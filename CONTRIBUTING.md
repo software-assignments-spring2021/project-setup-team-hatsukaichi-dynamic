@@ -36,6 +36,12 @@ If you have to miss a Standup, please provide notice in Slack in advance. Try no
 For our purposes, "done" means a task meets acceptance criteria if those exist or it has been merged into the master branch.
 
 
+## Standup Times
+
+We hold Standup meetings every Monday, Wednesday, and Friday at 10:30 AM ET in [this Discord server](https://discord.gg/Dnna2SQsAA).
+Additional meetings will be scheduled as needed.
+
+
 ## Conflict Resolution
 
 In the event of a conflict, please be honest and transparent. Avoiding talking about an issue can only serve to prolong or amplify it. If it's a minor issue, consider bringing it up in the slack. For more significant disagreements, we can schedule a full voice conversation to discuss the issue and resolve it amicably. In the event of a disagreement about implementation or project direction, ultimately, the majority will rule. Worst comes to worst, we will contact the Professor or tutors to help resolve the conflict.
