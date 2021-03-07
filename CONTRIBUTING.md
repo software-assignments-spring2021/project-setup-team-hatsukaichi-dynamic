@@ -1,2 +1,51 @@
 # Guide to Contributing
-Delete the contents of this file and replace with the contents of a proper guide to contributing to this project, as described in the [instructions](./instructions.md)
+
+Thank you for contributing to TV Tracker. If you're interested in helping out, please submit a pull request. We would urge you to follow the following norms:
+
+
+## Pull Request Process & Git Workflow
+
+0. Make a branch for each task.
+
+1. Name your PR with a focus on accuracy and brevity  and write a description of the task your PR accomplishes, linking to an issue if possible.
+
+2. [Stick to Semantic Versioning](http://semver.org/).
+
+3. Pull and resolve changes before making your PR.
+
+4. Wait for another developer to approve your PR before merging. 
+
+5. Merge into master.
+
+## Code of Conduct and Team Norms
+
+Our project is dedicated to providing a harassment-free experience for everyone, regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, ethnicity, religion (or lack thereof), or technology choices. We do not tolerate harassment of participants in any form. Sexual language and imagery is not appropriate. Participants violating these rules may be sanctioned or expelled. 
+
+Harassment includes offensive verbal comments related to gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, ethnicity, religion, technology choices, sexual images in public spaces, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention.
+
+Participants asked to stop any harassing behavior are expected to comply immediately.
+
+If a participant engages in harassing behavior, the lead developers may take any action they deem appropriate, including warning the offender or expulsion from the project.
+
+If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact a member of the team immediately.
+
+Adapted from [Conference Code of Conduct](https://confcodeofconduct.com).
+
+If you have to miss a Standup, please provide notice in Slack in advance. Try not to miss any Standups you don't have to.
+
+For our purposes, "done" means a task meets acceptance criteria if those exist or it has been merged into the master branch.
+
+
+## Conflict Resolution
+
+In the event of a conflict, please be honest and transparent. Avoiding talking about an issue can only serve to prolong or amplify it. If it's a minor issue, consider bringing it up in the slack. For more significant disagreements, we can schedule a full voice conversation to discuss the issue and resolve it amicably. In the event of a disagreement about implementation or project direction, ultimately, the majority will rule. Worst comes to worst, we will contact the Professor or tutors to help resolve the conflict.
+
+
+## Local Development
+
+Clone the repository through the command line or through Visual Studio.
+
+
+## Building and Testing
+
+TBD.
