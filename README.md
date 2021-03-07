@@ -2,6 +2,11 @@
 
 ## Project Description
 
+TV Tracker is an easy, intuitive way to keep track of the shows and movies you're watching across platforms. Given that some shows are only available on specific platforms, it can be hard to figure out where you're watching your content.
+That's where we come in. In TV Tracker, you can categorize your media--whether it be a show you're watching right now or a movie you watched a long time ago--by platform, filter by platform, and share a link to your profile with your friends.
+Our system allows for quick access to the basic details for just about every movie or show under the sun. With TV Tracker, it's never been easier to track your media.
+
+
 ### Team Members
 
 - [Lev Bernstein](https://github.com/LevBernstein)
