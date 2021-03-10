@@ -51,6 +51,7 @@ In the event of a conflict, please be honest and transparent. Avoiding talking a
 
 Clone the repository through the command line or through Visual Studio.
 
+For the front-end, navigate to the front-end folder and run `npm start` in the command line. Make sure the proper packages are installed with `npm install` (also run in the front-end folder).
 
 ## Building and Testing
 
