@@ -48,3 +48,11 @@ That's how TV Tracker was born.
 If you would like to contribute to this project, please take a look at the [CONTRIBUTING.md](CONTRIBUTING.md) file and follow the instructions there.
 
 You can take a look at the original project proposal [here](https://github.com/agile-dev-assignments/project-proposal-sme388).
+
+## Building and Testing
+
+Fork (if intending to make changes) or clone this repository.
+
+To start the front end of the project, navigate to the front-end folder and run the following commands in the command line:
+> npm install
+> npm start

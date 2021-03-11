@@ -13,9 +13,11 @@ Thank you for contributing to TV Tracker. If you're interested in helping out, p
 
 3. Pull and resolve changes before making your PR.
 
-4. Wait for another developer to approve your PR before merging. 
+4. Wait for another developer to approve your PR before merging.
 
 5. Merge into master.
+
+When reviewing others' PRs, only leave comments and suggestions on what to change. Do not merge others' PRs for them unless asked.
 
 ## Code of Conduct and Team Norms
 
@@ -51,6 +53,7 @@ In the event of a conflict, please be honest and transparent. Avoiding talking a
 
 Clone the repository through the command line or through Visual Studio.
 
+For the front-end, navigate to the front-end folder and run `npm start` in the command line. Make sure the proper packages are installed with `npm install` (also run in the front-end folder).
 
 ## Building and Testing
 
