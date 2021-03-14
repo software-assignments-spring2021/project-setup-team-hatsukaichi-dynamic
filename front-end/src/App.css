@@ -1,4 +1,12 @@
 #footer-container {
   width: 100%;
   text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  line-height: 50px;
+}
+
+.footer-links {
+  padding: 0 10px 0 10px;
 }
