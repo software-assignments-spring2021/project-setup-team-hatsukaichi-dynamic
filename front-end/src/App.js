@@ -8,6 +8,10 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/terms-of-service">
+          </Route>
+          <Route path="/meet-the-team">
+          </Route>
           <Route path="/">
             <Home />
           </Route>
