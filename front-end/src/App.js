@@ -2,12 +2,20 @@ import './App.css';
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './Home.js'
+import TermsOfService from './TermsOfService';
+import MeetTheTeam from './MeetTheTeam';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/terms-of-service">
+            <TermsOfService />
+          </Route>
+          <Route path="/meet-the-team">
+            <MeetTheTeam />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
