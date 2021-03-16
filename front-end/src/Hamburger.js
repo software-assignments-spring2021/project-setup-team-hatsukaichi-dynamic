@@ -1,7 +1,7 @@
 import React from 'react'
 import { slide as Menu } from 'react-burger-menu'
 
-const props = () => {
+const Hamburger = (props) => {
     return (
 	<Menu {...props}>
 	    <a id="home" className="menu-item" href="/">Home</a>
@@ -10,4 +10,4 @@ const props = () => {
 	</Menu>
     );
 }
-export default props
+export default Hamburger
