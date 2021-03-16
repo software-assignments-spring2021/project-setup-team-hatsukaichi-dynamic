@@ -1,0 +1,37 @@
+.content {
+    width: 700px;
+    padding: 50px;
+    overflow: hidden;
+}
+.content img {
+    margin-right: 15px;
+    float: left;
+    height: 100px;
+    width: 100px;
+}
+.header {
+    font-size: 32px;
+    text-align: center;
+    color: #333333;
+}
+.content h4 {
+    font-size: 24px;
+    margin-left: 20px;
+    margin: 2px 0 0 0;
+    display: block;
+    color: #333333;
+}
+.content p {
+    font-size: 16px;
+    margin-left: 15px;
+    margin: 2px 0 0 0;
+    display: block;
+    color: #333333;
+}
+.content a {
+    font-size: 16px;
+    margin-left: 15px;
+    margin: 2px 0 0 0;
+    display: block;
+    color: #ACF39D;
+}
