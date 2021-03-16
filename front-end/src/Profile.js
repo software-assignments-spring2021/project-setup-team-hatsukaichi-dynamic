@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import Footer from './Footer';
 import axios from 'axios';
+import './Profile.css'
 
-function UserInfo( {data} ) {
+// mockImage uses picsum to mock user-provided images
+const mockImage = (id) => {
+  return `https://picsum.photos/seed/${id}/200`;
+}
+
+const UserInfo = ( {data} ) => {
   return (
     <>
-      {data.username === undefined ? "empty's" : data.username + "'s"}
-      <span> profile page! </span>
+      <div id="container">
+        <div id="heading">
+          <img src={mockImage(data.id)} alt="profile" id="profile-picture"/>
+          <div id="profile-text">
+            <h3>{data.username}'s Profile</h3>
+            <p>{data.bio}</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
