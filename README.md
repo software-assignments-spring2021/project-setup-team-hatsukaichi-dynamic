@@ -11,6 +11,7 @@ Our system allows for quick access to the basic details for just about every mov
 - [Lev Bernstein](https://github.com/LevBernstein)
 - [Samantha Eng](https://github.com/sam-eng)
 - [Mason Kalaty](https://github.com/Gkal2000)
+- [Almazhan Kapan](https://github.com/almazhankapan)
 - [Ben Kaplan](https://github.com/benrkaplan)
 - [Nicole Stovall](https://github.com/stovalln21)
 
