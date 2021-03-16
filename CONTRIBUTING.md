@@ -15,7 +15,7 @@ Thank you for contributing to TV Tracker. If you're interested in helping out, p
 
 4. Wait for another developer to approve your PR before merging.
 
-5. Merge into master.
+5. Squash and merge into master (squash for the sake of neatness).
 
 When reviewing others' PRs, only leave comments and suggestions on what to change. Do not merge others' PRs for them unless asked.
 
