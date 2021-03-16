@@ -35,3 +35,7 @@
     display: block;
     color: #ACF39D;
 }
+
+.content a:hover{
+    color: #3cdd1b;
+}
