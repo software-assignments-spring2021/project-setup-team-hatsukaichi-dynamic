@@ -1,0 +1,23 @@
+#container {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+#profile-picture {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 1em;
+}
+
+#profile-text {
+  display: inline-block;
+}
+
+#show-container img {
+  height: 150px;
+  width: 100px;
+  padding: 1em;
+}
