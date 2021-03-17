@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Footer from './Footer';
 import axios from 'axios';
 import './Profile.css'
+// Hamburger should eventually be replaced with a navigation bar component, when created
+import Hamburger from './Hamburger';
 
 // Mock data for testing/development purposes when Mockaroo limits are reached
 const mockShows = JSON.parse(`[{
@@ -147,13 +149,13 @@ const UserInfo = ({ data }) => {
         </div>
         <div>
           <h4>Recently Added Shows</h4>
-          <p>{userShows 
-                ? <div id="show-container">
-                    {userShows.map( (show) => {
-                      return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
-                    })}
-                  </div>
-                : "No shows"}</p>
+          <p>{userShows
+            ? <div id="show-container">
+              {userShows.map((show) => {
+                return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
+              })}
+            </div>
+            : "No shows"}</p>
           <p>My Shows</p>
           <p>Settings</p>
           <p>Share</p>
@@ -191,6 +193,7 @@ const Profile = (props) => {
 
   return (
     <>
+      <Hamburger />
       {userData === null
         ? <p>Oh no! Looks like this user wasn't found....</p>
         : <UserInfo data={userData} />
