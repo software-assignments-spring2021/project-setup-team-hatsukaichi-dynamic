@@ -85,6 +85,12 @@ const mockImage = (id) => {
   return `https://picsum.photos/seed/${id}/200`;
 }
 
+// mockShowImage uses picsum to mock TV Show covers
+const mockShowImage = (id) => {
+  return `https://picsum.photos/seed/m${id}/200/300`
+}
+
+// UserInfo displays all user-specific information for the profile
 const UserInfo = ({ data }) => {
   const [userShows, setUserShows] = useState([]);
 
@@ -106,6 +112,8 @@ const UserInfo = ({ data }) => {
       else {
         showIds = data.shows;
       }
+      // Note: At the moment, we don't need any of the mocked data since we only really need the image here
+      // but it's being mocked with picsum for now.
       showIds.map((show) => {
         promises.push(
           axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=71236df0`)
@@ -138,9 +146,13 @@ const UserInfo = ({ data }) => {
           </div>
         </div>
         <div>
-          <p>Recently Added Shows</p>
+          <h4>Recently Added Shows</h4>
           <p>{userShows 
-                ? userShows.map( (show) => show.name).reduce( (prev, curr) => prev + curr + ", ", "").slice(0, -2)
+                ? <div id="show-container">
+                    {userShows.map( (show) => {
+                      return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
+                    })}
+                  </div>
                 : "No shows"}</p>
           <p>My Shows</p>
           <p>Settings</p>
