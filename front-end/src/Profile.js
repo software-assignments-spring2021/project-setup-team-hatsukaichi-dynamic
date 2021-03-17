@@ -118,7 +118,7 @@ const UserInfo = ({ data }) => {
       // but it's being mocked with picsum for now.
       showIds.map((show) => {
         promises.push(
-          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=71236df0`)
+          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
             .then((response) => {
               showInfo.push(response.data);
             })
@@ -169,7 +169,7 @@ const Profile = (props) => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=71236df0`)
+    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
       .then((response) => {
         setUserData(response.data)
       })
