@@ -3,6 +3,14 @@ p {
     padding: 0;
 }
 
+.text a {
+    color: #acf39d;
+}
+
+.text a:hover {
+    color: #3cdd1b;
+}
+
 #footer-container {
     width: 100%;
     text-align: center;
