@@ -3,6 +3,7 @@ import Footer from './Footer';
 import axios from 'axios';
 import './Profile.css'
 
+// Mock data for testing/development purposes when Mockaroo limits are reached
 const mockShows = JSON.parse(`[{
   "id": 36,
   "platform": "Babblestorm",
@@ -39,6 +40,7 @@ const mockShows = JSON.parse(`[{
   "progess": 22
 }]`);
 
+// Mock data for testing/development purposes when Mockaroo limits are reached
 const mockShowAPI = {
   '54': {
     "id": 54,
@@ -90,7 +92,8 @@ const UserInfo = ({ data }) => {
     let showIds = [];
     let promises = [];
     let showInfo = [];
-    console.log(data.shows);
+
+    // This check is crucial--it sees whether userData (the props) has been loaded yet or not
     if (!data.shows) {
       setUserShows([]);
     }
@@ -123,6 +126,7 @@ const UserInfo = ({ data }) => {
       })
     }
   }, [data])
+
   return (
     <>
       <div id="container">
@@ -172,7 +176,6 @@ const Profile = (props) => {
         setUserData(mockUser);
       });
   }, [props.id]);
-
 
   return (
     <>
