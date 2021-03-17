@@ -16,7 +16,20 @@ function TermsOfService() {
 		<h1 id="terms-and-conditions">Terms and Conditions</h1>
 		<p>Last updated: March 10, 2021</p>
 		<p>Please read these terms and conditions carefully before using Our Service.</p>
-		
+
+		<h2>Contents</h2>
+			<a href = "#interpretation">Interpretation and Definitions</a><br></br>
+			<a href = "#acknowledgment">Acknowledgment</a><br></br>
+			<a href = "#links-to-other-websites">Links to Other Websites</a><br></br>
+			<a href = "#termination">Termination</a><br></br>
+			<a href = "#limitation-of-liability">Limitation of Liability</a><br></br>
+			<a href = "#-as-is-and-as-available-disclaimer">&quot;AS IS&quot; and &quot;AS AVAILABLE&quot; Disclaimer</a><br></br>
+			<a href = "#governing-law">Governing Law</a><br></br>
+			<a href = "#disputes-resolution">Disputes Resolution</a><br></br>
+			<a href = "#severability-and-waiver">Severability and Waiver</a><br></br>
+			<a href = "#translation-interpretation">Translation Interpretation</a><br></br>
+			<a href = "#contact-us">Contact Us</a><br></br>
+
 		<h2 id="interpetation-and-definitions">Interpetation and Definitions</h2>
 		<h3 id="interpretation">Interpretation</h3>
 		<p>The following words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
@@ -43,7 +56,7 @@ function TermsOfService() {
 		    <li><p>&quot;You&quot; means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
 		    </li>
 		</ul>
-		
+
 		<h2 id="acknowledgment">Acknowledgment</h2>
 		<p>These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.</p>
 		<p>Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.</p>
@@ -94,8 +107,10 @@ function TermsOfService() {
 		<ul>
 		    <li>By visiting <Link to="/meet-the-team">our contact page.</Link></li>
 		</ul>
-		
-		<p><br></br></p>
+		<a href = "#terms-and-conditions">Back to top</a>
+		<p></p>
+		<br></br><br></br>
+
 	    </div>
 	    <Footer />
 	</>

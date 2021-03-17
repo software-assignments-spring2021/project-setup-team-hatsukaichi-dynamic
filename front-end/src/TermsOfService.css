@@ -39,3 +39,12 @@ h1 {
     margin-left: 15px;
     color: #333333;
 }
+.text a {
+    font-size: 20px;
+    color: #ACF39D;
+    text-decoration: none;
+}
+.text a:hover {
+    color: #3CDD1B;
+    text-decoration: none;
+}
