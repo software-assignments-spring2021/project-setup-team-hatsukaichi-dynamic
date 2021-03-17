@@ -2,6 +2,7 @@ import React from 'react'
 import Footer from './Footer'
 import Hamburger from './Hamburger'
 import './TermsOfService.css'
+import { Link } from 'react-router-dom'
 
 function TermsOfService() {
     return(
@@ -91,7 +92,7 @@ function TermsOfService() {
 		<h2 id="contact-us">Contact Us</h2>
 		<p>If you have any questions about these Terms and Conditions, You can contact us:</p>
 		<ul>
-		    <li>By visiting this page on our website: TBD</li>
+		    <li>By visiting <Link to="/meet-the-team">our contact page.</Link></li>
 		</ul>
 		
 		<p><br></br></p>
