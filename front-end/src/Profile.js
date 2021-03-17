@@ -134,7 +134,7 @@ const UserInfo = ({ data }) => {
           </div>
         </div>
         <div>
-          <p>Recent Shows</p>
+          <p>Recently Added Shows</p>
           <p>{userShows 
                 ? userShows.map( (show) => show.name).reduce( (prev, curr) => prev + curr + ", ", "").slice(0, -2)
                 : "No shows"}</p>
