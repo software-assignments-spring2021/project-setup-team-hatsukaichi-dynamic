@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Profile.css'
 // Hamburger should eventually be replaced with a navigation bar component, when created
 import Hamburger from './Hamburger';
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 // Mock data for testing/development purposes when Mockaroo limits are reached
 const mockShows = JSON.parse(`[{
@@ -137,6 +138,11 @@ const UserInfo = ({ data }) => {
     }
   }, [data])
 
+    const [copied, setCopied] = useState(false);
+    const onCopy = () => {
+	setCopied(true);
+    }
+  //CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.
   return (
     <>
       <div id="container">
@@ -158,12 +164,19 @@ const UserInfo = ({ data }) => {
             : "No shows"}</p>
           <p>My Shows</p>
           <p>Settings</p>
-          <p>Share</p>
+	  <CopyToClipboard text={window.location.href} onCopy={onCopy}>
+	      <div className="shareButton"> 
+		  <button>Share</button>
+		  <p>{copied ? "Copied URL to clipboard." : ""}</p>
+	      </div>
+	  </CopyToClipboard>
         </div>
       </div>
     </>
   );
 }
+
+
 
 const Profile = (props) => {
   const [userData, setUserData] = useState([]);
