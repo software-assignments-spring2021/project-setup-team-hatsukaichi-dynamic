@@ -6,6 +6,7 @@ import './Profile.css'
 import Hamburger from './Hamburger';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
+import { Link } from 'react-router-dom'
 
 // UserInfo displays all user-specific information for the profile
 const UserInfo = ({ data }) => {
@@ -74,15 +75,17 @@ const UserInfo = ({ data }) => {
                 return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
               })}
             </div>
-            : "No shows"}</p>
-          <p>My Shows</p>
-          <p>Settings</p>
-	  <CopyToClipboard text={window.location.href} onCopy={onCopy}>
-	    <div className="shareButton"> 
+              : "No shows"}</p>
+	    <Link to={`/my-shows/${data.id}`}>
+		<button className="profButton">My Shows</button>
+	    </Link>
+	    <button className="profButton">Settings</button>
+	    <CopyToClipboard text={window.location.href} onCopy={onCopy}>
+	    <div> 
 		{/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
-		<button>Share</button>
+		<button className="profButton">Share</button>
 		<p>{copied ? "Copied URL to clipboard." : ""}</p>
-	      </div>
+	    </div>
 	  </CopyToClipboard>
         </div>
       </div>

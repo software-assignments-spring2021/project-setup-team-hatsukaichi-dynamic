@@ -21,3 +21,15 @@
   width: 100px;
   padding: 1em;
 }
+
+.profButton {
+    border: 2px solid #84ED6F;
+    background-color: #666666;
+    color: #84ED6F;
+}
+
+.profButton:hover {
+    border: 2px solid #3CDD1B;
+    background-color: #4D4D4D;
+    color: #3CDD1B;
+}
