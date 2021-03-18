@@ -3,24 +3,75 @@ import Footer from './Footer';
 import axios from 'axios';
 // Hamburger should eventually be replaced with a navigation bar component, when created
 import Hamburger from './Hamburger';
-import {createMockUser, mockShowAPI} from './MockData'
+import { createMockUser, mockShowAPI, mockShowImage } from './MockData'
 
 const ShowGrid = (props) => {
+  const [shows, setShows] = useState([]);
+
+  useEffect(() => {
+    let promises = [];
+    let showInfo = [];
+
+    // This check is crucial--it sees whether userData (the props) has been loaded yet or not
+    if (!props.shows) {
+      setShows([]);
+    }
+    else {
+      // Note: At the moment, we don't need any of the mocked data since we only really need the image here
+      // but it's being mocked with picsum for now.
+      props.shows.map((show) => {
+        promises.push(
+          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
+            .then((response) => {
+              showInfo.push(response.data);
+            })
+            .catch((err) => {
+              console.log("We likely reached Mockaroo's request limit...");
+              console.log(err);
+              showInfo.push(mockShowAPI[show.id]);
+            })
+        )
+        return show.id;
+      });
+
+      Promise.all(promises).then(() => {
+        setShows(showInfo);
+      })
+    }
+  }, [props.shows])
+
+
   return (
     <>
       <h3>My Shows</h3>
-      {props.shows !== undefined
-        ? props.shows.map( (show) => {
-          return <p>{show.name}</p>
-        })
-        : <p>No shows found...</p>
-      }
+      <div id="show-container">
+        {shows !== undefined && shows.length !== 0
+          ? shows.map((show) => {
+            return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
+          })
+          : <p>No shows found...</p>
+        }
+      </div>
     </>
+  )
+}
+
+// For now, a very simple + non-function search.
+// I'm thinking of using react-sync to show search results in a drop-down
+const Search = ({ input, onChange }) => {
+  return (
+    <input
+      id="search-input"
+      value={input}
+      placeholder={"Search Shows..."}
+      onChange={(e) => onChange(e.target.value)}
+    />
   )
 }
 
 const MyShows = (props) => {
   const [userData, setUserData] = useState([]);
+  const [input, setInput] = useState('');
 
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
@@ -37,10 +88,16 @@ const MyShows = (props) => {
       });
   }, [props.id]);
 
+  const updateInput = ( input => {
+    setInput(input)
+  })
+
   return (
     <>
       <Hamburger />
-      <p>Sample My Shows Page--hello, {userData.username} !</p>
+      <h3>{userData.username}'s Shows</h3>
+      <Search input={input} onChange={updateInput}/>
+      <ShowGrid shows={userData.shows} />
       <Footer />
     </>
   )

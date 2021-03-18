@@ -1,0 +1,12 @@
+#show-container img {
+    height: 150px;
+    width: 100px;
+    padding: 1em;
+}
+
+#search-bar {
+    width: 50rem;
+    border: none;
+    padding: 0.5rem;
+    background: #F2F1F9;
+}
