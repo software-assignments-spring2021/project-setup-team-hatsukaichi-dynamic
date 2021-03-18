@@ -6,12 +6,17 @@ import TermsOfService from './TermsOfService';
 import MeetTheTeam from './MeetTheTeam';
 import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
+import MyShows from './MyShows'
 
 const ProfileWrapper = ({match}) => {
   return (
-    <>
-      <Profile id={match.params.id} />
-    </>
+    <Profile id={match.params.id} />
+  )
+}
+
+const MyShowsWrapper = ({match}) => {
+  return (
+    <MyShows id={match.params.id} />
   )
 }
 
@@ -21,6 +26,7 @@ const App = (props) => {
       <Router>
         <ScrollToTop />
         <Switch>
+          <Route path="/my-shows/:id" component={MyShowsWrapper} />
           <Route path="/profile/:id" component={ProfileWrapper} />
           <Route path="/terms-of-service">
             <TermsOfService />
