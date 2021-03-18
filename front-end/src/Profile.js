@@ -76,10 +76,14 @@ const UserInfo = ({ data }) => {
               })}
             </div>
               : "No shows"}</p>
-	    <Link to={`/my-shows/${data.id}`}>
-		<button className="profButton">My Shows</button>
-	    </Link>
-	    <button className="profButton">Settings</button>
+	    <div>
+		<Link to={`/my-shows/${data.id}`}>
+		    <button className="profButton">My Shows</button>
+		</Link>
+	    </div>
+	    <div>
+		<button className="profButton">Settings</button>
+	    </div>
 	    <CopyToClipboard text={window.location.href} onCopy={onCopy}>
 	    <div> 
 		{/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
