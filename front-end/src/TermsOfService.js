@@ -108,9 +108,7 @@ function TermsOfService() {
 		    <li>By visiting <Link to="/meet-the-team">our contact page.</Link></li>
 		</ul>
 		<a href = "#terms-and-conditions">Back to top</a>
-		<p></p>
 		<br></br><br></br>
-
 	    </div>
 	    <Footer />
 	</>
