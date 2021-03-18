@@ -4,18 +4,8 @@ import axios from 'axios';
 import './Profile.css'
 // Hamburger should eventually be replaced with a navigation bar component, when created
 import Hamburger from './Hamburger';
-import { createMockUser, mockShowAPI } from './MockData'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-
-// mockImage uses picsum to mock user-provided images
-const mockImage = (id) => {
-  return `https://picsum.photos/seed/${id}/200`;
-}
-
-// mockShowImage uses picsum to mock TV Show covers
-const mockShowImage = (id) => {
-  return `https://picsum.photos/seed/m${id}/200/300`
-}
+import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
 
 // UserInfo displays all user-specific information for the profile
 const UserInfo = ({ data }) => {
@@ -70,7 +60,7 @@ const UserInfo = ({ data }) => {
     <>
       <div id="container">
         <div id="heading">
-          <img src={mockImage(data.id)} alt="profile" id="profile-picture" />
+          <img src={mockUserImage(data.id)} alt="profile" id="profile-picture" />
           <div id="profile-text">
             <h3>{data.username}'s Profile</h3>
             <p>{data.bio}</p>

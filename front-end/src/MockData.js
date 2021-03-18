@@ -84,10 +84,38 @@ const mockShowAPI = {
     "isMovie": true,
     "episodes": 1,
     "coverPhoto": "http://dummyimage.com/225x181.png/cc0000/ffffff"
-  }
+  },
+  '3': {
+    "id": 3,
+    "name": "Forest (Rengeteg)",
+    "description": "Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.",
+    "genres": "Drama",
+    "isMovie": false,
+    "episodes": 10,
+    "coverPhoto": "http://dummyimage.com/219x233.png/cc0000/ffffff"
+  },
+  '36': {
+    "id": 36,
+    "name": "Man in the Saddle",
+    "description": "Vestibulum sed magna at nunc commodo placerat.",
+    "genres": "Western",
+    "isMovie": true,
+    "episodes": 1,
+    "coverPhoto": "http://dummyimage.com/184x242.png/ff4444/ffffff"
+  },
 };
+
+const mockUserImage = (id) => {
+  return `https://picsum.photos/seed/${id}/200`;
+}
+
+const mockShowImage = (id) => {
+  return `https://picsum.photos/seed/m${id}/200/300`
+}
 
 module.exports = {
   createMockUser: createMockUser,
   mockShowAPI: mockShowAPI,
+  mockUserImage: mockUserImage,
+  mockShowImage: mockShowImage,
 }
