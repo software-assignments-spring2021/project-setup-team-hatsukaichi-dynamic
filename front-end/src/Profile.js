@@ -142,7 +142,6 @@ const UserInfo = ({ data }) => {
     const onCopy = () => {
 	setCopied(true);
     }
-  //CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.
   return (
     <>
       <div id="container">
@@ -165,9 +164,10 @@ const UserInfo = ({ data }) => {
           <p>My Shows</p>
           <p>Settings</p>
 	  <CopyToClipboard text={window.location.href} onCopy={onCopy}>
-	      <div className="shareButton"> 
-		  <button>Share</button>
-		  <p>{copied ? "Copied URL to clipboard." : ""}</p>
+	    <div className="shareButton"> 
+		{/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
+		<button>Share</button>
+		<p>{copied ? "Copied URL to clipboard." : ""}</p>
 	      </div>
 	  </CopyToClipboard>
         </div>
@@ -175,8 +175,6 @@ const UserInfo = ({ data }) => {
     </>
   );
 }
-
-
 
 const Profile = (props) => {
   const [userData, setUserData] = useState([]);
