@@ -4,6 +4,7 @@ import axios from 'axios';
 // Hamburger should eventually be replaced with a navigation bar component, when created
 import Hamburger from './Hamburger';
 import { createMockUser, mockShowAPI, mockShowImage } from './MockData'
+import './MyShows.css'
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -60,12 +61,26 @@ const ShowGrid = (props) => {
 // I'm thinking of using react-sync to show search results in a drop-down
 const Search = ({ input, onChange }) => {
   return (
-    <input
-      id="search-input"
-      value={input}
-      placeholder={"Search Shows..."}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <div id="search-container">
+      <input
+        id="search-bar"
+        value={input}
+        placeholder={"Search Shows..."}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
+  )
+}
+
+const Filters = () => {
+  return (
+    <>
+      <div id="filter-container">
+        <button> In Progress </button>
+        <button> Filter Shows </button>
+        <button> Completed </button>
+      </div>
+    </>
   )
 }
 
@@ -88,16 +103,19 @@ const MyShows = (props) => {
       });
   }, [props.id]);
 
-  const updateInput = ( input => {
+  const updateInput = (input => {
     setInput(input)
   })
 
   return (
     <>
       <Hamburger />
-      <h3>{userData.username}'s Shows</h3>
-      <Search input={input} onChange={updateInput}/>
-      <ShowGrid shows={userData.shows} />
+      <div id="container">
+        <h3>{userData.username}'s Shows</h3>
+        <Search input={input} onChange={updateInput} />
+        <Filters />
+        <ShowGrid shows={userData.shows} />
+      </div>
       <Footer />
     </>
   )
