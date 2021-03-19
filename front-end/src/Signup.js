@@ -1,33 +1,20 @@
-import './Register.css';
+import './Signup.css';
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 
-class Register extends Component {
 
-    constructor(props) {
-        super(props);
-        this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            email: "",
-            password: "",
-            passwordconfirm: "",
-            firstname: "",
-            lastname: "",
-            errorMsg: "",
 
-        }
-    }
+    
 
-    handleChange(e) {
+    function handleChange(e) {
         this.setState({[e.target.name]: e.target.value })
     }
 
-    submit(e) {
+    function submit(e) {
         
     }
 
-    render() {
+    function Signup() {
         return(
 
             <div>
@@ -49,11 +36,12 @@ class Register extends Component {
                             <input type="password" name="passwordconfirm" placeholder="confirm password" value={this.state.passwordconfirm} onChange={this.handleChange} required />
                             <button type="submit">create account</button>
                             <p className="message">Already registered? <Link to="/login">Sign In</Link></p>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         );
     }
-}
 
-export default Register;
+
+export default Signup;

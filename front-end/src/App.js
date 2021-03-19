@@ -8,7 +8,7 @@ import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
 import MyShows from './MyShows';
 import Login from './Login';
-import Register from './Register';
+import Signup from './Signup';
 
 const ProfileWrapper = ({match}) => {
   return (
@@ -39,11 +39,11 @@ const App = (props) => {
           <Route path="/">
             <Home />
           </Route>
-          <Route path="/">
+          <Route path="/Login">
             <Login />
           </Route>
-          <Route path="/">
-            <Register />
+          <Route path="/Signup">
+            <Signup />
           </Route>
         </Switch>
       </Router>

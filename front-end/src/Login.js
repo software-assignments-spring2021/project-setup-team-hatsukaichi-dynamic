@@ -2,29 +2,17 @@ import './Login.css';
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 
-class Login extends Component {
 
-    constructor(props) {
-        super(props);
-        this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.flash = true;
-        this.state = {
-            username: "",
-            password: "",
-            errorMsg: ""
-        }
-    }
 
-    handleChange(e) {
+    function handleChange(e) {
         this.setState({[e.target.name]: e.target.value })
     }
 
-    submit() {
+    function submit() {
    
     }
 
-    render() {
+    function Login() {
         return (
             <div>
                 
@@ -43,5 +31,5 @@ class Login extends Component {
             </div>
         );
     }
-}
+
 export default Login;
