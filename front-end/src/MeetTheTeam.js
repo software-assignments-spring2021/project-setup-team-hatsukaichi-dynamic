@@ -8,7 +8,7 @@ import HeaderLogo from './HeaderLogo'
 function MeetTheTeam() {
     return (
 	<>
-	    <Header />
+	    <Header/>
 
 	    <div className = "header">
 		<h1>Meet the Team</h1>

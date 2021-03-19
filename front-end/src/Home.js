@@ -6,7 +6,7 @@ import './Home.css'
 function Home() {
     return (
 	<>
-		<Header />
+		<Header/>
 
 	    <img src="https://picsum.photos/1150/300" alt="Temporary from lorem picsum" class="fullIMG" />
 	    

@@ -9,8 +9,9 @@ const Header = () => (
   <StickyHeader    
     // This section is sticky 
     header={
-      <div className="Header_root">
-        <h1 className="Header_title">TV Tracker</h1>
+      <div className="header-root">
+        <h1 className="header-title">TV Tracker</h1>
+        <Hamburger>1</Hamburger>
       </div>
     }
   >
