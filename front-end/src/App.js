@@ -6,7 +6,9 @@ import TermsOfService from './TermsOfService';
 import MeetTheTeam from './MeetTheTeam';
 import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
-import MyShows from './MyShows'
+import MyShows from './MyShows';
+import Login from './Login';
+import Register from './Register';
 
 const ProfileWrapper = ({match}) => {
   return (
@@ -36,6 +38,12 @@ const App = (props) => {
           </Route>
           <Route path="/">
             <Home />
+          </Route>
+          <Route path="/">
+            <Login />
+          </Route>
+          <Route path="/">
+            <Register />
           </Route>
         </Switch>
       </Router>
