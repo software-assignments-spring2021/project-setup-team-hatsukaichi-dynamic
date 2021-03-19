@@ -24,7 +24,7 @@
     width: 20rem;
     border: none;
     padding: 0.5rem;
-    background: #F2F1F9;
+    background: #e6e6e6;
     display: block;
 }
 
@@ -36,9 +36,10 @@
 button {
     margin: 2em;
     border: none;
+    background: #e6e6e6;
     padding: 1em 2em 1em 2em;
 }
 
 .selected {
-    background-color: blue;
+    background: #acf39d;
 }
