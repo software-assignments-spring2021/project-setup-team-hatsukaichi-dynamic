@@ -56,20 +56,6 @@ const ShowGrid = (props) => {
   )
 }
 
-// For now, a very simple + non-functional search.
-// I'm thinking of using react-select-async to show search results in a dropdown
-const Search = ({ input, onChange }) => {
-
-  return (
-    <div id="search-container">
-      <input
-        id="search-bar"
-        placeholder={"Search Shows..."}
-      />
-    </div>
-  )
-}
-
 // filterShows filters a list of shows with user information by their status (indicated by a boolean)
 // the status variable being passed into this function, however, is a string as to account for
 // the case where no show status filtering is being done
