@@ -20,7 +20,7 @@ const ShowGrid = (props) => {
     else {
       // Note: At the moment, we don't need any of the mocked data since we only really need the image here
       // but it's being mocked with picsum for now.
-      props.shows.map((show) => {
+      filterShows(props.shows).map((show) => {
         promises.push(
           axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
             .then((response) => {
@@ -72,21 +72,16 @@ const Search = ({ input, onChange }) => {
   )
 }
 
-const Filters = () => {
-  return (
-    <>
-      <div id="filter-container">
-        <button> In Progress </button>
-        <button> Filter Shows </button>
-        <button> Completed </button>
-      </div>
-    </>
-  )
+const filterShows = (shows, status) => {
+  return !shows ? [] :shows.filter( (show) => show.status === status );
 }
 
 const MyShows = (props) => {
   const [userData, setUserData] = useState([]);
   const [input, setInput] = useState('');
+  const [status, setStatus] = useState('');
+  const [inProgressSelected, setInProgressSelected] = useState(false);
+  const [completedSelected, setCompletedSelected] = useState(false);
 
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
@@ -103,9 +98,26 @@ const MyShows = (props) => {
       });
   }, [props.id]);
 
-  const updateInput = (input => {
+  const updateInput = ( (input) => {
     setInput(input)
-  })
+  });
+
+  const onStatusChange = ( (buttonType) => {
+    if (buttonType === "in progress") {
+      inProgressSelected ? setStatus("") : setStatus("In Progress");
+      if (status !== "") {
+        setCompletedSelected(false);
+      }
+      setInProgressSelected(!inProgressSelected);
+    }
+    else {
+      completedSelected ? setStatus("") : setStatus("Completed");
+      if (status !== "") {
+        setInProgressSelected(false);
+      }
+      setCompletedSelected(!completedSelected);
+    }
+  });
 
   return (
     <>
@@ -113,8 +125,22 @@ const MyShows = (props) => {
       <div id="container">
         <h3>{userData.username}'s Shows</h3>
         <Search input={input} onChange={updateInput} />
-        <Filters />
-        <ShowGrid shows={userData.shows} />
+        <div id="filter-container">
+          <button 
+            className={inProgressSelected ? "selected" : ""}
+            onClick={(e) => onStatusChange("in progress")}
+          >
+            In Progress 
+          </button>
+          <button> Filter Shows </button>
+          <button 
+            className={completedSelected ? "selected" : ""}
+            onClick={(e) => onStatusChange("completed")}
+          >
+            Completed
+          </button>
+        </div>
+        <ShowGrid shows={userData.shows} status={status} />
       </div>
       <Footer />
     </>

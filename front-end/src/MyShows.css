@@ -38,3 +38,7 @@ button {
     border: none;
     padding: 1em 2em 1em 2em;
 }
+
+.selected {
+    background-color: blue;
+}
