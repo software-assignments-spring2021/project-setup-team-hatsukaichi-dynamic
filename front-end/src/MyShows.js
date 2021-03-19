@@ -55,7 +55,7 @@ const ShowGrid = (props) => {
   )
 }
 
-// For now, a very simple + non-function search.
+// For now, a very simple + non-functional search.
 // I'm thinking of using react-select-async to show search results in a dropdown
 const Search = ({ input, onChange }) => {
   return (
