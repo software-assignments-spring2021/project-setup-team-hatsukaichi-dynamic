@@ -18,8 +18,6 @@ const ShowGrid = (props) => {
       setShows([]);
     }
     else {
-      // Note: At the moment, we don't need any of the mocked data since we only really need the image here
-      // but it's being mocked with picsum for now.
       props.shows.map((show) => {
         promises.push(
           axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
@@ -57,8 +55,8 @@ const ShowGrid = (props) => {
   )
 }
 
-// For now, a very simple + non-function search.
-// I'm thinking of using react-sync to show search results in a drop-down
+// For now, a very simple + non-functional search.
+// I'm thinking of using react-select-async to show search results in a dropdown
 const Search = ({ input, onChange }) => {
   return (
     <div id="search-container">
@@ -72,21 +70,32 @@ const Search = ({ input, onChange }) => {
   )
 }
 
-const Filters = () => {
-  return (
-    <>
-      <div id="filter-container">
-        <button> In Progress </button>
-        <button> Filter Shows </button>
-        <button> Completed </button>
-      </div>
-    </>
-  )
+// filterShows filters a list of shows with user information by their status (indicated by a boolean)
+// the status variable being passed into this function, however, is a string as to account for
+// the case where no show status filtering is being done
+const filterShows = (shows, status) => {
+  const isCompleted = status === "Completed";
+  if (!shows) {
+    return [];
+  }
+  else {
+    const filtered = shows.filter( (show) => {
+      if (status === "") {
+        return show;
+      }
+      return show.completed === isCompleted;
+    });
+    console.log(filtered)
+    return filtered;
+  }
 }
 
 const MyShows = (props) => {
   const [userData, setUserData] = useState([]);
   const [input, setInput] = useState('');
+  const [status, setStatus] = useState('');
+  const [inProgressSelected, setInProgressSelected] = useState(false);
+  const [completedSelected, setCompletedSelected] = useState(false);
 
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
@@ -103,9 +112,27 @@ const MyShows = (props) => {
       });
   }, [props.id]);
 
-  const updateInput = (input => {
+  const updateInput = ( (input) => {
     setInput(input)
-  })
+  });
+
+  const onStatusChange = ( (buttonType) => {
+    if (buttonType === "in progress") {
+      inProgressSelected ? setStatus("") : setStatus("In Progress");
+      // This if statement logic ensures that the two status buttons are never on at the same time
+      if (status !== "") {
+        setCompletedSelected(false);
+      }
+      setInProgressSelected(!inProgressSelected);
+    }
+    else {
+      completedSelected ? setStatus("") : setStatus("Completed");
+      if (status !== "") {
+        setInProgressSelected(false);
+      }
+      setCompletedSelected(!completedSelected);
+    }
+  });
 
   return (
     <>
@@ -113,8 +140,22 @@ const MyShows = (props) => {
       <div id="container">
         <h3>{userData.username}'s Shows</h3>
         <Search input={input} onChange={updateInput} />
-        <Filters />
-        <ShowGrid shows={userData.shows} />
+        <div id="filter-container">
+          <button 
+            className={inProgressSelected ? "selected" : ""}
+            onClick={(e) => onStatusChange("in progress")}
+          >
+            In Progress 
+          </button>
+          <button> Filter Shows </button>
+          <button 
+            className={completedSelected ? "selected" : ""}
+            onClick={(e) => onStatusChange("completed")}
+          >
+            Completed
+          </button>
+        </div>
+        <ShowGrid shows={filterShows(userData.shows, status)} status={status} />
       </div>
       <Footer />
     </>
