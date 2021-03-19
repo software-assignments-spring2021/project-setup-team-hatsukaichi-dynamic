@@ -113,9 +113,81 @@ const mockShowImage = (id) => {
   return `https://picsum.photos/seed/m${id}/200/300`
 }
 
+const mockAllShows = JSON.parse(`[{
+  "id": 36,
+  "name": "Man in the Saddle",
+  "description": "Vestibulum sed magna at nunc commodo placerat.",
+  "genres": "Western",
+  "isMovie": true,
+  "episodes": 1,
+  "coverPhoto": "http://dummyimage.com/184x242.png/ff4444/ffffff"
+},{
+  "id": 3,
+  "name": "Forest (Rengeteg)",
+  "description": "Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.",
+  "genres": "Drama",
+  "isMovie": false,
+  "episodes": 10,
+  "coverPhoto": "http://dummyimage.com/219x233.png/cc0000/ffffff"
+},
+{
+  "id": 54,
+  "name": "Ladies They Talk About",
+  "description": "Aenean sit amet justo.",
+  "genres": "Drama|Romance",
+  "isMovie": false,
+  "episodes": 66,
+  "coverPhoto": "http://dummyimage.com/243x117.png/dddddd/000000"
+},
+{
+  "id": 42,
+  "name": "Samouraï, Le (Godson, The)",
+  "description": "Etiam pretium iaculis justo.",
+  "genres": "Crime|Drama|Thriller",
+  "isMovie": false,
+  "episodes": 56,
+  "coverPhoto": "http://dummyimage.com/246x181.png/cc0000/ffffff"
+},
+{
+  "id": 96,
+  "name": "Bob Saget: That Ain't Right",
+  "description": "Proin eu mi. Nulla ac enim.",
+  "genres": "Comedy",
+  "isMovie": true,
+  "episodes": 1,
+  "coverPhoto": "http://dummyimage.com/174x138.png/dddddd/000000"
+},
+{
+  "id": 11,
+  "name": "Ca$h",
+  "description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+  "genres": "Crime|Thriller",
+  "isMovie": true,
+  "episodes": 1,
+  "coverPhoto": "http://dummyimage.com/225x181.png/cc0000/ffffff"
+},
+{
+  "id": 9,
+  "name": "Smart People",
+  "description": "Proin risus. Praesent lectus.",
+  "genres": "Comedy|Drama|Romance",
+  "isMovie": true,
+  "episodes": 1,
+  "coverPhoto": "http://dummyimage.com/247x193.png/dddddd/000000"
+}, {
+  "id": 10,
+  "name": "Deck the Halls",
+  "description": "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.",
+  "genres": "Comedy",
+  "isMovie": true,
+  "episodes": 1,
+  "coverPhoto": "http://dummyimage.com/175x231.png/dddddd/000000"
+}]`)
+
 module.exports = {
   createMockUser: createMockUser,
   mockShowAPI: mockShowAPI,
+  mockAllShows: mockAllShows,
   mockUserImage: mockUserImage,
   mockShowImage: mockShowImage,
 }
