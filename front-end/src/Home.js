@@ -1,17 +1,13 @@
 import React from 'react'
+import Header from './Header'
 import Footer from './Footer'
-import Hamburger from './Hamburger'
-import HeaderLogo from './HeaderLogo'
 import './Home.css'
 
 function Home() {
     return (
 	<>
-		<HeaderLogo/>
-	    <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
-	    <div className = "header">
-		<h1>Welcome to TV Tracker!</h1>
-	    </div>
+		<Header />
+
 	    <img src="https://picsum.photos/1150/300" alt="Temporary from lorem picsum" class="fullIMG" />
 	    
 	    <p><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque gravida in fermentum et. Amet consectetur adipiscing elit pellentesque habitant. Duis at consectetur lorem donec massa sapien faucibus. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida. Tincidunt tortor aliquam nulla facilisi. Sed elementum tempus egestas sed sed risus pretium quam. At in tellus integer feugiat scelerisque. Nibh cras pulvinar mattis nunc sed blandit libero volutpat sed. Porttitor rhoncus dolor purus non enim. Aliquet eget sit amet tellus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa. Felis eget velit aliquet sagittis id consectetur purus ut. Venenatis tellus in metus vulputate eu.<br></br></p>
