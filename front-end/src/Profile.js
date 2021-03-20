@@ -69,10 +69,16 @@ const UserInfo = ({ data }) => {
 	alert('Settings updated.')
     }
 
-    const [email, setEmail] = useState(data.email);
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [bio, setBio] = useState(data.bio);
-    const [pic, setPic] = useState(data.img);
+    const [bio, setBio] = useState("");
+    const [pic, setPic] = useState("");
+
+    useEffect(() => {
+	setEmail(data.email)
+	setBio(data.bio)
+	setPic(data.img)
+    });
     
   return (
     <>
