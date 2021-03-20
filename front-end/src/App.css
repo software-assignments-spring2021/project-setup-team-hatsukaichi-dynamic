@@ -11,10 +11,12 @@ p {
     color: #3cdd1b;
 }
 
-#footer-container {
+footer {
+    margin-top: 2em;
+    background-color: #262626;
     width: 100%;
     text-align: center;
-    position: fixed;
+    position: static;
     left: 0;
     bottom: 0;
     line-height: 50px;
