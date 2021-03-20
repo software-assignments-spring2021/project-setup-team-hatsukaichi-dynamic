@@ -7,6 +7,9 @@ import MeetTheTeam from './MeetTheTeam';
 import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
 import MyShows from './MyShows'
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 const ProfileWrapper = ({match}) => {
   return (
