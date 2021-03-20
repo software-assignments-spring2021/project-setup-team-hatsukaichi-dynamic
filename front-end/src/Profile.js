@@ -7,6 +7,7 @@ import Hamburger from './Hamburger';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
 import { Link } from 'react-router-dom'
+import Modal from "react-modal";
 
 // UserInfo displays all user-specific information for the profile
 const UserInfo = ({ data }) => {
@@ -57,6 +58,12 @@ const UserInfo = ({ data }) => {
     const onCopy = () => {
 	setCopied(true);
     }
+
+    const [open, setOpen] = useState(false);
+    const toggleModal = () => {
+	setOpen(!open);
+    }
+    
   return (
     <>
       <div id="container">
@@ -82,7 +89,21 @@ const UserInfo = ({ data }) => {
 		</Link>
 	    </div>
 	    <div>
-		<button className="profButton">Settings</button>
+		<button className="profButton" onClick={toggleModal}>Settings</button>
+		<Modal
+		    isOpen={open}
+		    onRequestClose={toggleModal}
+		    contentLabel="Settings"
+		>
+		    <h1>Settings</h1>
+		    <label for="email">Email:</label>
+		    
+		    <h3>Password</h3>
+		    <h3>Bio</h3>
+		    <h3>Profile Picture</h3>
+		    
+		    <button className="profButton" onClick={toggleModal}>Back</button>
+		</Modal>
 	    </div>
 	    <CopyToClipboard text={window.location.href} onCopy={onCopy}>
 	    <div> 
