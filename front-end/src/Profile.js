@@ -11,7 +11,32 @@ import Modal from "react-modal";
 
 // UserInfo displays all user-specific information for the profile
 const UserInfo = ({ data }) => {
-  const [userShows, setUserShows] = useState([]);
+    const [userShows, setUserShows] = useState([]);
+    const [copied, setCopied] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [bio, setBio] = useState("");
+    const [pic, setPic] = useState("");
+    const [open, setOpen] = useState(false);
+
+    const toggleModal = () => {
+	setOpen(!open);
+    }
+
+    const onCopy = () => {
+	setCopied(true);
+    }
+
+    const handleSubmit = (event) => {
+	event.preventDefault();
+	alert('Settings updated.')
+    }
+
+    useEffect(() => {
+	setEmail(data.email)
+	setBio(data.bio)
+	setPic(data.img)
+    }, [data.email, data.bio, data.img]);
 
   useEffect(() => {
     let showIds = [];
@@ -54,31 +79,7 @@ const UserInfo = ({ data }) => {
     }
   }, [data])
 
-    const [copied, setCopied] = useState(false);
-    const onCopy = () => {
-	setCopied(true);
-    }
 
-    const [open, setOpen] = useState(false);
-    const toggleModal = () => {
-	setOpen(!open);
-    }
-
-    const handleSubmit = (event) => {
-	event.preventDefault();
-	alert('Settings updated.')
-    }
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [bio, setBio] = useState("");
-    const [pic, setPic] = useState("");
-
-    useEffect(() => {
-	setEmail(data.email)
-	setBio(data.bio)
-	setPic(data.img)
-    });
     
   return (
     <>
