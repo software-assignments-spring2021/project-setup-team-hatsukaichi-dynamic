@@ -64,10 +64,15 @@ const UserInfo = ({ data }) => {
 	setOpen(!open);
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = (event) => {
 	event.preventDefault();
-	alert('Information saved.')
+	alert('Settings updated.')
     }
+
+    const [email, setEmail] = useState(data.email);
+    const [password, setPassword] = useState("");
+    const [bio, setBio] = useState(data.bio);
+    const [pic, setPic] = useState(data.img);
     
   return (
     <>
@@ -104,16 +109,16 @@ const UserInfo = ({ data }) => {
 		    <form onSubmit={handleSubmit}>
 			<fieldset>
 			    <label><h3>Email:</h3>
-				<input type="email" name="email" />
+				<input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
 			    </label>
 			    <label><h3>Password</h3>
-				<input type="password" name="password" />
+				<input type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)}  />
 			    </label>
 			    <label><h3>Bio</h3>
-				<input type="text" name="bio" />
+				<input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
 			    </label>
 			    <label><h3>Profile Picture URL</h3>
-				<input type="url" name="profPic" />
+				<input type="url" id="profPic" name="profPic" value={pic} onChange={e => setPic(e.target.value)} />
 			    </label>
 			</fieldset>
 			<button type="submit" className="profButton">Save</button>
