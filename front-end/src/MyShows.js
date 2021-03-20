@@ -9,6 +9,7 @@ import './MyShows.css';
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
+  const [filteredShows, setFilteredShows] = useState([]);
 
   useEffect(() => {
     let promises = [];
@@ -17,6 +18,7 @@ const ShowGrid = (props) => {
     // This check is crucial--it sees whether userData (the props) has been loaded yet or not
     if (!props.shows) {
       setShows([]);
+      setFilteredShows([]);
     }
     else {
       props.shows.map((show) => {
@@ -36,17 +38,29 @@ const ShowGrid = (props) => {
 
       Promise.all(promises).then(() => {
         setShows(showInfo);
+        setFilteredShows(showInfo);
       })
     }
-  }, [props.shows])
+  }, [props.shows]);
 
+  useEffect(() => {
+    if (props.shows === undefined || shows.length === 0) {
+      setFilteredShows([]);
+    }
+    else {
+      const res = filterShows(props.shows, props.status).map( (showUserInfo) => {
+        return shows.find(show => show.id === showUserInfo.id);
+      });
+      setFilteredShows( res );
+    }
+  }, [props.shows, props.status, shows]);
 
   return (
     <>
       <h3>My Shows</h3>
       <div id="show-container">
-        {shows !== undefined && shows.length !== 0
-          ? shows.map((show) => {
+        {filteredShows !== undefined && filteredShows.length !== 0
+          ? filteredShows.map((show) => {
             return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
           })
           : <p>No shows found...</p>
@@ -159,7 +173,7 @@ const MyShows = (props) => {
             Completed
           </button>
         </div>
-        <ShowGrid shows={filterShows(userData.shows, status)} status={status} />
+        <ShowGrid shows={userData.shows} status={status} />
       </div>
       <Footer />
     </>
