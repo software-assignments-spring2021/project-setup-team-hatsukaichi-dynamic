@@ -63,6 +63,11 @@ const UserInfo = ({ data }) => {
     const toggleModal = () => {
 	setOpen(!open);
     }
+
+    const handleSubmit = event => {
+	event.preventDefault();
+	alert('Information saved.')
+    }
     
   return (
     <>
@@ -96,12 +101,23 @@ const UserInfo = ({ data }) => {
 		    contentLabel="Settings"
 		>
 		    <h1>Settings</h1>
-		    <label for="email">Email:</label>
-		    
-		    <h3>Password</h3>
-		    <h3>Bio</h3>
-		    <h3>Profile Picture</h3>
-		    
+		    <form onSubmit={handleSubmit}>
+			<fieldset>
+			    <label><h3>Email:</h3>
+				<input type="email" name="email" />
+			    </label>
+			    <label><h3>Password</h3>
+				<input type="password" name="password" />
+			    </label>
+			    <label><h3>Bio</h3>
+				<input type="text" name="bio" />
+			    </label>
+			    <label><h3>Profile Picture URL</h3>
+				<input type="url" name="profPic" />
+			    </label>
+			</fieldset>
+			<button type="submit" className="profButton">Save</button>
+		    </form>
 		    <button className="profButton" onClick={toggleModal}>Back</button>
 		</Modal>
 	    </div>
