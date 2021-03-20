@@ -109,7 +109,7 @@ function TermsOfService() {
 		</ul>
 		<br></br>
 		<a href = "#terms-and-conditions">Back to top</a>
-		<br></br><br></br><br></br><br></br><br></br>
+		<br></br>
 	    </div>
 	    <Footer />
 	</>
