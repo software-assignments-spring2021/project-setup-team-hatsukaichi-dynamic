@@ -102,11 +102,11 @@ const UserInfo = ({ data }) => {
               : "No shows"}</p>
 	    <div>
 		<Link to={`/my-shows/${data.id}`}>
-		    <button className="profButton">My Shows</button>
+		    <button className="prof-button">My Shows</button>
 		</Link>
 	    </div>
 	    <div>
-		<button className="profButton" onClick={toggleModal}>Settings</button>
+		<button className="prof-button" onClick={toggleModal}>Settings</button>
 		<Modal
 		    isOpen={open}
 		    onRequestClose={toggleModal}
@@ -125,18 +125,18 @@ const UserInfo = ({ data }) => {
 				<input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
 			    </label>
 			    <label><h3>Profile Picture URL</h3>
-				<input type="url" id="profPic" name="profPic" value={pic} onChange={e => setPic(e.target.value)} />
+				<input type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
 			    </label>
 			</fieldset>
-			<button type="submit" className="profButton">Save</button>
+			<button type="submit" className="prof-button">Save</button>
 		    </form>
-		    <button className="profButton" onClick={toggleModal}>Back</button>
+		    <button className="prof-button" onClick={toggleModal}>Back</button>
 		</Modal>
 	    </div>
 	    <CopyToClipboard text={window.location.href} onCopy={onCopy}>
 	    <div> 
 		{/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
-		<button className="profButton">Share</button>
+		<button className="prof-button">Share</button>
 		<p>{copied ? "Copied URL to clipboard." : ""}</p>
 	    </div>
 	  </CopyToClipboard>
