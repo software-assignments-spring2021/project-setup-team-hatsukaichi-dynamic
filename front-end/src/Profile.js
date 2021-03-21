@@ -36,7 +36,7 @@ const UserInfo = ({ data, updateUserData }) => {
 	    'img': pic,
 	    'email': email
 	}
-	axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=646d6e10&__method=PATCH`, newData ) //Paste in your key after key=.
+	axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=&__method=PATCH`, newData ) //Paste in your key after key=.
 	    .then((response) => {
 		console.log(response)
 		updateUserData(response.data)
