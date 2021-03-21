@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import Modal from "react-modal";
 
 // UserInfo displays all user-specific information for the profile
-const UserInfo = ({ data }) => {
+const UserInfo = ({ data, updateUserData }) => {
     const [userShows, setUserShows] = useState([]);
     const [copied, setCopied] = useState(false);
     const [email, setEmail] = useState("");
@@ -36,9 +36,10 @@ const UserInfo = ({ data }) => {
 	    'img': pic,
 	    'email': email
 	}
-	axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=646d6e10&__method=PATCH`, { newData } )
+	axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=646d6e10&__method=PATCH`, newData ) //Paste in your key after key=.
 	    .then((response) => {
-		console.log(response);
+		console.log(response)
+		updateUserData(response.data)
 	    })
     }
 
@@ -159,6 +160,10 @@ const UserInfo = ({ data }) => {
 const Profile = (props) => {
   const [userData, setUserData] = useState([]);
 
+    const newFn = (newData) => {
+	setUserData(newData)
+    }
+    
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
       .then((response) => {
@@ -179,7 +184,7 @@ const Profile = (props) => {
       <Hamburger />
       {userData === null
         ? <p>Oh no! Looks like this user wasn't found....</p>
-        : <UserInfo data={userData} />
+       : <UserInfo data={userData} updateUserData={newFn} />
       }
       <Footer />
     </>
