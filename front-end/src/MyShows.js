@@ -49,7 +49,7 @@ const ShowGrid = (props) => {
       setFilteredShows([]);
     }
     else {
-      const res = filterShows(props.shows, props.status).map( (showUserInfo) => {
+	const res = filterShows(props.shows, props.status, props.platforms).map( (showUserInfo) => {
         return shows.find(show => show.id === showUserInfo.id);
       });
       setFilteredShows( res );
@@ -81,7 +81,7 @@ const filterShows = (shows, status, platforms) => {
   }
   else {
     const filtered = shows.filter((show) => {
-	if (platforms.includes(show.platform) { 
+	if (platforms.includes(show.platform)) { 
 	    if (status === "") {
 		return show;
 	    }
@@ -163,6 +163,25 @@ const MyShows = (props) => {
       });
   };
 
+    const platforms= [
+	{label: "Netflix", id: "netflix"},
+	{label: "Amazon Prime", id: "prime"},
+	{label: "Hulu", id: "hulu"},
+	{label: "HBO", id: "hbo"},
+	{label: "Disney Plus", id: "disney"},
+	{label: "Crunchyroll", id: "crunchyroll"},
+	{label: "Other", id: "other"},
+    ]
+
+    const fullPlatforms = platforms.map( (platform) => {
+	return (
+	    <label>
+		<h3>{platform.label}</h3>
+		<input type="checkbox" id={platform.id} name={platform.id} />
+	    </label>
+	)
+    })
+    
   return (
     <>
       <Hamburger />
@@ -188,27 +207,7 @@ const MyShows = (props) => {
 		<h1>Filter by Platform</h1>
 		<form onSubmit={handleSubmit}>
 		    <fieldset>
-			<label><h3>Netflix</h3>
-			    <input type="checkbox" id="netflix" name="netflix" />
-			</label>
-			<label><h3>Amazon Prime</h3>
-			    <input type="checkbox" id="prime" name="prime" />
-			</label>
-			<label><h3>Hulu</h3>
-			    <input type="checkbox" id="hulu" name="hulu" />
-			</label>
-			<label><h3>HBO</h3>
-			    <input type="checkbox" id="hbo" name="hbo" />
-			</label>
-			<label><h3>Disney Plus</h3>
-			    <input type="checkbox" id="disney" name="disney" />
-			</label>
-			<label><h3>Crunchyroll</h3>
-			    <input type="checkbox" id="crunchyroll" name="crunchyroll" />
-			</label>
-			<label><h3>Other</h3>
-			    <input type="checkbox" id="other" name="other" />
-			</label>
+			<fullPlatforms />
 		    </fieldset>
 		    <button type="submit" className="my-shows-button">Filter</button>
 		</form>
@@ -221,7 +220,7 @@ const MyShows = (props) => {
             Completed
           </button>
         </div>
-        <ShowGrid shows={userData.shows} status={status} />
+          <ShowGrid shows={userData.shows} status={status} platforms={platforms} />
       </div>
       <Footer />
     </>
