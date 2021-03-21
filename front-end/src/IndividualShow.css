@@ -1,0 +1,76 @@
+
+.description {
+    width: 100%;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.block {
+    width: 100%;
+  background-color: lightgray;
+  }
+
+  #one {
+    width: 31%;
+    float: left;
+   
+   }
+  #two {
+    width: 31%;
+    float: left;
+   
+   }
+   #three {
+    width: 31%;
+    float: left;
+   
+   }
+
+.description input{
+    width: 50%;
+}
+  
+
+button {
+    margin: 2em;
+    border: none;
+    background: #e6e6e6;
+    padding: 1em 2em 1em 2em;
+}
+
+
+.main {
+    width: 80%;
+    background-color: rgb(142, 221, 217);
+}
+.show-details {
+    float: left; 
+    width: 60%;
+    background-color: rgb(149, 103, 202);
+}
+
+.show_content{
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+#cover {
+    width: 35%;
+    float: left; 
+    padding: 1em;
+}
+
+#clear{
+    clear:both
+}
+
+button {
+    margin: 2em;
+    border: none;
+    background: #e6e6e6;
+    padding: 1em 2em 1em 2em;
+}
+
+.progress{
+    width: 20%;
+}
