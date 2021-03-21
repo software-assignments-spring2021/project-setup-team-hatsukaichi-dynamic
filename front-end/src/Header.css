@@ -2,3 +2,11 @@ h1 {
     text-align: center;
 }
 
+p {
+    text-align: center;
+    line-height: 100px
+}
+
+.bm-burger-button{
+    top: 1.5em;
+}
