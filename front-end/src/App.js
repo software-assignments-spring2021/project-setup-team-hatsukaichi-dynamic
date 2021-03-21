@@ -36,14 +36,14 @@ const App = (props) => {
           <Route path="/meet-the-team">
             <MeetTheTeam />
           </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-          <Route path="/Login">
+            <Route path="/Login">
             <Login />
           </Route>
           <Route path="/Signup">
             <Signup />
+          </Route>
+          <Route path="/">
+            <Home />
           </Route>
         </Switch>
       </Router>
