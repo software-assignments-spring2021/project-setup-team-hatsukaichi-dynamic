@@ -6,6 +6,7 @@ import axios from 'axios';
 import Hamburger from './Hamburger';
 import { createMockUser, mockAllShows, mockShowAPI, mockShowImage } from './MockData';
 import './MyShows.css';
+import Modal from "react-modal";
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -95,7 +96,8 @@ const MyShows = (props) => {
   const [status, setStatus] = useState('');
   const [inProgressSelected, setInProgressSelected] = useState(false);
   const [completedSelected, setCompletedSelected] = useState(false);
-
+    const [open, setOpen] = useState(false)
+    
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
       .then((response) => {
@@ -111,6 +113,15 @@ const MyShows = (props) => {
       });
   }, [props.id]);
 
+    const toggleModal = () => {
+	setOpen(!open)
+    }
+
+    const handleSubmit = (event) => {
+	event.preventDefault();
+	toggleModal();
+    }
+    
   const onStatusChange = ((buttonType) => {
     if (buttonType === "in progress") {
       inProgressSelected ? setStatus("") : setStatus("In Progress");
@@ -160,14 +171,48 @@ const MyShows = (props) => {
         </div>
         <div id="filter-container">
           <button
-            className={inProgressSelected ? "selected" : ""}
+            className={inProgressSelected ? "selected" : "my-shows-button"}
             onClick={(e) => onStatusChange("in progress")}
           >
             In Progress
           </button>
-          <button> Filter Shows </button>
+            <button className="my-shows-button" onClick={toggleModal}>Filter Shows</button>
+	    <Modal
+		isOpen={open}
+		onRequestClose={toggleModal}
+		contentLabel="Filter Shows"
+	    >
+		<h1>Filter by Platform</h1>
+		<form onSubmit={handleSubmit}>
+		    <fieldset>
+			<label><h3>Netflix</h3>
+			    <input type="checkbox" id="netflix" name="netflix" />
+			</label>
+			<label><h3>Amazon Prime</h3>
+			    <input type="checkbox" id="prime" name="prime" />
+			</label>
+			<label><h3>Hulu</h3>
+			    <input type="checkbox" id="hulu" name="hulu" />
+			</label>
+			<label><h3>HBO</h3>
+			    <input type="checkbox" id="hbo" name="hbo" />
+			</label>
+			<label><h3>Disney Plus</h3>
+			    <input type="checkbox" id="disney" name="disney" />
+			</label>
+			<label><h3>Crunchyroll</h3>
+			    <input type="checkbox" id="crunchyroll" name="crunchyroll" />
+			</label>
+			<label><h3>Other</h3>
+			    <input type="checkbox" id="other" name="other" />
+			</label>
+		    </fieldset>
+		    <button type="submit" className="my-shows-button">Filter</button>
+		</form>
+		<button className="my-shows-button" onClick={toggleModal}>Back</button>
+	    </Modal>
           <button
-            className={completedSelected ? "selected" : ""}
+            className={completedSelected ? "selected" : "my-shows-button"}
             onClick={(e) => onStatusChange("completed")}
           >
             Completed
