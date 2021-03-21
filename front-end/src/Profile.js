@@ -22,6 +22,21 @@ const UserInfo = ({ username, bio, image }) => {
   )
 };
 
+const RecentShows = ({ shows }) => {
+  return (
+    <>
+      <h4>Recently Added Shows</h4>
+      {shows
+        ? <div id="profile-show-container">
+          {shows.map((show) => {
+            return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
+          })}
+        </div>
+        : "No shows"}
+    </>
+  )
+}
+
 const ProfileContents = ({ data, updateUserData }) => {
   const [userShows, setUserShows] = useState([]);
   const [copied, setCopied] = useState(false);
@@ -105,7 +120,7 @@ const ProfileContents = ({ data, updateUserData }) => {
         setUserShows(showInfo);
       })
     }
-  }, [data])
+  }, [data.shows])
 
 
 
@@ -113,15 +128,8 @@ const ProfileContents = ({ data, updateUserData }) => {
     <>
       <div id="container">
         <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
-        <div>
-          <h4>Recently Added Shows</h4>
-          {userShows
-            ? <div id="profile-show-container">
-              {userShows.map((show) => {
-                return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
-              })}
-            </div>
-            : "No shows"}
+        <RecentShows shows={userShows} />
+        <div id="profile-links">
           <div>
             <Link to={`/my-shows/${data.id}`}>
               <button className="prof-button">My Shows</button>
