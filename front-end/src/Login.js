@@ -32,8 +32,9 @@ import Footer from './Footer'
                         </form>
                     </div>
                 </div>
+            <Footer/> 
+
             </div>
-            <Footer />
 
         );
     }
