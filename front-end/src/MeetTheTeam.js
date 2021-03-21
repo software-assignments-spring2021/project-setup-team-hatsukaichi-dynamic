@@ -2,7 +2,7 @@ import React from 'react'
 import Footer from './Footer'
 import Hamburger from './Hamburger'
 import './MeetTheTeam.css'
-import image from './Images/107-1076987_user-staff-man-profile-person-icon-circle-png.png'
+import image from './Images/stock-user.png'
 import HeaderLogo from './HeaderLogo'
 
 function MeetTheTeam() {
