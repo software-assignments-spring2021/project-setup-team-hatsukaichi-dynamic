@@ -6,9 +6,12 @@ import TermsOfService from './TermsOfService';
 import MeetTheTeam from './MeetTheTeam';
 import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
-import MyShows from './MyShows';
+import MyShows from './MyShows'
+import Modal from "react-modal";
 import Login from './Login';
 import Signup from './Signup';
+
+Modal.setAppElement("#root");
 
 const ProfileWrapper = ({match}) => {
   return (
