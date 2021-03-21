@@ -14,11 +14,8 @@
     "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-<<<<<<< HEAD
     "react-select": "^4.3.0",
-=======
     "react-sticky-header": "^0.2.0",
->>>>>>> 908763b (Sticky Header changes)
     "web-vitals": "^1.1.0"
   },
   "scripts": {
