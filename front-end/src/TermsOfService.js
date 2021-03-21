@@ -1,12 +1,14 @@
 import React from 'react'
 import Footer from './Footer'
 import Hamburger from './Hamburger'
+import HeaderLogo from './HeaderLogo'
 import './TermsOfService.css'
 import { Link } from 'react-router-dom'
 
 function TermsOfService() {
     return(
 	<>
+		<HeaderLogo/>
 	    <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
 	    <div className = "header">
         	<h1>Terms of Service</h1>
