@@ -22,14 +22,14 @@
   padding: 1em;
 }
 
-.profButton {
+.prof-button {
     font-size: 18px;
     border: 2px solid #84ED6F;
     background-color: #666666;
     color: #84ED6F;
 }
 
-.profButton:hover {
+.prof-button:hover {
     font-size: 18px;
     border: 2px solid #3CDD1B;
     background-color: #2D2D2D;

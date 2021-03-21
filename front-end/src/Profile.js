@@ -5,12 +5,54 @@ import './Profile.css'
 // Hamburger should eventually be replaced with a navigation bar component, when created
 import Hamburger from './Hamburger';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
+import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
 import { Link } from 'react-router-dom'
+import Modal from "react-modal";
 
 // UserInfo displays all user-specific information for the profile
-const UserInfo = ({ data }) => {
-  const [userShows, setUserShows] = useState([]);
+const UserInfo = ({ data, updateUserData }) => {
+    const [userShows, setUserShows] = useState([]);
+    const [copied, setCopied] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [bio, setBio] = useState("");
+    const [pic, setPic] = useState("");
+    const [open, setOpen] = useState(false);
+
+    const toggleModal = () => {
+	setOpen(!open);
+    }
+
+    const onCopy = () => {
+	setCopied(true);
+    }
+
+    const handleSubmit = (event) => {
+	event.preventDefault();
+	alert('Settings updated.')
+	const newData = {
+	    ...data,
+	    'bio': bio,
+	    'img': pic,
+	    'email': email
+	}
+	axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=&__method=PATCH`, newData ) //Paste in your key after key=.
+	    .then((response) => {
+		console.log(response)
+		updateUserData(response.data)
+	    })
+	    .catch((err) => {
+		console.log("We likely reached Mockaroo's request limit, or no API key has been provided...");
+		console.log(err);
+		updateUserData(mockUserUpdate(data.id, newData));
+	    })
+    }
+
+    useEffect(() => {
+	setEmail(data.email)
+	setBio(data.bio)
+	setPic(data.img)
+    }, [data.email, data.bio, data.img]);
 
   useEffect(() => {
     let showIds = [];
@@ -53,10 +95,8 @@ const UserInfo = ({ data }) => {
     }
   }, [data])
 
-    const [copied, setCopied] = useState(false);
-    const onCopy = () => {
-	setCopied(true);
-    }
+
+    
   return (
     <>
       <div id="container">
@@ -69,25 +109,50 @@ const UserInfo = ({ data }) => {
         </div>
         <div>
           <h4>Recently Added Shows</h4>
-          <p>{userShows
+          {userShows
             ? <div id="show-container">
               {userShows.map((show) => {
                 return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
               })}
             </div>
-              : "No shows"}</p>
+              : "No shows"}
 	    <div>
 		<Link to={`/my-shows/${data.id}`}>
-		    <button className="profButton">My Shows</button>
+		    <button className="prof-button">My Shows</button>
 		</Link>
 	    </div>
 	    <div>
-		<button className="profButton">Settings</button>
+		<button className="prof-button" onClick={toggleModal}>Settings</button>
+		<Modal
+		    isOpen={open}
+		    onRequestClose={toggleModal}
+		    contentLabel="Settings"
+		>
+		    <h1>Settings</h1>
+		    <form onSubmit={handleSubmit}>
+			<fieldset>
+			    <label><h3>Email:</h3>
+				<input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+			    </label>
+			    <label><h3>Password</h3>
+				<input type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)}  />
+			    </label>
+			    <label><h3>Bio</h3>
+				<input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
+			    </label>
+			    <label><h3>Profile Picture URL</h3>
+				<input type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
+			    </label>
+			</fieldset>
+			<button type="submit" className="prof-button">Save</button>
+		    </form>
+		    <button className="prof-button" onClick={toggleModal}>Back</button>
+		</Modal>
 	    </div>
 	    <CopyToClipboard text={window.location.href} onCopy={onCopy}>
 	    <div> 
 		{/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
-		<button className="profButton">Share</button>
+		<button className="prof-button">Share</button>
 		<p>{copied ? "Copied URL to clipboard." : ""}</p>
 	    </div>
 	  </CopyToClipboard>
@@ -100,6 +165,10 @@ const UserInfo = ({ data }) => {
 const Profile = (props) => {
   const [userData, setUserData] = useState([]);
 
+    const updateUser = (newData) => {
+	setUserData(newData)
+    }
+    
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
       .then((response) => {
@@ -120,7 +189,7 @@ const Profile = (props) => {
       <Hamburger />
       {userData === null
         ? <p>Oh no! Looks like this user wasn't found....</p>
-        : <UserInfo data={userData} />
+       : <UserInfo data={userData} updateUserData={updateUser} />
       }
       <Footer />
     </>
