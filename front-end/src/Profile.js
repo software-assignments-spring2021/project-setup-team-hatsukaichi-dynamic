@@ -109,13 +109,13 @@ const UserInfo = ({ data, updateUserData }) => {
         </div>
         <div>
           <h4>Recently Added Shows</h4>
-          <p>{userShows
+          {userShows
             ? <div id="show-container">
               {userShows.map((show) => {
                 return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
               })}
             </div>
-              : "No shows"}</p>
+              : "No shows"}
 	    <div>
 		<Link to={`/my-shows/${data.id}`}>
 		    <button className="prof-button">My Shows</button>
