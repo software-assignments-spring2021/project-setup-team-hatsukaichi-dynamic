@@ -1,46 +1,43 @@
-import './Signup.css';
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import Hamburger from './Hamburger';
-import Footer from './Footer'
+import Header from './Header';
+import Footer from './Footer';
 
-
-
-export default function Signup() {
-
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-
-function handleChange(e) {
-    e.preventDefault();
-}
-
-function submit(e) {
-        
-}
+import './Signup.css';
 
 function Signup() {
-    return(
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
-        <div>
-            <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />  
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submit!");
+  }
 
+  return (
+    <>
+      <Header />
+      <div id="signup-container">
+        <form id="signup-form" onSubmit={handleSubmit}>
+          <h2>Sign up for TV Tracker</h2>
+          <div className="form-fields">
+            <label>Username</label>
+            <input type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}}/>
+            <label>Password</label>
+            <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <label>Confirm Password</label>
+            <input type="password" name="passwordconfirm" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button id="signup-button" type="submit">Sign Up</button>
+          <p className="message">Already have an account? <Link to="/login">Log In</Link></p>
+        </form>
+      </div>
+      <Footer />
 
-            <div className="login">
-                <div className="form">
-                    <form className="register-form" onSubmit={(e) => {submit();  e.preventDefault(); }}>
-                        <br />
-                        <input type="email" name="email" placeholder="email" value={email} onChange={ (e) => setEmail(e.target.value)} required />
-                        <input type="password" name="password" placeholder="create a password" value={password} onChange={ (e) => setPassword(e.target.value)} required />
-                        <input type="password" name="passwordconfirm" placeholder="confirm password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                        <button type="submit">create account</button>
-                        <p className="message">Already registered? <Link to="/login">Sign In</Link></p>
-                    </form>
-                </div>
-            </div>
-        <Footer/> 
-
-        </div>
-        );
-    }
+    </>
+  );
 }
+
+
+export default Signup;
