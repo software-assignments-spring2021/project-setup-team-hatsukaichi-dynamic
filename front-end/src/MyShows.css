@@ -31,7 +31,7 @@
     justify-content: space-around;
 }
 
-button {
+.filter-button {
     margin: 2em;
     border: none;
     background: #e6e6e6;

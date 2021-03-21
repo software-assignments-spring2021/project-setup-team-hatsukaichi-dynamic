@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Footer from './Footer';
 import axios from 'axios';
 import './Profile.css'
-// Hamburger should eventually be replaced with a navigation bar component, when created
-import Hamburger from './Hamburger';
+import Header from './Header';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
 import { Link } from 'react-router-dom'
@@ -56,7 +55,6 @@ const ProfileContents = ({ data, updateUserData }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert('Settings updated.')
     const newData = {
       ...data,
       'bio': bio,
@@ -67,11 +65,13 @@ const ProfileContents = ({ data, updateUserData }) => {
       .then((response) => {
         console.log(response)
         updateUserData(response.data)
+        toggleModal()
       })
       .catch((err) => {
         console.log("We likely reached Mockaroo's request limit, or no API key has been provided...");
         console.log(err);
-        updateUserData(mockUserUpdate(data.id, newData));
+        updateUserData(mockUserUpdate(data.id, newData))
+        toggleModal()
       })
   }
 
@@ -142,25 +142,27 @@ const ProfileContents = ({ data, updateUserData }) => {
               onRequestClose={toggleModal}
               contentLabel="Settings"
             >
-              <h1>Settings</h1>
-              <form onSubmit={handleSubmit}>
-                <fieldset>
-                  <label><h3>Email:</h3>
-                    <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-                  </label>
-                  <label><h3>Password</h3>
-                    <input type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
-                  </label>
-                  <label><h3>Bio</h3>
-                    <input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
-                  </label>
-                  <label><h3>Profile Picture URL</h3>
-                    <input type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
-                  </label>
-                </fieldset>
-                <button type="submit" className="prof-button">Save</button>
-              </form>
-              <button className="prof-button" onClick={toggleModal}>Back</button>
+              <div className="modal-contents">
+                <button id="back-button" onClick={toggleModal}>Back</button>
+                <h1>Settings</h1>
+                <form id="settings-form" onSubmit={handleSubmit}>
+                  <fieldset>
+                    <label><h3>Email:</h3>
+                      <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+                    </label>
+                    <label><h3>Password</h3>
+                      <input type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
+                    </label>
+                    <label><h3>Bio</h3>
+                      <input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
+                    </label>
+                    <label><h3>Profile Picture URL</h3>
+                      <input type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
+                    </label>
+                  </fieldset>
+                  <button type="submit" className="prof-button" form="settings-form">Save</button>
+                </form>
+              </div>
             </Modal>
           </div>
           <CopyToClipboard text={window.location.href} onCopy={onCopy}>
@@ -200,7 +202,7 @@ const Profile = (props) => {
 
   return (
     <>
-      <Hamburger />
+      <Header />
       {userData === null
         ? <p>Oh no! Looks like this user wasn't found....</p>
         : <ProfileContents data={userData} updateUserData={updateUser} />
