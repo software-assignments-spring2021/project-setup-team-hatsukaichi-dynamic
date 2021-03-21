@@ -1,6 +1,6 @@
 import React from 'react'
 import Footer from './Footer'
-import Hamburger from './Hamburger'
+import Header from './Header'
 import './MeetTheTeam.css'
 import image from './Images/stock-user.png'
 import HeaderLogo from './HeaderLogo'
@@ -8,8 +8,8 @@ import HeaderLogo from './HeaderLogo'
 function MeetTheTeam() {
     return (
 	<>
-		<HeaderLogo/>
-	    <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />  
+	    <Header/>
+
 	    <div className = "header">
 		<h1>Meet the Team</h1>
 	    </div>
