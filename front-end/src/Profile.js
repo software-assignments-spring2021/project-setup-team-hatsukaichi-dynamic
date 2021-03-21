@@ -11,48 +11,48 @@ import Modal from "react-modal";
 
 // UserInfo displays all user-specific information for the profile
 const UserInfo = ({ data, updateUserData }) => {
-    const [userShows, setUserShows] = useState([]);
-    const [copied, setCopied] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [bio, setBio] = useState("");
-    const [pic, setPic] = useState("");
-    const [open, setOpen] = useState(false);
+  const [userShows, setUserShows] = useState([]);
+  const [copied, setCopied] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [bio, setBio] = useState("");
+  const [pic, setPic] = useState("");
+  const [open, setOpen] = useState(false);
 
-    const toggleModal = () => {
-	setOpen(!open);
+  const toggleModal = () => {
+    setOpen(!open);
+  }
+
+  const onCopy = () => {
+    setCopied(true);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Settings updated.')
+    const newData = {
+      ...data,
+      'bio': bio,
+      'img': pic,
+      'email': email
     }
+    axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=&__method=PATCH`, newData) //Paste in your key after key=.
+      .then((response) => {
+        console.log(response)
+        updateUserData(response.data)
+      })
+      .catch((err) => {
+        console.log("We likely reached Mockaroo's request limit, or no API key has been provided...");
+        console.log(err);
+        updateUserData(mockUserUpdate(data.id, newData));
+      })
+  }
 
-    const onCopy = () => {
-	setCopied(true);
-    }
-
-    const handleSubmit = (event) => {
-	event.preventDefault();
-	alert('Settings updated.')
-	const newData = {
-	    ...data,
-	    'bio': bio,
-	    'img': pic,
-	    'email': email
-	}
-	axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=&__method=PATCH`, newData ) //Paste in your key after key=.
-	    .then((response) => {
-		console.log(response)
-		updateUserData(response.data)
-	    })
-	    .catch((err) => {
-		console.log("We likely reached Mockaroo's request limit, or no API key has been provided...");
-		console.log(err);
-		updateUserData(mockUserUpdate(data.id, newData));
-	    })
-    }
-
-    useEffect(() => {
-	setEmail(data.email)
-	setBio(data.bio)
-	setPic(data.img)
-    }, [data.email, data.bio, data.img]);
+  useEffect(() => {
+    setEmail(data.email)
+    setBio(data.bio)
+    setPic(data.img)
+  }, [data.email, data.bio, data.img]);
 
   useEffect(() => {
     let showIds = [];
@@ -96,7 +96,7 @@ const UserInfo = ({ data, updateUserData }) => {
   }, [data])
 
 
-    
+
   return (
     <>
       <div id="container">
@@ -115,47 +115,47 @@ const UserInfo = ({ data, updateUserData }) => {
                 return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
               })}
             </div>
-              : "No shows"}
-	    <div>
-		<Link to={`/my-shows/${data.id}`}>
-		    <button className="prof-button">My Shows</button>
-		</Link>
-	    </div>
-	    <div>
-		<button className="prof-button" onClick={toggleModal}>Settings</button>
-		<Modal
-		    isOpen={open}
-		    onRequestClose={toggleModal}
-		    contentLabel="Settings"
-		>
-		    <h1>Settings</h1>
-		    <form onSubmit={handleSubmit}>
-			<fieldset>
-			    <label><h3>Email:</h3>
-				<input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-			    </label>
-			    <label><h3>Password</h3>
-				<input type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)}  />
-			    </label>
-			    <label><h3>Bio</h3>
-				<input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
-			    </label>
-			    <label><h3>Profile Picture URL</h3>
-				<input type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
-			    </label>
-			</fieldset>
-			<button type="submit" className="prof-button">Save</button>
-		    </form>
-		    <button className="prof-button" onClick={toggleModal}>Back</button>
-		</Modal>
-	    </div>
-	    <CopyToClipboard text={window.location.href} onCopy={onCopy}>
-	    <div> 
-		{/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
-		<button className="prof-button">Share</button>
-		<p>{copied ? "Copied URL to clipboard." : ""}</p>
-	    </div>
-	  </CopyToClipboard>
+            : "No shows"}
+          <div>
+            <Link to={`/my-shows/${data.id}`}>
+              <button className="prof-button">My Shows</button>
+            </Link>
+          </div>
+          <div>
+            <button className="prof-button" onClick={toggleModal}>Settings</button>
+            <Modal
+              isOpen={open}
+              onRequestClose={toggleModal}
+              contentLabel="Settings"
+            >
+              <h1>Settings</h1>
+              <form onSubmit={handleSubmit}>
+                <fieldset>
+                  <label><h3>Email:</h3>
+                    <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+                  </label>
+                  <label><h3>Password</h3>
+                    <input type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
+                  </label>
+                  <label><h3>Bio</h3>
+                    <input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
+                  </label>
+                  <label><h3>Profile Picture URL</h3>
+                    <input type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
+                  </label>
+                </fieldset>
+                <button type="submit" className="prof-button">Save</button>
+              </form>
+              <button className="prof-button" onClick={toggleModal}>Back</button>
+            </Modal>
+          </div>
+          <CopyToClipboard text={window.location.href} onCopy={onCopy}>
+            <div>
+              {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
+              <button className="prof-button">Share</button>
+              <p>{copied ? "Copied URL to clipboard." : ""}</p>
+            </div>
+          </CopyToClipboard>
         </div>
       </div>
     </>
@@ -165,10 +165,10 @@ const UserInfo = ({ data, updateUserData }) => {
 const Profile = (props) => {
   const [userData, setUserData] = useState([]);
 
-    const updateUser = (newData) => {
-	setUserData(newData)
-    }
-    
+  const updateUser = (newData) => {
+    setUserData(newData)
+  }
+
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
       .then((response) => {
@@ -189,7 +189,7 @@ const Profile = (props) => {
       <Hamburger />
       {userData === null
         ? <p>Oh no! Looks like this user wasn't found....</p>
-       : <UserInfo data={userData} updateUserData={updateUser} />
+        : <UserInfo data={userData} updateUserData={updateUser} />
       }
       <Footer />
     </>
