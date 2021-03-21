@@ -1,36 +1,36 @@
 // This file contains mock data for handling Mockaroo rate limit exceeded errors
 const mockShows = JSON.parse(`[{
   "id": 36,
-  "platform": "Babblestorm",
+  "platform": "Netflix",
   "completed": false,
   "progess": 30
 },{
   "id": 3,
-  "platform": "Topiclounge",
+  "platform": "Amazon Prime",
   "completed": false,
   "progess": 78
 },
 {
   "id": 54,
-  "platform": "Fiveclub",
+  "platform": "Disney Plus",
   "completed": true,
   "progess": 8
 },
 {
   "id": 42,
-  "platform": "Feednation",
+  "platform": "HBO",
   "completed": false,
   "progess": 71
 },
 {
   "id": 96,
-  "platform": "Gigashots",
+  "platform": "Crunchyroll",
   "completed": false,
   "progess": 17
 },
 {
   "id": 11,
-  "platform": "Gigaclub",
+  "platform": "Other",
   "completed": true,
   "progess": 22
 }]`)

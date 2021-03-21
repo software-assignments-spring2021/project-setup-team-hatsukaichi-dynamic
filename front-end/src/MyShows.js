@@ -74,17 +74,20 @@ const ShowGrid = (props) => {
 // filterShows filters a list of shows with user information by their status (indicated by a boolean)
 // the status variable being passed into this function, however, is a string as to account for
 // the case where no show status filtering is being done
-const filterShows = (shows, status) => {
+const filterShows = (shows, status, platforms) => {
   const isCompleted = status === "Completed";
   if (!shows) {
     return [];
   }
   else {
     const filtered = shows.filter((show) => {
-      if (status === "") {
-        return show;
-      }
-      return show.completed === isCompleted;
+	if (platforms.includes(show.platform) { 
+	    if (status === "") {
+		return show;
+	    }
+	    return show.completed === isCompleted;
+	}
+	return false   
     });
     console.log(filtered)
     return filtered;
