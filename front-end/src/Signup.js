@@ -2,6 +2,8 @@ import './Signup.css';
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import Hamburger from './Hamburger';
+import Footer from './Footer'
+
 
 
 export default function Signup() {
@@ -21,11 +23,12 @@ export default function Signup() {
         return(
 
             <div>
-             
+                <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />  
+
 
                 <div className="login">
                     <div className="form">
-                        <form className="register-form" onSubmit={(e) => {this.submit();  e.preventDefault(); }}>
+                        <form className="register-form" onSubmit={(e) => {submit();  e.preventDefault(); }}>
                             <br />
                             <input type="email" name="email" placeholder="email" value={email} onChange={ (e) => setEmail(e.target.value)} required />
                             <input type="password" name="password" placeholder="create a password" value={password} onChange={ (e) => setPassword(e.target.value)} required />
@@ -36,6 +39,7 @@ export default function Signup() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         );
     }
 

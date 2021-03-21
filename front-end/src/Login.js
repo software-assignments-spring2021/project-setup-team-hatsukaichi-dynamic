@@ -1,6 +1,8 @@
 import './Login.css';
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import Hamburger from './Hamburger';
+import Footer from './Footer'
 
 
     export default function Login(){
@@ -9,7 +11,6 @@ import { Link } from 'react-router-dom';
         const [password, setPassword] = useState("");
 
     function handleChange(e) {
-        this.setState({[e.target.name]: e.target.value })
     }
 
     function submit() {
@@ -19,19 +20,21 @@ import { Link } from 'react-router-dom';
     function Login() {
         return (
             <div>
-                
+                <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />  
                 <div className="login">
                     <div className="form">
-                        <form className="login-form" onSubmit={(e) => { this.submit(); e.preventDefault(); }}>
-                            <img id="logo" src="/logo192.png" />
+                        <form className="login-form" onSubmit={(e) => { submit(); e.preventDefault(); }}>
+                            <img id="logo" src="/logo.svg" />
                             <input autoFocus={true} type="email" name="username" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                             <input type="password" name="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                             <button type="submit">login</button>
-                            <p className="message">Not registered? <Link to="/register">Create an account</Link></p>
+                            <p className="message">Not registered? <Link to="/Signup">Create an account</Link></p>
                         </form>
                     </div>
                 </div>
             </div>
+            <Footer />
+
         );
     }
 }
