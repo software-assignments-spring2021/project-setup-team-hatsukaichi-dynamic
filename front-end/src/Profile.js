@@ -5,7 +5,7 @@ import './Profile.css'
 // Hamburger should eventually be replaced with a navigation bar component, when created
 import Hamburger from './Hamburger';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
+import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
 import { Link } from 'react-router-dom'
 import Modal from "react-modal";
 
@@ -40,6 +40,11 @@ const UserInfo = ({ data, updateUserData }) => {
 	    .then((response) => {
 		console.log(response)
 		updateUserData(response.data)
+	    })
+	    .catch((err) => {
+		console.log("We likely reached Mockaroo's request limit, or no API key has been provided...");
+		console.log(err);
+		updateUserData(mockUserUpdate(data.id, newData));
 	    })
     }
 
@@ -160,7 +165,7 @@ const UserInfo = ({ data, updateUserData }) => {
 const Profile = (props) => {
   const [userData, setUserData] = useState([]);
 
-    const newFn = (newData) => {
+    const updateUser = (newData) => {
 	setUserData(newData)
     }
     
@@ -184,7 +189,7 @@ const Profile = (props) => {
       <Hamburger />
       {userData === null
         ? <p>Oh no! Looks like this user wasn't found....</p>
-       : <UserInfo data={userData} updateUserData={newFn} />
+       : <UserInfo data={userData} updateUserData={updateUser} />
       }
       <Footer />
     </>

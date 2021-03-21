@@ -1,17 +1,4 @@
 // This file contains mock data for handling Mockaroo rate limit exceeded errors
-const createMockUser = (id) => {
-  return ({
-    "id": id,
-    "username": "mlaffan0",
-    "password": "njb9oAB",
-    "email": "jparkin0@utexas.edu",
-    "bio": "Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.",
-    "img": "http://dummyimage.com/182x112.jpg/dddddd/000000",
-    "shows": mockShows,
-    }
-  )
-}
-
 const mockShows = JSON.parse(`[{
   "id": 36,
   "platform": "Babblestorm",
@@ -47,6 +34,70 @@ const mockShows = JSON.parse(`[{
   "completed": true,
   "progess": 22
 }]`)
+
+
+const createMockUser = (id) => {
+  return ({
+    "id": id,
+    "username": "mlaffan0",
+    "password": "njb9oAB",
+    "email": "jparkin0@utexas.edu",
+    "bio": "Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.",
+    "img": "http://dummyimage.com/182x112.jpg/dddddd/000000",
+    "shows": mockShows,
+    }
+  )
+}
+
+const mockUserAPI = {
+    '1': {
+	"id": 1,
+	"username": "mlaffan0",
+	"password": "njb9oAB",
+	"email": "jparkin0@utexas.edu",
+	"bio": "Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.",
+	"img": "http://dummyimage.com/182x112.jpg/dddddd/000000",
+	"shows": mockShows
+    },
+    '2': {
+	"id": 2,
+	"username": "fgoodlett1",
+	"password": "Y3DJKGN2",
+	"email": "rgrolmann1@cloudflare.com",
+	"bio": "Mauris sit amet cursus integer. Ut tellus.",
+	"img": "https://dummyimage.com/194x133.png/ffffff/000000",
+	"shows": mockShows	
+    },
+    '3': {
+	"id": 3,
+	"username": "msuff2",
+	"password": "hrqkb4",
+	"email": "msuff2",
+	"bio": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+	"img": "https://dummyimage.com/194x133.png/dddddd/000000",
+	"shows": mockShows	
+    },
+    '4': {
+	"id": 4,
+	"username": "dstuckford3",
+	"password": "ykBWYvO",
+	"email": "mjosilevich3@apple.com",
+	"bio": "Etiam faucibus cursus urna. Ut tellus.",
+	"img": "https://dummyimage.com/194x133.png/ffffff/000000",
+	"shows": mockShows	
+    }
+}
+
+const mockUserUpdate = (id, newUser) => {
+    const thirdUser = {
+	...mockUserAPI[id],
+	'bio':newUser.bio,
+	'img':newUser.img,
+	'email':newUser.email
+    }
+    mockUserAPI[id] = thirdUser
+    return thirdUser
+}
 
 const mockShowAPI = {
   '54': {
@@ -189,5 +240,7 @@ module.exports = {
   mockShowAPI: mockShowAPI,
   mockAllShows: mockAllShows,
   mockUserImage: mockUserImage,
-  mockShowImage: mockShowImage,
+    mockShowImage: mockShowImage,
+    mockUserAPI: mockUserAPI,
+    mockUserUpdate: mockUserUpdate
 }
