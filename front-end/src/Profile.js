@@ -30,6 +30,16 @@ const UserInfo = ({ data }) => {
     const handleSubmit = (event) => {
 	event.preventDefault();
 	alert('Settings updated.')
+	const newData = {
+	    ...data,
+	    'bio': bio,
+	    'img': pic,
+	    'email': email
+	}
+	axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=646d6e10&__method=PATCH`, { newData } )
+	    .then((response) => {
+		console.log(response);
+	    })
     }
 
     useEffect(() => {
