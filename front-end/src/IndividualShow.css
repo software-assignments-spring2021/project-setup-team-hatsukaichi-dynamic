@@ -9,21 +9,37 @@
     width: 100%;
   background-color: lightgray;
   }
-
+/*
   #one {
     width: 31%;
     float: left;
-   
+    padding: 1%;
+    text-align: center;
+    
    }
+
   #two {
     width: 31%;
     float: left;
-   
+    padding: 1%;
+    text-align: center;
    }
    #three {
     width: 31%;
     float: left;
-   
+    padding: 1%;
+    text-align: center;
+   }
+   */
+   #one,  #two,  #three,  #four{
+    width: 100%;
+    text-align: center;
+   }
+   figure{
+    width: 35%;
+    float: left;
+    padding: 1%;
+    text-align: center;
    }
 
 .description input{

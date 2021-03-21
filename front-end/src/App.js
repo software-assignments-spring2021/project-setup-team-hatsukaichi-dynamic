@@ -8,7 +8,6 @@ import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
 import MyShows from './MyShows';
 import IndividualShow from './IndividualShow';
-import InProgressWatched from './InProgressWatched';
 import Modal from "react-modal";
 
 /*
@@ -18,16 +17,10 @@ const IndividualShowWrapper = ({match}) => {
   )
 }
 
-const InProgressWatchedWrapper = ({match}) => {
-  return (
-    <InProgressWatched id={match.params.id} show_id={match.params.id.show_id} />
-  )
-}
 */
 
 /*
 <Route path="/my_shows/:id/:show_id" component={IndividualShowWrapper}/>
-<Route path="/my_shows/:id/watched" component={IndividualShowWrapper}/>
 */
 Modal.setAppElement("#root");
 
@@ -59,9 +52,6 @@ const App = (props) => {
           </Route>
           <Route path="/sample_show" >
           <IndividualShow />
-            </Route>
-            <Route path="/in-progress-watched" >
-          <InProgressWatched />
             </Route>
           <Route path="/">
             <Home />

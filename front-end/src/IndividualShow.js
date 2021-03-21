@@ -3,6 +3,11 @@ import Footer from './Footer'
 import Hamburger from './Hamburger'
 import './IndividualShow.css';
 import image from './poster.jpg'
+import img_actor1 from './actor1.jpeg'
+import img_actor2 from './actor2.jpeg'
+import img_actor3 from './actor3.jpeg'
+import img_actor4 from './actor4.jpeg'
+
 
 const IndividualShow = (props) => {
   const returnToShows = (() => {
@@ -10,7 +15,7 @@ const IndividualShow = (props) => {
   });
 
   const addToWatched = (() => {
-    window.location.href='/in-progress-watched/'
+    window.location.href='/my-shows/'
   });
 
   const saveProgress = (() => {
@@ -42,7 +47,7 @@ const IndividualShow = (props) => {
     <input id="season" class="progress" value="1"/>
     <br/>
     <label for="episode">Current Episode:</label> 
-    <input id="episode" class="progress" value="1"/>
+    <input id="episode" class="progress" value="15"/>
     <br/><br/>
   <input type="submit" value="Save Progress"/>
   </form>
@@ -66,10 +71,24 @@ const IndividualShow = (props) => {
   <input type="text" id="awards" value="Oscar, Golden Globes" readonly/><br/><br/>
   <p>Main actors: </p>  
   <div class="block">
-   
-    <img id="one" src="https://www.scania.org/wp-content/uploads/2018/10/article-10-2.jpg"/>
-    <img id="two" src="https://avatarfiles.alphacoders.com/121/121594.jpg"/>
-    <img id="three" src="https://www.scania.org/wp-content/uploads/2018/10/article-10-2.jpg"/>
+  <figure>
+  <img  id="one" src={img_actor1}/>
+    <figcaption>Beau Bridges</figcaption>
+    </figure>
+    <figure>
+    <img id="two" src={img_actor2}/>
+    <figcaption>Ron Silver</figcaption>
+    </figure>
+    <figure>
+    <img id="three" src={img_actor3}/>
+    <figcaption>George Takei</figcaption>
+    </figure>
+    <figure>
+    <img id="four" src={img_actor4}/>
+    <figcaption>Kenneth Welsh</figcaption>
+    </figure>
+    
+    
   </div>
   </div>
   <br/>
