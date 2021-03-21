@@ -9,8 +9,20 @@ import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpda
 import { Link } from 'react-router-dom'
 import Modal from "react-modal";
 
-// UserInfo displays all user-specific information for the profile
-const UserInfo = ({ data, updateUserData }) => {
+// UserInfo displays username, user bio, and user profile picture
+const UserInfo = ({ username, bio, image }) => {
+  return (
+    <div id="heading">
+      <img src={image} alt="profile" id="profile-picture" />
+      <div id="profile-text">
+        <h3>{username}'s Profile</h3>
+        <p>{bio}</p>
+      </div>
+    </div>
+  )
+};
+
+const ProfileContents = ({ data, updateUserData }) => {
   const [userShows, setUserShows] = useState([]);
   const [copied, setCopied] = useState(false);
   const [email, setEmail] = useState("");
@@ -100,17 +112,11 @@ const UserInfo = ({ data, updateUserData }) => {
   return (
     <>
       <div id="container">
-        <div id="heading">
-          <img src={mockUserImage(data.id)} alt="profile" id="profile-picture" />
-          <div id="profile-text">
-            <h3>{data.username}'s Profile</h3>
-            <p>{data.bio}</p>
-          </div>
-        </div>
+        <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
         <div>
           <h4>Recently Added Shows</h4>
           {userShows
-            ? <div id="show-container">
+            ? <div id="profile-show-container">
               {userShows.map((show) => {
                 return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
               })}
@@ -189,7 +195,7 @@ const Profile = (props) => {
       <Hamburger />
       {userData === null
         ? <p>Oh no! Looks like this user wasn't found....</p>
-        : <UserInfo data={userData} updateUserData={updateUser} />
+        : <ProfileContents data={userData} updateUserData={updateUser} />
       }
       <Footer />
     </>
