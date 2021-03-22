@@ -3,6 +3,7 @@ import StickyHeader from 'react-sticky-header';
 import './Header.css'
 import Hamburger from './Hamburger'
 import logo from './logo.png'
+import HeaderLogo from './HeaderLogo';
 
 const Header = () => {
   return (
@@ -10,7 +11,7 @@ const Header = () => {
       header={
         <div className="header-root">
           <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
-          <img src={logo} className="logo-img" />
+          <HeaderLogo src={logo} className="logo-img" />
         </div>
       }
     >
