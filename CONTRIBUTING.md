@@ -2,8 +2,7 @@
 
 Thank you for contributing to TV Tracker. If you're interested in helping out, please submit a pull request. We would urge you to follow the following norms:
 
-
-## Pull Request Process & Git Workflow
+##  Pull Request Process & Git Workflow
 
 0. Make a branch for each task.
 
