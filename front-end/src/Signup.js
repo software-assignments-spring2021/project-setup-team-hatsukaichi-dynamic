@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
 import './Signup.css';
+import axios from "axios";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -11,11 +12,27 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordMismatch, setPasswordMismatch] = useState(false);
+  const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
     
     password !== passwordConfirm ? setPasswordMismatch(true) : setPasswordMismatch(false);
+
+    // Mockaroo call goes here!
+    const newUser = {
+      'username': username,
+      'email': email,
+      'password': password,
+    }
+
+    axios.post('https://my.api.mockaroo.com/tv_users.json?key=71236df0&__method=POST', newUser)
+      .then( (response) => {
+        history.push(`/profile/${response.data.id}`);
+      })
+      .catch( (err) => {
+        history.push('/profile/1')
+      });
   }
 
   return (
