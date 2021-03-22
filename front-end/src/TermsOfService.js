@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom'
 
 function TermsOfService() {
 	return (
-		<>
+	    <>
+						<Header />
 			<body>
-				<Header />
 
 				<div className="header">
 					<h1>Terms of Service</h1>
