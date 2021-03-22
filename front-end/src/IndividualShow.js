@@ -13,8 +13,8 @@ const ProgressData = ({ season, episode }) => {
   const saveProgressData = (() => {
     //the function will be further developed in sprint 2
     let progress = [];
-    var season = React.findDOMNode(this.refs.season).value;
-    var episode = React.findDOMNode(this.refs.episode).value;
+    let season = React.findDOMNode(this.refs.season).value;
+    let episode = React.findDOMNode(this.refs.episode).value;
     progress.push(season);
     progress.push(episode);
   });
@@ -43,7 +43,6 @@ const PlatformData = () => {
   const refHBO = useRef();
   const refOther = useRef();
   const savePlatform = (() => {
-    //the function will be further developed in sprint 2
   });
   return (
     <div>
@@ -110,14 +109,14 @@ const IndividualShow = (props) => {
   const refTitle = useRef();
   const refCover = useRef();
   const returnToShows = (() => {
-    window.location.href = '/my-shows/'
+    window.location.href = '/my-shows/1'
   });
   const addToInProgress = (() => {
-    window.location.href = '/my-shows/'
+    window.location.href = '/my-shows/1'
   });
 
   const addToWatched = (() => {
-    window.location.href = '/my-shows/'
+    window.location.href = '/my-shows/1'
   });
 
   let [show, setShow] = useState([]);
@@ -126,12 +125,9 @@ const IndividualShow = (props) => {
     //temporary variable to be replaced
     let showInfo = [];
     let showId = "54";
-    //axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=ee3c98c0`)
     axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=ee3c98c0`)
       .then((response) => {
         showInfo.push(response.data);
-        console.log(showInfo);
-        //console.log(show);
         setShow(showInfo);
       })
       .catch((err) => {
