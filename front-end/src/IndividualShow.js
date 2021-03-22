@@ -21,9 +21,10 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
   }); //return null if the show is a movie since movie has typically only one season/episode
   if (isMovieSet==true) {
    return null; 
+  
   } else {
   return (
-    <div id="hide">
+    <div type="hidden">
     <form onSubmit={(e) => saveProgressData()} >
       <label className="labelCustom" for="season">Current Season: </label>
       <input id="season" className="progress" defaultValue={season} ref={refSeason} />
@@ -85,7 +86,7 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
   const refGenre = useRef();
   const refTotalEpisodes = useRef();
 let movieV = { isMovieN };
-if (movieV) {
+if ( isMovieN) {
   movieV = "Yes";
 } else {
   movieV = "No";
@@ -139,6 +140,8 @@ const IndividualShow = (props) => {
       .then((response) => {
         showInfo.push(response.data);
         setShow(showInfo);
+        console.log(showInfo);
+
       })
       .catch((err) => {
         console.log("We likely reached Mockaroo's request limit...");
