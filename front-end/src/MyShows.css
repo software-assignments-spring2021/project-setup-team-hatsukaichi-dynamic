@@ -31,15 +31,34 @@
     justify-content: space-around;
 }
 
-button {
+.filter-button {
     margin: 2em;
-    border: none;
+    font-size: 18px;
     background: #84ED6F;
     padding: 1em 2em 1em 2em;
 }
+.filter-button:hover {
+    background: #3CDD1B;
+}
+
+.my-shows-button {
+    margin: 2em;
+    font-size: 18px;
+    background: #84ED6F;
+    padding: 1em 2em 1em 2em;
+}
+
+.my-shows-button:hover {
+    background: #3CDD1B;
+}
+
 .selected {
+    margin: 2em;
+    font-size: 18px;
+    padding: 1em 2em 1em 2em;
     background: #ACF39D;
 }
-button:hover {
-    background: #3CDD1B;
+
+.selected:hover {
+    background: #3CCD1B;
 }
