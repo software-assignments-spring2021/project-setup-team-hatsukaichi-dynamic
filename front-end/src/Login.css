@@ -18,6 +18,14 @@
   display: block;
 }
 
+.login-links {
+    color: #ACF39D;
+}
+
+.login-links:hover {
+    color: #3CDD1B;
+}
+
 .error {
   color: red;
 }
@@ -29,12 +37,4 @@
   color: #84ED6F;
   padding: .5em 1em .5em 1em;
   margin-bottom: .5em;
-}
-
-.Link {
-    color: #ACF39D;
-}
-
-.Link:hover {
-    color: #3CDD1B;
 }

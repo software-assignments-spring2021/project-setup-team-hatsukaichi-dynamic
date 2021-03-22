@@ -18,6 +18,14 @@
   display: block;
 }
 
+.signup-links {
+    color: #ACF39D;
+}
+
+.signup-links:hover {
+    color: #3CDD1B;
+}
+
 .error {
   color: red;
 }

@@ -63,7 +63,7 @@ function Signup() {
               : null}
           </div>
           <button id="signup-button" type="submit">Sign Up</button>
-          <p className="message">Already have an account? <Link to="/login">Log In</Link></p>
+          <p>Already have an account? <Link to="/login" className="signup-links">Log In.</Link></p>
         </form>
       </div>
       <Footer />
