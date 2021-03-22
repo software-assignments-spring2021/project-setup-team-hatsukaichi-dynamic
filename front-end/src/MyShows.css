@@ -34,10 +34,12 @@
 button {
     margin: 2em;
     border: none;
-    background: #e6e6e6;
+    background: #84ED6F;
     padding: 1em 2em 1em 2em;
 }
-
 .selected {
-    background: #acf39d;
+    background: #ACF39D;
+}
+button:hover {
+    background: #3CDD1B;
 }

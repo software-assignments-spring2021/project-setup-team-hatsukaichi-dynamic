@@ -24,14 +24,15 @@
 
 .prof-button {
     font-size: 18px;
-    border: 2px solid #84ED6F;
-    background-color: #666666;
-    color: #84ED6F;
+    background-color: #84ED6F;
 }
 
 .prof-button:hover {
     font-size: 18px;
-    border: 2px solid #3CDD1B;
-    background-color: #2D2D2D;
-    color: #3CDD1B;
+    background-color: #3CDD1B;
+
+}
+.prof-button:selected {
+  font-size: 18px;
+  background-color: #ACF39D;
 }

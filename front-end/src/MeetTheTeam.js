@@ -3,7 +3,6 @@ import Footer from './Footer'
 import Header from './Header'
 import './MeetTheTeam.css'
 import image from './Images/stock-user.png'
-import HeaderLogo from './HeaderLogo'
 
 function MeetTheTeam() {
     return (

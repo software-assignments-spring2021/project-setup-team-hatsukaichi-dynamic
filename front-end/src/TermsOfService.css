@@ -5,14 +5,12 @@ h1 {
 
 .header {
     font-size: 32px;
-    color: #333333;
 }
 
 .text {
     text-align: left;
     margin-left: 100px;
     margin-right: 100px;
-    color: #333333;
 }
 
 .text h1 {
@@ -21,23 +19,19 @@ h1 {
 
 .text h2 {
     font-size: 24px;
-    color: #333333;
 }
 
 .text h3 {
     font-size: 20px;
-    color: #333333;
 }
 
 .text h4 {
     font-size: 24px;
-    color: #333333;
 }
 
 .text p {
     font-size: 20px;
     margin-left: 15px;
-    color: #333333;
 }
 .text a {
     font-size: 20px;

@@ -2,7 +2,6 @@ h1 {
     margin-top: 0;
     padding: 0;
 }
-
 .content {
     width: 700px;
     padding: 50px;
@@ -16,22 +15,20 @@ h1 {
 }
 .header {
     font-size: 32px;
-    text-align: center;
-    color: #333333;
+    text-align: center;  
 }
+
 .content h4 {
     font-size: 24px;
     margin-left: 20px;
     margin: 2px 0 0 0;
-    display: block;
-    color: #333333;
+    display: block;   
 }
 .content p {
     font-size: 16px;
     margin-left: 15px;
     margin: 2px 0 0 0;
     display: block;
-    color: #333333;
 }
 .content a {
     font-size: 16px;
