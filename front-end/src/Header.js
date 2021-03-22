@@ -2,6 +2,8 @@ import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
 import './Header.css'
 import Hamburger from './Hamburger'
+import LoginButton from './LoginButton'
+import SignupButton from './SignupButton'
 
 const Header = () => {
   return (
@@ -10,6 +12,8 @@ const Header = () => {
       header={
         <div className="header-root">
           <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+          <LoginButton/>
+          <SignupButton/>
           <h1 className="header-title">TV Tracker</h1>
         </div>
       }
