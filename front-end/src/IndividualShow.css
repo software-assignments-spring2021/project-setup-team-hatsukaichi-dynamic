@@ -2,7 +2,8 @@
 .description {
   width: 100%;
   text-align: center;
-  background-color: lightgray;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
 }
 
 .description input {
@@ -18,9 +19,8 @@
 .showDetails {
   float: left;
   width: 60%;
-  background-color: rgb(149, 103, 202);
+  background-color:#2d2d2d;
 }
-
 .showContent {
   display: flex;
   text-align: center;
@@ -37,67 +37,58 @@
   clear: both;
 }
 
-button {
-  margin: 2em;
-  border: none;
-  /*background: #e6e6e6;*/
-  padding: 1em 2em 1em 2em;
-  background: none;
-  border: none;
-  padding: 0;
-  color: #acf39d;
-  cursor: pointer;
-  text-decoration: underline;
+.labelCustom {
+    margin: 2em;
+    font-size: 16px;
+    background-color: #666666;
+    color: #D1CDC7 ;
+    padding: 1em 1em 1em 1em;
 }
 
-textarea {
-  height: 20%;
-}
-.progress {
-  width: 20%;
+.platform{
+  margin: 1em;
+  font-size: 16px;
+  color: #D1CDC7 ;
+  padding: 1em 1em 1em 1em;
 }
 
 
-
-
-
-
-@media (max-width: 750px) {
-  .btnProgress {
-    width: 90%;
-    text-align: center;
-    padding: 1em;
-  }
-  .btnProgressContainer {
-    width: 100%;
-    display: flex;
-  text-align: center;
-  justify-content: space-around;
-  }
-}
-
-@media (max-width: 1000px) {
-  .btnProgress {
-    width: 90%;
-    text-align: center;
-    padding: 1em;
-  }
-  .btnProgressContainer {
-    width: 100%;
-    text-align: center;
-    display: flex;
-  justify-content: space-around;
-  }
-}
-
-@media (max-width: 2000px) {
 .btnProgress {
-  width: 40%;
-  float: left;
-  padding: 1em;
+  margin: 2em;
+  font-size: 18px;
+  border: 2px solid #84ED6F;
+  background-color: #666666;
+  color: #84ED6F;
+  padding: 1em 2em 1em 2em;
 }
-.btnProgressContainer {
-  width: 100%;
-  text-align: center;
+
+.btnProgress:hover {
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
 }
+
+#episode, #season,  #description{
+  margin: 1em;
+  font-size: 16px;
+  background-color: whitesmoke;
+  color: #2D2D2D;
+  padding: 1em 1em 1em 1em;
 }
+#episode:hover, #season:hover, #description:hover {
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
+}
+
+.descript, span{
+  font-size: 1.2em;
+  font-weight: 3px;
+  color: #D1CDC7 ;
+}
+u{
+  color: #3CDD1B;
+}
+
+
+

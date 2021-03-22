@@ -20,13 +20,13 @@ const ProgressData = ({ season, episode }) => {
   });
   return (
     <form onSubmit={(e) => saveProgressData()} >
-      <label for="season">Current Season: </label>
-      <input id="season" class="progress" value={season} ref={refSeason} />
-      <br /> <br />
-      <label for="episode">Current Episode:</label>
-      <input id="episode" class="progress" value={episode} ref={refEpisode} />
+      <label className="labelCustom" for="season">Current Season: </label>
+      <input id="season" className="progress" value={season} ref={refSeason} />
+      <br /> <br /><br /> <br />
+      <label className="labelCustom" for="episode">Current Episode:</label>
+      <input id="episode" className="progress" value={episode} ref={refEpisode} />
       <br /><br />
-      <input type="submit" value="Save Progress" />
+      <input className="btnProgress" type="submit" value="Save Progress" />
     </form>
   )
 }
@@ -38,26 +38,34 @@ const PlatformData = () => {
   const refNetflix = useRef();
   const refPrime = useRef();
   const refHulu = useRef();
-  const refApple = useRef();
-
-
+  const refCrunchy = useRef();
+  const refDisney = useRef();
+  const refHBO = useRef();
+  const refOther = useRef();
   const savePlatform = (() => {
     //the function will be further developed in sprint 2
   });
   return (
     <div>
-      <p>Select the platform: </p>
+      
+      <p className="labelCustom">Select the platform: </p>
       <form onSubmit={(e) => savePlatform()}>
 
-        <input type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
-        <label for="netflix">Netflix  </label>
-        <input type="checkbox" id="prime" value="Prime" ref={refPrime} />
-        <label for="prime">Prime  </label>
-        <input type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
+        <input class="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
+        <label  for="netflix">Netflix  </label>
+        <input class="platform" type="checkbox" id="prime" value="Prime" ref={refPrime} />
+        <label for="prime">Amazon Prime  </label>
+        <input class="platform" type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
         <label for="hulu">Hulu  </label>
-        <input type="checkbox" id="apple" value="Apple" ref={refApple} />
-        <label for="apple">Apple TV+  </label><br /><br />
-        <input type="submit" value="Save Platform" />
+        <input class="platform" type="checkbox" id="crunch" value="Crunchyroll" ref={refCrunchy} />
+        <label for="crunch">Crunchyroll  </label><br /><br />
+        <input class="platform" type="checkbox" id="disney" value="Disney Plus" ref={refDisney} />
+        <label for="crunch">Disney Plus  </label><br /><br />
+        <input class="platform" type="checkbox" id="hbo" value="HBO" ref={refHBO} />
+        <label for="hbo">HBO  </label>
+        <input class="platform" type="checkbox" id="other" value="Other" ref={refOther} />
+        <label for="other">Other  </label><br /><br />
+        <input className="btnProgress" type="submit" value="Save Platform" />
       </form>
     </div>
   )
@@ -80,16 +88,16 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
     //the function will be further developed in sprint 2
   });
   return (
-    <div class="description">
+    <div className="description">
       <br /><br />
-      <label for="genre">Genre:  </label>
-      <span id="genre" ref={refGenre}>{genre}</span><br /><br />
-      <label for="description">Description: </label>
-      <textarea id="description" value={description} ref={refDescription} readonly /><br /><br />
-      <label for="totalEpisodes">Total Episodes: </label>
-      <span id="totalEpisodes" ref={refTotalEpisodes}>{totalEpisodes}</span><br /><br />
-      <label for="movie">Is it a movie? </label>
-      <span id="movie" value={movieV} ref={refIsMovie}>{movieV}</span><br /><br />
+      <label  className="descript" for="genre">Genre:  </label>
+      <u> <span   ref={refGenre}>{genre}</span></u><br /><br />
+      <u> <label className="descript"  for="description">Description:  </label></u> 
+      <span   value={description} ref={refDescription}>{description}</span><br /><br /><br />
+      <u> <label className="descript"  for="totalEpisodes">Total Episodes: </label></u> 
+      <span  ref={refTotalEpisodes}>{totalEpisodes}</span><br /><br /><br />
+      <label className="descript"   for="movie">Is it a movie? </label>
+      <u> <span  value={movieV} ref={refIsMovie}>{movieV}</span><br /><br /></u> 
     </div>
   )
 }
@@ -118,8 +126,8 @@ const IndividualShow = (props) => {
     //temporary variable to be replaced
     let showInfo = [];
     let showId = "54";
-    //axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=3010e030`)
-    axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=27e46d40`)
+    //axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=ee3c98c0`)
+    axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=ee3c98c0`)
       .then((response) => {
         showInfo.push(response.data);
         console.log(showInfo);
@@ -138,23 +146,23 @@ const IndividualShow = (props) => {
     <>
       <Header />
 
-      <div class="showContent">
-        <fieldset class="main">
-          <div class="showDetails">
+      <div className="showContent">
+        <fieldset className="main">
+          <div className="showDetails">
             <fieldset >
               {show.map(s => ( //display name of the show
                 <h3 id="title" value={s.name} ref={refTitle}>{s.name}</h3>
               ))}
 
-              <button onClick={(e) => returnToShows()}>
+              <button className="btnProgress" onClick={(e) => returnToShows()}>
                 Return to Shows
             </button>
 
-              <div class="btnProgressContainer">
-                <button class="btnProgress" onClick={(e) => addToInProgress()}>
+              <div className="btnProgressContainer">
+                <button className="btnProgress" onClick={(e) => addToInProgress()}>
                   Add to In Progress Shows
           </button>
-                <button class="btnProgress" onClick={(e) => addToWatched()}>
+                <button className="btnProgress" onClick={(e) => addToWatched()}>
                   Add to Watched Shows
           </button>
 
@@ -164,7 +172,7 @@ const IndividualShow = (props) => {
               <br /><br />
               <PlatformData />
               <br /><br />
-              <div class="showContent">
+              <div className="showContent">
                 {show.map(s => ( //display general info about the show
                   <Description genre={s.genres} description={s.description} totalEpisodes={s.episodes} isMovieN={s.isMovie} />
                 ))}
