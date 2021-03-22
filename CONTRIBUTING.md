@@ -5,7 +5,7 @@ Thank you for contributing to TV Tracker. If you're interested in helping out, p
 
 ## Pull Request Process & Git Workflow
 
-0. Make a branch for each task.
+0. Make a branch for each task. Branches should be named with the following format: issue#-description-of-task.
 
 1. Name your PR with a focus on accuracy and brevity  and write a description of the task your PR accomplishes, linking to an issue if possible.
 
