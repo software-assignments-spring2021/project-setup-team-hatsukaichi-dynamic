@@ -76,7 +76,6 @@ const ShowGrid = (props) => {
 // the status variable being passed into this function, however, is a string as to account for
 // the case where no show status filtering is being done
 const filterShows = (shows, status, platform) => {
-    console.log(platform)
     const isCompleted = status === "Completed";
   if (!shows) {
     return [];
@@ -92,7 +91,6 @@ const filterShows = (shows, status, platform) => {
 	}
 	return false   
     });
-    console.log(filtered)
     return filtered;
   }
 }
