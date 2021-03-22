@@ -1,15 +1,8 @@
 .ReactStickyHeader_fixed {
-    background: #262626;
+    background: #202020;
 }
 
 .header-title {
     text-align: center;
     color: #D1CDC7;
 }
-
-.bm-burger-button {
-    position: relative;
-    background-color:#D1CDC7;
-    color: #D1CDC7;   
-}
-
