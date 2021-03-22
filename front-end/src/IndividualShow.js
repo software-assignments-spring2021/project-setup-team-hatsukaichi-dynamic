@@ -155,7 +155,7 @@ const IndividualShow = (props) => {
   return (
     <>
       <Header />
-
+	<div className="main-container">
       <div className="showContent">
         <fieldset className="main">
           <div className="showDetails">
@@ -202,7 +202,7 @@ const IndividualShow = (props) => {
           <div id="clear"></div>
         </fieldset>
       </div>
-
+	</div>
       <Footer />
     </>
   );
