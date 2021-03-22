@@ -7,6 +7,7 @@ import { createMockUser, mockAllShows, mockShowAPI, mockShowImage } from './Mock
 import './MyShows.css';
 import Modal from "react-modal";
 import Select from "react-select";
+import { Link } from 'react-router-dom'
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -63,7 +64,7 @@ const ShowGrid = (props) => {
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0
           ? filteredShows.map((show) => {
-            return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
+              return <Link to={`/sample-show/${show.id}`}> <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} /></Link>
           })
           : <p>No shows found...</p>
         }
