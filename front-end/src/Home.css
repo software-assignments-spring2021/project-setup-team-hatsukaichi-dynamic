@@ -11,7 +11,7 @@
     padding: 0;
 }
 
-.home fieldset{
+.home div{
     width: 60%;
     display: flex;
   text-align: center;
