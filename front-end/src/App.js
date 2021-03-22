@@ -1,25 +1,27 @@
 import './App.css';
 import React from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Home.js'
 import TermsOfService from './TermsOfService';
 import MeetTheTeam from './MeetTheTeam';
 import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
-import MyShows from './MyShows'
+import MyShows from './MyShows';
+import IndividualShow from './IndividualShow';
 import Modal from "react-modal";
 import Login from './Login';
 import Signup from './Signup';
 
+
 Modal.setAppElement("#root");
 
-const ProfileWrapper = ({match}) => {
+const ProfileWrapper = ({ match }) => {
   return (
     <Profile id={match.params.id} />
   )
 }
 
-const MyShowsWrapper = ({match}) => {
+const MyShowsWrapper = ({ match }) => {
   return (
     <MyShows id={match.params.id} />
   )
@@ -39,7 +41,10 @@ const App = (props) => {
           <Route path="/meet-the-team">
             <MeetTheTeam />
           </Route>
-            <Route path="/Login">
+          <Route path="/sample-show" >
+            <IndividualShow />
+          </Route>
+          <Route path="/Login">
             <Login />
           </Route>
           <Route path="/Signup">

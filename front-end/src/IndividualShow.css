@@ -1,0 +1,93 @@
+
+.description {
+  width: 100%;
+  text-align: center;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
+}
+
+.description input {
+  width: 50%;
+}
+
+.main {
+  width: 90%;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
+}
+.showDetails {
+  float: left;
+  width: 60%;
+  background-color:#2d2d2d;
+}
+.showContent {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  background-color: #2d2d2d;;
+}
+#cover {
+  width: 35%;
+  float: left;
+  padding: 1em;
+}
+
+#clear {
+  clear: both;
+}
+
+.labelCustom {
+    margin: 2em;
+    font-size: 16px;
+    background-color: #666666;
+    color: #D1CDC7 ;
+    padding: 1em 1em 1em 1em;
+}
+
+.platform{
+  margin: 1em;
+  font-size: 16px;
+  color: #D1CDC7 ;
+  padding: 1em 1em 1em 1em;
+}
+
+
+.btnProgress {
+  margin: 2em;
+  font-size: 18px;
+  border: 2px solid #84ED6F;
+  background-color: #666666;
+  color: #84ED6F;
+  padding: 1em 2em 1em 2em;
+}
+
+.btnProgress:hover {
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
+}
+
+#episode, #season,  #description{
+  margin: 1em;
+  font-size: 16px;
+  background-color: whitesmoke;
+  color: #2D2D2D;
+  padding: 1em 1em 1em 1em;
+}
+#episode:hover, #season:hover, #description:hover {
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
+}
+
+.descript, span{
+  font-size: 1.2em;
+  font-weight: 3px;
+  color: #D1CDC7 ;
+}
+u{
+  color: #3CDD1B;
+}
+
+
+
