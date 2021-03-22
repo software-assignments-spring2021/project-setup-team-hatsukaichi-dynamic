@@ -1,0 +1,40 @@
+#login-container {
+  margin-top: 90px;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+#login-form {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+#login-form label {
+  display: block;
+}
+
+#login-form input {
+  margin-bottom: 1em;
+  display: block;
+}
+
+.login-links {
+    color: #ACF39D;
+}
+
+.login-links:hover {
+    color: #3CDD1B;
+}
+
+.error {
+  color: red;
+}
+
+#login-button {
+  font-size: 18px;
+  border: 2px solid #84ED6F;
+  background-color: #666666;
+  color: #84ED6F;
+  padding: .5em 1em .5em 1em;
+  margin-bottom: .5em;
+}
