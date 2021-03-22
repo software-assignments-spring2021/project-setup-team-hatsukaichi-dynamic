@@ -19,24 +19,24 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
     progress.push(seasonS);
     progress.push(episodeS);
   }); //return null if the show is a movie since movie has typically only one season/episode
-  if (isMovieSet==true) {
-   return null; 
-  
+  if (isMovie == true) {
+    return null;
+
   } else {
-  return (
-    <div type="hidden">
-    <form onSubmit={(e) => saveProgressData()} >
-      <label className="labelCustom" for="season">Current Season: </label>
-      <input id="season" className="progress" defaultValue={season} ref={refSeason} />
-      <br /> <br /><br /> <br />
-      <label className="labelCustom" for="episode">Current Episode:</label>
-      <input id="episode" className="progress" defaultValue={episode} ref={refEpisode} />
-      <br /><br />
-      <input className="btnProgress" type="submit" value="Save Progress" />
-    </form>
-    </div>
-  )
-}
+    return (
+      <div type="hidden">
+        <form onSubmit={(e) => saveProgressData()} >
+          <label className="labelCustom" for="season">Current Season: </label>
+          <input id="season" className="progress" defaultValue={season} ref={refSeason} />
+          <br /> <br /><br /> <br />
+          <label className="labelCustom" for="episode">Current Episode:</label>
+          <input id="episode" className="progress" defaultValue={episode} ref={refEpisode} />
+          <br /><br />
+          <input className="btnProgress" type="submit" value="Save Progress" />
+        </form>
+      </div>
+    )
+  }
 }
 
 /*the component displays and stores user's chosen platform*/
@@ -54,12 +54,12 @@ const PlatformData = () => {
   });
   return (
     <div>
-      
+
       <p className="labelCustom">Select the platform: </p>
       <form onSubmit={(e) => savePlatform()}>
-        
+
         <input class="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
-        <label  for="netflix">Netflix  </label>
+        <label for="netflix">Netflix  </label>
         <input class="platform" type="checkbox" id="prime" value="Prime" ref={refPrime} />
         <label for="prime">Amazon Prime  </label>
         <input class="platform" type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
@@ -85,12 +85,12 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
   const refIsMovie = useRef();
   const refGenre = useRef();
   const refTotalEpisodes = useRef();
-let movieV = { isMovieN };
-if ( isMovieN) {
-  movieV = "Yes";
-} else {
-  movieV = "No";
-}
+  let movieV = { isMovieN };
+  if (isMovieN) {
+    movieV = "Yes";
+  } else {
+    movieV = "No";
+  }
 
   const saveMovieData = (() => {
     //the function will be further developed in sprint 2
@@ -98,14 +98,14 @@ if ( isMovieN) {
   return (
     <div className="description">
       <br /><br />
-      <label  className="descript" for="genre">Genre:  </label>
-      <u> <span   ref={refGenre}>{genre}</span></u><br /><br />
-      <u> <label className="descript"  for="description">Description:  </label></u> 
-      <span   value={description} ref={refDescription}>{description}</span><br /><br /><br />
-      <u> <label className="descript"  for="totalEpisodes">Total Episodes: </label></u> 
-      <span  ref={refTotalEpisodes}>{totalEpisodes}</span><br /><br /><br />
-      <label className="descript"   for="movie">Is it a movie? </label>
-      <u> <span  value={movieV} ref={refIsMovie}>{movieV}</span><br /><br /></u> 
+      <label className="descript" for="genre">Genre:  </label>
+      <u> <span ref={refGenre}>{genre}</span></u><br /><br />
+      <u> <label className="descript" for="description">Description:  </label></u>
+      <span value={description} ref={refDescription}>{description}</span><br /><br /><br />
+      <u> <label className="descript" for="totalEpisodes">Total Episodes: </label></u>
+      <span ref={refTotalEpisodes}>{totalEpisodes}</span><br /><br /><br />
+      <label className="descript" for="movie">Is it a movie? </label>
+      <u> <span value={movieV} ref={refIsMovie}>{movieV}</span><br /><br /></u>
     </div>
   )
 }
@@ -126,17 +126,17 @@ const IndividualShow = (props) => {
   const addToWatched = (() => {
     window.location.href = '/my-shows/1'
   });
-  
-  
+
+
 
   let [show, setShow] = useState([]);
-  
+
 
   useEffect(() => {
     //temporary variable to be replaced
     let showInfo = [];
     let showId = "54";
-    axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=7728c8f0`)
+    axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=`)
       .then((response) => {
         showInfo.push(response.data);
         setShow(showInfo);
@@ -147,10 +147,12 @@ const IndividualShow = (props) => {
         console.log("We likely reached Mockaroo's request limit...");
         console.log(err);
         showInfo.push(mockShowAPI[showId]);
+        setShow(showInfo);
+        console.log(showInfo);
       })
   }, [])
 
-  
+
   return (
     <>
       <Header />
@@ -178,8 +180,8 @@ const IndividualShow = (props) => {
               </div>
               <div id="clear"></div>
               {show.map(s => ( //display watched progress if the show is not a movie
-              //the ProgressData will return null if the show is a movie
-                <ProgressData season="2" episode="5" isMovieSet={s.isMovie}/>
+                //the ProgressData will return null if the show is a movie
+                <ProgressData season="2" episode="5" isMovieSet={s.isMovie} />
               ))}
 
               <br /><br />
