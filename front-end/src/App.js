@@ -8,6 +8,8 @@ import ScrollToTop from './ScrollToTop';
 import Profile from './Profile';
 import MyShows from './MyShows'
 import Modal from "react-modal";
+import Login from './Login';
+import Signup from './Signup';
 
 Modal.setAppElement("#root");
 
@@ -36,6 +38,12 @@ const App = (props) => {
           </Route>
           <Route path="/meet-the-team">
             <MeetTheTeam />
+          </Route>
+            <Route path="/Login">
+            <Login />
+          </Route>
+          <Route path="/Signup">
+            <Signup />
           </Route>
           <Route path="/">
             <Home />

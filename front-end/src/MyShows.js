@@ -189,7 +189,7 @@ const MyShows = (props) => {
         </div>
         <div id="filter-container">
           <button
-            className={inProgressSelected ? "selected" : "my-shows-button"}
+            className={inProgressSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("in progress")}
           >
             In Progress
@@ -205,7 +205,7 @@ const MyShows = (props) => {
 		<button className="my-shows-button" onClick={toggleModal}>Apply</button>
 	    </Modal>
           <button
-            className={completedSelected ? "selected" : "my-shows-button"}
+            className={completedSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("completed")}
           >
             Completed
