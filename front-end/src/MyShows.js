@@ -5,6 +5,8 @@ import Footer from './Footer'
 import axios from 'axios';
 import { createMockUser, mockAllShows, mockShowAPI, mockShowImage } from './MockData';
 import './MyShows.css';
+import Modal from "react-modal";
+import Select from "react-select";
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -47,12 +49,12 @@ const ShowGrid = (props) => {
       setFilteredShows([]);
     }
     else {
-      const res = filterShows(props.shows, props.status).map((showUserInfo) => {
+	const res = filterShows(props.shows, props.status, props.platform).map( (showUserInfo) => {
         return shows.find(show => show.id === showUserInfo.id);
       });
       setFilteredShows(res);
     }
-  }, [props.shows, props.status, shows]);
+  }, [props.shows, props.status, props.platform, shows]);
 
 
   return (
@@ -75,19 +77,22 @@ const ShowGrid = (props) => {
 // filterShows filters a list of shows with user information by their status (indicated by a boolean)
 // the status variable being passed into this function, however, is a string as to account for
 // the case where no show status filtering is being done
-const filterShows = (shows, status) => {
-  const isCompleted = status === "Completed";
+const filterShows = (shows, status, platform) => {
+    const isCompleted = status === "Completed";
   if (!shows) {
     return [];
   }
   else {
-    const filtered = shows.filter((show) => {
-      if (status === "") {
-        return show;
-      }
-      return show.completed === isCompleted;
+      const filtered = shows.filter((show) => {
+	  if (platform === "" || show.platform === platform) { 
+	    console.log(show)
+	    if (status === "") {
+		return show;
+	    }
+	    return show.completed === isCompleted;
+	}
+	return false   
     });
-    console.log(filtered)
     return filtered;
   }
 }
@@ -97,7 +102,8 @@ const MyShows = (props) => {
   const [status, setStatus] = useState('');
   const [inProgressSelected, setInProgressSelected] = useState(false);
   const [completedSelected, setCompletedSelected] = useState(false);
-
+    const [open, setOpen] = useState(false)
+    
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
       .then((response) => {
@@ -113,6 +119,10 @@ const MyShows = (props) => {
       });
   }, [props.id]);
 
+    const toggleModal = () => {
+	setOpen(!open)
+    }
+    
   const onStatusChange = ((buttonType) => {
     if (buttonType === "in progress") {
       inProgressSelected ? setStatus("") : setStatus("In Progress");
@@ -151,6 +161,23 @@ const MyShows = (props) => {
       });
   };
 
+    const platforms = [
+	{value: "", label: "All Platforms"},
+	{value: "Netflix", label: "Netflix"},
+	{value: "Amazon Prime", label: "Amazon Prime"},
+	{value: "Hulu", label: "Hulu"},
+	{value: "HBO", label: "HBO"},
+	{value: "Disney Plus", label: "Disney Plus"},
+	{value: "Crunchyroll", label: "Crunchyroll"},
+	{value: "Other", label: "Other"},
+    ]
+
+    const [selectedPlatform, setSelectedPlatform] = useState("");
+    
+    const onChange = (platform) => {
+	setSelectedPlatform(platform.value)
+    }
+    
   return (
     <>
       <Header />
@@ -167,7 +194,16 @@ const MyShows = (props) => {
           >
             In Progress
           </button>
-          <button> Filter Shows </button>
+            <button className="my-shows-button" onClick={toggleModal}>Filter Shows</button>
+	    <Modal
+		isOpen={open}
+		onRequestClose={toggleModal}
+		contentLabel="Filter Shows"
+	    >
+		<h1>Filter by Platform</h1>
+		<Select options={platforms} onChange={onChange} value={selectedPlatform} />
+		<button className="my-shows-button" onClick={toggleModal}>Apply</button>
+	    </Modal>
           <button
             className={completedSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("completed")}
@@ -175,7 +211,7 @@ const MyShows = (props) => {
             Completed
           </button>
         </div>
-        <ShowGrid shows={userData.shows} status={status} />
+          <ShowGrid shows={userData.shows} status={status} platform={selectedPlatform} />
       </div>
       <Footer />
     </>

@@ -36,11 +36,39 @@
 
 .filter-button {
     margin: 2em;
-    border: none;
-    background: #e6e6e6;
+    font-size: 18px;
+    border: 2px solid #84ED6F;
+    background-color: #666666;
+    color: #84ED6F;
     padding: 1em 2em 1em 2em;
 }
 
+.my-shows-button {
+    margin: 2em;
+    font-size: 18px;
+    border: 2px solid #84ED6F;
+    background-color: #666666;
+    color: #84ED6F;
+    padding: 1em 2em 1em 2em;
+}
+
+.my-shows-button:hover {
+    border: 2px solid #3CDD1B;
+    background-color: #2D2D2D;
+    color: #3CDD1B;
+}
+
 .selected {
-    background: #acf39d;
+    margin: 2em;
+    font-size: 18px;
+    border: 2px solid #666666;
+    color: #666666;
+    padding: 1em 2em 1em 2em;
+    background-color: #ACF39D;
+}
+
+.selected:hover {
+    border: 2px solid #4D4D4D;
+    background-color: #84ED6F;
+    color: #4D4D4D;
 }
