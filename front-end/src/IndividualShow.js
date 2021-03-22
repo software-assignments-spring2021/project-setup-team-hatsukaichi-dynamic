@@ -27,10 +27,10 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
         <form onSubmit={(e) => saveProgressData()} >
           <label className="labelCustom" for="season">Current Season: </label>
           <input id="season" className="progress" defaultValue={season} ref={refSeason} />
-          <br /> <br /><br /> <br />
+          <br />
           <label className="labelCustom" for="episode">Current Episode:</label>
           <input id="episode" className="progress" defaultValue={episode} ref={refEpisode} />
-          <br /><br />
+          <br />
           <input className="btnProgress" type="submit" value="Save Progress" />
         </form>
       </div>
@@ -53,10 +53,8 @@ const PlatformData = () => {
   });
   return (
     <div>
-
       <p className="labelCustom">Select the platform: </p>
       <form onSubmit={(e) => savePlatform()}>
-
         <input class="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
         <label for="netflix">Netflix  </label>
         <input class="platform" type="checkbox" id="prime" value="Prime" ref={refPrime} />
@@ -64,13 +62,13 @@ const PlatformData = () => {
         <input class="platform" type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
         <label for="hulu">Hulu  </label>
         <input class="platform" type="checkbox" id="crunch" value="Crunchyroll" ref={refCrunchy} />
-        <label for="crunch">Crunchyroll  </label><br /><br />
+        <label for="crunch">Crunchyroll  </label><br />
         <input class="platform" type="checkbox" id="disney" value="Disney Plus" ref={refDisney} />
-        <label for="crunch">Disney Plus  </label><br /><br />
+        <label for="crunch">Disney Plus  </label>
         <input class="platform" type="checkbox" id="hbo" value="HBO" ref={refHBO} />
         <label for="hbo">HBO  </label>
         <input class="platform" type="checkbox" id="other" value="Other" ref={refOther} />
-        <label for="other">Other  </label><br /><br />
+        <label for="other">Other  </label><br />
         <input className="btnProgress" type="submit" value="Save Platform" />
       </form>
     </div>
@@ -96,15 +94,13 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
   });
   return (
     <div className="description">
-      <br /><br />
+      <br />
       <label className="descript" for="genre">Genre:  </label>
-      <u> <span ref={refGenre}>{genre}</span></u><br /><br />
-      <u> <label className="descript" for="description">Description:  </label></u>
-      <span value={description} ref={refDescription}>{description}</span><br /><br /><br />
-      <u> <label className="descript" for="totalEpisodes">Total Episodes: </label></u>
-      <span ref={refTotalEpisodes}>{totalEpisodes}</span><br /><br /><br />
-      <label className="descript" for="movie">Is it a movie? </label>
-      <u> <span value={movieV} ref={refIsMovie}>{movieV}</span><br /><br /></u>
+      <span ref={refGenre}>{genre}. </span>
+      <label className="descript" for="description">Description:  </label>
+      <span value={description} ref={refDescription}>{description} </span>
+      <label className="descript" for="totalEpisodes">Total Episodes: </label>
+      <span ref={refTotalEpisodes}>{totalEpisodes}.</span>
     </div>
   )
 }
@@ -182,15 +178,11 @@ const IndividualShow = (props) => {
                 //the ProgressData will return null if the show is a movie
                 <ProgressData season="2" episode="5" isMovieSet={s.isMovie} />
               ))}
-
-              <br /><br />
               <PlatformData />
-              <br /><br />
               <div className="showContent">
                 {show.map(s => ( //display general info about the show
                   <Description genre={s.genres} description={s.description} totalEpisodes={s.episodes} isMovieN={s.isMovie} />
                 ))}
-                <br />
               </div>
             </fieldset>
 
