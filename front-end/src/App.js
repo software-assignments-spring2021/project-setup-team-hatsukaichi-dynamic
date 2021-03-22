@@ -12,18 +12,7 @@ import Modal from "react-modal";
 import Login from './Login';
 import Signup from './Signup';
 
-/*
-const IndividualShowWrapper = ({match}) => {
-  return (
-    <IndividualShow id={match.params.id} show_id={match.params.id.show_id}  />
-  )
-}
 
-*/
-
-/*
-<Route path="/my_shows/:id/:show_id" component={IndividualShowWrapper}/>
-*/
 Modal.setAppElement("#root");
 
 const ProfileWrapper = ({ match }) => {
@@ -52,7 +41,7 @@ const App = (props) => {
           <Route path="/meet-the-team">
             <MeetTheTeam />
           </Route>
-          <Route path="/sample_show" >
+          <Route path="/sample-show" >
             <IndividualShow />
           </Route>
           <Route path="/Login">

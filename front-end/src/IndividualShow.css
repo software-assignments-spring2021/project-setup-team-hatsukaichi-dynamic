@@ -1,3 +1,4 @@
+
 .description {
   width: 100%;
   text-align: center;
@@ -8,27 +9,23 @@
   width: 50%;
 }
 
-button {
-  margin: 2em;
-  border: none;
-  background: #acf39d;
-  padding: 1em 2em 1em 2em;
-}
 
 .main {
   width: 90%;
-  background-color: rgb(142, 221, 217);
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
 }
-.show-details {
+.showDetails {
   float: left;
   width: 60%;
   background-color: rgb(149, 103, 202);
 }
 
-.show_content {
+.showContent {
   display: flex;
   text-align: center;
   justify-content: space-around;
+  background-color: #2d2d2d;;
 }
 #cover {
   width: 35%;
@@ -43,8 +40,14 @@ button {
 button {
   margin: 2em;
   border: none;
-  background: #e6e6e6;
+  /*background: #e6e6e6;*/
   padding: 1em 2em 1em 2em;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #acf39d;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 textarea {
@@ -52,4 +55,49 @@ textarea {
 }
 .progress {
   width: 20%;
+}
+
+
+
+
+
+
+@media (max-width: 750px) {
+  .btnProgress {
+    width: 90%;
+    text-align: center;
+    padding: 1em;
+  }
+  .btnProgressContainer {
+    width: 100%;
+    display: flex;
+  text-align: center;
+  justify-content: space-around;
+  }
+}
+
+@media (max-width: 1000px) {
+  .btnProgress {
+    width: 90%;
+    text-align: center;
+    padding: 1em;
+  }
+  .btnProgressContainer {
+    width: 100%;
+    text-align: center;
+    display: flex;
+  justify-content: space-around;
+  }
+}
+
+@media (max-width: 2000px) {
+.btnProgress {
+  width: 40%;
+  float: left;
+  padding: 1em;
+}
+.btnProgressContainer {
+  width: 100%;
+  text-align: center;
+}
 }

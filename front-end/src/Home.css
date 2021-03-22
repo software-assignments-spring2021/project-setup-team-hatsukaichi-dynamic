@@ -1,12 +1,21 @@
-.full-img {
+.full-img, .full-text {
     display: block;
     margin-top: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 90%;
 }
 
 .header {
     margin-top: 2.5em;
     padding: 0;
 }
+
+.home fieldset{
+    width: 60%;
+    display: flex;
+  text-align: center;
+  justify-content: space-around;
+}
+
+

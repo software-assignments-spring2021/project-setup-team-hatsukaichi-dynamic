@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
+import Header from './Header'
 import Footer from './Footer'
-import Hamburger from './Hamburger'
 import './IndividualShow.css';
 import axios from 'axios';
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
@@ -22,7 +22,7 @@ const ProgressData = ({ season, episode }) => {
     <form onSubmit={(e) => saveProgressData()} >
       <label for="season">Current Season: </label>
       <input id="season" class="progress" value={season} ref={refSeason} />
-      <br />
+      <br /> <br />
       <label for="episode">Current Episode:</label>
       <input id="episode" class="progress" value={episode} ref={refEpisode} />
       <br /><br />
@@ -65,12 +65,17 @@ const PlatformData = () => {
 
 /*the component displays and stores general info about the show*/
 
-const Description = ({ genre, description, total_episodes, is_movie }) => {
+const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
   const refDescription = useRef();
   const refIsMovie = useRef();
   const refGenre = useRef();
   const refTotalEpisodes = useRef();
-
+  let movieV = { isMovieN };
+  if (movieV) {
+    movieV = "Yes";
+  } else {
+    movieV = "No";
+  }
   const saveMovieData = (() => {
     //the function will be further developed in sprint 2
   });
@@ -78,13 +83,13 @@ const Description = ({ genre, description, total_episodes, is_movie }) => {
     <div class="description">
       <br /><br />
       <label for="genre">Genre:  </label>
-      <input type="text" id="genre" value={genre} ref={refGenre} readonly /><br /><br />
+      <span id="genre" ref={refGenre}>{genre}</span><br /><br />
       <label for="description">Description: </label>
       <textarea id="description" value={description} ref={refDescription} readonly /><br /><br />
-      <label for="total_episodes">Total Episodes: </label>
-      <input type="text" id="total_episodes" value={total_episodes} ref={refTotalEpisodes} readonly /><br /><br />
-      <label for="isMovie">Is it a movie? </label>
-      <input type="text" id="isMovie" value={is_movie} ref={refIsMovie} readonly /><br /><br />
+      <label for="totalEpisodes">Total Episodes: </label>
+      <span id="totalEpisodes" ref={refTotalEpisodes}>{totalEpisodes}</span><br /><br />
+      <label for="movie">Is it a movie? </label>
+      <span id="movie" value={movieV} ref={refIsMovie}>{movieV}</span><br /><br />
     </div>
   )
 }
@@ -99,56 +104,70 @@ const IndividualShow = (props) => {
   const returnToShows = (() => {
     window.location.href = '/my-shows/'
   });
-  const addToWatched = (() => {
-
+  const addToInProgress = (() => {
     window.location.href = '/my-shows/'
   });
 
+  const addToWatched = (() => {
+    window.location.href = '/my-shows/'
+  });
 
   let [show, setShow] = useState([]);
 
   useEffect(() => {
     //temporary variable to be replaced
     let showInfo = [];
-    let show_id = "54";
+    let showId = "54";
     //axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=3010e030`)
-    axios.get(`https://my.api.mockaroo.com/shows/${show_id}.json?key=3010e030`)
+    axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=27e46d40`)
       .then((response) => {
         showInfo.push(response.data);
         console.log(showInfo);
-        console.log(show);
+        //console.log(show);
         setShow(showInfo);
+      })
+      .catch((err) => {
+        console.log("We likely reached Mockaroo's request limit...");
+        console.log(err);
+        showInfo.push(mockShowAPI[showId]);
       })
   }, [])
 
 
   return (
     <>
-      <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
-      <div className="header"><h2>Show Page</h2></div>
+      <Header />
 
-      <div class="show_content">
+      <div class="showContent">
         <fieldset class="main">
-          <div class="show-details">
+          <div class="showDetails">
             <fieldset >
               {show.map(s => ( //display name of the show
                 <h3 id="title" value={s.name} ref={refTitle}>{s.name}</h3>
               ))}
+
               <button onClick={(e) => returnToShows()}>
                 Return to Shows
-      </button>
-              <button onClick={(e) => addToWatched()}>
-                Add to In Progress or Watched Shows
-      </button>
+            </button>
+
+              <div class="btnProgressContainer">
+                <button class="btnProgress" onClick={(e) => addToInProgress()}>
+                  Add to In Progress Shows
+          </button>
+                <button class="btnProgress" onClick={(e) => addToWatched()}>
+                  Add to Watched Shows
+          </button>
+
+              </div>
+              <div id="clear"></div>
               <ProgressData season="5" episode="7" />
               <br /><br />
               <PlatformData />
               <br /><br />
-              <div class="show_content">
+              <div class="showContent">
                 {show.map(s => ( //display general info about the show
-                  <Description genre={s.genres} description={s.description} total_episodes={s.episodes} is_movie={s.isMovie} />
+                  <Description genre={s.genres} description={s.description} totalEpisodes={s.episodes} isMovieN={s.isMovie} />
                 ))}
-
                 <br />
               </div>
             </fieldset>
@@ -157,6 +176,7 @@ const IndividualShow = (props) => {
           {show.map(s => ( //display cover image 
             <img id="cover" src={s.coverPhoto} alt="" ref={refCover}></img>
           ))}
+
           <div id="clear"></div>
         </fieldset>
       </div>

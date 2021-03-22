@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
-import Footer from './Footer';
+import Header from './Header'
+import Footer from './Footer'
 import axios from 'axios';
-// Hamburger should eventually be replaced with a navigation bar component, when created
-import Hamburger from './Hamburger';
 import { createMockUser, mockAllShows, mockShowAPI, mockShowImage } from './MockData';
 import './MyShows.css';
 
@@ -54,7 +53,7 @@ const ShowGrid = (props) => {
       setFilteredShows(res);
     }
   }, [props.shows, props.status, shows]);
-  
+
 
   return (
     <>
@@ -62,7 +61,7 @@ const ShowGrid = (props) => {
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0
           ? filteredShows.map((show) => {
-            return <img alt={`cover-${show.id}`} key={show.id} />
+            return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
           })
           : <p>No shows found...</p>
         }
@@ -154,7 +153,7 @@ const MyShows = (props) => {
 
   return (
     <>
-      <Hamburger />
+      <Header />
       <div id="container">
         <h3>{userData.username}'s Shows</h3>
         {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}

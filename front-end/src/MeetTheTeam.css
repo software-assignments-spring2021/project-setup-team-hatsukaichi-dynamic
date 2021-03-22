@@ -1,12 +1,21 @@
 h1 {
     margin-top: 0;
     padding: 0;
+    color: #D1CDC7; 
+
+}
+
+body{
+    color: #D1CDC7; 
+    background-color: #2d2d2d;
 }
 
 .content {
+    color: #D1CDC7; 
     width: 700px;
     padding: 50px;
     overflow: hidden;
+   
 }
 .content img {
     margin-right: 15px;
@@ -15,23 +24,27 @@ h1 {
     width: 100px;
 }
 .header {
+    color: #D1CDC7; 
+
     font-size: 32px;
     text-align: center;
-    color: #333333;
+   
 }
 .content h4 {
+   
+
     font-size: 24px;
     margin-left: 20px;
     margin: 2px 0 0 0;
     display: block;
-    color: #333333;
+    
 }
 .content p {
     font-size: 16px;
     margin-left: 15px;
     margin: 2px 0 0 0;
     display: block;
-    color: #333333;
+   
 }
 .content a {
     font-size: 16px;
