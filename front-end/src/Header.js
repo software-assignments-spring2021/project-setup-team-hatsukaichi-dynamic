@@ -12,9 +12,9 @@ const Header = () => {
       header={
         <div className="header-root">
           <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
-          <LoginButton/>
-          <SignupButton/>
           <h1 className="header-title">TV Tracker</h1>
+          <LoginButton className="login-buttons"><LoginButton/>
+          <SignupButton className="login-buttons"><SignupButton/>
         </div>
       }
     >

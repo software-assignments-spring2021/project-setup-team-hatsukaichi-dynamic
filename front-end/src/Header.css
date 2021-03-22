@@ -10,3 +10,7 @@
 .bm-burger-button {
     position: relative;
 }
+
+.login-buttons {
+	float: right;
+}
