@@ -25,6 +25,8 @@
 .prof-button {
     font-size: 18px;
     background-color: #84ED6F;
+    padding: 1em 2em 1em 2em;
+    margin: auto;
 }
 
 .prof-button:hover {
