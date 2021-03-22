@@ -19,9 +19,8 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
     progress.push(seasonS);
     progress.push(episodeS);
   }); //return null if the show is a movie since movie has typically only one season/episode
-  if (isMovie == true) {
+  if (isMovieSet === true) {
     return null;
-
   } else {
     return (
       <div type="hidden">
