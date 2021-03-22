@@ -54,7 +54,7 @@ const ShowGrid = (props) => {
       });
       setFilteredShows( res );
     }
-  }, [props.shows, props.status, shows]);
+  }, [props.shows, props.status, props.platforms, shows]);
 
   return (
     <>
