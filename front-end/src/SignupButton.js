@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 function SignupButton() {
   return (
 	<Link to={'/Signup'}>
-  		<button> Login </button>
+  		<button> Signup </button>
   	</Link>
   );
 }
