@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import './IndividualShow.css';
 import axios from 'axios';
-import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
+import { mockShowAPI, mockShowImage } from './MockData'
 
 
 /*the component stores user's watched episode progress 
@@ -130,8 +130,7 @@ const IndividualShow = (props) => {
   useEffect(() => {
     //temporary variable to be replaced
     let showInfo = [];
-    let showId = "54";
-    axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=`)
+    axios.get(`https://my.api.mockaroo.com/shows/${props.id}.json?key=`)
       .then((response) => {
         showInfo.push(response.data);
         setShow(showInfo);
@@ -141,11 +140,11 @@ const IndividualShow = (props) => {
       .catch((err) => {
         console.log("We likely reached Mockaroo's request limit...");
         console.log(err);
-        showInfo.push(mockShowAPI[showId]);
+        showInfo.push(mockShowAPI[props.id]);
         setShow(showInfo);
         console.log(showInfo);
       })
-  }, [])
+  }, [props.id])
 
 
   return (
@@ -188,7 +187,7 @@ const IndividualShow = (props) => {
 
           </div>
           {show.map(s => ( //display cover image 
-            <img id="cover" src={s.coverPhoto} alt="" ref={refCover}></img>
+            <img id="cover" src={mockShowImage(s.id)} alt="" ref={refCover}></img>
           ))}
 
           <div id="clear"></div>
