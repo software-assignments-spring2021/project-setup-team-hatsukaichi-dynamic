@@ -6,6 +6,8 @@ import axios from 'axios';
 import Hamburger from './Hamburger';
 import { createMockUser, mockAllShows, mockShowAPI, mockShowImage } from './MockData';
 import './MyShows.css';
+//import { Link } from 'react-router-dom';
+
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -48,12 +50,22 @@ const ShowGrid = (props) => {
       setFilteredShows([]);
     }
     else {
-      const res = filterShows(props.shows, props.status).map( (showUserInfo) => {
+      const res = filterShows(props.shows, props.status).map((showUserInfo) => {
         return shows.find(show => show.id === showUserInfo.id);
       });
-      setFilteredShows( res );
+      setFilteredShows(res);
     }
   }, [props.shows, props.status, shows]);
+  /*
+    const storeShow = ((showid) => {
+  <Link
+      to={`/sample-show/`}
+      state={{
+        showid, 
+      }}
+    />
+    });
+    */
 
   return (
     <>
@@ -61,11 +73,13 @@ const ShowGrid = (props) => {
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0
           ? filteredShows.map((show) => {
-            return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
+            return <img /*onClick={(e) => storeShow(show.id)}*/ alt={`cover-${show.id}`} key={show.id} />
           })
           : <p>No shows found...</p>
         }
+
       </div>
+
     </>
   )
 }
