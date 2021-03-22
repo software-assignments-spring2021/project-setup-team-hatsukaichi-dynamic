@@ -1,3 +1,7 @@
+.main-container {
+    margin-top: 15em;
+}
+
 
 .description {
   width: 100%;
@@ -21,6 +25,7 @@
   background-color:#2d2d2d;
 }
 .showContent {
+    margin-top: 0px;
   display: flex;
   text-align: center;
   justify-content: space-around;
