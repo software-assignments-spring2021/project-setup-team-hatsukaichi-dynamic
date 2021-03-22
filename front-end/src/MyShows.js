@@ -7,6 +7,7 @@ import Hamburger from './Hamburger';
 import { createMockUser, mockAllShows, mockShowAPI, mockShowImage } from './MockData';
 import './MyShows.css';
 import Modal from "react-modal";
+import Select from "react-select";
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -49,12 +50,12 @@ const ShowGrid = (props) => {
       setFilteredShows([]);
     }
     else {
-	const res = filterShows(props.shows, props.status, props.platforms).map( (showUserInfo) => {
+	const res = filterShows(props.shows, props.status, props.platform).map( (showUserInfo) => {
         return shows.find(show => show.id === showUserInfo.id);
       });
       setFilteredShows( res );
     }
-  }, [props.shows, props.status, props.platforms, shows]);
+  }, [props.shows, props.status, props.platform, shows]);
 
   return (
     <>
@@ -74,14 +75,16 @@ const ShowGrid = (props) => {
 // filterShows filters a list of shows with user information by their status (indicated by a boolean)
 // the status variable being passed into this function, however, is a string as to account for
 // the case where no show status filtering is being done
-const filterShows = (shows, status, platforms) => {
-  const isCompleted = status === "Completed";
+const filterShows = (shows, status, platform) => {
+    console.log(platform)
+    const isCompleted = status === "Completed";
   if (!shows) {
     return [];
   }
   else {
-    const filtered = shows.filter((show) => {
-	if (platforms.includes(show.platform)) { 
+      const filtered = shows.filter((show) => {
+	  if (platform === "" || show.platform === platform) { 
+	    console.log(show)
 	    if (status === "") {
 		return show;
 	    }
@@ -118,11 +121,6 @@ const MyShows = (props) => {
 
     const toggleModal = () => {
 	setOpen(!open)
-    }
-
-    const handleSubmit = (event) => {
-	event.preventDefault();
-	toggleModal();
     }
     
   const onStatusChange = ((buttonType) => {
@@ -163,24 +161,22 @@ const MyShows = (props) => {
       });
   };
 
-    const platforms= [
-	{label: "Netflix", id: "netflix"},
-	{label: "Amazon Prime", id: "prime"},
-	{label: "Hulu", id: "hulu"},
-	{label: "HBO", id: "hbo"},
-	{label: "Disney Plus", id: "disney"},
-	{label: "Crunchyroll", id: "crunchyroll"},
-	{label: "Other", id: "other"},
+    const platforms = [
+	{value: "", label: "All Platforms"},
+	{value: "Netflix", label: "Netflix"},
+	{value: "Amazon Prime", label: "Amazon Prime"},
+	{value: "Hulu", label: "Hulu"},
+	{value: "HBO", label: "HBO"},
+	{value: "Disney Plus", label: "Disney Plus"},
+	{value: "Crunchyroll", label: "Crunchyroll"},
+	{value: "Other", label: "Other"},
     ]
 
-    const fullPlatforms = platforms.map( (platform) => {
-	return (
-	    <label>
-		<h3>{platform.label}</h3>
-		<input type="checkbox" id={platform.id} name={platform.id} />
-	    </label>
-	)
-    })
+    const [selectedPlatform, setSelectedPlatform] = useState("");
+    
+    const onChange = (platform) => {
+	setSelectedPlatform(platform.value)
+    }
     
   return (
     <>
@@ -205,13 +201,8 @@ const MyShows = (props) => {
 		contentLabel="Filter Shows"
 	    >
 		<h1>Filter by Platform</h1>
-		<form onSubmit={handleSubmit}>
-		    <fieldset>
-			<fullPlatforms />
-		    </fieldset>
-		    <button type="submit" className="my-shows-button">Filter</button>
-		</form>
-		<button className="my-shows-button" onClick={toggleModal}>Back</button>
+		<Select options={platforms} onChange={onChange} value={selectedPlatform} />
+		<button className="my-shows-button" onClick={toggleModal}>Apply</button>
 	    </Modal>
           <button
             className={completedSelected ? "selected" : "my-shows-button"}
@@ -220,7 +211,7 @@ const MyShows = (props) => {
             Completed
           </button>
         </div>
-          <ShowGrid shows={userData.shows} status={status} platforms={platforms} />
+          <ShowGrid shows={userData.shows} status={status} platform={selectedPlatform} />
       </div>
       <Footer />
     </>
