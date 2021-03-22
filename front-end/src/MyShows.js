@@ -174,14 +174,14 @@ const MyShows = (props) => {
         </div>
         <div id="filter-container">
           <button
-            className={inProgressSelected ? "selected" : ""}
+            className={inProgressSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("in progress")}
           >
             In Progress
           </button>
           <button> Filter Shows </button>
           <button
-            className={completedSelected ? "selected" : ""}
+            className={completedSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("completed")}
           >
             Completed

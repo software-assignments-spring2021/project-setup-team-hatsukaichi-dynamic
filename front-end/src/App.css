@@ -1,3 +1,11 @@
+body {
+    margin-top: 90px;
+}
+
+.modal-contents {
+    margin-top: 50px;
+}
+
 p {
     margin-top: 0;
     padding: 0;
@@ -68,6 +76,7 @@ footer {
 .bm-menu-wrap {
     position: fixed;
     height: 100%;
+    top: 0;
 }
 
 /* General sidebar styles */
