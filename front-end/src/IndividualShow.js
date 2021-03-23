@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import './IndividualShow.css';
 import axios from 'axios';
-import { createMockUser, mockShowAPI, mockUserImage, mockShowImage } from './MockData'
+import { mockShowAPI, mockShowImage } from './MockData'
 
 
 /*the component stores user's watched episode progress 
@@ -30,7 +30,7 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
           <br /> <br /><br /> <br />
           <label className="label-custom" for="episode">Current Episode:</label>
           <input id="episode" className="progress" defaultValue={episode} ref={refEpisode} />
-          <br /><br />
+          <br />
           <input className="btnProgress" type="submit" value="Save Progress" />
         </form>
       </div>
@@ -55,8 +55,8 @@ const PlatformData = () => {
     <div>
 
       <p className="label-custom">Select the platform: </p>
-      <form onSubmit={(e) => savePlatform()}>
 
+      <form onSubmit={(e) => savePlatform()}>
         <input class="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
         <label for="netflix">Netflix  </label>
         <input class="platform" type="checkbox" id="prime" value="Prime" ref={refPrime} />
@@ -64,13 +64,13 @@ const PlatformData = () => {
         <input class="platform" type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
         <label for="hulu">Hulu  </label>
         <input class="platform" type="checkbox" id="crunch" value="Crunchyroll" ref={refCrunchy} />
-        <label for="crunch">Crunchyroll  </label><br /><br />
+        <label for="crunch">Crunchyroll  </label><br />
         <input class="platform" type="checkbox" id="disney" value="Disney Plus" ref={refDisney} />
-        <label for="crunch">Disney Plus  </label><br /><br />
+        <label for="crunch">Disney Plus  </label>
         <input class="platform" type="checkbox" id="hbo" value="HBO" ref={refHBO} />
         <label for="hbo">HBO  </label>
         <input class="platform" type="checkbox" id="other" value="Other" ref={refOther} />
-        <label for="other">Other  </label><br /><br />
+        <label for="other">Other  </label><br />
         <input className="btnProgress" type="submit" value="Save Platform" />
       </form>
     </div>
@@ -96,15 +96,13 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
   });
   return (
     <div className="description">
-      <br /><br />
+      <br />
       <label className="descript" for="genre">Genre:  </label>
-      <u> <span ref={refGenre}>{genre}</span></u><br /><br />
-      <u> <label className="descript" for="description">Description:  </label></u>
-      <span value={description} ref={refDescription}>{description}</span><br /><br /><br />
-      <u> <label className="descript" for="totalEpisodes">Total Episodes: </label></u>
-      <span ref={refTotalEpisodes}>{totalEpisodes}</span><br /><br /><br />
-      <label className="descript" for="movie">Is it a movie? </label>
-      <u> <span value={movieV} ref={refIsMovie}>{movieV}</span><br /><br /></u>
+      <span ref={refGenre}>{genre}. </span>
+      <label className="descript" for="description">Description:  </label>
+      <span value={description} ref={refDescription}>{description} </span>
+      <label className="descript" for="totalEpisodes">Total Episodes: </label>
+      <span ref={refTotalEpisodes}>{totalEpisodes}.</span>
     </div>
   )
 }
@@ -134,8 +132,7 @@ const IndividualShow = (props) => {
   useEffect(() => {
     //temporary variable to be replaced
     let showInfo = [];
-    let showId = "54";
-    axios.get(`https://my.api.mockaroo.com/shows/${showId}.json?key=`)
+    axios.get(`https://my.api.mockaroo.com/shows/${props.id}.json?key=`)
       .then((response) => {
         showInfo.push(response.data);
         setShow(showInfo);
@@ -145,17 +142,17 @@ const IndividualShow = (props) => {
       .catch((err) => {
         console.log("We likely reached Mockaroo's request limit...");
         console.log(err);
-        showInfo.push(mockShowAPI[showId]);
+        showInfo.push(mockShowAPI[props.id]);
         setShow(showInfo);
         console.log(showInfo);
       })
-  }, [])
+  }, [props.id])
 
 
   return (
     <>
       <Header />
-
+	<div className="main-container">
       <div className="showContent">
         <fieldset className="main">
           <div className="showDetails">
@@ -182,27 +179,23 @@ const IndividualShow = (props) => {
                 //the ProgressData will return null if the show is a movie
                 <ProgressData season="2" episode="5" isMovieSet={s.isMovie} />
               ))}
-
-              <br /><br />
               <PlatformData />
-              <br /><br />
               <div className="showContent">
                 {show.map(s => ( //display general info about the show
                   <Description genre={s.genres} description={s.description} totalEpisodes={s.episodes} isMovieN={s.isMovie} />
                 ))}
-                <br />
               </div>
             </fieldset>
 
           </div>
           {show.map(s => ( //display cover image 
-            <img id="cover" src={s.coverPhoto} alt="" ref={refCover}></img>
+            <img id="cover" src={mockShowImage(s.id)} alt="" ref={refCover}></img>
           ))}
 
           <div id="clear"></div>
         </fieldset>
       </div>
-
+	</div>
       <Footer />
     </>
   );

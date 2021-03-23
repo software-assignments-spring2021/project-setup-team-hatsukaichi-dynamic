@@ -1,3 +1,7 @@
+.main-container {
+    margin-top: 15em;
+}
+
 
 .description {
   width: 100%;
@@ -21,6 +25,7 @@
   background-color:#2d2d2d;
 }
 .showContent {
+    margin-top: 0px;
   display: flex;
   text-align: center;
   justify-content: space-around;
@@ -85,9 +90,3 @@
   font-weight: 3px;
   color: #D1CDC7 ;
 }
-u{
-  color: #3CDD1B;
-}
-
-
-

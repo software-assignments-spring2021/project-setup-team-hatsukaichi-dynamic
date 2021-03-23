@@ -7,6 +7,7 @@ import { createMockUser, mockAllShows, mockShowAPI, mockShowImage } from './Mock
 import './MyShows.css';
 import Modal from "react-modal";
 import Select from "react-select";
+import { Link, useHistory } from 'react-router-dom'
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -63,7 +64,7 @@ const ShowGrid = (props) => {
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0
           ? filteredShows.map((show) => {
-            return <img className="show-images" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
+              return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-images" src={mockShowImage(show.id)} alt={`cover-${show.id}`}/></Link>
           })
           : <p>No shows found...</p>
         }
@@ -103,6 +104,7 @@ const MyShows = (props) => {
   const [inProgressSelected, setInProgressSelected] = useState(false);
   const [completedSelected, setCompletedSelected] = useState(false);
   const [open, setOpen] = useState(false)
+  const history = useHistory()
 
   useEffect(() => {
     axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
@@ -178,6 +180,10 @@ const MyShows = (props) => {
     setSelectedPlatform(platform.value)
   }
 
+  const linkToShow = (e) => {
+    history.push(`/show/${e.value}`);
+  };
+
   return (
     <>
       <Header />
@@ -185,7 +191,7 @@ const MyShows = (props) => {
         <h3>{userData.username}'s Shows</h3>
         {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}
         <div id="search-container">
-          <AsyncSelect id="search-bar" cacheOptions defaultOptions loadOptions={loadOptions} />
+          <AsyncSelect id="search-bar" cacheOptions defaultOptions loadOptions={loadOptions} onChange={linkToShow}/>
         </div>
         <div id="filter-container">
           <button

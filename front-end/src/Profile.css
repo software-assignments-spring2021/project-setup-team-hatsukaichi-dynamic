@@ -1,5 +1,6 @@
 #container {
-  padding-left: 2em;
+    margin-top: 15em;
+    padding-left: 2em;
   padding-right: 2em;
    
 }
@@ -8,6 +9,7 @@
   color: #D1CDC7; 
 }
 #profile-picture {
+    margin-top: 3em;
   border-radius: 50%;
   display: inline-block;
   vertical-align: top;

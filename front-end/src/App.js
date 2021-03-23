@@ -27,12 +27,19 @@ const MyShowsWrapper = ({ match }) => {
   )
 }
 
+const IndividualShowWrapper = ({match}) => {
+  return (
+    <IndividualShow id={match.params.id} />
+  )
+}
+
 const App = (props) => {
   return (
     <div className="App">
       <Router>
         <ScrollToTop />
         <Switch>
+          <Route path="/show/:id" component={IndividualShowWrapper} />
           <Route path="/my-shows/:id" component={MyShowsWrapper} />
           <Route path="/profile/:id" component={ProfileWrapper} />
           <Route path="/terms-of-service">
@@ -40,9 +47,6 @@ const App = (props) => {
           </Route>
           <Route path="/meet-the-team">
             <MeetTheTeam />
-          </Route>
-          <Route path="/sample-show" >
-            <IndividualShow />
           </Route>
           <Route path="/Login">
             <Login />

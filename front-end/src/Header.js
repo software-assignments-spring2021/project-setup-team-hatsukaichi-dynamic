@@ -4,6 +4,8 @@ import './Header.css'
 import Hamburger from './Hamburger'
 import logo from './logo.png'
 import HeaderLogo from './HeaderLogo';
+import SignupButton from './SignupButton';
+import LoginButton from './LoginButton'
 
 const Header = () => {
   return (
@@ -12,6 +14,8 @@ const Header = () => {
         <div className="header-root">
           <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
           <HeaderLogo src={logo} className="logo-img" />
+          <LoginButton/>
+          <SignupButton/>
         </div>
       }
     >
