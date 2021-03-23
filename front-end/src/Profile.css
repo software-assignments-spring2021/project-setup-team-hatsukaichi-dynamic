@@ -1,12 +1,14 @@
 #container {
   padding-left: 2em;
   padding-right: 2em;
+   
 }
-
+.modal-contents{
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
+}
 #profile-picture {
   border-radius: 50%;
-  height: 100px;
-  width: 100px;
   display: inline-block;
   vertical-align: top;
   padding: 1em;
@@ -27,40 +29,32 @@
   padding: 1em;
 }
 
-#profile-links {
+.profile-links {
   display: flex;
-}
-
-#profile-links div {
-  margin: 1em;
+  justify-content: space-around;
+  margin-bottom: 4em;
+  margin-top: 5em;
 }
 
 .modal-contents h1 {
-  margin-top: 0;
+  padding-top: 3%;
   margin-bottom: 0;
+  text-align: center;
+
 }
 
-#settings-form fieldset {
+#settings-form  {
   border: 0px;
   margin-bottom: 5%;
+   text-align: center;
+    background-color:#2d2d2d;
+  color: #D1CDC7; 
+}
+#settings-form{
+  background-color:#2d2d2d;
+  color: #D1CDC7;
 }
 
-#settings-buttons button {
-  margin: 1em;
-}
-
-#back-button {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #acf39d;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-#back-button:hover {
-  color: #3cdd1b;
-}
 
 .prof-button {
   font-size: 18px;
@@ -78,10 +72,7 @@
   color: #3CDD1B;
 }
 
-#buttons {
-    display: flex;
-    justify-content: space-around;
-}
+
 
 .filter-button {
     margin: 2em;
@@ -92,25 +83,66 @@
     padding: 1em 2em 1em 2em;
 }
 
-fieldset{
+.main{
   width: 90%;
   background-color:#2d2d2d;
   color: #D1CDC7; 
-  margin-left: 25%;
-  margin-right: 25%;
   text-align: center;
 }
-.showDetails {
+
+.show-details {
   width: 100%;
   background-color:#2d2d2d;
   text-align: center;
 }
-.showContent {
+.show-content, .main {
   display: flex;
   text-align: center;
   justify-content: space-around;
-  background-color: #2d2d2d;;
+  background-color: #2d2d2d;
+  
 }
 #heading{
   text-align: center;
+  background-color: #2d2d2d;;
+}
+
+#settings-btn{
+  margin-top: 4%;
+  padding-top: 4%;
+}
+
+.label-custom {
+    margin: 2em;
+    font-size: 16px;
+    background-color: #666666;
+    color: #D1CDC7 ;
+    padding: 1em 1em 1em 1em;
+}
+
+
+
+.inputs{
+  margin: 1em;
+  font-size: 16px;
+  background-color: whitesmoke;
+  color: #2D2D2D;
+  padding: 1em 1em 1em 1em;
+}
+.inputs:hover {
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
+}
+
+#settings-title{
+  margin-bottom: 3%;
+}
+
+#settings-btns{
+margin-bottom: 3%;
+}
+
+.ReactModal__Body--open{
+  background-color: #2D2D2D;
 }

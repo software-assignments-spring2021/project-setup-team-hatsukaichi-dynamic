@@ -3,7 +3,7 @@
     padding-left: 2em;
     background-color: #2d2d2d;
     color: #D1CDC7; 
-
+    margin-top: 10%;
 }
 
 #show-container {
@@ -74,3 +74,8 @@
     width: 30%;
 }
 
+h3 {
+  margin-top: 5%;
+  margin-bottom: 5%;
+   text-align: center;
+}

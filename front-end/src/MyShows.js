@@ -59,7 +59,7 @@ const ShowGrid = (props) => {
 
   return (
     <>
-      <h3>My Shows</h3>
+      <h3 id="title">My Shows</h3>
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0
           ? filteredShows.map((show) => {

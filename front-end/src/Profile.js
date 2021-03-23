@@ -28,7 +28,7 @@ const RecentShows = ({ shows }) => {
       {shows
         ? <div id="profile-show-container">
           {shows.map((show) => {
-            return <img class="showImage" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
+            return <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
           })}
         </div>
         : "No shows"}
@@ -126,60 +126,72 @@ const ProfileContents = ({ data, updateUserData }) => {
 
   return (
     <>
-      <div className="showContent">
-        <fieldset className="main">
-          <div className="showDetails">
-        <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
-        <RecentShows shows={userShows} />
-        <div id="profile-links">
-          <div>
-            <Link to={`/my-shows/${data.id}`}>
-              <button className="prof-button">My Shows</button>
-            </Link>
-          </div>
-          <div id="buttons">
-            <button className="prof-button" onClick={toggleModal}>Settings</button>
-            <Modal
-              isOpen={open}
-              onRequestClose={toggleModal}
-              contentLabel="Settings"
-            >
-              <div className="modal-contents">
-                <button id="back-button" onClick={toggleModal}>Back</button>
-                <h1>Settings</h1>
-                <form id="settings-form" onSubmit={handleSubmit}>
-                  <fieldset>
-                    <label><h3>Email:</h3>
-                      <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-                    </label>
-                    <label><h3>Password</h3>
-                      <input type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
-                    </label>
-                    <label><h3>Bio</h3>
-                      <input type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
-                    </label>
-                    <label><h3>Profile Picture URL</h3>
-                      <input type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
-                    </label>
-                  </fieldset>
-                  <button type="submit" className="prof-button" form="settings-form">Save</button>
-                </form>
+
+      <div className="show-content">
+        <div className="main">
+          <div className="show-details">
+            <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
+            <RecentShows shows={userShows} />
+            <br /><br />
+            <div className="profile-links">
+              <div>
+                <Link to={`/my-shows/${data.id}`}>
+                  <button className="prof-button">My Shows</button>
+                </Link>
               </div>
-            </Modal>
-          </div>
-          <CopyToClipboard text={window.location.href} onCopy={onCopy}>
-            <div>
-              {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
-              <button className="prof-button">Share</button>
-              <p>{copied ? "Copied URL to clipboard." : ""}</p>
+              <div id="buttons">
+                <button className="prof-button" onClick={toggleModal}>Settings</button>
+                <Modal
+                  isOpen={open}
+                  onRequestClose={toggleModal}
+                  contentLabel="Settings"
+                >
+                  <div className="modal-contents">
+
+                    <form id="settings-form" onSubmit={handleSubmit}>
+                      <fieldset>
+                        <h1 id="settings-title">Settings</h1>
+                        <label className="label-custom">User Email:</label>
+                        <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+                        <br />
+                        <label className="label-custom">Password: </label>
+                        <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
+                        <br />
+                        <label className="label-custom">Biography:</label>
+                        <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
+                        <br />
+                        <label className="label-custom">Profile img url:</label>
+                        <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
+                        <br /><br />
+                        <div id="settings-btns" className="profile-links">
+                          <button className="prof-button" onClick={toggleModal}>Back</button>
+                          <button type="submit" className="prof-button" form="settings-form">Save</button>
+                        </div>
+                      </fieldset>
+
+
+                    </form>
+                  </div>
+                  <Footer />
+                </Modal>
+              </div>
+              <CopyToClipboard text={window.location.href} onCopy={onCopy}>
+                <div>
+                  {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
+                  <button className="prof-button">Share</button>
+                  <br /> <br />
+                  <p>{copied ? "Copied URL to clipboard." : ""}</p>
+                </div>
+              </CopyToClipboard>
+
             </div>
-          </CopyToClipboard>
+
+          </div>
+
         </div>
+
       </div>
-     
-      </fieldset>
-      </div>
-      
+      <Footer />
     </>
   );
 }
@@ -213,7 +225,7 @@ const Profile = (props) => {
         ? <p>Oh no! Looks like this user wasn't found....</p>
         : <ProfileContents data={userData} updateUserData={updateUser} />
       }
-      <Footer />
+
     </>
   )
 }
