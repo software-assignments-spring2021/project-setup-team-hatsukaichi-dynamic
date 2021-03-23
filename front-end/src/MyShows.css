@@ -4,7 +4,7 @@
     padding-left: 2em;
     background-color: #2d2d2d;
     color: #D1CDC7; 
-
+    margin-top: 10%;
 }
 
 #show-container {
@@ -13,8 +13,7 @@
 }
 
 #show-container img {
-    height: 150px;
-    width: 100px;
+    width: 12%;
     padding: 1em;
 }
 
@@ -53,13 +52,13 @@
 }
 
 .my-shows-button:hover {
-    border: 2px solid #3CDD1B;
+    border: 1px solid #3CDD1B;
     background-color: #2D2D2D;
     color: #3CDD1B;
 }
 
 .selected {
-    margin: 2em;
+    margin: 1em;
     font-size: 18px;
     border: 2px solid #666666;
     color: #666666;
@@ -68,7 +67,16 @@
 }
 
 .selected:hover {
-    border: 2px solid #4D4D4D;
+    border: 1px solid #4D4D4D;
     background-color: #84ED6F;
     color: #4D4D4D;
+}
+.show-images{
+    width: 30%;
+}
+
+h3 {
+  margin-top: 5%;
+  margin-bottom: 5%;
+   text-align: center;
 }

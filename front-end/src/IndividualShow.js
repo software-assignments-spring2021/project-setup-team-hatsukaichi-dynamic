@@ -25,10 +25,10 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
     return (
       <div type="hidden">
         <form onSubmit={(e) => saveProgressData()} >
-          <label className="labelCustom" for="season">Current Season: </label>
+          <label className="label-custom" for="season">Current Season: </label>
           <input id="season" className="progress" defaultValue={season} ref={refSeason} />
-          <br />
-          <label className="labelCustom" for="episode">Current Episode:</label>
+          <br /> <br /><br /> <br />
+          <label className="label-custom" for="episode">Current Episode:</label>
           <input id="episode" className="progress" defaultValue={episode} ref={refEpisode} />
           <br />
           <input className="btnProgress" type="submit" value="Save Progress" />
@@ -53,7 +53,9 @@ const PlatformData = () => {
   });
   return (
     <div>
-      <p className="labelCustom">Select the platform: </p>
+
+      <p className="label-custom">Select the platform: </p>
+
       <form onSubmit={(e) => savePlatform()}>
         <input class="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
         <label for="netflix">Netflix  </label>
