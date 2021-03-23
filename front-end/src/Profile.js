@@ -28,7 +28,7 @@ const RecentShows = ({ shows }) => {
       {shows
         ? <div id="profile-show-container">
           {shows.map((show) => {
-            return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
+            return <img class="showImage" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
           })}
         </div>
         : "No shows"}
@@ -126,7 +126,9 @@ const ProfileContents = ({ data, updateUserData }) => {
 
   return (
     <>
-      <div id="container">
+      <div className="showContent">
+        <fieldset className="main">
+          <div className="showDetails">
         <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
         <RecentShows shows={userShows} />
         <div id="profile-links">
@@ -135,7 +137,7 @@ const ProfileContents = ({ data, updateUserData }) => {
               <button className="prof-button">My Shows</button>
             </Link>
           </div>
-          <div>
+          <div id="buttons">
             <button className="prof-button" onClick={toggleModal}>Settings</button>
             <Modal
               isOpen={open}
@@ -174,6 +176,10 @@ const ProfileContents = ({ data, updateUserData }) => {
           </CopyToClipboard>
         </div>
       </div>
+     
+      </fieldset>
+      </div>
+      
     </>
   );
 }

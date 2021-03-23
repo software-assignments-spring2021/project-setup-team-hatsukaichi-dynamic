@@ -12,8 +12,7 @@
 }
 
 #show-container img {
-    height: 150px;
-    width: 100px;
+    width: 15%;
     padding: 1em;
 }
 
@@ -52,13 +51,13 @@
 }
 
 .my-shows-button:hover {
-    border: 2px solid #3CDD1B;
+    border: 1px solid #3CDD1B;
     background-color: #2D2D2D;
     color: #3CDD1B;
 }
 
 .selected {
-    margin: 2em;
+    margin: 1em;
     font-size: 18px;
     border: 2px solid #666666;
     color: #666666;
@@ -67,7 +66,11 @@
 }
 
 .selected:hover {
-    border: 2px solid #4D4D4D;
+    border: 1px solid #4D4D4D;
     background-color: #84ED6F;
     color: #4D4D4D;
 }
+.showImages{
+    width: 30%;
+}
+

@@ -63,7 +63,7 @@ const ShowGrid = (props) => {
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0
           ? filteredShows.map((show) => {
-            return <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
+            return <img className="showImages" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />
           })
           : <p>No shows found...</p>
         }
