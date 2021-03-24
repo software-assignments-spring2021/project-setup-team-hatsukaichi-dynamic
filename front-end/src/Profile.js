@@ -7,10 +7,11 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
 import { Link } from 'react-router-dom'
 import Modal from "react-modal";
+require('dotenv').config();
 
 // UserInfo displays username, user bio, and user profile picture
 const UserInfo = ({ username, bio, image }) => {
-  return (
+    return (
     <div id="heading">
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
@@ -61,14 +62,14 @@ const ProfileContents = ({ data, updateUserData }) => {
       'img': pic,
       'email': email
     }
-    axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=&__method=PATCH`, newData) //Paste in your key after key=.
+    axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`, newData)
       .then((response) => {
         console.log(response)
         updateUserData(response.data)
         toggleModal()
       })
       .catch((err) => {
-        console.log("We likely reached Mockaroo's request limit, or no API key has been provided...");
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         updateUserData(mockUserUpdate(data.id, newData))
         toggleModal()
@@ -103,13 +104,13 @@ const ProfileContents = ({ data, updateUserData }) => {
       // but it's being mocked with picsum for now.
       showIds.map((show) => {
         promises.push(
-          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
+          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
             .then((response) => {
               showInfo.push(response.data);
             })
             .catch((err) => {
-              console.log("We likely reached Mockaroo's request limit...");
-              console.log(err);
+	      console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+	      console.log(err);
               showInfo.push(mockShowAPI[show.id]);
             })
         )
@@ -168,8 +169,6 @@ const ProfileContents = ({ data, updateUserData }) => {
                           <button type="submit" className="prof-button" form="settings-form">Save</button>
                         </div>
                       </fieldset>
-
-
                     </form>
                   </div>
                   <Footer />
@@ -204,7 +203,7 @@ const Profile = (props) => {
   }
 
   useEffect(() => {
-    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
+    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
         setUserData(response.data)
       })
@@ -212,7 +211,8 @@ const Profile = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to 
         // access a non-existent user
-        console.log(err);
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+	console.log(err);
         const mockUser = createMockUser(props.id);
         setUserData(mockUser);
       });

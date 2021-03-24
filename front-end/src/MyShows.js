@@ -8,6 +8,7 @@ import './MyShows.css';
 import Modal from "react-modal";
 import Select from "react-select";
 import { Link, useHistory } from 'react-router-dom'
+require('dotenv').config();
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -25,12 +26,12 @@ const ShowGrid = (props) => {
     else {
       props.shows.map((show) => {
         promises.push(
-          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
+          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
             .then((response) => {
               showInfo.push(response.data);
             })
             .catch((err) => {
-              console.log("We likely reached Mockaroo's request limit...");
+	      console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
               console.log(err);
               showInfo.push(mockShowAPI[show.id]);
             })
@@ -107,7 +108,7 @@ const MyShows = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
+    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
         setUserData(response.data)
       })
@@ -115,6 +116,7 @@ const MyShows = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to 
         // access a non-existent user
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         const mockUser = createMockUser(props.id);
         setUserData(mockUser);
@@ -153,11 +155,12 @@ const MyShows = (props) => {
   }
 
   const loadOptions = (input) => {
-    return axios.get('https://my.api.mockaroo.com/shows.json?key=')
+    return axios.get('https://my.api.mockaroo.com/shows.json?key=${process.env.REACT_APP_MOCKAROO_KEY}')
       .then(response => {
         return searchShows(input, response.data);
       })
-      .catch((err) => {
+     .catch((err) => {
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         return searchShows(input, mockAllShows);
       });
