@@ -31,7 +31,7 @@ const ShowGrid = (props) => {
               showInfo.push(response.data);
             })
             .catch((err) => {
-              console.log("We likely reached Mockaroo's request limit...");
+	      console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
               console.log(err);
               showInfo.push(mockShowAPI[show.id]);
             })
@@ -116,6 +116,7 @@ const MyShows = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to 
         // access a non-existent user
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         const mockUser = createMockUser(props.id);
         setUserData(mockUser);
@@ -158,7 +159,8 @@ const MyShows = (props) => {
       .then(response => {
         return searchShows(input, response.data);
       })
-      .catch((err) => {
+     .catch((err) => {
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         return searchShows(input, mockAllShows);
       });

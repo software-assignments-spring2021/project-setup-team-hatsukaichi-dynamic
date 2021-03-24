@@ -11,9 +11,7 @@ import IndividualShow from './IndividualShow';
 import Modal from "react-modal";
 import Login from './Login';
 import Signup from './Signup';
-
 require('dotenv').config();
-
 
 Modal.setAppElement("#root");
 

@@ -69,7 +69,7 @@ const ProfileContents = ({ data, updateUserData }) => {
         toggleModal()
       })
       .catch((err) => {
-        console.log("We likely reached Mockaroo's request limit, or no API key has been provided...");
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         updateUserData(mockUserUpdate(data.id, newData))
         toggleModal()
@@ -109,8 +109,8 @@ const ProfileContents = ({ data, updateUserData }) => {
               showInfo.push(response.data);
             })
             .catch((err) => {
-              console.log("We likely reached Mockaroo's request limit...");
-              console.log(err);
+	      console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+	      console.log(err);
               showInfo.push(mockShowAPI[show.id]);
             })
         )
@@ -169,8 +169,6 @@ const ProfileContents = ({ data, updateUserData }) => {
                           <button type="submit" className="prof-button" form="settings-form">Save</button>
                         </div>
                       </fieldset>
-
-
                     </form>
                   </div>
                   <Footer />
@@ -213,7 +211,8 @@ const Profile = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to 
         // access a non-existent user
-        console.log(err);
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+	console.log(err);
         const mockUser = createMockUser(props.id);
         setUserData(mockUser);
       });

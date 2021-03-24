@@ -31,7 +31,8 @@ function Signup() {
         history.push(`/profile/${response.data.id}`);
       })
       .catch( (err) => {
-        history.push('/profile/1')
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+	history.push('/profile/1')
       });
   }
 

@@ -4,6 +4,7 @@ import Footer from './Footer'
 import './IndividualShow.css';
 import axios from 'axios';
 import { mockShowAPI, mockShowImage } from './MockData'
+import { Link } from 'react-router-dom'
 require('dotenv').config();
 
 /*the component stores user's watched episode progress 
@@ -140,7 +141,7 @@ const IndividualShow = (props) => {
 
       })
       .catch((err) => {
-        console.log("We likely reached Mockaroo's request limit...");
+        console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         showInfo.push(mockShowAPI[props.id]);
         setShow(showInfo);
