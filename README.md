@@ -57,4 +57,8 @@ To start the front end of the project, navigate to the front-end folder and run 
 
 > npm start
 
-In front-end, modify the .env file to include your Mockaroo API Key after the =.
+In front-end, create a file named '.env' with the following contents:
+
+> REACT_APP_MOCKAROO_KEY=[your API key]
+
+Replace [your API key] with your actual API key.
