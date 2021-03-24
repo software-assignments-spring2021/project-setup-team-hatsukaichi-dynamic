@@ -8,6 +8,7 @@ import './MyShows.css';
 import Modal from "react-modal";
 import Select from "react-select";
 import { Link, useHistory } from 'react-router-dom'
+require('dotenv').config();
 
 const ShowGrid = (props) => {
   const [shows, setShows] = useState([]);
@@ -25,7 +26,7 @@ const ShowGrid = (props) => {
     else {
       props.shows.map((show) => {
         promises.push(
-          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
+          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
             .then((response) => {
               showInfo.push(response.data);
             })
@@ -107,7 +108,7 @@ const MyShows = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
+    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
         setUserData(response.data)
       })
@@ -153,7 +154,7 @@ const MyShows = (props) => {
   }
 
   const loadOptions = (input) => {
-    return axios.get('https://my.api.mockaroo.com/shows.json?key=')
+    return axios.get('https://my.api.mockaroo.com/shows.json?key=${process.env.REACT_APP_MOCKAROO_KEY}')
       .then(response => {
         return searchShows(input, response.data);
       })

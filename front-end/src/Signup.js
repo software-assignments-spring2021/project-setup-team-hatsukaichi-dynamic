@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-
 import './Signup.css';
 import axios from "axios";
+require('dotenv').config();
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -26,7 +26,7 @@ function Signup() {
       'password': password,
     }
 
-    axios.post('https://my.api.mockaroo.com/tv_users.json?key=71236df0&__method=POST', newUser)
+    axios.post('https://my.api.mockaroo.com/tv_users.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=POST', newUser)
       .then( (response) => {
         history.push(`/profile/${response.data.id}`);
       })

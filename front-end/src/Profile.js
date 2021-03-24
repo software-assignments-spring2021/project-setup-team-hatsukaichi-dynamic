@@ -7,10 +7,11 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
 import { Link } from 'react-router-dom'
 import Modal from "react-modal";
+require('dotenv').config();
 
 // UserInfo displays username, user bio, and user profile picture
 const UserInfo = ({ username, bio, image }) => {
-  return (
+    return (
     <div id="heading">
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
@@ -61,7 +62,7 @@ const ProfileContents = ({ data, updateUserData }) => {
       'img': pic,
       'email': email
     }
-    axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=&__method=PATCH`, newData) //Paste in your key after key=.
+    axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`, newData)
       .then((response) => {
         console.log(response)
         updateUserData(response.data)
@@ -103,7 +104,7 @@ const ProfileContents = ({ data, updateUserData }) => {
       // but it's being mocked with picsum for now.
       showIds.map((show) => {
         promises.push(
-          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=`)
+          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
             .then((response) => {
               showInfo.push(response.data);
             })
@@ -204,7 +205,7 @@ const Profile = (props) => {
   }
 
   useEffect(() => {
-    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=`)
+    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
         setUserData(response.data)
       })

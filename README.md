@@ -56,3 +56,5 @@ To start the front end of the project, navigate to the front-end folder and run 
 > npm install
 
 > npm start
+
+In front-end, modify the .env file to include your Mockaroo API Key after the =.

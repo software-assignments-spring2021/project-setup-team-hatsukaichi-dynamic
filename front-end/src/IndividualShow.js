@@ -4,7 +4,7 @@ import Footer from './Footer'
 import './IndividualShow.css';
 import axios from 'axios';
 import { mockShowAPI, mockShowImage } from './MockData'
-
+require('dotenv').config();
 
 /*the component stores user's watched episode progress 
 by allowing to save the show's latest season and episode watched*/
@@ -25,10 +25,10 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
     return (
       <div type="hidden">
         <form onSubmit={(e) => saveProgressData()} >
-          <label className="label-custom" for="season">Current Season: </label>
+          <label className="label-custom" htmlFor="season">Current Season: </label>
           <input id="season" className="progress" defaultValue={season} ref={refSeason} />
           <br /> <br /><br /> <br />
-          <label className="label-custom" for="episode">Current Episode:</label>
+          <label className="label-custom" htmlFor="episode">Current Episode:</label>
           <input id="episode" className="progress" defaultValue={episode} ref={refEpisode} />
           <br />
           <input className="btnProgress" type="submit" value="Save Progress" />
@@ -57,20 +57,20 @@ const PlatformData = () => {
       <p className="label-custom">Select the platform: </p>
 
       <form onSubmit={(e) => savePlatform()}>
-        <input class="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
-        <label for="netflix">Netflix  </label>
-        <input class="platform" type="checkbox" id="prime" value="Prime" ref={refPrime} />
-        <label for="prime">Amazon Prime  </label>
-        <input class="platform" type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
-        <label for="hulu">Hulu  </label>
-        <input class="platform" type="checkbox" id="crunch" value="Crunchyroll" ref={refCrunchy} />
-        <label for="crunch">Crunchyroll  </label><br />
-        <input class="platform" type="checkbox" id="disney" value="Disney Plus" ref={refDisney} />
-        <label for="crunch">Disney Plus  </label>
-        <input class="platform" type="checkbox" id="hbo" value="HBO" ref={refHBO} />
-        <label for="hbo">HBO  </label>
-        <input class="platform" type="checkbox" id="other" value="Other" ref={refOther} />
-        <label for="other">Other  </label><br />
+        <input className="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
+        <label htmlFor="netflix">Netflix  </label>
+        <input className="platform" type="checkbox" id="prime" value="Prime" ref={refPrime} />
+        <label htmlFor="prime">Amazon Prime  </label>
+        <input className="platform" type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
+        <label htmlFor="hulu">Hulu  </label>
+        <input className="platform" type="checkbox" id="crunch" value="Crunchyroll" ref={refCrunchy} />
+        <label htmlFor="crunch">Crunchyroll  </label><br />
+        <input className="platform" type="checkbox" id="disney" value="Disney Plus" ref={refDisney} />
+        <label htmlFor="crunch">Disney Plus  </label>
+        <input className="platform" type="checkbox" id="hbo" value="HBO" ref={refHBO} />
+        <label htmlFor="hbo">HBO  </label>
+        <input className="platform" type="checkbox" id="other" value="Other" ref={refOther} />
+        <label htmlFor="other">Other  </label><br />
         <input className="btnProgress" type="submit" value="Save Platform" />
       </form>
     </div>
@@ -97,11 +97,11 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
   return (
     <div className="description">
       <br />
-      <label className="descript" for="genre">Genre:  </label>
+      <label className="descript" htmlFor="genre">Genre:  </label>
       <span ref={refGenre}>{genre}. </span>
-      <label className="descript" for="description">Description:  </label>
+      <label className="descript" htmlFor="description">Description:  </label>
       <span value={description} ref={refDescription}>{description} </span>
-      <label className="descript" for="totalEpisodes">Total Episodes: </label>
+      <label className="descript" htmlFor="totalEpisodes">Total Episodes: </label>
       <span ref={refTotalEpisodes}>{totalEpisodes}.</span>
     </div>
   )
@@ -132,7 +132,7 @@ const IndividualShow = (props) => {
   useEffect(() => {
     //temporary variable to be replaced
     let showInfo = [];
-    axios.get(`https://my.api.mockaroo.com/shows/${props.id}.json?key=`)
+    axios.get(`https://my.api.mockaroo.com/shows/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
         showInfo.push(response.data);
         setShow(showInfo);
