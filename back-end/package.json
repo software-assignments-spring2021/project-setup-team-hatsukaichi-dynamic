@@ -1,0 +1,30 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "TV Tracker backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agile-dev-assignments/project-setup-team-hatsukaichi-dynamic.git"
+  },
+  "author": "Sam Eng, Lev Bernstein, Ben Kaplan, Mason Kalaty, Nicole Stovall, Almazhan Kapan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agile-dev-assignments/project-setup-team-hatsukaichi-dynamic/issues"
+  },
+  "homepage": "https://github.com/agile-dev-assignments/project-setup-team-hatsukaichi-dynamic#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "morgan": "^1.10.0",
+    "ngrok": "^3.4.1",
+    "nodemon": "^2.0.7",
+    "postman": "^0.2.0"
+  }
+}
