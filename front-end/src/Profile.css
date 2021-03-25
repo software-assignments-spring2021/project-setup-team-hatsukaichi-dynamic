@@ -11,10 +11,11 @@
   right: 30%;
 }
 
-.modal-contents{
+.modal-contents {
   background-color:#2d2d2d;
   color: #D1CDC7; 
 }
+
 #profile-picture {
   margin-top: 1em;
   border-radius: 50%;
@@ -53,19 +54,11 @@
   text-align: center;
 }
 
-.h4 {
-  padding: 0px;
-}
-
-#settings-form  {
+#settings-form {
   border: 0px;
   text-align: center;
   background-color:#2d2d2d;
   color: #D1CDC7; 
-}
-#settings-form{
-  background-color:#2d2d2d;
-  color: #D1CDC7;
 }
 
 .prof-button {
@@ -93,7 +86,7 @@
   padding: 1em 2em 1em 2em;
 }
 
-.main{
+.main {
   width: 90%;
   background-color:#2d2d2d;
   color: #D1CDC7; 
@@ -105,19 +98,20 @@
   background-color:#2d2d2d;
   text-align: center;
 }
+
 .show-content, .main {
   display: flex;
   text-align: center;
   justify-content: space-around;
   background-color: #2d2d2d;
-  
 }
-#heading{
+
+#heading {
   text-align: center;
   background-color: #2d2d2d;;
 }
 
-#settings-btn{
+#settings-btn {
   margin-top: 4%;
   padding-top: 4%;
 }
@@ -152,10 +146,6 @@
   margin-bottom: 3%;
 }
 
-.ReactModal__Body--open {
-  background-color: #2D2D2D;
-}
-
 .modal-open {
   position: fixed;
   top: 0;
@@ -164,4 +154,3 @@
   bottom: 0;
   background-color: rgba(0,0,0,0.75);
 }
-
