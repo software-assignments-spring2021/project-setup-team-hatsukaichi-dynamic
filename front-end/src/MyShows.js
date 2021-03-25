@@ -155,7 +155,7 @@ const MyShows = (props) => {
   }
 
   const loadOptions = (input) => {
-    return axios.get('https://my.api.mockaroo.com/shows.json?key=${process.env.REACT_APP_MOCKAROO_KEY}')
+    return axios.get(`https://my.api.mockaroo.com/shows.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then(response => {
         return searchShows(input, response.data);
       })
