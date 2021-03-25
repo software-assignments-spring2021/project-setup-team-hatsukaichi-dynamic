@@ -114,21 +114,7 @@ const IndividualShow = (props) => {
 
   const refTitle = useRef();
   const refCover = useRef();
-  const returnToShows = (() => {
-    window.location.href = '/my-shows/1'
-  });
-  const addToInProgress = (() => {
-    window.location.href = '/my-shows/1'
-  });
-
-  const addToWatched = (() => {
-    window.location.href = '/my-shows/1'
-  });
-
-
-
   let [show, setShow] = useState([]);
-
 
   useEffect(() => {
     //temporary variable to be replaced
