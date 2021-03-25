@@ -2,13 +2,14 @@ h1 {
     padding: 0;
     color: #D1CDC7; 
     background-color: #2d2d2d;
-
 }
+
 body{
     margin-top: 8em;
     color: #D1CDC7; 
     background-color: #2d2d2d;
 }
+
 .header {
     font-size: 32px;
     color: #D1CDC7; 
@@ -25,16 +26,19 @@ body{
 
 .text h1 {
     font-size: 35px;
+    margin-bottom: 1em;
 }
 
 .text h2 {
     font-size: 24px;
-   
+    margin-bottom: 1em;
 }
 
 .text h3 {
     font-size: 20px;
-   
+    text-align: left;
+    margin: 0;
+    margin-bottom: 1em;
 }
 
 .text h4 {
@@ -47,12 +51,18 @@ body{
     margin-left: 15px;
     
 }
+
 .text a {
     font-size: 20px;
     color: #ACF39D;
     text-decoration: none;
 }
+
 .text a:hover {
     color: #3CDD1B;
     text-decoration: none;
+}
+
+.TOC {
+    margin-left: 15px;
 }
