@@ -2,8 +2,16 @@
     margin-top: 15em;
     padding-left: 2em;
   padding-right: 2em;
-   
 }
+
+.settings-modal {
+    position: absolute;
+    top: 15%;
+    bottom: 5%;
+    left: 30%;
+    right: 30%;
+}
+
 .modal-contents{
   background-color:#2d2d2d;
   color: #D1CDC7; 
@@ -39,15 +47,14 @@
 }
 
 .modal-contents h1 {
-  padding-top: 3%;
+    margin-top: 1.75em;
+  padding-top: 1%;
   margin-bottom: 0;
   text-align: center;
-
 }
 
 #settings-form  {
   border: 0px;
-  margin-bottom: 5%;
    text-align: center;
     background-color:#2d2d2d;
   color: #D1CDC7; 
@@ -56,7 +63,6 @@
   background-color:#2d2d2d;
   color: #D1CDC7;
 }
-
 
 .prof-button {
   font-size: 18px;
@@ -73,8 +79,6 @@
   background-color: #2D2D2D;
   color: #3CDD1B;
 }
-
-
 
 .filter-button {
     margin: 2em;
@@ -122,19 +126,17 @@
     padding: 1em 1em 1em 1em;
 }
 
-
-
 .inputs{
   margin: 1em;
   font-size: 16px;
-  background-color: whitesmoke;
-  color: #2D2D2D;
+  background-color: #000000;
+  color: #666666;
   padding: 1em 1em 1em 1em;
 }
 .inputs:hover {
-  border: 2px solid #3CDD1B;
+  border: 2px solid #D1CDC7;
   background-color: #2D2D2D;
-  color: #3CDD1B;
+  color: #D1CDC7;
 }
 
 #settings-title{

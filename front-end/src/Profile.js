@@ -124,10 +124,8 @@ const ProfileContents = ({ data, updateUserData }) => {
   }, [data.shows])
 
 
-
   return (
     <>
-
       <div className="show-content">
         <div className="main">
           <div className="show-details">
@@ -145,10 +143,10 @@ const ProfileContents = ({ data, updateUserData }) => {
                 <Modal
                   isOpen={open}
                   onRequestClose={toggleModal}
-                  contentLabel="Settings"
+                    contentLabel="Settings"
+		    className="settings-modal"
                 >
                   <div className="modal-contents">
-
                     <form id="settings-form" onSubmit={handleSubmit}>
                       <fieldset>
                         <h1 id="settings-title">Settings</h1>
@@ -161,9 +159,9 @@ const ProfileContents = ({ data, updateUserData }) => {
                         <label className="label-custom">Biography:</label>
                         <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
                         <br />
-                        <label className="label-custom">Profile img url:</label>
+                        <label className="label-custom">Profile Pic UR::</label>
                         <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
-                        <br /><br />
+                        <br />
                         <div id="settings-btns" className="profile-links">
                           <button className="prof-button" onClick={toggleModal}>Back</button>
                           <button type="submit" className="prof-button" form="settings-form">Save</button>
@@ -171,24 +169,19 @@ const ProfileContents = ({ data, updateUserData }) => {
                       </fieldset>
                     </form>
                   </div>
-                  <Footer />
                 </Modal>
               </div>
               <CopyToClipboard text={window.location.href} onCopy={onCopy}>
-                <div>
+                <div className="clipboard-button">
                   {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
                   <button className="prof-button">Share</button>
                   <br /> <br />
                   <p>{copied ? "Copied URL to clipboard." : ""}</p>
                 </div>
               </CopyToClipboard>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
       <Footer />
     </>
@@ -225,7 +218,6 @@ const Profile = (props) => {
         ? <p>Oh no! Looks like this user wasn't found....</p>
         : <ProfileContents data={userData} updateUserData={updateUser} />
       }
-
     </>
   )
 }
