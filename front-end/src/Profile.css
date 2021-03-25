@@ -1,15 +1,14 @@
 #container {
-    margin-top: 15em;
-    padding-left: 2em;
+  padding-left: 2em;
   padding-right: 2em;
 }
 
 .settings-modal {
-    position: absolute;
-    top: 15%;
-    bottom: 5%;
-    left: 30%;
-    right: 30%;
+  position: absolute;
+  top: 15%;
+  bottom: 5%;
+  left: 30%;
+  right: 30%;
 }
 
 .modal-contents{
@@ -17,11 +16,12 @@
   color: #D1CDC7; 
 }
 #profile-picture {
-    margin-top: 3em;
+  margin-top: 1em;
   border-radius: 50%;
   display: inline-block;
   vertical-align: top;
-  padding: 1em;
+  padding-top: 1em;
+  padding-right: 1em;
 }
 
 #profile-text {
@@ -34,29 +34,33 @@
   justify-content: flex-start;
 }
 
-#profile-show-container img {
-  width: 18%;
-  padding: 1em;
+.show-image {
+  width: 7%;
+  padding-right: 1em;
 }
 
 .profile-links {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 4em;
-  margin-top: 5em;
+  margin-bottom: 1.75em;
+  margin-top: 2em;
 }
 
 .modal-contents h1 {
-    margin-top: 1.75em;
+  margin-top: 1.75em;
   padding-top: 1%;
-  margin-bottom: 0;
+  margin-bottom: 0px;
   text-align: center;
+}
+
+.h4 {
+  padding: 0px;
 }
 
 #settings-form  {
   border: 0px;
-   text-align: center;
-    background-color:#2d2d2d;
+  text-align: center;
+  background-color:#2d2d2d;
   color: #D1CDC7; 
 }
 #settings-form{
@@ -81,12 +85,12 @@
 }
 
 .filter-button {
-    margin: 2em;
-    font-size: 18px;
-    border: 2px solid #84ED6F;
-    background-color: #666666;
-    color: #84ED6F;
-    padding: 1em 2em 1em 2em;
+  margin: 2em;
+  font-size: 18px;
+  border: 2px solid #84ED6F;
+  background-color: #666666;
+  color: #84ED6F;
+  padding: 1em 2em 1em 2em;
 }
 
 .main{
@@ -133,6 +137,7 @@
   color: #666666;
   padding: 1em 1em 1em 1em;
 }
+
 .inputs:hover {
   border: 2px solid #D1CDC7;
   background-color: #2D2D2D;
@@ -144,7 +149,7 @@
 }
 
 #settings-btns{
-margin-bottom: 3%;
+  margin-bottom: 3%;
 }
 
 .ReactModal__Body--open{

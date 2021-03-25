@@ -32,7 +32,7 @@ const RecentShows = ({ shows }) => {
             return <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
           })}
         </div>
-        : "No shows"}
+        : "No shows. Add some shows on the My Shows page!"}
     </>
   )
 }
@@ -143,8 +143,8 @@ const ProfileContents = ({ data, updateUserData }) => {
                 <Modal
                   isOpen={open}
                   onRequestClose={toggleModal}
-                    contentLabel="Settings"
-		    className="settings-modal"
+                  contentLabel="Settings"
+		  className="settings-modal"
                 >
                   <div className="modal-contents">
                     <form id="settings-form" onSubmit={handleSubmit}>
@@ -159,7 +159,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                         <label className="label-custom">Biography:</label>
                         <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
                         <br />
-                        <label className="label-custom">Profile Pic UR::</label>
+                        <label className="label-custom">Profile Pic URL:</label>
                         <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
                         <br />
                         <div id="settings-btns" className="profile-links">
