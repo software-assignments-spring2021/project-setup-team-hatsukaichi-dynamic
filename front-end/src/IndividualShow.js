@@ -152,52 +152,52 @@ const IndividualShow = (props) => {
 
   return (
     <>
-      <Header />
+	<Header />
 	<div className="main-container">
-      <div className="showContent">
-        <fieldset className="main">
-          <div className="showDetails">
-            <fieldset >
-              {show.map(s => ( //display name of the show
-                <h3 id="title" value={s.name} ref={refTitle}>{s.name}</h3>
-              ))}
-
-              <button className="btnProgress" onClick={(e) => returnToShows()}>
-                Return to Shows
-            </button>
-
-              <div className="btnProgressContainer">
-                <button className="btnProgress" onClick={(e) => addToInProgress()}>
-                  Add to In Progress Shows
-          </button>
-                <button className="btnProgress" onClick={(e) => addToWatched()}>
-                  Add to Watched Shows
-          </button>
-
-              </div>
-              <div id="clear"></div>
-              {show.map(s => ( //display watched progress if the show is not a movie
-                //the ProgressData will return null if the show is a movie
-                <ProgressData season="2" episode="5" isMovieSet={s.isMovie} />
-              ))}
-              <PlatformData />
-              <div className="showContent">
-                {show.map(s => ( //display general info about the show
-                  <Description genre={s.genres} description={s.description} totalEpisodes={s.episodes} isMovieN={s.isMovie} />
-                ))}
-              </div>
-            </fieldset>
-
-          </div>
-          {show.map(s => ( //display cover image 
-            <img id="cover" src={mockShowImage(s.id)} alt="" ref={refCover}></img>
-          ))}
-
-          <div id="clear"></div>
-        </fieldset>
-      </div>
+	    <div className="showContent">
+		<fieldset className="main">
+		    <div className="showDetails">
+			<fieldset >
+			    {show.map(s => ( //display name of the show
+				<h3 id="title" value={s.name} ref={refTitle}>{s.name}</h3>
+			    ))}
+			    <Link to="/my-shows/1">
+				<button className="btnProgress">
+				    Return to Shows
+				</button>
+			    </Link>
+			    <Link to="/my-shows/1">
+				<button className="btnProgress">
+				    Add to In Progress Shows
+				</button>
+			    </Link>
+			    <Link to="/my-shows/1">
+				<button className="btnProgress">
+				    Add to Watched Shows
+				</button>
+			    </Link>
+			    <div id="clear"></div>
+			    {show.map(s => ( //display watched progress if the show is not a movie
+				//the ProgressData will return null if the show is a movie
+				<ProgressData season="2" episode="5" isMovieSet={s.isMovie} />
+			    ))}
+			    <PlatformData />
+			    <div className="showContent">
+				{show.map(s => ( //display general info about the show
+				    <Description genre={s.genres} description={s.description} totalEpisodes={s.episodes} isMovieN={s.isMovie} />
+				))}
+			    </div>
+			</fieldset>
+		    </div>
+		    {show.map(s => ( //display cover image 
+			<img id="cover" src={mockShowImage(s.id)} alt="" ref={refCover}></img>
+		    ))}
+		    
+		    <div id="clear"></div>
+		</fieldset>
+	    </div>
 	</div>
-      <Footer />
+	<Footer />
     </>
   );
 }
