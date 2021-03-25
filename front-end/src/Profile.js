@@ -123,7 +123,6 @@ const ProfileContents = ({ data, updateUserData }) => {
     }
   }, [data.shows])
 
-
   return (
     <>
       <div className="show-content">
@@ -143,8 +142,9 @@ const ProfileContents = ({ data, updateUserData }) => {
                 <Modal
                   isOpen={open}
                   onRequestClose={toggleModal}
-                  contentLabel="Settings"
-		  className="settings-modal"
+                    contentLabel="Settings"
+		    className="settings-modal"
+		    overlayClassName="modal-open"
                 >
                   <div className="modal-contents">
                     <form id="settings-form" onSubmit={handleSubmit}>

@@ -130,7 +130,7 @@
     padding: 1em 1em 1em 1em;
 }
 
-.inputs{
+.inputs {
   margin: 1em;
   font-size: 16px;
   background-color: #000000;
@@ -144,14 +144,24 @@
   color: #D1CDC7;
 }
 
-#settings-title{
+#settings-title {
   margin-bottom: 3%;
 }
 
-#settings-btns{
+#settings-btns {
   margin-bottom: 3%;
 }
 
-.ReactModal__Body--open{
+.ReactModal__Body--open {
   background-color: #2D2D2D;
 }
+
+.modal-open {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.75);
+}
+

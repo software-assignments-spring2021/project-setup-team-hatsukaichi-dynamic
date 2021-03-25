@@ -9,6 +9,12 @@
 
 .login-signup-buttons {
     position: absolute;
-    right: 0px;
+    right: 10px;
     top: 0px;
+}
+
+.login-signup-buttons button {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
 }
