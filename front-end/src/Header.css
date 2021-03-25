@@ -6,3 +6,9 @@
     text-align: center;
     color: #D1CDC7;
 }
+
+.login-signup-buttons {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}

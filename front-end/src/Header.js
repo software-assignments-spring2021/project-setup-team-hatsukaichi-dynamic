@@ -1,3 +1,4 @@
+import React from 'react'
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
 import './Header.css'
@@ -14,8 +15,10 @@ const Header = () => {
         <div className="header-root">
           <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
           <HeaderLogo src={logo} className="logo-img" />
-          <LoginButton/>
-          <SignupButton/>
+	  <div className="login-signup-buttons">
+	    <LoginButton />
+	    <SignupButton />
+	  </div>
         </div>
       }
     >
