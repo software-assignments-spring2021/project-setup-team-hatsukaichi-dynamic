@@ -5,15 +5,41 @@
     color: #D1CDC7; 
     margin-top: 10%;
 }
+#search-bar{
+    color: black; 
+}
+div.css-yk16xz-control {
+  margin-left: 5%;
+  margin-right: 10%;
+
+  width: 90%;
+  height: 90%;
+}
+
+#filter-title{
+    padding-top: 5%;
+}
+
+.css-2b097c-container{
+color: black;
+}  
+
+
 
 #show-container {
     display: flex;
-    flex-wrap: wrap;
+   flex-wrap: wrap; 
+
+}
+.modal-contents {
+  background-color: #2d2d2d;
+  color: #d1cdc7;
 }
 
+
 #show-container img {
-    width: 85%;
-    padding: 3em;
+    width: 75%;
+    padding: 0.5em;
 }
 
 #search-container {
@@ -39,6 +65,8 @@
     background-color: #666666;
     color: #84ED6F;
     padding: 1em 2em 1em 2em;
+    font-size: 1.4vw;
+
 }
 
 .my-shows-button {
@@ -48,12 +76,16 @@
     background-color: #666666;
     color: #84ED6F;
     padding: 1em 2em 1em 2em;
+    font-size: 1.4vw;
+
 }
 
 .my-shows-button:hover {
     border: 1px solid #3CDD1B;
     background-color: #2D2D2D;
     color: #3CDD1B;
+    font-size: 1.4vw;
+
 }
 
 .selected {
@@ -78,4 +110,67 @@ h3 {
   margin-top: 5%;
   margin-bottom: 5%;
    text-align: center;
+}
+#apply{
+margin-left: 45%;
+margin-right: 45%;
+
+
+}
+
+
+@media screen and (max-width: 1800px) {
+  .filter-button,
+  .my-shows-button,
+  .filter-button:hover,
+  .my-shows-button:hover {
+    font-size: 18px;
+  }
+  #title-myshows, #title, #filter-title {
+  font-size: 22px;
+}
+#show-container img {
+  width: 75%;
+  padding: 0.1em;
+}
+
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  .filter-button, .my-shows-button, .filter-button:hover, .my-shows-button:hover{
+      font-size: 14px;
+  }
+  #title-myshows, #title, #filter-title{
+      font-size: 20px;
+
+  }
+  #show-container img {
+  width: 66%;
+  padding: 0.2em;
+}
+
+}
+
+
+
+@media screen and (max-width: 650px) {
+  .filter-button,
+.my-shows-button,
+.filter-button:hover,
+.my-shows-button:hover {
+  font-size: 10px;
+}
+#title-myshows, #title, #filter-title {
+  font-size: 15px;
+}
+#show-container img {
+  width: 55%;
+
+ padding: 0.1em;
+}
+
+
+
+
 }
