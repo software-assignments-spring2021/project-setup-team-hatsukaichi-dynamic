@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Home.js'
 import TermsOfService from './TermsOfService';
@@ -27,38 +27,49 @@ const MyShowsWrapper = ({ match }) => {
   )
 }
 
-const IndividualShowWrapper = ({match}) => {
+const IndividualShowWrapper = ({ match }) => {
   return (
     <IndividualShow id={match.params.id} />
   )
 }
 
-const App = (props) => {
+export const AuthContext = React.createContext();
+
+const App = () => {
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+  const setUser = (user) => {
+    localStorage.setItem('user', JSON.stringify(user))
+    setLoggedInUser(user)
+  }
+
   return (
     <div className="App">
-      <Router>
-        <ScrollToTop />
-        <Switch>
-          <Route path="/show/:id" component={IndividualShowWrapper} />
-          <Route path="/my-shows/:id" component={MyShowsWrapper} />
-          <Route path="/profile/:id" component={ProfileWrapper} />
-          <Route path="/terms-of-service">
-            <TermsOfService />
-          </Route>
-          <Route path="/meet-the-team">
-            <MeetTheTeam />
-          </Route>
-          <Route path="/Login">
-            <Login />
-          </Route>
-          <Route path="/Signup">
-            <Signup />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+      <AuthContext.Provider value={{ loggedInUser, setLoggedInUser: setUser }}>
+        <Router>
+          <ScrollToTop />
+          <Switch>
+            <Route path="/show/:id" component={IndividualShowWrapper} />
+            <Route path="/my-shows/:id" component={MyShowsWrapper} />
+            <Route path="/profile/:id" component={ProfileWrapper} />
+            <Route path="/terms-of-service">
+              <TermsOfService />
+            </Route>
+            <Route path="/meet-the-team">
+              <MeetTheTeam />
+            </Route>
+            <Route path="/Login">
+              <Login />
+            </Route>
+            <Route path="/Signup">
+              <Signup />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
 }
