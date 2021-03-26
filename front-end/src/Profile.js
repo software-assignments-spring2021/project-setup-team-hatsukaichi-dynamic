@@ -7,6 +7,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
 import { Link } from 'react-router-dom'
 import Modal from "react-modal";
+import { AuthContext } from './App';
 require('dotenv').config();
 
 // UserInfo displays username, user bio, and user profile picture
@@ -29,7 +30,7 @@ const RecentShows = ({ shows }) => {
       {shows
         ? <div id="profile-show-container">
           {shows.map((show) => {
-            return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`}/> </Link>;
+            return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`} /> </Link>;
           })}
         </div>
         : "No shows. Add some shows on the My Shows page!"}
@@ -45,6 +46,7 @@ const ProfileContents = ({ data, updateUserData }) => {
   const [bio, setBio] = useState("");
   const [pic, setPic] = useState("");
   const [open, setOpen] = useState(false);
+  const { loggedInUser } = React.useContext(AuthContext);
 
   const toggleModal = () => {
     setOpen(!open);
@@ -137,40 +139,42 @@ const ProfileContents = ({ data, updateUserData }) => {
                   <button className="prof-button">My Shows</button>
                 </Link>
               </div>
-              <div id="buttons">
-                <button className="prof-button" onClick={toggleModal}>Settings</button>
-                <Modal
-                  isOpen={open}
-                  onRequestClose={toggleModal}
-                  contentLabel="Settings"
-                  className="settings-modal"
-                  overlayClassName="modal-open"
-                >
-                  <div className="modal-contents">
-                    <form id="settings-form" onSubmit={handleSubmit}>
-                      <fieldset>
-                        <h1 id="settings-title">Settings</h1>
-                        <label className="label-custom">User Email:</label>
-                        <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-                        <br />
-                        <label className="label-custom">Password: </label>
-                        <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
-                        <br />
-                        <label className="label-custom">Biography:</label>
-                        <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
-                        <br />
-                        <label className="label-custom">Profile Pic URL:</label>
-                        <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
-                        <br />
-                        <div id="settings-btns" className="profile-links">
-                          <button className="prof-button" onClick={toggleModal}>Back</button>
-                          <button type="submit" className="prof-button" form="settings-form">Save</button>
-                        </div>
-                      </fieldset>
-                    </form>
+                { loggedInUser && loggedInUser.id === data.id
+                  ? <div id="buttons">
+                    <button className="prof-button" onClick={toggleModal}>Settings</button>
+                    <Modal
+                      isOpen={open}
+                      onRequestClose={toggleModal}
+                      contentLabel="Settings"
+                      className="settings-modal"
+                      overlayClassName="modal-open"
+                    >
+                      <div className="modal-contents">
+                        <form id="settings-form" onSubmit={handleSubmit}>
+                          <fieldset>
+                            <h1 id="settings-title">Settings</h1>
+                            <label className="label-custom">User Email:</label>
+                            <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+                            <br />
+                            <label className="label-custom">Password: </label>
+                            <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
+                            <br />
+                            <label className="label-custom">Biography:</label>
+                            <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
+                            <br />
+                            <label className="label-custom">Profile Pic URL:</label>
+                            <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
+                            <br />
+                            <div id="settings-btns" className="profile-links">
+                              <button className="prof-button" onClick={toggleModal}>Back</button>
+                              <button type="submit" className="prof-button" form="settings-form">Save</button>
+                            </div>
+                          </fieldset>
+                        </form>
+                      </div>
+                    </Modal>
                   </div>
-                </Modal>
-              </div>
+                  : null}
               <CopyToClipboard text={window.location.href} onCopy={onCopy}>
                 <div className="clipboard-button">
                   {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
