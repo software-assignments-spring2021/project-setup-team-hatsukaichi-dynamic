@@ -1,5 +1,5 @@
 .main-container {
-    margin-top: 15em;
+    margin-top: 5.25em;
 }
 
 .description {
@@ -23,6 +23,7 @@
   width: 60%;
   background-color:#2d2d2d;
 }
+
 .showContent {
     margin-top: 0px;
   display: flex;
@@ -30,10 +31,11 @@
   justify-content: space-around;
   background-color: #2d2d2d;;
 }
+
 #cover {
-  width: 35%;
+  width: 25%;
   float: left;
-  padding: 1em;
+  padding: .5em;
 }
 
 #clear {
@@ -41,7 +43,7 @@
 }
 
 .label-custom {
-    margin: 2em;
+    margin: 1em;
     font-size: 16px;
     background-color: #666666;
     color: #D1CDC7 ;
@@ -49,7 +51,7 @@
 }
 
 .platform{
-  margin: 1em;
+  margin: .75em;
   font-size: 16px;
   color: #D1CDC7 ;
   padding: 1em 1em 1em 1em;
@@ -57,7 +59,8 @@
 
 
 .btnProgress {
-  margin: 2em;
+  margin: 1em;
+  margin-top: 0;
   font-size: 18px;
   border: 2px solid #84ED6F;
   background-color: #666666;
@@ -72,16 +75,16 @@
 }
 
 #episode, #season,  #description{
-  margin: 1em;
+  margin: .3em;
   font-size: 16px;
   background-color: whitesmoke;
   color: #2D2D2D;
   padding: 1em 1em 1em 1em;
 }
 #episode:hover, #season:hover, #description:hover {
-  border: 2px solid #3CDD1B;
+  border: 2px solid #D1DCD7;
   background-color: #2D2D2D;
-  color: #3CDD1B;
+  color: #D1DCD7;
 }
 
 .descript, span{
