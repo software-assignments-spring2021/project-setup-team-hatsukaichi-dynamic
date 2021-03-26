@@ -39,12 +39,12 @@
   padding: 0.5em;
 }
 
-#clear {
-  clear: both;
-}
-
-#btn-progress {
-  margin-top: 3%;
+.label-custom {
+    margin: 1em;
+    font-size: 16px;
+    background-color: #666666;
+    color: #D1CDC7 ;
+    padding: 1em 1em 1em 1em;
 }
 
 .label-custom {
