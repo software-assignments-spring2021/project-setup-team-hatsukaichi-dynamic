@@ -124,9 +124,9 @@ margin-right: 45%;
   .my-shows-button,
   .filter-button:hover,
   .my-shows-button:hover {
-    font-size: 18px;
+    font-size: 16px;
   }
-  #profile-title {
+  #profile-title, #title {
   font-size: 22px;
 }
 #show-container img {
@@ -141,7 +141,7 @@ margin-right: 45%;
   .filter-button, .my-shows-button, .filter-button:hover, .my-shows-button:hover{
       font-size: 14px;
   }
-  #profile-title{
+  #profile-title, #title{
       font-size: 20px;
 
   }
@@ -159,9 +159,9 @@ margin-right: 45%;
 .my-shows-button,
 .filter-button:hover,
 .my-shows-button:hover {
-  font-size: 10px;
+  font-size: 12px;
 }
-#profile-title {
+#profile-title, #title {
   font-size: 15px;
 }
 #show-container img {
@@ -169,4 +169,16 @@ margin-right: 45%;
  padding: 0.1em;
 }
 
+
 }
+
+@media screen and (max-width: 500px) {
+  .filter-button,
+  .my-shows-button,
+  .filter-button:hover,
+  .my-shows-button:hover {
+    font-size: 10.5px;
+  }
+  
+}
+

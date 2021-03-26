@@ -53,7 +53,6 @@ body{
 }
 
 .text a {
-    font-size: 20px;
     color: #ACF39D;
     text-decoration: none;
 }
@@ -66,3 +65,63 @@ body{
 .TOC {
     margin-left: 15px;
 }
+
+@media screen and (max-width: 1800px) {
+  #header-title {
+    font-size: 35.5px;
+  }
+
+  #contents,
+.text h2 {
+  font-size: 33px;
+}
+
+.text h3 {
+  font-size: 31px;
+}
+
+p{
+font-size: 30px;
+}
+.TOC a, .text p,#link{
+  font-size: 22px;
+}
+
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  #header-title, #terms-and-conditions{
+    font-size: 35px;
+  }
+#contents,
+.text h2 {
+  font-size: 28px;
+}
+
+.text h3 {
+  font-size: 22px;
+}
+
+.TOC a,.text p,#link {
+  font-size: 20px;
+}
+}
+
+@media screen and (max-width: 650px) {
+  #header-title, #terms-and-conditions{
+    font-size: 22px;
+  }
+  #contents, .text h2 {
+  font-size: 20px;
+}
+
+.text h3 {
+  font-size: 18px;
+}
+
+.TOC a, .text p, .text a, #link{
+  font-size: 16px;
+}
+}
+

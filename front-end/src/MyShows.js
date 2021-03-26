@@ -191,7 +191,7 @@ const MyShows = (props) => {
     <>
       <Header />
       <div id="container">
-        <h3 id="title-myshows">{userData.username}'s Shows</h3>
+        <h3 id="profile-title">{userData.username}'s Shows</h3>
         {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}
         <div id="search-container">
           <AsyncSelect id="search-bar" cacheOptions defaultOptions loadOptions={loadOptions} onChange={linkToShow}/>

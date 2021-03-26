@@ -166,7 +166,7 @@
   .prof-button,
   .filter-button:hover,
   .prof-button:hover {
-    font-size: 18px;
+    font-size: 16px;
   }
   
   #profile-title, #title-rec-shows, #settings-title {
@@ -224,7 +224,7 @@
   .prof-button,
   .filter-button:hover,
   .prof-button:hover, .label-profile, .inputs {
-    font-size: 10px;
+    font-size: 12px;
   }
   
   #profile-title, #title-rec-shows, #settings-title

@@ -20,7 +20,7 @@
 }
 
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1800px) {
   .login-signup-buttons button, 
   .login-signup-buttons:hover {
     font-size: 18px;
@@ -42,7 +42,7 @@
   .login-signup-buttons button,
   
 .login-signup-buttons button:hover {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 }

@@ -41,13 +41,18 @@
 #clear {
   clear: both;
 }
-
+#btn-progress{
+  margin-top: 3%;
+}
 .label-custom {
     margin: 1em;
     font-size: 16px;
     background-color: #666666;
     color: #D1CDC7 ;
     padding: 1em 1em 1em 1em;
+    margin-bottom: 3%;
+margin-top: 3%;
+
 }
 
 .platform{
@@ -58,17 +63,16 @@
 }
 
 
-.btnProgress {
+.btn-progress {
   margin: 1em;
   margin-top: 0;
-  font-size: 18px;
   border: 2px solid #84ED6F;
   background-color: #666666;
   color: #84ED6F;
   padding: 1em 2em 1em 2em;
 }
 
-.btnProgress:hover {
+.btn-progress:hover {
   border: 2px solid #3CDD1B;
   background-color: #2D2D2D;
   color: #3CDD1B;
@@ -92,3 +96,48 @@
   font-weight: 3px;
   color: #D1CDC7 ;
 }
+
+
+@media screen and (max-width: 1800px) {
+  .btn-progress,
+  .btn-progress:hover, .label-custom, #season, #episode, .label-platform, .descript{
+    font-size: 16px;
+  }
+  #profile-title {
+    font-size: 22px;
+  }
+  #show-container img {
+    width: 75%;
+    padding: 0.1em;
+  }
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  .btn-progress,
+  .btn-progress:hover, .label-custom, #season, #episode, .label-platform, .descript{
+    font-size: 14px;
+  }
+  #profile-title {
+    font-size: 20px;
+  }
+  #show-container img {
+    width: 66%;
+    padding: 0.2em;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .btn-progress,
+  .btn-progress:hover, .label-custom, #season, #episode, .label-platform, .descript{
+    font-size: 12px;
+  }
+  #profile-title {
+    font-size: 15px;
+  }
+  #show-container img {
+    width: 55%;
+    padding: 0.1em;
+  }
+}
+
