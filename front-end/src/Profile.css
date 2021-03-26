@@ -30,16 +30,14 @@
   max-width: 75%;
 }
 
-#profile-show-container {
-  display: flex;
-  justify-content: flex-start;
-}
-
 .show-image {
-  width: 7%;
-  padding-right: 1em;
+  width: 75%;
+padding: 0.5em;
 }
 
+#profile-title{
+  font-size: 2em;
+}
 .profile-links {
   display: flex;
   justify-content: space-around;
@@ -153,4 +151,9 @@
   left: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.75);
+}
+
+#profile-show-container {
+  display: flex;
+  flex-wrap: wrap;
 }
