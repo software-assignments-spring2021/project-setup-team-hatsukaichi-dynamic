@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Home.js'
 import TermsOfService from './TermsOfService';
@@ -42,6 +42,14 @@ const App = () => {
     localStorage.setItem('user', JSON.stringify(user))
     setLoggedInUser(user)
   }
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
 
   return (
     <div className="App">
