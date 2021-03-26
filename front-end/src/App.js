@@ -36,7 +36,7 @@ const IndividualShowWrapper = ({ match }) => {
 export const AuthContext = React.createContext();
 
 const App = () => {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const setUser = (user) => {
     localStorage.setItem('user', JSON.stringify(user))
