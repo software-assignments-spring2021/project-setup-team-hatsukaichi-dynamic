@@ -12,20 +12,17 @@ function Login() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { state: authState, dispatch } = React.useContext(AuthContext);
+  const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext);
   const history = useHistory();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
     // Actual login handling will go here; for now, we'll simply get a user
     // from our Mockaroo API. User id is hardcoded for now.
     axios(`https://my.api.mockaroo.com/tv_users/1.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
-        dispatch({
-          type: 'LOGIN',
-          payload: response.data
-        })
-        history.push(`/profile/${authState.user.id}`)
+        setLoggedInUser(response.data);
+        history.push(`/profile/${loggedInUser.id}`)
       })
       .catch((err) => {
         // This case is likely to be due to Mockaroo rate limiting!
@@ -34,11 +31,8 @@ function Login() {
         console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         const mockUser = createMockUser(1);
-        dispatch({
-          type: 'LOGIN',
-          payload: mockUser
-        })
-        history.push(`/profile/${authState.user.id}`)
+        setLoggedInUser(mockUser);
+        history.push(`/profile/${loggedInUser.id}`)
       });
   }
   return (

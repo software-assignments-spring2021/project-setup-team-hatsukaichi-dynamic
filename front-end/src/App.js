@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Home.js'
 import TermsOfService from './TermsOfService';
@@ -36,42 +36,16 @@ const IndividualShowWrapper = ({ match }) => {
 export const AuthContext = React.createContext();
 
 const App = () => {
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'LOGIN':
-        localStorage.setItem("user", JSON.stringify(action.payload.user));
-        localStorage.setItem("token", JSON.stringify(action.payload.token));
-        console.log(action.payload)
-        return {
-          ...state,
-          isAuthenticated: true,
-          user: action.payload.user,
-          token: action.payload.token
-        };
-      case 'LOGOUT':
-        localStorage.clear();
-        return {
-          ...state,
-          isAuthenticated: false,
-          user: null,
-          token: null
-        }
-      default:
-        return state;
-    }
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+  const setUser = (user) => {
+    localStorage.setItem('user', JSON.stringify(user))
+    setLoggedInUser(user)
   }
-
-  const initialState = {
-    isAuthenticated: false,
-    user: null,
-    token: null,
-  };
-
-  const [state, dispatch] = React.useReducer(reducer, initialState)
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ state, dispatch }}>
+      <AuthContext.Provider value={{ loggedInUser, setLoggedInUser: setUser }}>
         <Router>
           <ScrollToTop />
           <Switch>
