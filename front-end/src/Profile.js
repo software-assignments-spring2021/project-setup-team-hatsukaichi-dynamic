@@ -29,7 +29,7 @@ const RecentShows = ({ shows }) => {
       {shows
         ? <div id="profile-show-container">
           {shows.map((show) => {
-            return <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
+            return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`}/> </Link>;
           })}
         </div>
         : "No shows. Add some shows on the My Shows page!"}
