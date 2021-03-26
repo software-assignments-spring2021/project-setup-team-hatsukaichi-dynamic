@@ -1,6 +1,6 @@
 import './Login.css'
 import React, { useState } from "react"
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Header from './Header'
 import Footer from './Footer'
@@ -13,7 +13,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext);
-  const history = useHistory();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -22,7 +22,7 @@ function Login() {
     axios(`https://my.api.mockaroo.com/tv_users/1.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
         setLoggedInUser(response.data);
-        history.push(`/profile/${loggedInUser.id}`)
+        setIsLoggedIn(true);
       })
       .catch((err) => {
         // This case is likely to be due to Mockaroo rate limiting!
@@ -32,9 +32,14 @@ function Login() {
         console.log(err);
         const mockUser = createMockUser(1);
         setLoggedInUser(mockUser);
-        history.push(`/profile/${loggedInUser.id}`)
+        setIsLoggedIn(true);
       });
   }
+
+  if (isLoggedIn) {
+    return <Redirect to={`/profile/${loggedInUser.id}`} />
+  }
+
   return (
     <>
       <Header />
