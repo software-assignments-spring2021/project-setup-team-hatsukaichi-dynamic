@@ -11,7 +11,7 @@ require('dotenv').config();
 
 // UserInfo displays username, user bio, and user profile picture
 const UserInfo = ({ username, bio, image }) => {
-    return (
+  return (
     <div id="heading">
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
@@ -69,7 +69,7 @@ const ProfileContents = ({ data, updateUserData }) => {
         toggleModal()
       })
       .catch((err) => {
-	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+        console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         updateUserData(mockUserUpdate(data.id, newData))
         toggleModal()
@@ -109,8 +109,8 @@ const ProfileContents = ({ data, updateUserData }) => {
               showInfo.push(response.data);
             })
             .catch((err) => {
-	      console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
-	      console.log(err);
+              console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+              console.log(err);
               showInfo.push(mockShowAPI[show.id]);
             })
         )
@@ -142,9 +142,9 @@ const ProfileContents = ({ data, updateUserData }) => {
                 <Modal
                   isOpen={open}
                   onRequestClose={toggleModal}
-                    contentLabel="Settings"
-		    className="settings-modal"
-		    overlayClassName="modal-open"
+                  contentLabel="Settings"
+                  className="settings-modal"
+                  overlayClassName="modal-open"
                 >
                   <div className="modal-contents">
                     <form id="settings-form" onSubmit={handleSubmit}>
@@ -204,8 +204,8 @@ const Profile = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to 
         // access a non-existent user
-	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
-	console.log(err);
+        console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+        console.log(err);
         const mockUser = createMockUser(props.id);
         setUserData(mockUser);
       });
