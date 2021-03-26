@@ -18,31 +18,3 @@
     width: 100%;
     margin-bottom: 5px;
 }
-
-
-@media screen and (max-width: 1400px) {
-  .login-signup-buttons button, 
-  .login-signup-buttons:hover {
-    font-size: 18px;
-  }
-  
-}
-
-/* On screens that are 992px or less, set the background color to blue */
-@media screen and (max-width: 992px) {
-  .login-signup-buttons button,
-  
-.login-signup-buttons button:hover {
-  font-size: 14px;
-}
-
-}
-
-@media screen and (max-width: 650px) {
-  .login-signup-buttons button,
-  
-.login-signup-buttons button:hover {
-  font-size: 10px;
-}
-
-}

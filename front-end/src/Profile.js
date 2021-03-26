@@ -15,7 +15,7 @@ const UserInfo = ({ username, bio, image }) => {
     <div id="heading">
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
-        <h3 id="profile-title">{username}'s Profile</h3>
+        <h3>{username}'s Profile</h3>
         <p>{bio}</p>
       </div>
     </div>

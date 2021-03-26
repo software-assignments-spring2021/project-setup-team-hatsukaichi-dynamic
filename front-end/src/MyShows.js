@@ -159,8 +159,8 @@ const MyShows = (props) => {
       .then(response => {
         return searchShows(input, response.data);
       })
-      .catch((err) => {
-console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+     .catch((err) => {
+	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         return searchShows(input, mockAllShows);
       });
@@ -191,13 +191,14 @@ console.log("We likely reached Mockaroo's request limit, or you did not insert y
     <>
       <Header />
       <div id="container">
-        <h3 id="title-myshows">{userData.username}'s Shows</h3>
+        <h3>{userData.username}'s Shows</h3>
         {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}
         <div id="search-container">
           <AsyncSelect id="search-bar" cacheOptions defaultOptions loadOptions={loadOptions} onChange={linkToShow}/>
         </div>
         <div id="filter-container">
-          <button className="my-shows-button"
+          <button
+            className={inProgressSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("in progress")}
           >
             In Progress
@@ -208,18 +209,12 @@ console.log("We likely reached Mockaroo's request limit, or you did not insert y
             onRequestClose={toggleModal}
             contentLabel="Filter Shows"
           >
-             <div className="modal-contents">
-               
-            <h3 id="filter-title" >Filter by Platform</h3>
-            <br/>
+            <h1>Filter by Platform</h1>
             <Select options={platforms} onChange={onChange} value={selectedPlatform} />
-            
-            <button className="my-shows-button" id="apply" onClick={toggleModal}>Apply</button>
-            
-            </div>
+            <button className="my-shows-button" onClick={toggleModal}>Apply</button>
           </Modal>
           <button
-            className="my-shows-button"
+            className={completedSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("completed")}
           >
             Completed
@@ -233,4 +228,3 @@ console.log("We likely reached Mockaroo's request limit, or you did not insert y
 }
 
 export default MyShows
-
