@@ -10,7 +10,9 @@
   left: 30%;
   right: 30%;
 }
-
+#settings-title{
+  padding-bottom: 3%;
+}
 .modal-contents {
   background-color:#2d2d2d;
   color: #D1CDC7; 
@@ -30,10 +32,7 @@
   max-width: 75%;
 }
 
-.show-image {
-  width: 75%;
-padding: 0.5em;
-}
+
 
 #profile-title{
   font-size: 2em;
@@ -57,6 +56,10 @@ padding: 0.5em;
   text-align: center;
   background-color:#2d2d2d;
   color: #D1CDC7; 
+}
+
+#field-modal{
+  width: 100%;
 }
 
 .prof-button {
@@ -114,12 +117,13 @@ padding: 0.5em;
   padding-top: 4%;
 }
 
-.label-custom {
+.label-profile {
     margin: 2em;
-    font-size: 16px;
     background-color: #666666;
     color: #D1CDC7 ;
     padding: 1em 1em 1em 1em;
+    margin-bottom: 3%;
+    margin-top: 3%;
 }
 
 .inputs {
@@ -136,9 +140,7 @@ padding: 0.5em;
   color: #D1CDC7;
 }
 
-#settings-title {
-  margin-bottom: 3%;
-}
+
 
 #settings-btns {
   margin-bottom: 3%;
@@ -156,4 +158,94 @@ padding: 0.5em;
 #profile-show-container {
   display: flex;
   flex-wrap: wrap;
+}
+
+
+@media screen and (max-width: 1800px) {
+  .filter-button,
+  .prof-button,
+  .filter-button:hover,
+  .prof-button:hover {
+    font-size: 18px;
+  }
+  
+  #profile-title, #title-rec-shows, #settings-title {
+    font-size: 22px;
+  }
+  .show-image {
+    width: 75%;
+    padding: 0.1em;
+  }
+  #profile-picture {
+  width: 170px;
+
+}
+#bio {
+  font-size: 18px;
+}
+
+#settings-title {
+  margin-bottom: 4%;
+}
+
+
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  .filter-button,
+  .prof-button,
+  .filter-button:hover,
+  .prof-button:hover {
+    font-size: 14px;
+  }
+  #profile-title, #title-rec-shows, #settings-title {
+    font-size: 20px;
+  }
+  .show-image {
+    width: 66%;
+    padding: 0.2em;
+  }
+  #profile-picture {
+  width: 150px;
+}
+#bio {
+  font-size: 16px;
+}
+#settings-title {
+  margin-bottom: 5%;
+}
+
+
+}
+
+@media screen and (max-width: 650px) {
+  .filter-button,
+  .prof-button,
+  .filter-button:hover,
+  .prof-button:hover, .label-profile, .inputs {
+    font-size: 10px;
+  }
+  
+  #profile-title, #title-rec-shows, #settings-title
+ {
+    font-size: 15px;
+  }
+  .show-image{
+  width: 55%;
+  padding: 0.1em;
+}
+#profile-picture{
+  width: 25%;
+}
+#bio {
+  font-size: 12px;
+}
+#settings-title {
+  margin-bottom: 3%;
+}
+
+
+
+  
 }

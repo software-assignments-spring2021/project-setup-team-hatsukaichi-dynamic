@@ -16,7 +16,7 @@ const UserInfo = ({ username, bio, image }) => {
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
         <h3 id="profile-title">{username}'s Profile</h3>
-        <p>{bio}</p>
+        <p id="bio" >{bio}</p>
       </div>
     </div>
   )
@@ -25,7 +25,7 @@ const UserInfo = ({ username, bio, image }) => {
 const RecentShows = ({ shows }) => {
   return (
     <>
-      <h4>Recently Added Shows</h4>
+      <h4 id="title-rec-shows">Recently Added Shows</h4>
       {shows
         ? <div id="profile-show-container">
           {shows.map((show) => {
@@ -148,18 +148,18 @@ const ProfileContents = ({ data, updateUserData }) => {
                 >
                   <div className="modal-contents">
                     <form id="settings-form" onSubmit={handleSubmit}>
-                      <fieldset>
+                      <fieldset id="field-modal">
                         <h1 id="settings-title">Settings</h1>
-                        <label className="label-custom">User Email:</label>
+                        <label className="label-profile">User Email:</label>
                         <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
                         <br />
-                        <label className="label-custom">Password: </label>
+                        <label className="label-profile">Password: </label>
                         <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
                         <br />
-                        <label className="label-custom">Biography:</label>
+                        <label className="label-profile">Biography:</label>
                         <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
                         <br />
-                        <label className="label-custom">Profile Pic URL:</label>
+                        <label className="label-profile">Profile Pic URL:</label>
                         <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
                         <br />
                         <div id="settings-btns" className="profile-links">

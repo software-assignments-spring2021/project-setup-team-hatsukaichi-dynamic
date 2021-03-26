@@ -126,7 +126,7 @@ margin-right: 45%;
   .my-shows-button:hover {
     font-size: 18px;
   }
-  #title-myshows, #title, #filter-title {
+  #profile-title {
   font-size: 22px;
 }
 #show-container img {
@@ -141,7 +141,7 @@ margin-right: 45%;
   .filter-button, .my-shows-button, .filter-button:hover, .my-shows-button:hover{
       font-size: 14px;
   }
-  #title-myshows, #title, #filter-title{
+  #profile-title{
       font-size: 20px;
 
   }
@@ -161,16 +161,12 @@ margin-right: 45%;
 .my-shows-button:hover {
   font-size: 10px;
 }
-#title-myshows, #title, #filter-title {
+#profile-title {
   font-size: 15px;
 }
 #show-container img {
   width: 55%;
-
  padding: 0.1em;
 }
-
-
-
 
 }
