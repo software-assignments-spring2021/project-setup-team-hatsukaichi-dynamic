@@ -1,10 +1,9 @@
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 2400px) {
   .footer-links {
     font-size: 18px;
   }
 }
 
-/* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
   .footer-links{
     font-size: 16px;

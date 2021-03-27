@@ -46,7 +46,7 @@
 
 }
 
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 2400px) {
   .header h1 {
     font-size: 35.5px;
   }
@@ -61,7 +61,6 @@
 
 }
 
-/* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
   .header h1 {
     font-size: 35px;

@@ -2,7 +2,6 @@
     background: #202020;
 }
 
-
 .header-title {
     text-align: center;
     color: #D1CDC7;
@@ -21,7 +20,7 @@
 }
 
 
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 2400px) {
   .login-signup-buttons button, 
   .login-signup-buttons:hover {
     font-size: 18px;
@@ -29,7 +28,6 @@
   
 }
 
-/* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
   .login-signup-buttons button,
   
@@ -45,6 +43,5 @@
 .login-signup-buttons button:hover {
   font-size: 12px;
 }
-
 
 }

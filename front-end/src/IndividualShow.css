@@ -98,7 +98,7 @@ margin-top: 3%;
 }
 
 
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 2400px) {
   .btn-progress,
   .btn-progress:hover, .label-custom, #season, #episode, .label-platform, .descript{
     font-size: 16px;
@@ -129,7 +129,6 @@ margin-top: 3%;
 
 }
 
-/* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
   .btn-progress,
   .btn-progress:hover, .label-custom, #season, #episode, .label-platform, .descript{
