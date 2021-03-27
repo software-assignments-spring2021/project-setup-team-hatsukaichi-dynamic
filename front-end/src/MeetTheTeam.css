@@ -15,6 +15,7 @@ body{
     width: 700px;
     padding: 50px;
     overflow: hidden;
+    
    
 }
 .content img {
@@ -57,3 +58,79 @@ body{
 .content a:hover{
     color: #3cdd1b;
 }
+
+@media screen and (max-width: 1800px) {
+  .header h1 {
+    font-size: 35.5px;
+  }
+
+  #contents,
+  .text h2 {
+    font-size: 33px;
+  }
+
+  .content h4 {
+    font-size: 31px;
+  }
+
+  p {
+    font-size: 30px;
+  }
+  .content p, .content a {
+    font-size: 22px;
+  }
+  .content img {
+  width: 130px;
+  height: 130px;
+}
+
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+   .header h1
+ {
+    font-size: 35px;
+  }
+  #contents,
+  .text h2 {
+    font-size: 28px;
+  }
+
+  .content h4 {
+    font-size: 22px;
+  }
+
+  .content p, .content a {
+    font-size: 20px;
+  }
+  .content img {
+  width: 110px;
+  height: 110px;
+
+}
+
+}
+
+@media screen and (max-width: 650px) {
+  .header h1 {
+    font-size: 24px;
+  }
+  #contents,
+  .text h2 {
+    font-size: 20px;
+  }
+
+  .content h4 {
+    font-size: 18px;
+  }
+
+  .content p, .content a{
+    font-size: 16px;
+  }
+  .content img{
+      width: 100px;
+      height: 100px; 
+  }
+}
+

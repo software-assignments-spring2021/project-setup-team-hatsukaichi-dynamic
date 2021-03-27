@@ -123,7 +123,7 @@ margin-right: 45%;
   .filter-button,
   .my-shows-button,
   .filter-button:hover,
-  .my-shows-button:hover {
+  .my-shows-button:hover, #no-shows {
     font-size: 16px;
   }
   #profile-title, #title {
@@ -138,7 +138,7 @@ margin-right: 45%;
 
 /* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
-  .filter-button, .my-shows-button, .filter-button:hover, .my-shows-button:hover{
+  .filter-button, .my-shows-button, .filter-button:hover, .my-shows-button:hover, #no-shows{
       font-size: 14px;
   }
   #profile-title, #title{
@@ -158,7 +158,7 @@ margin-right: 45%;
   .filter-button,
 .my-shows-button,
 .filter-button:hover,
-.my-shows-button:hover {
+.my-shows-button:hover, #no-shows {
   font-size: 12px;
 }
 #profile-title, #title {

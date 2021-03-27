@@ -165,7 +165,7 @@
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover {
+  .prof-button:hover, #no-shows {
     font-size: 16px;
   }
   
@@ -196,7 +196,7 @@
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover {
+  .prof-button:hover, #no-shows {
     font-size: 14px;
   }
   #profile-title, #title-rec-shows, #settings-title {
@@ -223,7 +223,7 @@
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover, .label-profile, .inputs {
+  .prof-button:hover, .label-profile, .inputs, #no-shows {
     font-size: 12px;
   }
   

@@ -32,7 +32,7 @@ const RecentShows = ({ shows }) => {
             return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`}/> </Link>;
           })}
         </div>
-        : "No shows. Add some shows on the My Shows page!"}
+        : <p id="no-shows">No shows. Add some shows on the My Shows page!</p>}
     </>
   )
 }

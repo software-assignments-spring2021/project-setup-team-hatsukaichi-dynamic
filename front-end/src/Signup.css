@@ -2,20 +2,20 @@
   margin-top: 10em;
   padding-left: 2em;
   padding-right: 2em;
+  text-align: center;
 }
+
 
 #signup-form {
   padding-top: 1em;
   padding-bottom: 1em;
 }
 
-#signup-form label {
-  display: block;
-}
+
 
 #signup-form input {
   margin-bottom: 1em;
-  display: block;
+ 
 }
 
 .signup-links {
@@ -38,3 +38,48 @@
   padding: .5em 1em .5em 1em;
   margin-bottom: .5em;
 }
+
+@media screen and (max-width: 1800px) {
+  .header h1 {
+    font-size: 35.5px;
+  }
+
+  .form-fields p,
+  .form-fields label, #question {
+    font-size: 20px;
+  }
+
+  #signup-button {
+    font-size: 16px;
+  }
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  .header h1 {
+    font-size: 35px;
+  }
+
+  .form-fields p,
+  .form-fields label, #question {
+    font-size: 20px;
+  }
+
+  #signup-button {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .header h1 {
+    font-size: 24px;
+  }
+  .form-fields p,
+  .form-fields label, #question {
+    font-size: 16px;
+  }
+  #signup-button {
+    font-size: 13px;
+  }
+}
+
