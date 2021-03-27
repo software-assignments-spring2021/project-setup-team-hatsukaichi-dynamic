@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Footer from "./Footer";
-import axios from "axios";
-import "./Profile.css";
-import Header from "./Header";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import {
-  createMockUser,
-  mockShowAPI,
-  mockUserImage,
-  mockShowImage,
-  mockUserUpdate,
-} from "./MockData";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import Footer from './Footer';
+import axios from 'axios';
+import './Profile.css'
+import Header from './Header';
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
+import { Link } from 'react-router-dom'
 import Modal from "react-modal";
-require("dotenv").config();
+require('dotenv').config();
 
 // UserInfo displays username, user bio, and user profile picture
 const UserInfo = ({ username, bio, image }) => {
@@ -22,37 +16,26 @@ const UserInfo = ({ username, bio, image }) => {
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
         <h3 id="profile-title">{username}'s Profile</h3>
-        <p id="bio">{bio}</p>
+        <p id="bio" >{bio}</p>
       </div>
     </div>
-  );
+  )
 };
 
 const RecentShows = ({ shows }) => {
   return (
     <>
       <h4 id="title-rec-shows">Recently Added Shows</h4>
-      {shows ? (
-        <div id="profile-show-container">
+      {shows
+        ? <div id="profile-show-container">
           {shows.map((show) => {
-            return (
-              <Link to={`/show/${show.id}`} key={show.id}>
-                {" "}
-                <img
-                  className="show-image"
-                  src={mockShowImage(show.id)}
-                  alt={`cover-${show.id}`}
-                />{" "}
-              </Link>
-            );
+            return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`}/> </Link>;
           })}
         </div>
-      ) : (
-        <p id="no-shows">No shows. Add some shows on the My Shows page!</p>
-      )}
+        : <p id="no-shows">No shows. Add some shows on the My Shows page!</p>}
     </>
-  );
-};
+  )
+}
 
 const ProfileContents = ({ data, updateUserData }) => {
   const [userShows, setUserShows] = useState([]);
@@ -65,44 +48,38 @@ const ProfileContents = ({ data, updateUserData }) => {
 
   const toggleModal = () => {
     setOpen(!open);
-  };
+  }
 
   const onCopy = () => {
     setCopied(true);
-  };
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newData = {
       ...data,
-      bio: bio,
-      img: pic,
-      email: email,
-    };
-    axios
-      .patch(
-        `https://my.api.mockaroo.com/tv_users/${data.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`,
-        newData
-      )
+      'bio': bio,
+      'img': pic,
+      'email': email
+    }
+    axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`, newData)
       .then((response) => {
-        console.log(response);
-        updateUserData(response.data);
-        toggleModal();
+        console.log(response)
+        updateUserData(response.data)
+        toggleModal()
       })
       .catch((err) => {
-        console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
-        );
+        console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
-        updateUserData(mockUserUpdate(data.id, newData));
-        toggleModal();
-      });
-  };
+        updateUserData(mockUserUpdate(data.id, newData))
+        toggleModal()
+      })
+  }
 
   useEffect(() => {
-    setEmail(data.email);
-    setBio(data.bio);
-    setPic(data.img);
+    setEmail(data.email)
+    setBio(data.bio)
+    setPic(data.img)
   }, [data.email, data.bio, data.img]);
 
   useEffect(() => {
@@ -113,55 +90,47 @@ const ProfileContents = ({ data, updateUserData }) => {
     // This check is crucial--it sees whether userData (the props) has been loaded yet or not
     if (!data.shows) {
       setUserShows([]);
-    } else {
+    }
+    else {
       if (data.shows.length > 4) {
         for (let i = data.shows.length - 4; i < data.shows.length; i++) {
           showIds.push(data.shows[i]);
         }
-      } else {
+      }
+      else {
         showIds = data.shows;
       }
       // Note: At the moment, we don't need any of the mocked data since we only really need the image here
       // but it's being mocked with picsum for now.
       showIds.map((show) => {
         promises.push(
-          axios
-            .get(
-              `https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
-            )
+          axios.get(`https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
             .then((response) => {
               showInfo.push(response.data);
             })
             .catch((err) => {
-              console.log(
-                "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
-              );
+              console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
               console.log(err);
               showInfo.push(mockShowAPI[show.id]);
             })
-        );
+        )
         return show.id;
       });
 
       Promise.all(promises).then(() => {
         setUserShows(showInfo);
-      });
+      })
     }
-  }, [data.shows]);
+  }, [data.shows])
 
   return (
     <>
       <div className="show-content">
         <div className="main">
           <div className="show-profile-details">
-            <UserInfo
-              username={data.username}
-              bio={bio}
-              image={mockUserImage(data.id)}
-            />
+            <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
             <RecentShows shows={userShows} />
-            <br />
-            <br />
+            <br /><br />
             <div className="profile-links">
               <div>
                 <Link to={`/my-shows/${data.id}`}>
@@ -169,9 +138,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                 </Link>
               </div>
               <div id="buttons">
-                <button className="prof-button" onClick={toggleModal}>
-                  Settings
-                </button>
+                <button className="prof-button" onClick={toggleModal}>Settings</button>
                 <Modal
                   isOpen={open}
                   onRequestClose={toggleModal}
@@ -181,64 +148,25 @@ const ProfileContents = ({ data, updateUserData }) => {
                 >
                   <div className="modal-contents">
                     <form id="settings-form" onSubmit={handleSubmit}>
-                      <div id="field-modal">
+                      <fieldset id="field-modal">
                         <h1 id="settings-title">Settings</h1>
                         <label className="label-profile">User Email:</label>
-                        <input
-                          className="inputs"
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
                         <br />
                         <label className="label-profile">Password: </label>
-                        <input
-                          className="inputs"
-                          type="password"
-                          id="password"
-                          name="password"
-                          placeholder="******"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
                         <br />
                         <label className="label-profile">Biography:</label>
-                        <input
-                          className="inputs"
-                          type="text"
-                          id="bio"
-                          name="bio"
-                          value={bio}
-                          onChange={(e) => setBio(e.target.value)}
-                        />
+                        <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
                         <br />
-                        <label className="label-profile">
-                          Profile Pic URL:
-                        </label>
-                        <input
-                          className="inputs"
-                          type="url"
-                          id="prof-pic"
-                          name="prof-pic"
-                          value={pic}
-                          onChange={(e) => setPic(e.target.value)}
-                        />
+                        <label className="label-profile">Profile Pic URL:</label>
+                        <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
                         <br />
                         <div id="settings-btns" className="profile-links">
-                          <button className="prof-button" onClick={toggleModal}>
-                            Back
-                          </button>
-                          <button
-                            type="submit"
-                            className="prof-button"
-                            form="settings-form"
-                          >
-                            Save
-                          </button>
+                          <button className="prof-button" onClick={toggleModal}>Back</button>
+                          <button type="submit" className="prof-button" form="settings-form">Save</button>
                         </div>
-                      </div>
+                      </fieldset>
                     </form>
                   </div>
                 </Modal>
@@ -258,29 +186,25 @@ const ProfileContents = ({ data, updateUserData }) => {
       <Footer />
     </>
   );
-};
+}
 
 const Profile = (props) => {
   const [userData, setUserData] = useState([]);
 
   const updateUser = (newData) => {
-    setUserData(newData);
-  };
+    setUserData(newData)
+  }
 
   useEffect(() => {
-    axios(
-      `https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
-    )
+    axios(`https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
-        setUserData(response.data);
+        setUserData(response.data)
       })
       .catch((err) => {
         // This case is likely to be due to Mockaroo rate limiting!
-        // It'd be good to add some error handling here later, if someone tries to
+        // It'd be good to add some error handling here later, if someone tries to 
         // access a non-existent user
-        console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
-        );
+        console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         const mockUser = createMockUser(props.id);
         setUserData(mockUser);
@@ -290,13 +214,12 @@ const Profile = (props) => {
   return (
     <>
       <Header />
-      {userData === null ? (
-        <p>Oh no! Looks like this user wasn't found....</p>
-      ) : (
-        <ProfileContents data={userData} updateUserData={updateUser} />
-      )}
+      {userData === null
+        ? <p>Oh no! Looks like this user wasn't found....</p>
+        : <ProfileContents data={userData} updateUserData={updateUser} />
+      }
     </>
-  );
-};
+  )
+}
 
 export default Profile;

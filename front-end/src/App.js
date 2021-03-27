@@ -1,31 +1,37 @@
-import "./App.css";
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./Home.js";
-import TermsOfService from "./TermsOfService";
-import MeetTheTeam from "./MeetTheTeam";
-import ScrollToTop from "./ScrollToTop";
-import Profile from "./Profile";
-import MyShows from "./MyShows";
-import IndividualShow from "./IndividualShow";
+import './App.css';
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Home from './Home.js'
+import TermsOfService from './TermsOfService';
+import MeetTheTeam from './MeetTheTeam';
+import ScrollToTop from './ScrollToTop';
+import Profile from './Profile';
+import MyShows from './MyShows';
+import IndividualShow from './IndividualShow';
 import Modal from "react-modal";
-import Login from "./Login";
-import Signup from "./Signup";
-require("dotenv").config();
+import Login from './Login';
+import Signup from './Signup';
+require('dotenv').config();
 
 Modal.setAppElement("#root");
 
 const ProfileWrapper = ({ match }) => {
-  return <Profile id={match.params.id} />;
-};
+  return (
+    <Profile id={match.params.id} />
+  )
+}
 
 const MyShowsWrapper = ({ match }) => {
-  return <MyShows id={match.params.id} />;
-};
+  return (
+    <MyShows id={match.params.id} />
+  )
+}
 
 const IndividualShowWrapper = ({ match }) => {
-  return <IndividualShow id={match.params.id} />;
-};
+  return (
+    <IndividualShow id={match.params.id} />
+  )
+}
 
 export const AuthContext = React.createContext();
 
@@ -33,9 +39,9 @@ const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   const setUser = (user) => {
-    localStorage.setItem("user", JSON.stringify(user));
-    setLoggedInUser(user);
-  };
+    localStorage.setItem('user', JSON.stringify(user))
+    setLoggedInUser(user)
+  }
 
   return (
     <div className="App">
@@ -66,6 +72,6 @@ const App = () => {
       </AuthContext.Provider>
     </div>
   );
-};
+}
 
 export default App;

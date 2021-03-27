@@ -1,41 +1,47 @@
 .ReactStickyHeader_fixed {
-  background: #202020;
+    background: #202020;
 }
 
 .header-title {
-  text-align: center;
-  color: #d1cdc7;
+    text-align: center;
+    color: #D1CDC7;
 }
 
 .login-signup-buttons {
-  position: absolute;
-  right: 10px;
-  top: 0px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
 }
 
 .login-signup-buttons button {
-  display: block;
-  width: 100%;
-  margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
+
 @media screen and (max-width: 2400px) {
-  .login-signup-buttons button,
+  .login-signup-buttons button, 
   .login-signup-buttons:hover {
     font-size: 18px;
   }
+  
 }
 
 @media screen and (max-width: 992px) {
   .login-signup-buttons button,
-  .login-signup-buttons button:hover {
-    font-size: 14px;
-  }
+  
+.login-signup-buttons button:hover {
+  font-size: 14px;
+}
+
 }
 
 @media screen and (max-width: 650px) {
   .login-signup-buttons button,
-  .login-signup-buttons button:hover {
-    font-size: 12px;
-  }
+  
+.login-signup-buttons button:hover {
+  font-size: 12px;
+}
+
 }

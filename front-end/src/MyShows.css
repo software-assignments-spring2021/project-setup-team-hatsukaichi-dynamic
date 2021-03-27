@@ -1,12 +1,12 @@
 #container {
-  margin-top: 15em;
-  padding-left: 2em;
-  background-color: #2d2d2d;
-  color: #d1cdc7;
-  margin-top: 10%;
+    margin-top: 15em;
+    padding-left: 2em;
+    background-color: #2d2d2d;
+    color: #D1CDC7; 
+    margin-top: 10%;
 }
-#search-bar {
-  color: black;
+#search-bar{
+    color: black; 
 }
 div.css-yk16xz-control {
   margin-left: 5%;
@@ -16,151 +16,159 @@ div.css-yk16xz-control {
   height: 90%;
 }
 
-#filter-title {
-  padding-top: 5%;
+#filter-title{
+    padding-top: 5%;
 }
 
-.css-2b097c-container {
-  color: black;
-}
+.css-2b097c-container{
+color: black;
+}  
+
+
 
 #show-container {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+   flex-wrap: wrap; 
+
 }
 .modal-contents {
   background-color: #2d2d2d;
   color: #d1cdc7;
 }
 
+
 #show-container img {
-  width: 75%;
-  padding: 0.5em;
+    width: 75%;
+    padding: 0.5em;
 }
 
 #search-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #search-bar {
-  width: 20rem;
-  padding: 0.5rem;
-  display: block;
+    width: 20rem;
+    padding: 0.5rem;
+    display: block;
 }
 
 #filter-container {
-  display: flex;
-  justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
 }
 
 .filter-button {
-  margin: 2em;
-  font-size: 18px;
-  border: 2px solid #84ed6f;
-  background-color: #666666;
-  color: #84ed6f;
-  padding: 1em 2em 1em 2em;
-  font-size: 1.4vw;
+    margin: 2em;
+    font-size: 18px;
+    border: 2px solid #84ED6F;
+    background-color: #666666;
+    color: #84ED6F;
+    padding: 1em 2em 1em 2em;
+    font-size: 1.4vw;
+
 }
 
 .my-shows-button {
-  margin: 2em;
-  font-size: 18px;
-  border: 2px solid #84ed6f;
-  background-color: #666666;
-  color: #84ed6f;
-  padding: 1em 2em 1em 2em;
-  font-size: 1.4vw;
+    margin: 2em;
+    font-size: 18px;
+    border: 2px solid #84ED6F;
+    background-color: #666666;
+    color: #84ED6F;
+    padding: 1em 2em 1em 2em;
+    font-size: 1.4vw;
+
 }
 
 .my-shows-button:hover {
-  border: 1px solid #3cdd1b;
-  background-color: #2d2d2d;
-  color: #3cdd1b;
-  font-size: 1.4vw;
+    border: 1px solid #3CDD1B;
+    background-color: #2D2D2D;
+    color: #3CDD1B;
+    font-size: 1.4vw;
+
 }
 
 .selected {
-  margin: 1em;
-  font-size: 18px;
-  border: 2px solid #666666;
-  color: #666666;
-  padding: 1em 2em 1em 2em;
-  background-color: #acf39d;
+    margin: 1em;
+    font-size: 18px;
+    border: 2px solid #666666;
+    color: #666666;
+    padding: 1em 2em 1em 2em;
+    background-color: #ACF39D;
 }
 
 .selected:hover {
-  border: 1px solid #4d4d4d;
-  background-color: #84ed6f;
-  color: #4d4d4d;
+    border: 1px solid #4D4D4D;
+    background-color: #84ED6F;
+    color: #4D4D4D;
 }
-.show-images {
-  width: 30%;
+.show-images{
+    width: 30%;
 }
 
 h3 {
   margin-top: 5%;
   margin-bottom: 5%;
-  text-align: center;
+   text-align: center;
 }
-#apply {
-  margin-left: 45%;
-  margin-right: 45%;
+#apply{
+margin-left: 45%;
+margin-right: 45%;
+
+
 }
+
 
 @media screen and (max-width: 2400px) {
   .filter-button,
   .my-shows-button,
   .filter-button:hover,
-  .my-shows-button:hover,
-  #no-shows {
+  .my-shows-button:hover, #no-shows {
     font-size: 16px;
   }
-  #profile-title,
-  #title {
-    font-size: 22px;
-  }
-  #show-container img {
-    width: 75%;
-    padding: 0.1em;
-  }
+  #profile-title, #title {
+  font-size: 22px;
+}
+#show-container img {
+  width: 75%;
+  padding: 0.1em;
+}
+
 }
 
 @media screen and (max-width: 992px) {
-  .filter-button,
-  .my-shows-button,
-  .filter-button:hover,
-  .my-shows-button:hover,
-  #no-shows {
-    font-size: 14px;
+  .filter-button, .my-shows-button, .filter-button:hover, .my-shows-button:hover, #no-shows{
+      font-size: 14px;
   }
-  #profile-title,
-  #title {
-    font-size: 20px;
+  #profile-title, #title{
+      font-size: 20px;
+
   }
   #show-container img {
-    width: 66%;
-    padding: 0.2em;
-  }
+  width: 66%;
+  padding: 0.2em;
 }
+
+}
+
+
 
 @media screen and (max-width: 650px) {
   .filter-button,
-  .my-shows-button,
-  .filter-button:hover,
-  .my-shows-button:hover,
-  #no-shows {
-    font-size: 12px;
-  }
-  #profile-title,
-  #title {
-    font-size: 15px;
-  }
-  #show-container img {
-    width: 55%;
-    padding: 0.1em;
-  }
+.my-shows-button,
+.filter-button:hover,
+.my-shows-button:hover, #no-shows {
+  font-size: 12px;
+}
+#profile-title, #title {
+  font-size: 15px;
+}
+#show-container img {
+  width: 55%;
+ padding: 0.1em;
+}
+
+
 }
 
 @media screen and (max-width: 500px) {
@@ -170,4 +178,6 @@ h3 {
   .my-shows-button:hover {
     font-size: 10.5px;
   }
+  
 }
+

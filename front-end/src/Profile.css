@@ -10,15 +10,16 @@
   left: 30%;
   right: 30%;
 }
-#settings-title {
+#settings-title{
   padding-bottom: 3%;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+
 }
 .modal-contents {
-  background-color: #2d2d2d;
-  color: #d1cdc7;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
 }
 
 #profile-picture {
@@ -35,7 +36,9 @@
   max-width: 75%;
 }
 
-#profile-title {
+
+
+#profile-title{
   font-size: 2em;
 }
 .profile-links {
@@ -55,54 +58,53 @@
 #settings-form {
   border: 0px;
   text-align: center;
-  background-color: #2d2d2d;
-  color: #d1cdc7;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
 }
 
-#field-modal {
+#field-modal{
   width: 100%;
 }
 
 .prof-button {
   font-size: 18px;
-  border: 2px solid #84ed6f;
+  border: 2px solid #84ED6F;
   background-color: #666666;
-  color: #84ed6f;
+  color: #84ED6F;
   padding: 1em 2em 1em 2em;
   margin: auto;
 }
 
 .prof-button:hover {
   font-size: 18px;
-  border: 2px solid #3cdd1b;
-  background-color: #2d2d2d;
-  color: #3cdd1b;
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
 }
 
 .filter-button {
   margin: 2em;
   font-size: 18px;
-  border: 2px solid #84ed6f;
+  border: 2px solid #84ED6F;
   background-color: #666666;
-  color: #84ed6f;
+  color: #84ED6F;
   padding: 1em 2em 1em 2em;
 }
 
 .main {
   width: 90%;
-  background-color: #2d2d2d;
-  color: #d1cdc7;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
   text-align: center;
 }
 
 .show-profile-details {
   width: 100%;
-  background-color: #2d2d2d;
+  background-color:#2d2d2d;
   text-align: center;
 }
 
-.show-content,
-.main {
+.show-content, .main {
   display: flex;
   text-align: center;
   justify-content: space-around;
@@ -111,7 +113,7 @@
 
 #heading {
   text-align: center;
-  background-color: #2d2d2d;
+  background-color: #2d2d2d;;
 }
 
 #settings-btn {
@@ -120,12 +122,12 @@
 }
 
 .label-profile {
-  margin: 2em;
-  background-color: #666666;
-  color: #d1cdc7;
-  padding: 1em 1em 1em 1em;
-  margin-bottom: 3%;
-  margin-top: 3%;
+    margin: 2em;
+    background-color: #666666;
+    color: #D1CDC7 ;
+    padding: 1em 1em 1em 1em;
+    margin-bottom: 3%;
+    margin-top: 3%;
 }
 
 .inputs {
@@ -137,10 +139,12 @@
 }
 
 .inputs:hover {
-  border: 2px solid #d1cdc7;
-  background-color: #2d2d2d;
-  color: #d1cdc7;
+  border: 2px solid #D1CDC7;
+  background-color: #2D2D2D;
+  color: #D1CDC7;
 }
+
+
 
 #settings-btns {
   margin-bottom: 3%;
@@ -152,7 +156,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0,0,0,0.75);
 }
 
 #profile-show-container {
@@ -160,19 +164,16 @@
   flex-wrap: wrap;
 }
 
+
 @media screen and (max-width: 2400px) {
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover,
-  #no-shows,
-  #copied {
+  .prof-button:hover, #no-shows, #copied {
     font-size: 16px;
   }
-
-  #profile-title,
-  #title-rec-shows,
-  #settings-title {
+  
+  #profile-title, #title-rec-shows, #settings-title {
     font-size: 22px;
   }
   .show-image {
@@ -180,30 +181,28 @@
     padding: 0.1em;
   }
   #profile-picture {
-    max-width: 155px;
-  }
-  #bio {
-    font-size: 18px;
-  }
+  max-width: 155px;
 
-  #settings-title {
-    margin-bottom: 3%;
-    margin-top: 3%;
-  }
+}
+#bio {
+  font-size: 18px;
+}
+
+#settings-title {
+  margin-bottom: 4%;
+}
+
+
 }
 
 @media screen and (max-width: 992px) {
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover,
-  #no-shows,
-  #copied {
+  .prof-button:hover, #no-shows, #copied {
     font-size: 14px;
   }
-  #profile-title,
-  #title-rec-shows,
-  #settings-title {
+  #profile-title, #title-rec-shows, #settings-title {
     font-size: 20px;
   }
   .show-image {
@@ -211,46 +210,42 @@
     padding: 0.2em;
   }
   #profile-picture {
-    max-width: 140px;
-  }
-  #bio {
-    font-size: 16px;
-  }
-  #settings-title {
-    margin-bottom: 3%;
-    margin-top: 3%;
-  }
+  max-width: 140px;
+}
+#bio {
+  font-size: 16px;
+}
+#settings-title {
+  margin-bottom: 5%;
+}
+
+
 }
 
 @media screen and (max-width: 650px) {
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover,
-  .label-profile,
-  .inputs,
-  #no-shows,
-  #copied {
+  .prof-button:hover, .label-profile, .inputs, #no-shows, #copied {
     font-size: 12px;
   }
-
-  #profile-title,
-  #title-rec-shows,
-  #settings-title {
+  
+  #profile-title, #title-rec-shows, #settings-title
+ {
     font-size: 15px;
   }
-  .show-image {
-    width: 55%;
-    padding: 0.1em;
-  }
-  #profile-picture {
-    width: 28%;
-  }
-  #bio {
-    font-size: 12px;
-  }
-  #settings-title {
-    margin-bottom: 3%;
-    margin-top: 3%;
-  }
+  .show-image{
+  width: 55%;
+  padding: 0.1em;
+}
+#profile-picture{
+  width: 28%;
+}
+#bio {
+  font-size: 12px;
+}
+#settings-title {
+  margin-bottom: 3%;
+}
+  
 }
