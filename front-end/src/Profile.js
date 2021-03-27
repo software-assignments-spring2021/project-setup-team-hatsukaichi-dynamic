@@ -93,7 +93,7 @@ const SettingsForm = (props) => {
           <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
           <br />
           <div id="settings-btns" className="profile-links">
-          <button className="prof-button" onClick={toggleModal}>Back</button>
+          <button className="prof-button" onClick={props.toggleModal}>Back</button>
           <button type="submit" className="prof-button" form="settings-form">Save</button>
           </div>
         </div>
