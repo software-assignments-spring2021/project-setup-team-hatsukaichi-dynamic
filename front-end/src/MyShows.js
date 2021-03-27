@@ -8,6 +8,7 @@ import './MyShows.css';
 import Modal from "react-modal";
 import Select from "react-select";
 import { Link, useHistory } from 'react-router-dom'
+import platforms from './Platforms'
 require('dotenv').config();
 
 const ShowGrid = (props) => {
@@ -164,17 +165,6 @@ const MyShows = (props) => {
         return searchShows(input, mockAllShows);
       });
   };
-
-  const platforms = [
-    { value: "", label: "All Platforms" },
-    { value: "Netflix", label: "Netflix" },
-    { value: "Amazon Prime", label: "Amazon Prime" },
-    { value: "Hulu", label: "Hulu" },
-    { value: "HBO", label: "HBO" },
-    { value: "Disney Plus", label: "Disney Plus" },
-    { value: "Crunchyroll", label: "Crunchyroll" },
-    { value: "Other", label: "Other" },
-  ]
 
   const [selectedPlatform, setSelectedPlatform] = useState("");
 
