@@ -67,7 +67,7 @@ const ShowGrid = (props) => {
           ? filteredShows.map((show) => {
               return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-images" src={mockShowImage(show.id)} alt={`cover-${show.id}`}/></Link>
           })
-          : <p>No shows found...</p>
+          : <p id="no-shows">No shows found...</p>
         }
 
       </div>
@@ -160,7 +160,7 @@ const MyShows = (props) => {
         return searchShows(input, response.data);
       })
      .catch((err) => {
-	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+  console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
         return searchShows(input, mockAllShows);
       });
@@ -191,14 +191,15 @@ const MyShows = (props) => {
     <>
       <Header />
       <div id="container">
-        <h3>{userData.username}'s Shows</h3>
+        <h3 id="profile-title">{userData.username}'s Shows</h3>
         {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}
         <div id="search-container">
           <AsyncSelect id="search-bar" cacheOptions defaultOptions loadOptions={loadOptions} onChange={linkToShow}/>
         </div>
         <div id="filter-container">
-          <button
+          <button 
             className={inProgressSelected ? "selected filter-button" : "filter-button"}
+
             onClick={(e) => onStatusChange("in progress")}
           >
             In Progress
@@ -209,9 +210,13 @@ const MyShows = (props) => {
             onRequestClose={toggleModal}
             contentLabel="Filter Shows"
           >
-            <h1>Filter by Platform</h1>
+             <div className="modal-contents">
+               
+            <h3 id="filter-title" >Filter by Platform</h3>
+            <br/>
             <Select options={platforms} onChange={onChange} value={selectedPlatform} />
-            <button className="my-shows-button" onClick={toggleModal}>Apply</button>
+            <button className="my-shows-button" id="apply" onClick={toggleModal}>Apply</button>
+            </div>
           </Modal>
           <button
             className={completedSelected ? "selected filter-button" : "filter-button"}
@@ -228,3 +233,4 @@ const MyShows = (props) => {
 }
 
 export default MyShows
+
