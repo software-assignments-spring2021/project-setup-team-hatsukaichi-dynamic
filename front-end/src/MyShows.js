@@ -197,7 +197,9 @@ const MyShows = (props) => {
           <AsyncSelect id="search-bar" cacheOptions defaultOptions loadOptions={loadOptions} onChange={linkToShow}/>
         </div>
         <div id="filter-container">
-          <button className="my-shows-button"
+          <button 
+            className={inProgressSelected ? "selected filter-button" : "filter-button"}
+
             onClick={(e) => onStatusChange("in progress")}
           >
             In Progress
@@ -213,13 +215,11 @@ const MyShows = (props) => {
             <h3 id="filter-title" >Filter by Platform</h3>
             <br/>
             <Select options={platforms} onChange={onChange} value={selectedPlatform} />
-            
             <button className="my-shows-button" id="apply" onClick={toggleModal}>Apply</button>
-            
             </div>
           </Modal>
           <button
-            className="my-shows-button"
+            className={completedSelected ? "selected filter-button" : "filter-button"}
             onClick={(e) => onStatusChange("completed")}
           >
             Completed

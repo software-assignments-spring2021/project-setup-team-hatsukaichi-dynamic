@@ -84,18 +84,20 @@ div.css-yk16xz-control {
 }
 
 .selected {
-  margin: 1em;
+  background-color: #acf39d;
+  margin: 2em;
   font-size: 18px;
-  border: 2px solid #666666;
+  border: 2px solid #84ed6f;
   color: #666666;
   padding: 1em 2em 1em 2em;
-  background-color: #acf39d;
+  font-size: 1.4vw;
 }
 
 .selected:hover {
   border: 1px solid #4d4d4d;
   background-color: #84ed6f;
   color: #4d4d4d;
+  font-size: 1.4vw;
 }
 
 .show-images {
@@ -118,7 +120,9 @@ h3 {
   .my-shows-button,
   .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows {
+  #no-shows, 
+  .selected, 
+  .selected:hover {
     font-size: 16px;
   }
   #profile-title,
@@ -136,7 +140,9 @@ h3 {
   .my-shows-button,
   .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows {
+  #no-shows, 
+  .selected, 
+  .selected:hover { 
     font-size: 14px;
   }
   #profile-title,
@@ -154,7 +160,9 @@ h3 {
   .my-shows-button,
   .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows {
+  #no-shows, 
+  .selected, 
+  .selected:hover {
     font-size: 12px;
   }
   #profile-title,
@@ -171,7 +179,9 @@ h3 {
   .filter-button,
   .my-shows-button,
   .filter-button:hover,
-  .my-shows-button:hover {
+  .my-shows-button:hover, 
+  .selected, 
+  .selected:hover {
     font-size: 10.5px;
   }
 }
