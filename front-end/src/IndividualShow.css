@@ -9,10 +9,6 @@
   color: #d1cdc7;
 }
 
-.description input {
-  width: 50%;
-}
-
 .main {
   width: 90%;
   background-color: #2d2d2d;
@@ -47,7 +43,8 @@
     padding: 1em 1em 1em 1em;
 }
 
-.label-custom {
+.platform {
+  margin: .75em;
   font-size: 16px;
   background-color: #666666;
   color: #d1cdc7;
