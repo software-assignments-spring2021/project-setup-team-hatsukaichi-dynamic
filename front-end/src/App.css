@@ -1,72 +1,72 @@
 body {
-    margin-top: 90px;
+  margin-top: 90px;
 }
 
 .modal-contents {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 p {
-    margin-top: 0;
-    padding: 0;
+  margin-top: 0;
+  padding: 0;
 }
 
 .text a {
-    color: #acf39d;
+  color: #acf39d;
 }
 
 .text a:hover {
-    color: #3cdd1b;
+  color: #3cdd1b;
 }
 
 footer {
-    margin-top: 2em;
-    background-color: #262626;
-    width: 100%;
-    text-align: center;
-    position: static;
-    left: 0;
-    bottom: 0;
-    line-height: 50px;
+  margin-top: 2em;
+  background-color: #262626;
+  width: 100%;
+  text-align: center;
+  position: static;
+  left: 0;
+  bottom: 0;
+  line-height: 50px;
 }
 
 .footer-links {
-    color: #acf39d;
-    padding: 0 10px 0 10px;
+  color: #acf39d;
+  padding: 0 10px 0 10px;
 }
 
 .footer-links:hover {
-    color: #3cdd1b; 
+  color: #3cdd1b;
 }
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-    background: #D1CDC7;
+  background: #d1cdc7;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-    background: #3cdd1b;
+  background: #3cdd1b;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-    height: 24px;
-    width: 24px;
+  height: 24px;
+  width: 24px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-    background: #D1CDC7;
+  background: #d1cdc7;
 }
 
 /*
@@ -74,16 +74,16 @@ footer {
   Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
 .bm-menu-wrap {
-    position: fixed;
-    height: 100%;
-    top: 0;
+  position: fixed;
+  height: 100%;
+  top: 0;
 }
 
 /* General sidebar styles */
 .bm-menu {
-    background: #333333;
-    padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
+  background: #333333;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -93,25 +93,25 @@ footer {
 
 /* Wrapper for item list */
 .bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
+  color: #b8b7ad;
+  padding: 0.8em;
 }
 
 /* Individual item */
 .bm-item {
-    display: inline-block;
-    color: #acf39d;
-    margin-bottom: 10px;
-    text-align: left;
-    text-decoration: none;
-    transition: color 0.2s;
+  display: inline-block;
+  color: #acf39d;
+  margin-bottom: 10px;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.bm-item:hover{
-    color: #3cdd1b;
+.bm-item:hover {
+  color: #3cdd1b;
 }
 
 /* Styling of overlay */
 .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
 }

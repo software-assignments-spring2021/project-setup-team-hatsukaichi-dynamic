@@ -1,69 +1,68 @@
 h1 {
-    padding: 0;
-    color: #D1CDC7; 
-    background-color: #2d2d2d;
+  padding: 0;
+  color: #d1cdc7;
+  background-color: #2d2d2d;
 }
 
-body{
-    margin-top: 8em;
-    color: #D1CDC7; 
-    background-color: #2d2d2d;
+body {
+  margin-top: 8em;
+  color: #d1cdc7;
+  background-color: #2d2d2d;
 }
 
 .header {
-    font-size: 32px;
-    color: #D1CDC7; 
-    background-color: #2d2d2d;
+  font-size: 32px;
+  color: #d1cdc7;
+  background-color: #2d2d2d;
 }
 
 .text {
-    text-align: left;
-    margin-left: 100px;
-    margin-right: 100px;
-    color: #D1CDC7; 
-    background-color: #2d2d2d;
+  text-align: left;
+  margin-left: 100px;
+  margin-right: 100px;
+  color: #d1cdc7;
+  background-color: #2d2d2d;
 }
 
 .text h1 {
-    font-size: 35px;
-    margin-bottom: 1em;
+  font-size: 35px;
+  margin-bottom: 1em;
 }
 
 .text h2 {
-    font-size: 24px;
-    margin-bottom: 1em;
+  font-size: 24px;
+  margin-bottom: 1em;
 }
 
 .text h3 {
-    font-size: 20px;
-    text-align: left;
-    margin: 0;
-    margin-bottom: 1em;
+  font-size: 20px;
+  text-align: left;
+  margin: 0;
+  margin-bottom: 1em;
 }
 
 .text h4 {
-    font-size: 24px;
-    color: #333333;
+  font-size: 24px;
+  color: #333333;
 }
 
 .text p {
-    font-size: 20px;
-    margin-left: 15px;
-    
+  font-size: 20px;
+  margin-left: 15px;
 }
 
 .text a {
-    color: #ACF39D;
-    text-decoration: none;
+  color: #acf39d;
+  text-decoration: none;
 }
 
 .text a:hover {
-    color: #3CDD1B;
-    text-decoration: none;
+  color: #3cdd1b;
+  text-decoration: none;
 }
 
 .TOC {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 @media screen and (max-width: 2400px) {
@@ -72,55 +71,63 @@ body{
   }
 
   #contents,
-.text h2 {
-  font-size: 33px;
-}
+  .text h2 {
+    font-size: 33px;
+  }
 
-.text h3 {
-  font-size: 31px;
-}
+  .text h3 {
+    font-size: 31px;
+  }
 
-p{
-font-size: 30px;
-}
-.TOC a, .text p,.link{
-  font-size: 22px;
-}
-
+  p {
+    font-size: 30px;
+  }
+  .TOC a,
+  .text p,
+  .link {
+    font-size: 22px;
+  }
 }
 
 @media screen and (max-width: 992px) {
-  #header-title, #terms-and-conditions{
+  #header-title,
+  #terms-and-conditions {
     font-size: 35px;
   }
-#contents,
-.text h2 {
-  font-size: 28px;
-}
+  #contents,
+  .text h2 {
+    font-size: 28px;
+  }
 
-.text h3 {
-  font-size: 22px;
-}
+  .text h3 {
+    font-size: 22px;
+  }
 
-.TOC a,.text p,.link {
-  font-size: 20px;
-}
+  .TOC a,
+  .text p,
+  .link {
+    font-size: 20px;
+  }
 }
 
 @media screen and (max-width: 650px) {
-  #header-title, #terms-and-conditions{
+  #header-title,
+  #terms-and-conditions {
     font-size: 22px;
   }
-  #contents, .text h2 {
-  font-size: 20px;
-}
+  #contents,
+  .text h2 {
+    font-size: 20px;
+  }
 
-.text h3 {
-  font-size: 18px;
-}
+  .text h3 {
+    font-size: 18px;
+  }
 
-.TOC a, .text p, .text a, .link{
-  font-size: 16px;
+  .TOC a,
+  .text p,
+  .text a,
+  .link {
+    font-size: 16px;
+  }
 }
-}
-

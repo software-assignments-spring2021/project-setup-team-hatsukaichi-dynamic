@@ -7,7 +7,6 @@ import Footer from './Footer'
 import { AuthContext } from './App'
 import { createMockUser } from './MockData.js'
 
-
 function Login() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -44,7 +43,6 @@ function Login() {
     <>
       <Header />
       <div id="login-container">
-       
         <form id="login-form" onSubmit={handleSubmit}>
           <h2>Log in to TV Tracker</h2>
           <div className="form-fields">
@@ -58,13 +56,9 @@ function Login() {
             <p>Not registered? <Link to="/signup/" className="login-links">Create an account.</Link></p>
           </div>
         </form>
-        
-       
       </div>
        <Footer />
-      
     </>
   );
 }
-
 export default Login;

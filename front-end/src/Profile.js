@@ -148,7 +148,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                 >
                   <div className="modal-contents">
                     <form id="settings-form" onSubmit={handleSubmit}>
-                      <fieldset id="field-modal">
+                      <div id="field-modal">
                         <h1 id="settings-title">Settings</h1>
                         <label className="label-profile">User Email:</label>
                         <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
@@ -166,7 +166,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                           <button className="prof-button" onClick={toggleModal}>Back</button>
                           <button type="submit" className="prof-button" form="settings-form">Save</button>
                         </div>
-                      </fieldset>
+                      </div>
                     </form>
                   </div>
                 </Modal>
