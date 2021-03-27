@@ -65,7 +65,7 @@ const PlatformData = () => {
         <input className="platform" type="checkbox" id="hbo" value="HBO" ref={refHBO} />
         <label className="label-platform" htmlFor="hbo">HBO  </label>
         <input className="platform" type="checkbox" id="other" value="Other" ref={refOther} />
-        <label className="label-platform" htmlFor="other">Other  </label><br />
+        <label className="label-platform" htmlFor="other">Other  </label><br /><br />
         <input className="btn-progress" type="submit" value="Save Platform" />
       </form>
     </div>
@@ -125,9 +125,9 @@ const IndividualShow = (props) => {
     <>
 	<Header />
 	<div className="main-container">
-	    <div className="showContent">
+	    <div className="show-content">
 		<fieldset className="main">
-		    <div className="showDetails">
+		    <div className="show-details">
 			<fieldset >
 			    <h3 id="title" value={show.name} ref={refTitle}>{show.name}</h3>
 			    <Link to="/my-shows/1">
@@ -148,12 +148,17 @@ const IndividualShow = (props) => {
 			    <div id="clear"></div>
 				<ProgressData season="2" episode="5" isMovieSet={show.isMovie} />
 			    <PlatformData />
-			    <div className="showContent">
+			    <div className="show-content">
 				<Description genre={show.genres} description={show.description} totalEpisodes={show.episodes} isMovieN={show.isMovie} />
 			    </div>
 			</fieldset>
 		    </div>
-		    <img id="cover" src={mockShowImage(show.id)} alt={`cover-${show.id}`} ref={refCover}></img>
+        <div id="cover">
+        <p className="label-custom">Show Title </p>
+        <br/>
+		    <img  src={mockShowImage(show.id)} alt={`cover-${show.id}`} ref={refCover}></img>
+        </div>
+        
 		    <div id="clear"></div>
 		</fieldset>
 	    </div>

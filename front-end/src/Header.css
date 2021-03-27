@@ -2,6 +2,7 @@
     background: #202020;
 }
 
+
 .header-title {
     text-align: center;
     color: #D1CDC7;
@@ -44,5 +45,6 @@
 .login-signup-buttons button:hover {
   font-size: 12px;
 }
+
 
 }

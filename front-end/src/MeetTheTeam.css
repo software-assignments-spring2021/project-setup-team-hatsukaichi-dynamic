@@ -132,5 +132,8 @@ body{
       width: 100px;
       height: 100px; 
   }
+  .header{
+    margin-top: 3%;
+  }
 }
 

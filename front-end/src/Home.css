@@ -15,8 +15,8 @@
     margin-top: 12em;
 }
 @media screen and (max-width: 1800px) {
-  .full-img{
-    font-size: 13px;
+  .full-text{
+    font-size: 16px;
   }
 
 }
@@ -24,7 +24,7 @@
 /* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
   .full-text {
-    font-size: 13px;
+    font-size: 14px;
   }
   
 }
