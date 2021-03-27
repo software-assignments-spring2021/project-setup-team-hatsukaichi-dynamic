@@ -5,25 +5,21 @@
   text-align: center;
 }
 
-
 #signup-form {
   padding-top: 1em;
   padding-bottom: 1em;
 }
 
-
-
 #signup-form input {
   margin-bottom: 1em;
- 
 }
 
 .signup-links {
-    color: #ACF39D;
+  color: #acf39d;
 }
 
 .signup-links:hover {
-    color: #3CDD1B;
+  color: #3cdd1b;
 }
 
 .error {
@@ -32,11 +28,11 @@
 
 #signup-button {
   font-size: 18px;
-  border: 2px solid #84ED6F;
+  border: 2px solid #84ed6f;
   background-color: #666666;
-  color: #84ED6F;
-  padding: .5em 1em .5em 1em;
-  margin-bottom: .5em;
+  color: #84ed6f;
+  padding: 0.5em 1em 0.5em 1em;
+  margin-bottom: 0.5em;
 }
 
 @media screen and (max-width: 2400px) {
@@ -45,7 +41,8 @@
   }
 
   .form-fields p,
-  .form-fields label, #question {
+  .form-fields label,
+  #question {
     font-size: 20px;
   }
 
@@ -60,7 +57,8 @@
   }
 
   .form-fields p,
-  .form-fields label, #question {
+  .form-fields label,
+  #question {
     font-size: 20px;
   }
 
@@ -74,11 +72,11 @@
     font-size: 24px;
   }
   .form-fields p,
-  .form-fields label, #question {
+  .form-fields label,
+  #question {
     font-size: 16px;
   }
   #signup-button {
     font-size: 13px;
   }
 }
-
