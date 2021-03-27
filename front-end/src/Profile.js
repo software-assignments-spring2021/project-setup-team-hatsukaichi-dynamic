@@ -127,7 +127,7 @@ const ProfileContents = ({ data, updateUserData }) => {
     <>
       <div className="show-content">
         <div className="main">
-          <div className="show-details">
+          <div className="show-profile-details">
             <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
             <RecentShows shows={userShows} />
             <br /><br />
@@ -176,7 +176,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                   {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
                   <button className="prof-button">Share</button>
                   <br /> <br />
-                  <p>{copied ? "Copied URL to clipboard." : ""}</p>
+                  <p id="copied">{copied ? "Copied URL to clipboard." : ""}</p>
                 </div>
               </CopyToClipboard>
             </div>

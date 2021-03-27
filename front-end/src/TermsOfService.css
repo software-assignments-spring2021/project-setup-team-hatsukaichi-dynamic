@@ -83,7 +83,7 @@ body{
 p{
 font-size: 30px;
 }
-.TOC a, .text p,#link{
+.TOC a, .text p,.link{
   font-size: 22px;
 }
 
@@ -103,7 +103,7 @@ font-size: 30px;
   font-size: 22px;
 }
 
-.TOC a,.text p,#link {
+.TOC a,.text p,.link {
   font-size: 20px;
 }
 }
@@ -120,7 +120,7 @@ font-size: 30px;
   font-size: 18px;
 }
 
-.TOC a, .text p, .text a, #link{
+.TOC a, .text p, .text a, .link{
   font-size: 16px;
 }
 }

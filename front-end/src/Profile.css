@@ -12,6 +12,10 @@
 }
 #settings-title{
   padding-bottom: 3%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 .modal-contents {
   background-color:#2d2d2d;
@@ -94,7 +98,7 @@
   text-align: center;
 }
 
-.show-details {
+.show-profile-details {
   width: 100%;
   background-color:#2d2d2d;
   text-align: center;
@@ -165,7 +169,7 @@
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover, #no-shows {
+  .prof-button:hover, #no-shows, #copied {
     font-size: 16px;
   }
   
@@ -177,7 +181,7 @@
     padding: 0.1em;
   }
   #profile-picture {
-  width: 170px;
+  max-width: 155px;
 
 }
 #bio {
@@ -196,7 +200,7 @@
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover, #no-shows {
+  .prof-button:hover, #no-shows, #copied {
     font-size: 14px;
   }
   #profile-title, #title-rec-shows, #settings-title {
@@ -207,7 +211,7 @@
     padding: 0.2em;
   }
   #profile-picture {
-  width: 150px;
+  max-width: 140px;
 }
 #bio {
   font-size: 16px;
@@ -223,7 +227,7 @@
   .filter-button,
   .prof-button,
   .filter-button:hover,
-  .prof-button:hover, .label-profile, .inputs, #no-shows {
+  .prof-button:hover, .label-profile, .inputs, #no-shows, #copied {
     font-size: 12px;
   }
   
@@ -236,7 +240,7 @@
   padding: 0.1em;
 }
 #profile-picture{
-  width: 25%;
+  width: 28%;
 }
 #bio {
   font-size: 12px;
