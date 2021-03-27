@@ -104,10 +104,10 @@ function TermsOfService() {
 			<h2 id="contact-us">Contact Us</h2>
 			<p>If you have any questions about these Terms and Conditions, You can contact us:</p>
 			<ul>
-			    <li class="link">By visiting <Link to="/meet-the-team">our contact page.</Link></li>
+			    <li className="link">By visiting <Link to="/meet-the-team">our contact page.</Link></li>
 			</ul>
 			<br />
-			<a class="link"href="#terms-and-conditions">Back to top</a>
+			<a className="link"href="#terms-and-conditions">Back to top</a>
 			<br />
 		    </div>
 		    <Footer />

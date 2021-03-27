@@ -10,7 +10,7 @@ function MeetTheTeam() {
 	    <body>
 		<Header />
 		<div className="header"><h1>Meet the Team</h1></div>
-		<div class="content">
+		<div className="content">
 		    <img src={image} alt=""></img>
 		    <h4>Sam Eng</h4>
 		    <p>Student at New York University</p>
@@ -18,7 +18,7 @@ function MeetTheTeam() {
 			 <p>Favorite color: Red. Interests: Drawing, Skiing, Music. </p>
 			 <p>Favorite Movie: Titanic</p>
 		</div>
-		<div class="content">
+		<div className="content">
 		    <img src={image} alt=""></img>
 		    <h4>Lev Bernstein</h4>
 		    <p>Student at New York University</p>
@@ -26,7 +26,7 @@ function MeetTheTeam() {
 			<p>Favorite color: Green. Interests: Piano, Travel, Music. </p>
 			 <p>Favorite Movie: Transformers</p>
 		</div>
-		<div class="content">
+		<div className="content">
 		    <img src={image} alt=""></img>
 		    <h4>Mason Kalaty</h4>
 		    <p>Student at New York University</p>
@@ -34,7 +34,7 @@ function MeetTheTeam() {
 			<p>Favorite color: Blue. Interests: Reading, Sightseeing, Guitar. </p>
 			 <p>Favorite Movie: Great Gatsby</p>
 		</div>
-		<div class="content">
+		<div className="content">
 		    <img src={image} alt=""></img>
 		    <h4>Ben Kaplan</h4>
 		    <p>Student at New York University</p>
@@ -42,7 +42,7 @@ function MeetTheTeam() {
 			<p>Favorite color: Grey. Interests: Travel, Computer games, Reading. </p>
 			 <p>Favorite Movie: Formula 1</p>
 		</div>
-		<div class="content">
+		<div className="content">
 		    <img src={image} alt=""></img>
 		    <h4>Nicole Stovall</h4>
 		    <p>Student at New York University</p>
@@ -50,7 +50,7 @@ function MeetTheTeam() {
 			<p>Favorite color: Yellow. Interests: Hiking, Music, Piano. </p>
 			 <p>Favorite Movie: Supernatural</p>
 		</div>
-		<div class="content">
+		<div className="content">
 		    <img src={image} alt=""></img>
 		    <h4>Almazhan Kapan</h4>
 		    <p>Student at New York University</p>
