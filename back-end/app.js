@@ -23,7 +23,7 @@ app.get('/tv_users/:id', (req, res, next) => {
 });
 
 app.get('/shows', (req, res, next) => {
-    axios.get(`https://my.api.mockaroo.com/shows.json?key=`)
+    axios.get(`https://my.api.mockaroo.com/shows.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
         .then( (response) => {
             res.json(response.data)
         })
