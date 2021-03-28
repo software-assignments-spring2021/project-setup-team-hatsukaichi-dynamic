@@ -1,12 +1,12 @@
 .main-container {
-  margin-top: 5.25em;
+    margin-top: 5.25em;
 }
 
 .description {
   width: 100%;
   text-align: center;
-  background-color: #2d2d2d;
-  color: #d1cdc7;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
 }
 
 .description input {
@@ -15,186 +15,80 @@
 
 .main {
   width: 90%;
-  background-color: #2d2d2d;
-  color: #d1cdc7;
+  background-color:#2d2d2d;
+  color: #D1CDC7; 
 }
-
-.show-details {
+.showDetails {
   float: left;
   width: 60%;
-  background-color: #2d2d2d;
+  background-color:#2d2d2d;
 }
 
-.show-content {
-  margin-top: 0px;
+.showContent {
+    margin-top: 0px;
   display: flex;
   text-align: center;
   justify-content: space-around;
-  background-color: #2d2d2d;
+  background-color: #2d2d2d;;
 }
 
 #cover {
-  width: 30%;
+  width: 25%;
   float: left;
-  padding: 0.5em;
+  padding: .5em;
 }
 
 #clear {
   clear: both;
 }
 
-#btn-progress {
-  margin-top: 3%;
-}
-
 .label-custom {
-  font-size: 16px;
-  background-color: #666666;
-  color: #d1cdc7;
-  padding: 1em 1em 1em 1em;
-  margin-bottom: 3%;
-  margin-top: 3%;
+    margin: 1em;
+    font-size: 16px;
+    background-color: #666666;
+    color: #D1CDC7 ;
+    padding: 1em 1em 1em 1em;
 }
 
-.platform {
-  margin: 0.75em;
+.platform{
+  margin: .75em;
   font-size: 16px;
-  color: #d1cdc7;
+  color: #D1CDC7 ;
   padding: 1em 1em 1em 1em;
 }
 
-.btn-progress {
+
+.btnProgress {
   margin: 1em;
   margin-top: 0;
-  border: 2px solid #84ed6f;
+  font-size: 18px;
+  border: 2px solid #84ED6F;
   background-color: #666666;
-  color: #84ed6f;
+  color: #84ED6F;
   padding: 1em 2em 1em 2em;
 }
 
-.btn-progress:hover {
-  border: 2px solid #3cdd1b;
-  background-color: #2d2d2d;
-  color: #3cdd1b;
+.btnProgress:hover {
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
 }
 
-#episode,
-#season,
-#description {
-  margin: 5%;
+#episode, #season,  #description{
+  margin: .3em;
   font-size: 16px;
   background-color: whitesmoke;
-  color: #2d2d2d;
+  color: #2D2D2D;
   padding: 1em 1em 1em 1em;
 }
-#episode:hover,
-#season:hover,
-#description:hover {
-  border: 2px solid #d1dcd7;
-  background-color: #2d2d2d;
-  color: #d1dcd7;
+#episode:hover, #season:hover, #description:hover {
+  border: 2px solid #D1DCD7;
+  background-color: #2D2D2D;
+  color: #D1DCD7;
 }
 
-.descript,
-span {
+.descript, span{
   font-size: 1.2em;
   font-weight: 3px;
-  color: #d1cdc7;
-}
-
-@media screen and (max-width: 2400px) {
-  .btn-progress,
-  .btn-progress:hover,
-  .label-custom,
-  #season,
-  #episode,
-  .label-platform,
-  .descript {
-    font-size: 16px;
-  }
-  #profile-title,
-  #show-title {
-    font-size: 22px;
-  }
-  #show-container img {
-    width: 75%;
-    padding: 0.1em;
-  }
-  #cover {
-    height: 70%;
-  }
-  #episode,
-  #season,
-  #description {
-    margin-top: 1%;
-    margin-bottom: 1%;
-  }
-  #cover img {
-    height: 100%;
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .btn-progress,
-  .btn-progress:hover,
-  .label-custom,
-  #season,
-  #episode,
-  .label-platform,
-  .descript {
-    font-size: 14px;
-  }
-  #profile-title,
-  #show-title {
-    font-size: 20px;
-  }
-  #show-container img {
-    width: 66%;
-    padding: 0.2em;
-  }
-  #cover {
-    height: 70%;
-  }
-  #episode,
-  #season,
-  #description {
-    margin-top: 1%;
-    margin-bottom: 1%;
-  }
-  #cover img {
-    height: 100%;
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .btn-progress,
-  .btn-progress:hover,
-  .label-custom,
-  #season,
-  #episode,
-  .label-platform,
-  .descript {
-    font-size: 12px;
-  }
-  #profile-title,
-  #show-title {
-    font-size: 15px;
-  }
-  #show-container img {
-    width: 55%;
-    padding: 0.1em;
-  }
-  #cover img {
-    height: 100%;
-    width: 100%;
-  }
-  #episode,
-  #season,
-  #description,
-  .label-custom {
-    margin-top: 6%;
-    margin-bottom: 6%;
-  }
+  color: #D1CDC7 ;
 }

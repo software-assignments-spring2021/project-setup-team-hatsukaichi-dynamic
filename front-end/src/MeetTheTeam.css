@@ -1,128 +1,59 @@
 h1 {
-  margin-top: 0;
-  padding: 0;
-  color: #d1cdc7;
+    margin-top: 0;
+    padding: 0;
+    color: #D1CDC7; 
+
 }
 
-body {
-  color: #d1cdc7;
-  background-color: #2d2d2d;
+body{
+    color: #D1CDC7; 
+    background-color: #2d2d2d;
 }
 
 .content {
-  color: #d1cdc7;
-  width: 700px;
-  padding: 50px;
-  overflow: hidden;
+    color: #D1CDC7; 
+    width: 700px;
+    padding: 50px;
+    overflow: hidden;
+   
 }
 .content img {
-  margin-right: 15px;
-  float: left;
-  height: 100px;
-  width: 100px;
+    margin-right: 15px;
+    float: left;
+    height: 100px;
+    width: 100px;
 }
 .header {
-  color: #d1cdc7;
+    color: #D1CDC7; 
 
-  font-size: 32px;
-  text-align: center;
+    font-size: 32px;
+    text-align: center;
+   
 }
 .content h4 {
-  font-size: 24px;
-  margin-left: 20px;
-  margin: 2px 0 0 0;
-  display: block;
+   
+
+    font-size: 24px;
+    margin-left: 20px;
+    margin: 2px 0 0 0;
+    display: block;
+    
 }
 .content p {
-  font-size: 16px;
-  margin-left: 15px;
-  margin: 2px 0 0 0;
-  display: block;
+    font-size: 16px;
+    margin-left: 15px;
+    margin: 2px 0 0 0;
+    display: block;
+   
 }
 .content a {
-  font-size: 16px;
-  margin-left: 15px;
-  margin: 2px 0 0 0;
-  display: block;
-  color: #acf39d;
-}
-
-.content a:hover {
-  color: #3cdd1b;
-}
-
-@media screen and (max-width: 2400px) {
-  .header h1 {
-    font-size: 35.5px;
-  }
-
-  #contents,
-  .text h2 {
-    font-size: 33px;
-  }
-
-  .content h4 {
-    font-size: 31px;
-  }
-
-  p {
-    font-size: 30px;
-  }
-  .content p,
-  .content a {
-    font-size: 22px;
-  }
-  .content img {
-    width: 130px;
-    height: 130px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .header h1 {
-    font-size: 35px;
-  }
-  #contents,
-  .text h2 {
-    font-size: 28px;
-  }
-
-  .content h4 {
-    font-size: 22px;
-  }
-
-  .content p,
-  .content a {
-    font-size: 20px;
-  }
-  .content img {
-    width: 110px;
-    height: 110px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .header h1 {
-    font-size: 24px;
-  }
-  #contents,
-  .text h2 {
-    font-size: 20px;
-  }
-
-  .content h4 {
-    font-size: 18px;
-  }
-
-  .content p,
-  .content a {
     font-size: 16px;
-  }
-  .content img {
-    width: 100px;
-    height: 100px;
-  }
-  .header {
-    margin-top: 3%;
-  }
+    margin-left: 15px;
+    margin: 2px 0 0 0;
+    display: block;
+    color: #ACF39D;
+}
+
+.content a:hover{
+    color: #3cdd1b;
 }

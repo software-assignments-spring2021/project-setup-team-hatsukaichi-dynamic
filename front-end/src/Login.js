@@ -7,6 +7,7 @@ import Footer from './Footer'
 import { AuthContext } from './App'
 import { createMockUser } from './MockData.js'
 
+
 function Login() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -46,19 +47,20 @@ function Login() {
         <form id="login-form" onSubmit={handleSubmit}>
           <h2>Log in to TV Tracker</h2>
           <div className="form-fields">
-            <label>Username</label><br/>
-            <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required /><br/>
-            <label>Email</label><br/>
-            <input autoFocus={true} type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required /><br/>
-            <label>Password</label><br/>
-            <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required /><br/><br/>
-            <button id="login-button" type="submit">Login</button><br/>
+            <label>Username</label>
+            <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+            <label>Email</label>
+            <input autoFocus={true} type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <label>Password</label>
+            <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <button id="login-button" type="submit">Login</button>
             <p>Not registered? <Link to="/signup/" className="login-links">Create an account.</Link></p>
           </div>
         </form>
+        <Footer />
       </div>
-       <Footer />
     </>
   );
 }
+
 export default Login;

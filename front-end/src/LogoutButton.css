@@ -1,15 +1,15 @@
 .logoutButton {
   font-size: 18px;
-  border: 2px solid #84ed6f;
+  border: 2px solid #84ED6F;
   background-color: #666666;
-  color: #84ed6f;
+  color: #84ED6F;
   padding: 1em 2em 1em 2em;
   margin: auto;
 }
-
+  
 .logoutButton:hover {
   font-size: 18px;
-  border: 2px solid #3cdd1b;
-  background-color: #2d2d2d;
-  color: #3cdd1b;
+  border: 2px solid #3CDD1B;
+  background-color: #2D2D2D;
+  color: #3CDD1B;
 }
