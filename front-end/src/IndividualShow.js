@@ -129,7 +129,7 @@ const IndividualShow = (props) => {
 		<fieldset className="main">
 		    <div className="show-details">
 			<fieldset >
-			    <h3 id="title" value={show.name} ref={refTitle}>{show.name}</h3>
+			    <h3 id="title" value="Show Title" ref={refTitle}>{show.name}</h3>
 			    <Link to="/my-shows/1">
 				<button className="btn-progress">
 				    Return to Shows
