@@ -43,13 +43,13 @@ function Signup() {
         <form id="signup-form" onSubmit={handleSubmit}>
           <h2>Sign up for TV Tracker</h2>
           <div className="form-fields">
-            <label>Username</label>
-            <input type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} required/>
-            <label>Email</label>
-            <input type="text" name="email" value={email} onChange={(e) => {setEmail(e.target.value)}} required/>
-            <label>Password</label>
-            <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-            <label>Confirm Password</label>
+            <label>Username</label><br/>
+            <input type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} required/><br/>
+            <label>Email</label><br/>
+            <input type="text" name="email" value={email} onChange={(e) => {setEmail(e.target.value)}} required/><br/>
+            <label>Password</label><br/>
+            <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/><br/>
+            <label>Confirm Password</label><br/>
             <input 
               type="password" 
               name="passwordconfirm" 
@@ -64,7 +64,7 @@ function Signup() {
               : null}
           </div>
           <button id="signup-button" type="submit">Sign Up</button>
-          <p>Already have an account? <Link to="/login" className="signup-links">Log In.</Link></p>
+          <p id="question">Already have an account? <Link to="/login" className="signup-links">Log In.</Link></p>
         </form>
       </div>
       <Footer />

@@ -31,7 +31,7 @@ const ProgressData = ({ season, episode, isMovieSet }) => {
           <label className="label-custom" htmlFor="episode">Current Episode:</label>
           <input id="episode" className="progress" defaultValue={episode} ref={refEpisode} />
           <br />
-          <input className="btnProgress" type="submit" value="Save Progress" />
+          <input className="btn-progress" id="btn-progress" type="submit" value="Save Progress" />
         </form>
       </div>
     )
@@ -53,20 +53,20 @@ const PlatformData = () => {
       <p className="label-custom">Select the platform: </p>
       <form onSubmit={(e) => savePlatform()}>
         <input className="platform" type="checkbox" id="netflix" value="Netflix" ref={refNetflix} />
-        <label htmlFor="netflix">Netflix  </label>
+        <label className="label-platform" htmlFor="netflix">Netflix  </label>
         <input className="platform" type="checkbox" id="prime" value="Prime" ref={refPrime} />
-        <label htmlFor="prime">Amazon Prime  </label>
+        <label className="label-platform" htmlFor="prime">Amazon Prime  </label>
         <input className="platform" type="checkbox" id="hulu" value="Hulu" ref={refHulu} />
-        <label htmlFor="hulu">Hulu  </label>
+        <label className="label-platform" htmlFor="hulu">Hulu  </label>
         <input className="platform" type="checkbox" id="crunch" value="Crunchyroll" ref={refCrunchy} />
-        <label htmlFor="crunch">Crunchyroll  </label><br />
+        <label className="label-platform" htmlFor="crunch">Crunchyroll  </label><br />
         <input className="platform" type="checkbox" id="disney" value="Disney Plus" ref={refDisney} />
-        <label htmlFor="crunch">Disney Plus  </label>
+        <label className="label-platform" htmlFor="crunch">Disney Plus  </label>
         <input className="platform" type="checkbox" id="hbo" value="HBO" ref={refHBO} />
-        <label htmlFor="hbo">HBO  </label>
+        <label className="label-platform" htmlFor="hbo">HBO  </label>
         <input className="platform" type="checkbox" id="other" value="Other" ref={refOther} />
-        <label htmlFor="other">Other  </label><br />
-        <input className="btnProgress" type="submit" value="Save Platform" />
+        <label className="label-platform" htmlFor="other">Other  </label><br /><br />
+        <input className="btn-progress" type="submit" value="Save Platform" />
       </form>
     </div>
   )
@@ -87,9 +87,9 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
     <div className="description">
       <br />
       <label className="descript" htmlFor="genre">Genre:  </label>
-      <span ref={refGenre}>{genre}. </span>
+      <span ref={refGenre}>{genre}. </span> <br/>
       <label className="descript" htmlFor="description">Description:  </label>
-      <span value={description} ref={refDescription}>{description} </span>
+      <span value={description} ref={refDescription}>{description} </span> <br/>
       <label className="descript" htmlFor="totalEpisodes">Total Episodes: </label>
       <span ref={refTotalEpisodes}>{totalEpisodes}.</span>
     </div>
@@ -125,35 +125,40 @@ const IndividualShow = (props) => {
     <>
 	<Header />
 	<div className="main-container">
-	    <div className="showContent">
+	    <div className="show-content">
 		<fieldset className="main">
-		    <div className="showDetails">
+		    <div className="show-details">
 			<fieldset >
 			    <h3 id="title" value={show.name} ref={refTitle}>{show.name}</h3>
 			    <Link to="/my-shows/1">
-				<button className="btnProgress">
+				<button className="btn-progress">
 				    Return to Shows
 				</button>
 			    </Link>
 			    <Link to="/my-shows/1">
-				<button className="btnProgress">
+				<button className="btn-progress">
 				    Add to In Progress Shows
 				</button>
 			    </Link>
 			    <Link to="/my-shows/1">
-				<button className="btnProgress">
+				<button className="btn-progress">
 				    Add to Watched Shows
 				</button>
 			    </Link>
 			    <div id="clear"></div>
 				<ProgressData season="2" episode="5" isMovieSet={show.isMovie} />
 			    <PlatformData />
-			    <div className="showContent">
+			    <div className="show-content">
 				<Description genre={show.genres} description={show.description} totalEpisodes={show.episodes} isMovieN={show.isMovie} />
 			    </div>
 			</fieldset>
 		    </div>
-		    <img id="cover" src={mockShowImage(show.id)} alt={`cover-${show.id}`} ref={refCover}></img>
+        <div id="cover">
+        <p className="label-custom">{mockShowImage(show.name)}</p>
+        <br/>
+		    <img  src={mockShowImage(show.id)} alt={`cover-${show.id}`} ref={refCover}></img>
+        </div>
+        
 		    <div id="clear"></div>
 		</fieldset>
 	    </div>
