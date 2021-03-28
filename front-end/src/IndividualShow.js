@@ -129,7 +129,7 @@ const IndividualShow = (props) => {
 		<fieldset className="main">
 		    <div className="show-details">
 			<fieldset >
-			    <h3 id="title" value={show.name} ref={refTitle}>Show Title</h3>
+			    <h3 id="title" value={show.name} ref={refTitle}>{show.name}</h3>
 			    <Link to="/my-shows/1">
 				<button className="btn-progress">
 				    Return to Shows
@@ -154,7 +154,7 @@ const IndividualShow = (props) => {
 			</fieldset>
 		    </div>
         <div id="cover">
-        <p className="label-custom">{mockShowImage(show.name)}</p>
+        <p className="label-custom">{mockShowAPI[`36`]['name']}</p>
         <br/>
 		    <img  src={mockShowImage(show.id)} alt={`cover-${show.id}`} ref={refCover}></img>
         </div>
