@@ -16,8 +16,8 @@ const UserInfo = ({ username, bio, image }) => {
     <div id="heading">
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
-        <h3>{username}'s Profile</h3>
-        <p>{bio}</p>
+        <h3 id="profile-title">{username}'s Profile</h3>
+        <p id="bio" >{bio}</p>
       </div>
     </div>
   )
@@ -27,14 +27,14 @@ const UserInfo = ({ username, bio, image }) => {
 const RecentShows = ({ shows }) => {
   return (
     <>
-      <h4>Recently Added Shows</h4>
+      <h4 id="title-rec-shows">Recently Added Shows</h4>
       {shows
         ? <div id="profile-show-container">
           {shows.map((show) => {
             return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`} /> </Link>;
           })}
         </div>
-        : "No shows. Add some shows on the My Shows page!"}
+        : <p id="no-shows">No shows. Add some shows on the My Shows page!</p>}
     </>
   )
 }
@@ -78,27 +78,27 @@ const SettingsForm = (props) => {
   return (
     <div className="modal-contents">
       <form id="settings-form" onSubmit={handleSubmit}>
-        <fieldset>
+        <div id="field-modal">
           <h1 id="settings-title">Settings</h1>
-          <label className="label-custom">User Email:</label>
+          <label className="label-profile">User Email:</label>
           <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
           <br />
-          <label className="label-custom">Password: </label>
+          <label className="label-profile">Password: </label>
           <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
           <br />
-          <label className="label-custom">Biography:</label>
+          <label className="label-profile">Biography:</label>
           <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
           <br />
-          <label className="label-custom">Profile Pic URL:</label>
+          <label className="label-profile">Profile Pic URL:</label>
           <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
           <br />
           <div id="settings-btns" className="profile-links">
-            <button className="prof-button" onClick={props.toggleModal}>Back</button>
-            <button type="submit" className="prof-button" form="settings-form">Save</button>
+          <button className="prof-button" onClick={props.toggleModal}>Back</button>
+          <button type="submit" className="prof-button" form="settings-form">Save</button>
           </div>
-        </fieldset>
-      </form>
-    </div>
+        </div>
+    </form>
+  </div>
   )
 }
 
@@ -161,7 +161,7 @@ const ProfileContents = ({ data, updateUserData }) => {
     <>
       <div className="show-content">
         <div className="main">
-          <div className="show-details">
+          <div className="show-profile-details">
             <UserInfo username={data.username} bio={data.bio} image={mockUserImage(data.id)} />
             <RecentShows shows={userShows} />
             <br /><br />
@@ -190,7 +190,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                   {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
                   <button className="prof-button">Share</button>
                   <br /> <br />
-                  <p>{copied ? "Copied URL to clipboard." : ""}</p>
+                  <p id="copied">{copied ? "Copied URL to clipboard." : ""}</p>
                 </div>
               </CopyToClipboard>
             </div>
