@@ -10,13 +10,13 @@ function TermsOfService() {
 		<Header />
 		<body>
 		    <div className="header">
-			<h1 id="header-title">Terms of Service</h1>
+			<h1>Terms of Service</h1>
 		    </div>
 		    <div className="text">
 			<h1 id="terms-and-conditions">Terms and Conditions</h1>
 			<p>Last updated: March 10, 2021</p>
 			<p>Please read these terms and conditions carefully before using Our Service.</p>
-			<h2 id="contents">Contents</h2>
+			<h2>Contents</h2>
 			<div className="TOC">
 			    <a href="#interpretation">Interpretation and Definitions</a><br></br>
 			    <a href="#acknowledgment">Acknowledgment</a><br></br>
@@ -104,10 +104,10 @@ function TermsOfService() {
 			<h2 id="contact-us">Contact Us</h2>
 			<p>If you have any questions about these Terms and Conditions, You can contact us:</p>
 			<ul>
-			    <li className="link">By visiting <Link to="/meet-the-team">our contact page.</Link></li>
+			    <li>By visiting <Link to="/meet-the-team">our contact page.</Link></li>
 			</ul>
 			<br />
-			<a className="link"href="#terms-and-conditions">Back to top</a>
+			<a href="#terms-and-conditions">Back to top</a>
 			<br />
 		    </div>
 		    <Footer />

@@ -2,30 +2,29 @@
   margin-top: 10em;
   padding-left: 2em;
   padding-right: 2em;
-
-  text-align: center;
-}
-
-.form-fields label {
-  padding-bottom: 5%;
 }
 
 #login-form {
-  margin-top: 5em;
+    margin-top: 5em;
   padding-top: 1em;
   padding-bottom: 1em;
 }
 
+#login-form label {
+  display: block;
+}
+
 #login-form input {
   margin-bottom: 1em;
+  display: block;
 }
 
 .login-links {
-  color: #acf39d;
+    color: #ACF39D;
 }
 
 .login-links:hover {
-  color: #3cdd1b;
+    color: #3CDD1B;
 }
 
 .error {
@@ -34,53 +33,9 @@
 
 #login-button {
   font-size: 18px;
-  border: 2px solid #84ed6f;
+  border: 2px solid #84ED6F;
   background-color: #666666;
-  color: #84ed6f;
-  padding: 0.5em 1em 0.5em 1em;
-  margin-bottom: 0.5em;
-}
-
-@media screen and (max-width: 2400px) {
-  .header h1 {
-    font-size: 35.5px;
-  }
-
-  .form-fields p,
-  .form-fields label {
-    font-size: 20px;
-  }
-
-  #login-button {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .header h1 {
-    font-size: 35px;
-  }
-
-  .form-fields p,
-  .form-fields label {
-    font-size: 20px;
-  }
-
-  #login-button {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .header h1 {
-    font-size: 24px;
-  }
-
-  .form-fields p,
-  .form-fields label {
-    font-size: 16px;
-  }
-  #login-button {
-    font-size: 13px;
-  }
+  color: #84ED6F;
+  padding: .5em 1em .5em 1em;
+  margin-bottom: .5em;
 }
