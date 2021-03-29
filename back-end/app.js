@@ -1,9 +1,10 @@
 const express = require("express")
 const axios = require("axios")
 const app = express()
+require('dotenv').config();
 
 app.get('/shows/:id', (req, res, next) => {
-    axios.get(`https://my.api.mockaroo.com/shows/${req.params.id}.json?key=`)
+    axios.get(`https://my.api.mockaroo.com/shows/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}`)
         .then( (response) => {
             res.json(response.data)
         })
@@ -13,7 +14,7 @@ app.get('/shows/:id', (req, res, next) => {
 });
 
 app.get('/tv_users/:id', (req, res, next) => {
-    axios.get(`https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=`)
+    axios.get(`https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}`)
         .then( (response) => {
             res.json(response.data)
         })
