@@ -51,7 +51,7 @@ You can take a look at the original project proposal [here](https://github.com/a
 
 Fork (if intending to make changes) or clone this repository.
 
-To start the front end of the project, navigate to the front-end folder and run the following commands in the command line:
+To start the front end of the project, navigate to the front-end folder and run the following command in the command line:
 
 > npm install
 
@@ -64,3 +64,17 @@ Replace [your API key] with your actual API key. Save the file and close it.
 Then, run:
 
 > npm start
+
+To start the back end of the project, navigate to the back-end folder and run the following command in the command line:
+
+> npm install
+
+In back-end, create a file named '.env' with the following contents:
+
+> REACT_APP_MOCKAROO_KEY=[your API key]
+
+Replace [your API key] with your actual API key. Save the file and close it.
+
+Then, run:
+
+> npx nodemon
