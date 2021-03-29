@@ -5,7 +5,7 @@ require('dotenv').config()
 app.use(express.json())
 
 app.get('/shows/:id', (req, res, next) => {
-    axios.get(`https://my.api.mockaroo.com/shows/${req.params.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
+    axios.get(`https://my.api.mockaroo.com/shows/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}`)
         .then( (response) => {
             res.json(response.data)
         })
@@ -15,7 +15,7 @@ app.get('/shows/:id', (req, res, next) => {
 });
 
 app.get('/tv_users/:id', (req, res, next) => {
-    axios.get(`https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
+    axios.get(`https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}`)
         .then( (response) => {
             res.json(response.data)
         })
@@ -25,7 +25,7 @@ app.get('/tv_users/:id', (req, res, next) => {
 });
 
 app.patch('/tv_users/:id', (req, res, next) => {
-    axios.patch(`https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`, {
+    axios.patch(`https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}&__method=PATCH`, {
         "username": (req.body.username == null ? req.query.username : req.body.username),
         "password": (req.body.password == null ? req.query.password : req.body.password),
         "bio": (req.body.bio == null ? req.query.bio : req.body.bio),
