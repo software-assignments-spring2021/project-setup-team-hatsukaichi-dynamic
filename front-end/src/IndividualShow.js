@@ -87,11 +87,11 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
     <div className="description">
       <br />
       <label className="descript" htmlFor="genre">Genre:  </label>
-      <span ref={refGenre}>{genre}. </span> <br/>
+      <span className="descript" ref={refGenre}>{genre}</span> <br/>
       <label className="descript" htmlFor="description">Description:  </label>
-      <span value={description} ref={refDescription}>{description} </span> <br/>
+      <span className="descript" value={description} ref={refDescription}>{description} </span> <br/>
       <label className="descript" htmlFor="totalEpisodes">Total Episodes: </label>
-      <span ref={refTotalEpisodes}>{totalEpisodes}.</span>
+      <span className="descript" ref={refTotalEpisodes}>{totalEpisodes}.</span>
     </div>
   )
 }
@@ -108,13 +108,11 @@ const IndividualShow = (props) => {
     //let showInfo = [];
     axios.get(`https://my.api.mockaroo.com/shows/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
       .then((response) => {
-        //showInfo.push(response.data);
         setShow(response.data);
       })
       .catch((err) => {
         console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
         console.log(err);
-        //showInfo.push(mockShowAPI[props.id]);
         setShow(mockShowAPI[props.id]);
       })
   }, [props.id])
