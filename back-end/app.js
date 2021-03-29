@@ -22,4 +22,19 @@ app.get('/tv_users/:id', (req, res, next) => {
         })
 });
 
+app.post('/tv_users', (req, res, next) => {
+    axios.post(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=POST`, {
+        "username": req.body.username,
+        "email": req.body.email,
+        "password": req.body.password
+    })
+    .then((response) => {
+        console.log(response)
+        res.json(response.data)
+    })
+    .catch((err) => {
+        next(err)
+    })
+});
+
 module.exports = app
