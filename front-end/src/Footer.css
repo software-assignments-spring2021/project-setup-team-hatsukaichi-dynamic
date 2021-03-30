@@ -1,17 +1,56 @@
+.footer-container {
+  box-shadow: 0 50vh 0 50vh #262626;
+}
+
 @media screen and (max-width: 2400px) {
-  .footer-links {
+  .footer-links, .trakt-power {
     font-size: 18px;
   }
+
+  #trakt-logo {
+    width: 3%;
+  }
 }
+
+@media screen and (max-width: 1600px) {
+  .footer-links, .trakt-power {
+    font-size: 17px;
+  }
+
+  #trakt-logo {
+    width: 4%;
+  }
+}
+
 
 @media screen and (max-width: 992px) {
-  .footer-links {
+  .footer-links, .trakt-power {
     font-size: 16px;
+  }
+
+  #trakt-logo {
+    width: 5%;
   }
 }
 
+
 @media screen and (max-width: 650px) {
-  .footer-links {
+  .footer-links, .trakt-power {
     font-size: 14px;
   }
+
+  #trakt-logo {
+    width: 6%;
+  }
+}
+
+#trakt-logo {
+  position: absolute;
+  right: 1em;
+}
+
+.trakt-power {
+  position: absolute;
+  right: 4.5em;
+  padding-bottom: 0em;
 }
