@@ -1,9 +1,5 @@
-.footer-container {
-  box-shadow: 0 50vh 0 50vh #262626;
-}
-
 @media screen and (max-width: 2400px) {
-  .footer-links, .trakt-power {
+  .footer-links, #trakt-power {
     font-size: 18px;
   }
 
@@ -13,7 +9,7 @@
 }
 
 @media screen and (max-width: 1600px) {
-  .footer-links, .trakt-power {
+  .footer-links, #trakt-power {
     font-size: 17px;
   }
 
@@ -22,9 +18,8 @@
   }
 }
 
-
 @media screen and (max-width: 992px) {
-  .footer-links, .trakt-power {
+  .footer-links, #trakt-power {
     font-size: 16px;
   }
 
@@ -33,9 +28,8 @@
   }
 }
 
-
 @media screen and (max-width: 650px) {
-  .footer-links, .trakt-power {
+  .footer-links, #trakt-power {
     font-size: 14px;
   }
 
@@ -44,12 +38,16 @@
   }
 }
 
+.footer-container {
+  box-shadow: 0 50vh 0 50vh #262626;
+}
+
 #trakt-logo {
   position: absolute;
   right: .5em;
 }
 
-.trakt-power {
+#trakt-power {
   color: #000000;
   position: absolute;
   right: 4.5em;
