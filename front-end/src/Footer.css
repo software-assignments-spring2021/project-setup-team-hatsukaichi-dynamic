@@ -46,10 +46,11 @@
 
 #trakt-logo {
   position: absolute;
-  right: 1em;
+  right: .5em;
 }
 
 .trakt-power {
+  color: #000000;
   position: absolute;
   right: 4.5em;
   padding-bottom: 0em;
