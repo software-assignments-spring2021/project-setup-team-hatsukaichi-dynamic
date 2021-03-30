@@ -87,7 +87,7 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
       { !isMovieN
         ? <React.Fragment>
           <label className="descript" htmlFor="totalEpisodes">Total Episodes: </label>
-          <span className="descript" ref={refTotalEpisodes} > {totalEpisodes}.</span>
+          <span className="descript" ref={refTotalEpisodes}>{totalEpisodes}.</span>
         </React.Fragment>
         : null }
     </div>
