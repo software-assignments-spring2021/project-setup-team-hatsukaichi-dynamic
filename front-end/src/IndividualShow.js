@@ -83,9 +83,10 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
       <label className="descript" htmlFor="genre">Genre:  </label>
       <span className="descript" ref={refGenre}>{genre}</span> <br/>
       <label className="descript" htmlFor="description">Description:  </label>
-      <span className="descript" value={description} ref={refDescription}>{description} </span> <br/>
+      <span className="descript" value={description} ref={refDescription}>{description} </span>
       { !isMovieN
         ? <React.Fragment>
+          <br/>
           <label className="descript" htmlFor="totalEpisodes">Total Episodes: </label>
           <span className="descript" ref={refTotalEpisodes}>{totalEpisodes}.</span>
         </React.Fragment>
