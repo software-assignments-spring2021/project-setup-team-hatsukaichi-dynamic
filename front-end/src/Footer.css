@@ -1,5 +1,6 @@
 @media screen and (max-width: 2400px) {
-  .footer-links, #trakt-power {
+  .footer-links,
+  #trakt-power {
     font-size: 18px;
   }
 
@@ -9,7 +10,8 @@
 }
 
 @media screen and (max-width: 1600px) {
-  .footer-links, #trakt-power {
+  .footer-links,
+  #trakt-power {
     font-size: 17px;
   }
 
@@ -19,7 +21,8 @@
 }
 
 @media screen and (max-width: 992px) {
-  .footer-links, #trakt-power {
+  .footer-links,
+  #trakt-power {
     font-size: 16px;
   }
 
@@ -29,7 +32,8 @@
 }
 
 @media screen and (max-width: 650px) {
-  .footer-links, #trakt-power {
+  .footer-links,
+  #trakt-power {
     font-size: 14px;
   }
 
