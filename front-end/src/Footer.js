@@ -11,7 +11,6 @@ function Footer() {
         <img id="trakt-logo" src={trakt} alt="Trakt Logo" />
         <Link to="/terms-of-service" className="footer-links">Terms of Service</Link>
         <Link to="/meet-the-team" className="footer-links">Meet the Team</Link>
-        
       </div>
     </footer>
   );
