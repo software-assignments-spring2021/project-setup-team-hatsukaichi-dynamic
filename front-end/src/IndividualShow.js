@@ -154,7 +154,6 @@ const IndividualShow = (props) => {
         <br/>
 		    <img  src={mockShowImage(show.id)} alt={`cover-${show.id}`} ref={refCover}></img>
         </div>
-        
 		    <div id="clear"></div>
 		</fieldset>
 	    </div>
