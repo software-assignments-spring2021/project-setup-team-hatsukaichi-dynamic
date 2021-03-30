@@ -61,6 +61,24 @@ In front-end, create a file named '.env' with the following contents:
 
 Replace [your API key] with your actual API key. Save the file and close it.
 
-Then, run:
+For example, if your API key is 123456, the file would read:
+
+> REACT_APP_MOCKAROO_KEY=123456
+
+Then, in front-end, run:
 
 > npm start
+
+To start the back end of the project, navigate to the back-end folder and run the following commands in the command line:
+
+> npm install
+
+In back-end, create a file named '.env' with the following contents:
+
+> MOCKAROO_KEY=[your API key]
+
+Replace [your API key] with your actual API key. Save the file and close it.
+
+Then, in back-end, run:
+
+> npx nodemon

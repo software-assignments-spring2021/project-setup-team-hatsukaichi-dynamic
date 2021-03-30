@@ -7,44 +7,106 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { createMockUser, mockShowAPI, mockUserImage, mockShowImage, mockUserUpdate } from './MockData'
 import { Link } from 'react-router-dom'
 import Modal from "react-modal";
+import { AuthContext } from './App';
 require('dotenv').config();
 
-// UserInfo displays username, user bio, and user profile picture
+/* UserInfo displays username, user bio, and user profile picture */
 const UserInfo = ({ username, bio, image }) => {
-    return (
+  return (
     <div id="heading">
       <img src={image} alt="profile" id="profile-picture" />
       <div id="profile-text">
-        <h3>{username}'s Profile</h3>
-        <p>{bio}</p>
+        <h3 id="profile-title">{username}'s Profile</h3>
+        <p id="bio" >{bio}</p>
       </div>
     </div>
   )
 };
 
+/* RecentShows displays the up to four most recent shows for a user */
 const RecentShows = ({ shows }) => {
   return (
     <>
-      <h4>Recently Added Shows</h4>
+      <h4 id="title-rec-shows">Recently Added Shows</h4>
       {shows
         ? <div id="profile-show-container">
           {shows.map((show) => {
-            return <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`} key={show.id} />;
+            return <Link to={`/show/${show.id}`} key={show.id}> <img className="show-image" src={mockShowImage(show.id)} alt={`cover-${show.id}`} /> </Link>;
           })}
         </div>
-        : "No shows. Add some shows on the My Shows page!"}
+        : <p id="no-shows">No shows. Add some shows on the My Shows page!</p>}
     </>
+  )
+}
+
+/* SettingsForm displays the contents of the settings modal--a form for 
+ * updating user account information. */
+const SettingsForm = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [bio, setBio] = useState("");
+  const [pic, setPic] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newData = {
+      ...props.data,
+      'bio': bio,
+      'img': pic,
+      'email': email
+    }
+    axios.patch(`https://my.api.mockaroo.com/tv_users/${props.data.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`, newData)
+      .then((response) => {
+        console.log(response)
+        props.updateUserData(response.data)
+        props.toggleModal()
+      })
+      .catch((err) => {
+        console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+        console.log(err);
+        props.updateUserData(mockUserUpdate(props.data.id, newData))
+        props.toggleModal()
+      })
+  }
+
+  useEffect(() => {
+    setEmail(props.data.email)
+    setBio(props.data.bio)
+    setPic(props.data.img)
+  }, [props.data.email, props.data.bio, props.data.img]);
+
+  return (
+    <div className="modal-contents">
+      <form id="settings-form" onSubmit={handleSubmit}>
+        <div id="field-modal">
+          <h1 id="settings-title">Settings</h1>
+          <label className="label-profile">User Email:</label>
+          <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+          <br />
+          <label className="label-profile">Password: </label>
+          <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
+          <br />
+          <label className="label-profile">Biography:</label>
+          <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
+          <br />
+          <label className="label-profile">Profile Pic URL:</label>
+          <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
+          <br />
+          <div id="settings-btns" className="profile-links">
+          <button className="prof-button" onClick={props.toggleModal}>Back</button>
+          <button type="submit" className="prof-button" form="settings-form">Save</button>
+          </div>
+        </div>
+    </form>
+  </div>
   )
 }
 
 const ProfileContents = ({ data, updateUserData }) => {
   const [userShows, setUserShows] = useState([]);
   const [copied, setCopied] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [bio, setBio] = useState("");
-  const [pic, setPic] = useState("");
   const [open, setOpen] = useState(false);
+  const { loggedInUser } = React.useContext(AuthContext);
 
   const toggleModal = () => {
     setOpen(!open);
@@ -53,34 +115,6 @@ const ProfileContents = ({ data, updateUserData }) => {
   const onCopy = () => {
     setCopied(true);
   }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newData = {
-      ...data,
-      'bio': bio,
-      'img': pic,
-      'email': email
-    }
-    axios.patch(`https://my.api.mockaroo.com/tv_users/${data.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`, newData)
-      .then((response) => {
-        console.log(response)
-        updateUserData(response.data)
-        toggleModal()
-      })
-      .catch((err) => {
-	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
-        console.log(err);
-        updateUserData(mockUserUpdate(data.id, newData))
-        toggleModal()
-      })
-  }
-
-  useEffect(() => {
-    setEmail(data.email)
-    setBio(data.bio)
-    setPic(data.img)
-  }, [data.email, data.bio, data.img]);
 
   useEffect(() => {
     let showIds = [];
@@ -109,8 +143,8 @@ const ProfileContents = ({ data, updateUserData }) => {
               showInfo.push(response.data);
             })
             .catch((err) => {
-	      console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
-	      console.log(err);
+              console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+              console.log(err);
               showInfo.push(mockShowAPI[show.id]);
             })
         )
@@ -127,8 +161,8 @@ const ProfileContents = ({ data, updateUserData }) => {
     <>
       <div className="show-content">
         <div className="main">
-          <div className="show-details">
-            <UserInfo username={data.username} bio={bio} image={mockUserImage(data.id)} />
+          <div className="show-profile-details">
+            <UserInfo username={data.username} bio={data.bio} image={mockUserImage(data.id)} />
             <RecentShows shows={userShows} />
             <br /><br />
             <div className="profile-links">
@@ -137,46 +171,26 @@ const ProfileContents = ({ data, updateUserData }) => {
                   <button className="prof-button">My Shows</button>
                 </Link>
               </div>
-              <div id="buttons">
-                <button className="prof-button" onClick={toggleModal}>Settings</button>
-                <Modal
-                  isOpen={open}
-                  onRequestClose={toggleModal}
+              {loggedInUser && loggedInUser.id === data.id
+                ? <div id="buttons">
+                  <button className="prof-button" onClick={toggleModal}>Settings</button>
+                  <Modal
+                    isOpen={open}
+                    onRequestClose={toggleModal}
                     contentLabel="Settings"
-		    className="settings-modal"
-		    overlayClassName="modal-open"
-                >
-                  <div className="modal-contents">
-                    <form id="settings-form" onSubmit={handleSubmit}>
-                      <fieldset>
-                        <h1 id="settings-title">Settings</h1>
-                        <label className="label-custom">User Email:</label>
-                        <input className="inputs" type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-                        <br />
-                        <label className="label-custom">Password: </label>
-                        <input className="inputs" type="password" id="password" name="password" placeholder="******" value={password} onChange={e => setPassword(e.target.value)} />
-                        <br />
-                        <label className="label-custom">Biography:</label>
-                        <input className="inputs" type="text" id="bio" name="bio" value={bio} onChange={e => setBio(e.target.value)} />
-                        <br />
-                        <label className="label-custom">Profile Pic URL:</label>
-                        <input className="inputs" type="url" id="prof-pic" name="prof-pic" value={pic} onChange={e => setPic(e.target.value)} />
-                        <br />
-                        <div id="settings-btns" className="profile-links">
-                          <button className="prof-button" onClick={toggleModal}>Back</button>
-                          <button type="submit" className="prof-button" form="settings-form">Save</button>
-                        </div>
-                      </fieldset>
-                    </form>
-                  </div>
-                </Modal>
-              </div>
+                    className="settings-modal"
+                    overlayClassName="modal-open"
+                  >
+                    <SettingsForm data={data} updateUserData={updateUserData} toggleModal={toggleModal}/>
+                  </Modal>
+                </div>
+                : null}
               <CopyToClipboard text={window.location.href} onCopy={onCopy}>
                 <div className="clipboard-button">
                   {/*CopyToClipboard must have exactly one child, hence why the button and copied text are wrapped in a div.*/}
                   <button className="prof-button">Share</button>
                   <br /> <br />
-                  <p>{copied ? "Copied URL to clipboard." : ""}</p>
+                  <p id="copied">{copied ? "Copied URL to clipboard." : ""}</p>
                 </div>
               </CopyToClipboard>
             </div>
@@ -204,8 +218,8 @@ const Profile = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to 
         // access a non-existent user
-	console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
-	console.log(err);
+        console.log("We likely reached Mockaroo's request limit, or you did not insert your API key in .env.");
+        console.log(err);
         const mockUser = createMockUser(props.id);
         setUserData(mockUser);
       });
