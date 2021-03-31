@@ -4,8 +4,6 @@ const app = express()
 require('dotenv').config()
 app.use(express.json())
 
-
-
 app.get('/shows/:id', (req, res, next) => {
     axios.get(`https://my.api.mockaroo.com/shows/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}`)
         .then( (response) => {
@@ -27,7 +25,7 @@ app.get('/tv_users/:id', (req, res, next) => {
 });
 
 app.get('/shows', (req, res, next) => {
-    axios.get(`https://my.api.mockaroo.com/shows.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`)
+    axios.get(`https://my.api.mockaroo.com/shows.json?key=${process.env.MOCKAROO_KEY}`)
         .then( (response) => {
             res.json(response.data)
         })
@@ -51,6 +49,5 @@ app.patch('/tv_users/:id', (req, res, next) => {
             next(err)
         })
 });
-
 
 module.exports = app
