@@ -1,6 +1,6 @@
 # Terms and Conditions
 
-Last updated: March 10, 2021
+Last updated: March 31, 2021
 
 Please read these terms and conditions carefully before using Our Service.
 
@@ -28,7 +28,7 @@ For the purposes of these Terms and Conditions:
 
 * "Third-party Social Media Service" means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.
 
-* "Website" refers to TV Tracker, accessible from [TBD].
+* "Website" refers to TV Tracker, accessible from https://tvtracker.us.
 
 * "You" means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
@@ -41,14 +41,16 @@ Your access to and use of the Service is conditioned on Your acceptance of and c
 By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.
 
 Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company. Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service.
-Links to Other Websites
+
+## Links to Other Websites
 
 Our Service may contain links to third-party web sites or services that are not owned or controlled by the Company.
 
 The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such web sites or services.
 
 We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.
-Termination
+
+## Termination
 
 We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.
 
@@ -109,4 +111,4 @@ By continuing to access or use Our Service after those revisions become effectiv
 
 If you have any questions about these Terms and Conditions, You can contact us:
 
-* By visiting this page on our website: TBD
+* By visiting [our contact page](https://tvtracker.us/meet-the-team).
