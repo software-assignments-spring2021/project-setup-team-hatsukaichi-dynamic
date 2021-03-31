@@ -1,38 +1,40 @@
 import React from 'react'
-import 'react-sticky-header/styles.css';
-import StickyHeader from 'react-sticky-header';
+import 'react-sticky-header/styles.css'
+import StickyHeader from 'react-sticky-header'
 import './Header.css'
 import Hamburger from './Hamburger'
 import logo from './Images/logo.png'
-import HeaderLogo from './HeaderLogo';
-import SignupButton from './SignupButton';
+import HeaderLogo from './HeaderLogo'
+import SignupButton from './SignupButton'
 import LoginButton from './LoginButton'
-import { AuthContext } from './App';
-import LogoutButton from './LogoutButton';
+import { AuthContext } from './App'
+import LogoutButton from './LogoutButton'
 
 const Header = () => {
-  const { loggedInUser } = React.useContext(AuthContext);
+  const { loggedInUser } = React.useContext(AuthContext)
   return (
     <StickyHeader
       header={
         <div className="header-root">
-          <Hamburger pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+          <Hamburger
+            pageWrapId={'page-wrap'}
+            outerContainerId={'outer-container'}
+          />
           <HeaderLogo src={logo} className="logo-img" />
           <div className="login-signup-buttons">
-            {loggedInUser 
-            ? <LogoutButton /> 
-            :
+            {loggedInUser ? (
+              <LogoutButton />
+            ) : (
               <>
                 <LoginButton />
                 <SignupButton />
               </>
-            }
+            )}
           </div>
         </div>
       }
-    >
-    </StickyHeader>
-  );
+    ></StickyHeader>
+  )
 }
 
-export default Header;
+export default Header
