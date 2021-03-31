@@ -76,12 +76,6 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
   const refDescription = useRef();
   const refGenre = useRef();
   const refTotalEpisodes = useRef();
-  let movieV = { isMovieN };
-  if (isMovieN) {
-    movieV = "Yes";
-  } else {
-    movieV = "No";
-  }
 
   return (
     <div className="description">
@@ -89,9 +83,14 @@ const Description = ({ genre, description, totalEpisodes, isMovieN }) => {
       <label className="descript" htmlFor="genre">Genre:  </label>
       <span className="descript" ref={refGenre}>{genre}</span> <br/>
       <label className="descript" htmlFor="description">Description:  </label>
-      <span className="descript" value={description} ref={refDescription}>{description} </span> <br/>
-      <label className="descript" htmlFor="totalEpisodes">Total Episodes: </label>
-      <span className="descript" ref={refTotalEpisodes}>{totalEpisodes}.</span>
+      <span className="descript" value={description} ref={refDescription}>{description} </span>
+      { !isMovieN
+        ? <>
+          <br/>
+          <label className="descript" htmlFor="totalEpisodes">Total Episodes: </label>
+          <span className="descript" ref={refTotalEpisodes}>{totalEpisodes}.</span>
+        </>
+        : null }
     </div>
   )
 }
@@ -154,7 +153,6 @@ const IndividualShow = (props) => {
         <br/>
 		    <img  src={mockShowImage(show.id)} alt={`cover-${show.id}`} ref={refCover}></img>
         </div>
-        
 		    <div id="clear"></div>
 		</fieldset>
 	    </div>

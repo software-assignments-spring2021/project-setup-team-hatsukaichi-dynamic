@@ -13,7 +13,7 @@ import Login from './Login';
 import Signup from './Signup';
 require('dotenv').config();
 
-Modal.setAppElement("#root");
+Modal.setAppElement("#root"); //Necessary for settings modal
 
 const ProfileWrapper = ({ match }) => {
   return (
