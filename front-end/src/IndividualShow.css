@@ -87,6 +87,7 @@
   color: #2d2d2d;
   padding: 1em 1em 1em 1em;
 }
+
 #episode:hover,
 #season:hover,
 #description:hover {
@@ -112,23 +113,28 @@ span {
   .descript {
     font-size: 16px;
   }
+
   #profile-title,
   #show-title {
     font-size: 22px;
   }
+
   #show-container img {
     width: 75%;
     padding: 0.1em;
   }
+
   #cover {
     height: 70%;
   }
+
   #episode,
   #season,
   #description {
     margin-top: 1%;
     margin-bottom: 1%;
   }
+
   #cover img {
     height: 100%;
     width: 100%;
@@ -145,23 +151,28 @@ span {
   .descript {
     font-size: 14px;
   }
+
   #profile-title,
   #show-title {
     font-size: 20px;
   }
+
   #show-container img {
     width: 66%;
     padding: 0.2em;
   }
+
   #cover {
     height: 70%;
   }
+
   #episode,
   #season,
   #description {
     margin-top: 1%;
     margin-bottom: 1%;
   }
+
   #cover img {
     height: 100%;
     width: 100%;
@@ -178,18 +189,22 @@ span {
   .descript {
     font-size: 12px;
   }
+
   #profile-title,
   #show-title {
     font-size: 15px;
   }
+
   #show-container img {
     width: 55%;
     padding: 0.1em;
   }
+
   #cover img {
     height: 100%;
     width: 100%;
   }
+
   #episode,
   #season,
   #description,

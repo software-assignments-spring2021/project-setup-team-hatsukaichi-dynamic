@@ -4,18 +4,21 @@ import { AuthContext } from './App.js'
 import './LogoutButton.css'
 
 function LogoutButton() {
-  const { setLoggedInUser } = React.useContext(AuthContext);
-  const history = useHistory();
+  const { setLoggedInUser } = React.useContext(AuthContext)
+  const history = useHistory()
 
   const handleClick = (e) => {
     e.preventDefault()
-    setLoggedInUser(null);
-    history.push('/');
+    setLoggedInUser(null)
+    history.push('/')
   }
 
   return (
-    <button onClick={handleClick} className="logoutButton"> Logout </button>
-  );
+    <button onClick={handleClick} className="logoutButton">
+      {' '}
+      Logout{' '}
+    </button>
+  )
 }
 
-export default LogoutButton;
+export default LogoutButton

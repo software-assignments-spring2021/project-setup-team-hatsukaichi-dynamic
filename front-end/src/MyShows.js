@@ -69,7 +69,6 @@ const ShowGrid = (props) => {
           })
           : <p id="no-shows">No shows found...</p>
         }
-
       </div>
 
     </>
