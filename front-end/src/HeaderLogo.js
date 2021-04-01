@@ -6,9 +6,11 @@ import './HeaderLogo.css'
 function HeaderLogo() {
   return (
     <>
-      <Link to="/Home"><img id="logo" src={logo} alt="TV Tracker Logo" /> </Link>
+      <Link to="/Home">
+        <img id="logo" src={logo} alt="TV Tracker Logo" />{' '}
+      </Link>
     </>
   )
 }
 
-export default HeaderLogo;
+export default HeaderLogo
