@@ -2,11 +2,44 @@
   .footer-links {
     font-size: 18px;
   }
+
+  #trakt-power {
+    font-size: 15px;
+    right: 4.5em;
+  }
+
+  #trakt-logo {
+    width: 3%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .footer-links {
+    font-size: 17px;
+  }
+
+  #trakt-power {
+    font-size: 14px;
+    right: 4.5em;
+  }
+
+  #trakt-logo {
+    width: 4%;
+  }
 }
 
 @media screen and (max-width: 992px) {
   .footer-links {
     font-size: 16px;
+  }
+
+  #trakt-power {
+    font-size: 13px;
+    right: 4.5em;
+  }
+
+  #trakt-logo {
+    width: 5%;
   }
 }
 
@@ -14,4 +47,30 @@
   .footer-links {
     font-size: 14px;
   }
+
+  #trakt-power {
+    font-size: 0;
+    right: 0;
+  }
+
+  #trakt-logo {
+    width: 6%;
+  }
+}
+
+.footer-container {
+  box-shadow: 0 50vh 0 50vh #262626;
+}
+
+#trakt-logo {
+  position: absolute;
+  right: .5em;
+}
+
+#trakt-power {
+  color: #000000;
+  position: absolute;
+  text-align: right;
+  padding-bottom: 0;
+  padding-left: 1em;
 }
