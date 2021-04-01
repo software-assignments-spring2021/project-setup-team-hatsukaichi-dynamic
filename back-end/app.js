@@ -5,7 +5,7 @@ require('dotenv').config()
 app.use(express.json())
 
 app.get('/tv_users', (req, res, next) => {
-    axios.get(`https://my.api.mockaroo.com/tv_users.json?key=`)
+    axios.get(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.MOCKAROO_KEY}`)
         .then( (response) => {
             res.json(response.data)
         })
