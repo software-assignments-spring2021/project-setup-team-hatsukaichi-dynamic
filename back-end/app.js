@@ -19,6 +19,10 @@ app.get('/shows/:id', (req, res, next) => {
     })
 })
 
+app.get('/', (req, res, next) => {
+  res.send("TV Tracker App Home page!")
+})
+
 app.get('/tv_users/:id', (req, res, next) => {
   axios
     .get(
