@@ -96,10 +96,8 @@ For ``Description`` enter description for the project (e.g. *App allows to retri
 For ``Redirect uri``, enter `urn:ietf:wg:oauth:2.0:oob`. <br>
 Leave the rest empty and click on ``SAVE APP``. <br>
 You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. More 
-information about Trakt API required headers is available [here](https://trakt.docs.
-apiary.io/#introduction/required-headers). 
-3. To create Oauth, please follow these instructions [here](https://github.com/
-xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 
+information about Trakt API required headers is available [here](https://trakt.docs.apiary.io/#introduction/required-headers). 
+3. To create Oauth, please follow these instructions [here](https://github.com/xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 
 
 
 
