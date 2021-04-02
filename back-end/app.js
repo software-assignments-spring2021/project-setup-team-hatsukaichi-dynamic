@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/shows/:id', (req, res, next) => {
   axios
     .get(
-      `https://my.api.mockaroo.com/shows/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}`
+      `https://my.api.mockaroo.com/shows/${req.params.id}.json?key=${process.env.API_MOCKAROO_KEY}`
     )
     .then((response) => {
       res.json(response.data)
@@ -21,7 +21,7 @@ app.get('/shows/:id', (req, res, next) => {
 app.get('/tv_users/:id', (req, res, next) => {
   axios
     .get(
-      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}`
+      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_MOCKAROO_KEY}`
     )
     .then((response) => {
       res.json(response.data)
@@ -32,7 +32,7 @@ app.get('/tv_users/:id', (req, res, next) => {
 })
 
 app.post('/tv_users', (req, res, next) => {
-    axios.post(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.MOCKAROO_KEY}&__method=POST`, {
+    axios.post(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_MOCKAROO_KEY}&__method=POST`, {
         "username": req.body.username,
         "email": req.body.email,
         "password": req.body.password
@@ -49,7 +49,7 @@ app.post('/tv_users', (req, res, next) => {
 app.get('/shows', (req, res, next) => {
   axios
     .get(
-      `https://my.api.mockaroo.com/shows.json?key=${process.env.MOCKAROO_KEY}`
+      `https://my.api.mockaroo.com/shows.json?key=${process.env.API_MOCKAROO_KEY}`
     )
     .then((response) => {
       res.json(response.data)
@@ -62,7 +62,7 @@ app.get('/shows', (req, res, next) => {
 app.patch('/tv_users/:id', (req, res, next) => {
   axios
     .patch(
-      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.MOCKAROO_KEY}&__method=PATCH`,
+      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_MOCKAROO_KEY}&__method=PATCH`,
       {
         username:
           req.body.username == null ? req.query.username : req.body.username,
