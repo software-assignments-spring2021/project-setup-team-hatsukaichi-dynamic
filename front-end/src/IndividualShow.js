@@ -81,27 +81,23 @@ const Description = ({ genres, description, totalEpisodes, isMovie }) => {
 
 const IndividualShow = ({ id }) => {
   const [show, setShow] = useState({})
-  const [showProgress, setShowProgress] = useState({})
+  const notLoggedShow = {
+    seasons: '0',
+    episodes: '0',
+    platform: ''
+  }
+  const [showProgress, setShowProgress] = useState(notLoggedShow)
   const { loggedInUser } = React.useContext(AuthContext)
   // fetch the show from the user information
   useEffect(() => {
     // Fetch user-related show information for the logged in user
-    const notLoggedShow = {
-      seasons: '0',
-      episodes: '0',
-      platform: ''
-    }
     if (loggedInUser) {
       const userShowInfo = loggedInUser.shows.filter((show) => {
         return show.id === parseInt(id)
       })
-      if (userShowInfo.length === 0) {
-        setShowProgress(notLoggedShow)
-      } else {
+      if (userShowInfo.length !== 0) {
         setShowProgress(userShowInfo[0])
       }
-    } else {
-      setShowProgress(notLoggedShow)
     }
     // Fetch show meta-information from the API
     axios
