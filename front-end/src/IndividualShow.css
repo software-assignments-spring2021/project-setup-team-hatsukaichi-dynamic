@@ -39,12 +39,12 @@
   margin: 1em;
   font-size: 16px;
   background-color: #666666;
-  color: #D1CDC7 ;
+  color: #d1cdc7;
   padding: 1em 1em 1em 1em;
 }
 
 .platform {
-  margin: .75em;
+  margin: 0.75em;
   font-size: 16px;
   background-color: #666666;
   color: #d1cdc7;
@@ -209,15 +209,18 @@ span {
     margin-top: 6%;
     margin-bottom: 6%;
   }
-#episode:hover, #season:hover, #description:hover {
-  border: 2px solid #D1DCD7;
-  background-color: #2D2D2D;
-  color: #D1DCD7;
-}
+  #episode:hover,
+  #season:hover,
+  #description:hover {
+    border: 2px solid #d1dcd7;
+    background-color: #2d2d2d;
+    color: #d1dcd7;
+  }
 
-.platform-select {
-  max-width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1em;
+  .platform-select {
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+  }
 }
