@@ -6,6 +6,16 @@ require('dotenv').config()
 app.use(express.json())
 app.use(morgan("dev")) // dev is a concise color-coded default style for morgan
 
+app.get('/tv_users', (req, res, next) => {
+    axios.get(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.MOCKAROO_KEY}`)
+        .then( (response) => {
+            res.json(response.data)
+        })
+        .catch( (err) => {
+            next(err)
+        })
+});
+
 app.get('/shows/:id', (req, res, next) => {
   axios
     .get(
