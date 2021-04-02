@@ -56,4 +56,11 @@ For the front-end, navigate to the front-end folder and run `npm start` in the c
 
 ## Building and Testing
 
-TBD.
+### Trakt API
+
+To use Trakt API, you need to register for an account and create a Trakt App. 
+1. Register for an account [here](https://login.apiary.io/register).
+2. Create a new Trakt API app [here](https://trakt.tv/oauth/applications/new) to have your own ``client_id`` and ``client_secret``, https://trakt.tv/oauth/applications.<br>
+You only need to fill up the ``Name`` with a ``Description`` and ``Redirect uri`` to `urn:ietf:wg:oauth:2.0:oob`, leave the rest empty and click on ``SAVE APP``.
+You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. 
+3. To create Oauth, please follow these instructions [here](https://github.com/xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 

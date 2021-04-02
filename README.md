@@ -51,6 +51,8 @@ You can take a look at the original project proposal [here](https://github.com/a
 
 Fork (if intending to make changes) or clone this repository.
 
+### Building 
+
 To start the front end of the project, navigate to the front-end folder and run the following commands in the command line:
 
 > npm install
@@ -82,3 +84,14 @@ Replace [your API key] with your actual API key. Save the file and close it.
 Then, in back-end, run:
 
 > npx nodemon
+
+
+### Trakt API Setup
+
+To use Trakt API, you need to register for an account and create a Trakt App. 
+1. Register for an account [here](https://login.apiary.io/register).
+2. Create a new Trakt API app [here](https://trakt.tv/oauth/applications/new) to have your own ``client_id`` and ``client_secret``. <br>
+You only need to fill up the ``Name`` with a ``Description`` and ``Redirect uri`` to `urn:ietf:wg:oauth:2.0:oob`, leave the rest empty and click on ``SAVE APP``. 
+You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. 
+3. To create Oauth, please follow these instructions [here](https://github.com/
+xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 
