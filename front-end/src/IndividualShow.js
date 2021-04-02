@@ -28,7 +28,7 @@ const ProgressData = ({ initialSeason, initialEpisode }) => {
 
   return (
     <div type="hidden">
-      <form if="progress-form" onSubmit={updateProgress}>
+      <form id="progress-form" onSubmit={updateProgress}>
         <label className="label-custom" htmlFor="season">
           Current Season
         </label>
@@ -67,7 +67,7 @@ const Description = ({ genres, description, totalEpisodes, isMovie }) => {
       <p className="descript">{genres ? genres.replaceAll('|', ', ') : null}</p>
       <span>Description</span>
       <p className="descript">{description}</p>
-      {isMovie ? (
+      {!isMovie ? (
         <>
           <span>Total Episodes</span>
           <p className="descript">{totalEpisodes}</p>
@@ -87,13 +87,13 @@ const IndividualShow = ({ id }) => {
   useEffect(() => {
     // Fetch user-related show information for the logged in user
     const notLoggedShow = {
-      seasons: 0,
-      episodes: 0,
+      seasons: '0',
+      episodes: '0',
       platform: ''
     }
     if (loggedInUser) {
-      const userShowInfo = loggedInUser.shows.filer((show) => {
-        return show.id === id
+      const userShowInfo = loggedInUser.shows.filter((show) => {
+        return show.id === parseInt(id)
       })
       if (userShowInfo.length === 0) {
         setShowProgress(notLoggedShow)
