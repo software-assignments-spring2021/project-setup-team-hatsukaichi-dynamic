@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import './IndividualShow.css'
@@ -7,97 +7,106 @@ import { mockShowAPI, mockShowImage } from './MockData'
 import { Link } from 'react-router-dom'
 import platforms from './Platforms'
 import Select from 'react-select'
+import { AuthContext } from './App'
 require('dotenv').config()
 
 /*the component stores user's watched episode progress 
 by allowing to save the show's latest season and episode watched*/
-const ProgressData = ({ season, episode, isMovieSet }) => {
-  const refSeason = useRef()
-  const refEpisode = useRef()
-  const saveProgressData = () => {
-    let progress = []
-    let seasonS = React.findDOMNode(this.refs.season).value
-    let episodeS = React.findDOMNode(this.refs.episode).value
-    progress.push(seasonS)
-    progress.push(episodeS)
-  } //return null if the show is a movie since a movie does not have seasons or episodes
-  if (isMovieSet === true) {
-    return null
-  } else {
-    return (
-      <div type="hidden">
-        <form onSubmit={(e) => saveProgressData()}>
-          <label className="label-custom" htmlFor="season">
-            Current Season:{' '}
-          </label>
-          <input
-            id="season"
-            className="progress"
-            defaultValue={season}
-            ref={refSeason}
-          />
-          <br />
-          <label className="label-custom" htmlFor="episode">
-            Current Episode:
-          </label>
-          <input
-            id="episode"
-            className="progress"
-            defaultValue={episode}
-            ref={refEpisode}
-          />
-          <br />
-          <input
-            className="btn-progress"
-            id="btn-progress"
-            type="submit"
-            value="Save Progress"
-          />
-        </form>
-      </div>
-    )
-  }
-}
-
-
-const Description = ({ genres, description, totalEpisodes, isMovie }) => {
-
-  return (
-    <div className="description">
-      <span>
-        Genres
-      </span>
-      <p>
-        {genres ? genres.replaceAll("|", ", ") 
-        : null}</p>
-      <span>
-        Description
-      </span>
-      <p>
-        {description}
-      </p>
-      {isMovie ? (
-        <>
-          <span>
-            Total Episodes
-          </span>
-          <p>
-            {totalEpisodes}.
-          </p>
-        </>
-      ) : <p>This entry is a movie</p>}
-    </div>
-    )
-  }
-
-const IndividualShow = ({ id, seasons, episodes, completed, progress }) => {
-  const [show, setShow] = useState({});
-
+const ProgressData = ({ initialSeason, initialEpisode }) => {
+  const [season, setSeason] = useState('')
+  const [episode, setEpisode] = useState('')
 
   useEffect(() => {
+    setSeason(initialSeason)
+    setEpisode(initialEpisode)
+  }, [initialSeason, initialEpisode])
+
+  const updateProgress = (e) => {
+    e.preventDefault()
+    console.log('update to season ' + season + ' episode ' + episode)
+  }
+
+  return (
+    <div type="hidden">
+      <form if="progress-form" onSubmit={updateProgress}>
+        <label className="label-custom" htmlFor="season">
+          Current Season
+        </label>
+        <input
+          id="season"
+          className="progress"
+          value={season}
+          onChange={(e) => setSeason(e.target.value)}
+        />
+        <br />
+        <label className="label-custom" htmlFor="episode">
+          Current Episode
+        </label>
+        <input
+          id="episode"
+          className="progress"
+          value={episode}
+          onChange={(e) => setEpisode(e.target.value)}
+        />
+        <br />
+        <input
+          className="btn-progress"
+          id="btn-progress"
+          type="submit"
+          value="Save"
+        />
+      </form>
+    </div>
+  )
+}
+
+const Description = ({ genres, description, totalEpisodes, isMovie }) => {
+  return (
+    <div className="description">
+      <span>Genres</span>
+      <p className="descript">{genres ? genres.replaceAll('|', ', ') : null}</p>
+      <span>Description</span>
+      <p className="descript">{description}</p>
+      {isMovie ? (
+        <>
+          <span>Total Episodes</span>
+          <p className="descript">{totalEpisodes}</p>
+        </>
+      ) : (
+        <p className="descript">This entry is a movie</p>
+      )}
+    </div>
+  )
+}
+
+const IndividualShow = ({ id }) => {
+  const [show, setShow] = useState({})
+  const [showProgress, setShowProgress] = useState({})
+  const { loggedInUser } = React.useContext(AuthContext)
+  // fetch the show from the user information
+  useEffect(() => {
+    // Fetch user-related show information for the logged in user
+    const notLoggedShow = {
+      seasons: 0,
+      episodes: 0,
+      platform: ''
+    }
+    if (loggedInUser) {
+      const userShowInfo = loggedInUser.shows.filer((show) => {
+        return show.id === id
+      })
+      if (userShowInfo.length === 0) {
+        setShowProgress(notLoggedShow)
+      } else {
+        setShowProgress(userShowInfo[0])
+      }
+    } else {
+      setShowProgress(notLoggedShow)
+    }
+    // Fetch show meta-information from the API
     axios
       .get(
-      `https://my.api.mockaroo.com/shows/${id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+        `https://my.api.mockaroo.com/shows/${id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
       )
       .then((response) => {
         setShow(response.data)
@@ -109,7 +118,7 @@ const IndividualShow = ({ id, seasons, episodes, completed, progress }) => {
         console.log(err)
         setShow(mockShowAPI[id])
       })
-  }, [id])
+  }, [id, loggedInUser])
 
   return (
     <>
@@ -119,9 +128,7 @@ const IndividualShow = ({ id, seasons, episodes, completed, progress }) => {
           <fieldset className="main">
             <div className="show-details">
               <fieldset>
-                <h3 id="title" value={show.name} ref={refTitle}>
-                  {show.name}
-                </h3>
+                <h3 id="title">{show.name}</h3>
                 <Link to="/my-shows/1">
                   <button className="btn-progress">Return to Shows</button>
                 </Link>
@@ -133,11 +140,16 @@ const IndividualShow = ({ id, seasons, episodes, completed, progress }) => {
                 <Link to="/my-shows/1">
                   <button className="btn-progress">Add to Watched Shows</button>
                 </Link>
-                <ProgressData season={seasons} episode={episodes} isMovieSet={show.isMovie} />
+                {show.isMovie ? null : (
+                  <ProgressData
+                    initialSeason={showProgress.seasons}
+                    initialEpisode={showProgress.episodes}
+                  />
+                )}
                 <Select className="platform-select" options={platforms} />
                 <div className="show-content">
                   <Description
-                    genre={show.genres}
+                    genres={show.genres}
                     description={show.description}
                     totalEpisodes={show.episodes}
                     isMovie={show.isMovie}
@@ -148,11 +160,7 @@ const IndividualShow = ({ id, seasons, episodes, completed, progress }) => {
             <div id="cover">
               <p className="label-custom">{show.name}</p>
               <br />
-              <img
-                src={mockShowImage(show.id)}
-                alt={`cover-${show.id}`}
-                ref={refCover}
-              ></img>
+              <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} />
             </div>
             <div id="clear"></div>
           </fieldset>
