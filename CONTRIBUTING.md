@@ -68,6 +68,13 @@ For ``Redirect uri``, enter `urn:ietf:wg:oauth:2.0:oob`. <br>
 Leave the rest empty and click on ``SAVE APP``. <br>
 You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. More information about Trakt API required headers is available [here](https://trakt.docs.apiary.io/#introduction/required-headers). 
 3. To create Oauth, please follow these instructions [here](https://github.com/xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 
+4. In your .env file, add the following line: 
+
+> API_TRAKT_KEY=your_client_id
+
+For example, if your client id is 123456, the file would read:
+
+> API_TRAKT_KEY=123456
 
 
  
