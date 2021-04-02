@@ -105,8 +105,3 @@ information about Trakt API required headers is available [here](https://trakt.d
 For example, if your client id is 123456, the file would read:
 
 > API_TRAKT_KEY=123456
-
-
-
-
-

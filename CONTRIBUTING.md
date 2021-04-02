@@ -75,12 +75,3 @@ You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. 
 For example, if your client id is 123456, the file would read:
 
 > API_TRAKT_KEY=123456
-
-
- 
-
-
-
-
-
-
