@@ -70,8 +70,8 @@ You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. 
 3. To create Oauth, please follow these instructions [here](https://github.com/xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 
 4. In your .env file, add the following line: 
 
-> API_TRAKT_KEY=your_client_id
+> API_KEY_TRAKT=your_client_id
 
 For example, if your client id is 123456, the file would read:
 
-> API_TRAKT_KEY=123456
+> API_KEY_TRAKT=123456
