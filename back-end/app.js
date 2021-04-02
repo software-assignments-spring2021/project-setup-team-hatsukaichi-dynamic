@@ -75,4 +75,17 @@ app.patch('/tv_users/:id', (req, res, next) => {
     })
 })
 
+app.get('/shows-trakt', (req, res, next) => {
+  axios
+    .get(
+      `https://api.trakt.tv/shows/popular?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_TRAKT_KEY}`
+    )
+    .then((response) => {
+      res.json(response.data)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
 module.exports = app
