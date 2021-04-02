@@ -51,6 +51,8 @@ You can take a look at the original project proposal [here](https://github.com/a
 
 Fork (if intending to make changes) or clone this repository.
 
+### Building 
+
 To start the front end of the project, navigate to the front-end folder and run the following commands in the command line:
 
 > npm install
@@ -75,10 +77,31 @@ To start the back end of the project, navigate to the back-end folder and run th
 
 In back-end, create a file named '.env' with the following contents:
 
-> MOCKAROO_KEY=[your API key]
+> API_KEY_MOCKAROO=[your API key]
 
 Replace [your API key] with your actual API key. Save the file and close it.
 
 Then, in back-end, run:
 
 > npx nodemon
+
+### Trakt API Setup
+
+To use Trakt API, you need to register for an account and create a Trakt App. 
+1. Register for an account [here](https://login.apiary.io/register).
+2. Create a new Trakt API app [here](https://trakt.tv/oauth/applications/new) to have 
+your own ``client_id`` and ``client_secret``. <br>
+For ``Name``, enter your project name (e.g. *TV Tracker*). <br>
+For ``Description`` enter description for the project (e.g. *App allows to retrieve information about trending shows and store it*). <br>
+For ``Redirect uri``, enter `urn:ietf:wg:oauth:2.0:oob`. <br>
+Leave the rest empty and click on ``SAVE APP``. <br>
+You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. More 
+information about Trakt API required headers is available [here](https://trakt.docs.apiary.io/#introduction/required-headers). 
+3. To create Oauth, please follow these instructions [here](https://github.com/xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 
+4. In your .env file, add the following line: 
+
+> API_KEY_TRAKT=your_client_id
+
+For example, if your client id is 123456, the file would read:
+
+> API_KEY_TRAKT=123456
