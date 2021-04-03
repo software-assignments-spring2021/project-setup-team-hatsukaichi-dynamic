@@ -10,7 +10,12 @@ import Select from 'react-select'
 import { AuthContext } from './App'
 require('dotenv').config()
 
-const ProgressData = ({ initialSeason, initialEpisode, updateProgress }) => {
+const ProgressData = ({
+  initialSeason,
+  initialEpisode,
+  updateSeasons,
+  updateEpisodes
+}) => {
   const [season, setSeason] = useState(0)
   const [episode, setEpisode] = useState(0)
 
@@ -19,14 +24,22 @@ const ProgressData = ({ initialSeason, initialEpisode, updateProgress }) => {
     setEpisode(initialEpisode)
   }, [initialSeason, initialEpisode])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    updateProgress(parseInt(season), parseInt(episode))
+  // handleSeasonChange and handleEpisodeChange updates both the current season state
+  // (in ProgressData) and the season field in showProgress in IndividualShow (the parent)
+  // component
+  const handleSeasonChange = (season) => {
+    setSeason(season)
+    updateSeasons(season)
+  }
+
+  const handleEpisodeChange = (episode) => {
+    setEpisode(episode)
+    updateEpisodes(episode)
   }
 
   return (
     <div type="hidden">
-      <form id="progress-form" onSubmit={handleSubmit}>
+      <fieldset id="progress-group">
         <label className="label-custom" htmlFor="season">
           Current Season
         </label>
@@ -35,7 +48,7 @@ const ProgressData = ({ initialSeason, initialEpisode, updateProgress }) => {
           className="progress"
           value={season}
           type="number"
-          onChange={(e) => setSeason(e.target.value)}
+          onChange={(e) => handleSeasonChange(parseInt(e.target.value))}
         />
         <br />
         <label className="label-custom" htmlFor="episode">
@@ -46,16 +59,10 @@ const ProgressData = ({ initialSeason, initialEpisode, updateProgress }) => {
           className="progress"
           value={episode}
           type="number"
-          onChange={(e) => setEpisode(e.target.value)}
+          onChange={(e) => handleEpisodeChange(parseInt(e.target.value))}
         />
         <br />
-        <input
-          className="btn-progress"
-          id="btn-progress"
-          type="submit"
-          value="Save"
-        />
-      </form>
+      </fieldset>
     </div>
   )
 }
@@ -116,11 +123,21 @@ const IndividualShow = ({ id }) => {
       })
   }, [id, loggedInUser])
 
-  const updateProgress = (seasons, episodes) => {
+  // TODO: do a check for NaN here
+  const updateSeasons = (seasons) => {
     const updatedShow = showProgress
     updatedShow.seasons = seasons
+    setShowProgress(updatedShow)
+  }
+
+  const updateEpisodes = (episodes) => {
+    const updatedShow = showProgress
     updatedShow.episodes = episodes
     setShowProgress(updatedShow)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
     // only go through with the PATCH request if there is a user logged in
     // and if the show is already in their list
     // TODO: Eventually move this into its own handleSubmit function to be done later
@@ -130,29 +147,36 @@ const IndividualShow = ({ id }) => {
         // parseInt is needed because id is stored as a String while show.id is a Number
         if (show.id === parseInt(id)) {
           updated = true
-          return updatedShow
+          return showProgress
         }
         return show
       })
+      const patchUser = loggedInUser
+
       if (updated) {
-        const patchUser = loggedInUser
         patchUser.shows = updatedShows
-        axios
-          .patch(
-            `https://my.api.mockaroo.com/tv_users/${loggedInUser.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`,
-            patchUser
-          )
-          .then((response) => {
-            setLoggedInUser(response.data)
-          })
-          .catch((err) => {
-            console.log(
-              "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
-            )
-            console.log(err)
-            setLoggedInUser(patchUser)
-          })
+      } else {
+        patchUser.shows.push(showProgress)
       }
+      axios
+        .patch(
+          `https://my.api.mockaroo.com/tv_users/${loggedInUser.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`,
+          patchUser
+        )
+        .then((response) => {
+          setLoggedInUser(response.data)
+        })
+        .catch((err) => {
+          console.log(
+            "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+          )
+          console.log(err)
+          setLoggedInUser(patchUser)
+        })
+    } else {
+      console.log(
+        'Oh no! There is no logged in user. Add some sort of notification here.'
+      )
     }
   }
 
@@ -184,13 +208,11 @@ const IndividualShow = ({ id }) => {
 
   const handleDropdownChange = (newValue, type) => {
     const updatedShow = showProgress
-    console.log(newValue + ' ' + type)
     if (type === 'platform') {
       updatedShow.platform = newValue.value
     } else if (type === 'status') {
       updatedShow.completed = newValue.value === 'Watched'
     }
-    console.log(updatedShow)
     setShowProgress(updatedShow)
   }
 
@@ -201,7 +223,7 @@ const IndividualShow = ({ id }) => {
         <div className="show-content">
           <fieldset className="main">
             <div className="show-details">
-              <fieldset>
+              <form id="show-form" onSubmit={handleSubmit}>
                 <h3 id="title">{show.name}</h3>
                 <Link to="/my-shows/1">
                   <button className="btn-progress">Return to My Shows</button>
@@ -216,7 +238,8 @@ const IndividualShow = ({ id }) => {
                   <ProgressData
                     initialSeason={showProgress.seasons}
                     initialEpisode={showProgress.episodes}
-                    updateProgress={updateProgress}
+                    updateSeasons={updateSeasons}
+                    updateEpisodes={updateEpisodes}
                   />
                 )}
                 <Select
@@ -233,7 +256,13 @@ const IndividualShow = ({ id }) => {
                     isMovie={show.isMovie}
                   />
                 </div>
-              </fieldset>
+                <input
+                  className="btn-progress"
+                  id="btn-progress"
+                  type="submit"
+                  value="Save"
+                />
+              </form>
             </div>
             <div id="cover">
               <p className="label-custom">{show.name}</p>
