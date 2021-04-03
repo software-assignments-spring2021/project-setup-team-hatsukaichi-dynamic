@@ -100,7 +100,7 @@ app.patch('/tv_users/:id', (req, res, next) => {
 app.get('/shows-trakt/:id', (req, res, next) => {
   axios
     .get(
-      `https://api.trakt.tv/search/trakt/${req.params.id}?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
+      `https://api.trakt.tv/shows/${req.params.id}?extended=full&Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
     )
     .then((response) => {
       res.json(response.data)
