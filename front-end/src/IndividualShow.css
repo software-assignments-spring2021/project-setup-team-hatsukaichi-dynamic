@@ -217,10 +217,17 @@ span {
     color: #d1dcd7;
   }
 
-  .platform-select {
+  .platform-select,
+  .status-select {
     max-width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
   }
+}
+
+.css-2b097c-container {
+  color: black;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }

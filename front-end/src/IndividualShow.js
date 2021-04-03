@@ -5,7 +5,7 @@ import './IndividualShow.css'
 import axios from 'axios'
 import { mockShowAPI, mockShowImage } from './MockData'
 import { Link } from 'react-router-dom'
-import platforms from './Platforms'
+import { platforms, statuses } from './DropdownOptions'
 import Select from 'react-select'
 import { AuthContext } from './App'
 require('dotenv').config()
@@ -84,8 +84,7 @@ const IndividualShow = ({ id }) => {
   const notLoggedShow = {
     id: id,
     seasons: 0,
-    episodes: 0,
-    platform: ''
+    episodes: 0
   }
   const [showProgress, setShowProgress] = useState(notLoggedShow)
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
@@ -157,20 +156,41 @@ const IndividualShow = ({ id }) => {
     }
   }
 
-  // platformToValue transforms a platform name to a value format to pre-populate
-  // the Select component for selecting a platform the show is being watched on.
-  const platformToValue = (platform) => {
-    const match = platforms.filter((p) => p.value === platform)
+  // textToValue transforms a text value to a value/label format to pre-populate
+  // the Select component that calls the function. It currently supports both
+  // platform dropdowns and status dropdowns
+  const textToValue = (text, type) => {
+    let array = []
+    switch (type) {
+      case 'platform':
+        array = platforms
+        break
+      case 'status':
+        array = statuses
+        break
+      default:
+        break
+    }
+    const match = array.filter((p) => p.value === text)
     if (match.length === 0) {
-      return { value: '', label: 'Select a Platform' }
+      return {
+        value: '',
+        label: `Select a ${type.charAt(0).toUpperCase() + type.slice(1)}`
+      }
     } else {
       return match[0]
     }
   }
 
-  const handlePlatformChange = (platform) => {
+  const handleDropdownChange = (newValue, type) => {
     const updatedShow = showProgress
-    updatedShow.platform = platform.value
+    console.log(newValue + ' ' + type)
+    if (type === 'platform') {
+      updatedShow.platform = newValue.value
+    } else if (type === 'status') {
+      updatedShow.completed = newValue.value === 'Watched'
+    }
+    console.log(updatedShow)
     setShowProgress(updatedShow)
   }
 
@@ -186,14 +206,12 @@ const IndividualShow = ({ id }) => {
                 <Link to="/my-shows/1">
                   <button className="btn-progress">Return to My Shows</button>
                 </Link>
-                <Link to="/my-shows/1">
-                  <button className="btn-progress">
-                    Add to In Progress Shows
-                  </button>
-                </Link>
-                <Link to="/my-shows/1">
-                  <button className="btn-progress">Add to Watched Shows</button>
-                </Link>
+                <Select
+                  className="status-select"
+                  defaultValue={textToValue(showProgress.completed, 'status')}
+                  options={statuses}
+                  onChange={(value) => handleDropdownChange(value, 'status')}
+                />
                 {show.isMovie ? null : (
                   <ProgressData
                     initialSeason={showProgress.seasons}
@@ -203,9 +221,9 @@ const IndividualShow = ({ id }) => {
                 )}
                 <Select
                   className="platform-select"
-                  defaultValue={platformToValue(showProgress.platform)}
+                  defaultValue={textToValue(showProgress.platform, 'platform')}
                   options={platforms}
-                  onChange={handlePlatformChange}
+                  onChange={(value) => handleDropdownChange(value, 'platform')}
                 />
                 <div className="show-content">
                   <Description
