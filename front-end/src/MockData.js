@@ -162,6 +162,16 @@ const mockShowAPI = {
     isMovie: true,
     episodes: 1,
     coverPhoto: 'http://dummyimage.com/184x242.png/ff4444/ffffff'
+  },
+  10: {
+    id: 10,
+    name: 'Deck the Halls',
+    description:
+      'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.',
+    genres: 'Comedy',
+    isMovie: false,
+    episodes: 10,
+    coverPhoto: 'http://dummyimage.com/175x231.png/dddddd/000000'
   }
 }
 
@@ -239,8 +249,8 @@ const mockAllShows = JSON.parse(`[{
   "name": "Deck the Halls",
   "description": "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.",
   "genres": "Comedy",
-  "isMovie": true,
-  "episodes": 1,
+  "isMovie": false,
+  "episodes": 10,
   "coverPhoto": "http://dummyimage.com/175x231.png/dddddd/000000"
 }]`)
 
