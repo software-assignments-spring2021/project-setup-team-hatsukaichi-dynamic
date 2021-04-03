@@ -10,25 +10,24 @@ import Select from 'react-select'
 import { AuthContext } from './App'
 require('dotenv').config()
 
-/*the component stores user's watched episode progress 
-by allowing to save the show's latest season and episode watched*/
-const ProgressData = ({ initialSeason, initialEpisode }) => {
-  const [season, setSeason] = useState('')
-  const [episode, setEpisode] = useState('')
+const ProgressData = ({ initialSeason, initialEpisode, updateProgress }) => {
+  const [season, setSeason] = useState(0)
+  const [episode, setEpisode] = useState(0)
 
   useEffect(() => {
     setSeason(initialSeason)
     setEpisode(initialEpisode)
   }, [initialSeason, initialEpisode])
 
-  const updateProgress = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     console.log('update to season ' + season + ' episode ' + episode)
+    updateProgress(parseInt(season), parseInt(episode))
   }
 
   return (
     <div type="hidden">
-      <form id="progress-form" onSubmit={updateProgress}>
+      <form id="progress-form" onSubmit={handleSubmit}>
         <label className="label-custom" htmlFor="season">
           Current Season
         </label>
@@ -36,6 +35,7 @@ const ProgressData = ({ initialSeason, initialEpisode }) => {
           id="season"
           className="progress"
           value={season}
+          type="number"
           onChange={(e) => setSeason(e.target.value)}
         />
         <br />
@@ -46,6 +46,7 @@ const ProgressData = ({ initialSeason, initialEpisode }) => {
           id="episode"
           className="progress"
           value={episode}
+          type="number"
           onChange={(e) => setEpisode(e.target.value)}
         />
         <br />
@@ -82,12 +83,13 @@ const Description = ({ genres, description, totalEpisodes, isMovie }) => {
 const IndividualShow = ({ id }) => {
   const [show, setShow] = useState({})
   const notLoggedShow = {
-    seasons: '0',
-    episodes: '0',
+    id: id,
+    seasons: 0,
+    episodes: 0,
     platform: ''
   }
   const [showProgress, setShowProgress] = useState(notLoggedShow)
-  const { loggedInUser } = React.useContext(AuthContext)
+  const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
   // fetch the show from the user information
   useEffect(() => {
     // Fetch user-related show information for the logged in user
@@ -116,6 +118,46 @@ const IndividualShow = ({ id }) => {
       })
   }, [id, loggedInUser])
 
+  const updateProgress = (seasons, episodes) => {
+    const updatedShow = showProgress
+    updatedShow.seasons = seasons
+    updatedShow.episodes = episodes
+    setShowProgress(updatedShow)
+    // only go through with the PATCH request if there is a user logged in
+    // and if the show is already in their list
+    // TODO: Eventually move this into its own handleSubmit function to be done later
+    if (loggedInUser) {
+      let updated = false
+      const updatedShows = loggedInUser.shows.map((show) => {
+        // parseInt is needed because id is stored as a String while show.id is a Number
+        if (show.id === parseInt(id)) {
+          updated = true
+          return updatedShow
+        }
+        return show
+      })
+      if (updated) {
+        const patchUser = loggedInUser
+        patchUser.shows = updatedShows
+        axios
+          .patch(
+            `https://my.api.mockaroo.com/tv_users/${loggedInUser.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`,
+            patchUser
+          )
+          .then((response) => {
+            setLoggedInUser(response.data)
+          })
+          .catch((err) => {
+            console.log(
+              "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+            )
+            console.log(err)
+            setLoggedInUser(patchUser)
+          })
+      }
+    }
+  }
+
   return (
     <>
       <Header />
@@ -126,7 +168,7 @@ const IndividualShow = ({ id }) => {
               <fieldset>
                 <h3 id="title">{show.name}</h3>
                 <Link to="/my-shows/1">
-                  <button className="btn-progress">Return to Shows</button>
+                  <button className="btn-progress">Return to My Shows</button>
                 </Link>
                 <Link to="/my-shows/1">
                   <button className="btn-progress">
@@ -140,6 +182,7 @@ const IndividualShow = ({ id }) => {
                   <ProgressData
                     initialSeason={showProgress.seasons}
                     initialEpisode={showProgress.episodes}
+                    updateProgress={updateProgress}
                   />
                 )}
                 <Select className="platform-select" options={platforms} />

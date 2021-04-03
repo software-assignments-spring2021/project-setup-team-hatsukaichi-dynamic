@@ -47,7 +47,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ loggedInUser, setLoggedInUser: setUser }}>
+      <AuthContext.Provider
+        value={{
+          loggedInUser,
+          setLoggedInUser: setUser
+        }}>
         <Router>
           <ScrollToTop />
           <Switch>
