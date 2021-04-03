@@ -126,6 +126,14 @@ app.get('/shows-trakt', (req, res, next) => {
 
 app.get('/shows-trakt/:id', (req, res, next) => {
   if (Object.keys(req.query).length === 0){
+    const errorMessage = {
+    status: 412,
+    error:"Internal Client Error",
+    message: "Content type (show or movie) is not indicated e.g. /shows-trakt/1390/?type=movie",
+    path: "/shows-trakt/:id",
+  }
+  res.json(errorMessage);
+  /*
     axios
       .get(
         `https://api.trakt.tv/search/trakt/${req.params.id}?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
@@ -136,6 +144,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
       .catch((err) => {
         next(err)
       })
+  */
   }else if (req.query.type=='show'){
     axios
       .get(
