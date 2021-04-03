@@ -96,9 +96,9 @@ app.patch('/tv_users/:id', (req, res, next) => {
     })
 })
 
-app.get('/shows-trakt/:query?', (req, res, next) => {
+app.get('/shows-trakt', (req, res, next) => {
   //return popular shows if query is not given
-  if (req.params.query==null){
+  if (Object.keys(req.query).length === 0){
     axios
       .get(
         `https://api.trakt.tv/shows/popular?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
@@ -113,7 +113,7 @@ app.get('/shows-trakt/:query?', (req, res, next) => {
   }else{
     axios
       .get(
-        `https://api.trakt.tv/search/show?query=${req.params.query}&Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
+        `https://api.trakt.tv/search/show,movie?query=${req.query.query}&Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
       )
       .then((response) => {
         res.json(response.data)
