@@ -9,4 +9,13 @@ const platforms = [
   { value: 'Other', label: 'Other' }
 ]
 
-export default platforms
+const statuses = [
+  { value: '', label: 'Select a Status' },
+  { value: 'Watched', label: 'Watched' },
+  { value: 'In Progress', label: 'In Progress' }
+]
+
+module.exports = {
+  platforms: platforms,
+  statuses: statuses
+}
