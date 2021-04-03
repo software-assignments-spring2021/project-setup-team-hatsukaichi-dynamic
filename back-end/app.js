@@ -96,7 +96,7 @@ app.patch('/tv_users/:id', (req, res, next) => {
     })
 })
 
-app.get('/shows', (req, res, next) => {
+app.get('/shows-trakt', (req, res, next) => {
   //return popular shows if query is not given
   if (Object.keys(req.query).length === 0){
     axios
