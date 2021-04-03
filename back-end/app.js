@@ -89,7 +89,6 @@ app.patch('/tv_users/:id', (req, res, next) => {
       }
     )
     .then((response) => {
-      console.log(response)
       res.json(response.data)
     })
     .catch((err) => {
@@ -97,17 +96,32 @@ app.patch('/tv_users/:id', (req, res, next) => {
     })
 })
 
-app.get('/shows-trakt', (req, res, next) => {
-  axios
-    .get(
-      `https://api.trakt.tv/shows/popular?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_TRAKT_KEY}`
-    )
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      next(err)
-    })
+app.get('/shows-trakt/:query?', (req, res, next) => {
+  //return popular shows if query is not given
+  if (req.params.query==null){
+    axios
+      .get(
+        `https://api.trakt.tv/shows/popular?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
+      )  
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((err) => {
+        next(err)
+      })
+  //otherwise return requested show information
+  }else{
+    axios
+      .get(
+        `https://api.trakt.tv/search/show?query=${req.params.query}&Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
+      )
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((err) => {
+        next(err)
+      })
+  }
 })
 
 module.exports = app
