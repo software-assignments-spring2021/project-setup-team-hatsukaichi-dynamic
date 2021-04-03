@@ -128,8 +128,8 @@ app.get('/shows-trakt/:id', (req, res, next) => {
   if (Object.keys(req.query).length === 0){
     const errorMessage = {
     status: 412,
-    error:"Internal Client Error",
-    message: "Content type (show or movie) is not indicated e.g. /shows-trakt/1390/?type=movie",
+    error:"Client Error",
+    message: "Precondition failed: content type (show or movie) is not indicated e.g. /shows-trakt/1390/?type=movie",
     path: "/shows-trakt/:id",
   }
   res.json(errorMessage);
