@@ -89,12 +89,39 @@ app.patch('/tv_users/:id', (req, res, next) => {
       }
     )
     .then((response) => {
-      console.log(response)
       res.json(response.data)
     })
     .catch((err) => {
       next(err)
     })
+})
+
+app.get('/shows-trakt', (req, res, next) => {
+  //return popular shows if query is not given
+  if (Object.keys(req.query).length === 0){
+    axios
+      .get(
+        `https://api.trakt.tv/shows/popular?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
+      )  
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((err) => {
+        next(err)
+      })
+  //otherwise return requested show information
+  }else{
+    axios
+      .get(
+        `https://api.trakt.tv/search/show,movie?query=${req.query.query}&Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
+      )
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((err) => {
+        next(err)
+      })
+  }
 })
 
 module.exports = app
