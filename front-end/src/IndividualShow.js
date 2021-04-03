@@ -21,7 +21,6 @@ const ProgressData = ({ initialSeason, initialEpisode, updateProgress }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('update to season ' + season + ' episode ' + episode)
     updateProgress(parseInt(season), parseInt(episode))
   }
 
@@ -158,6 +157,23 @@ const IndividualShow = ({ id }) => {
     }
   }
 
+  // platformToValue transforms a platform name to a value format to pre-populate
+  // the Select component for selecting a platform the show is being watched on.
+  const platformToValue = (platform) => {
+    const match = platforms.filter((p) => p.value === platform)
+    if (match.length === 0) {
+      return { value: '', label: 'Select a Platform' }
+    } else {
+      return match[0]
+    }
+  }
+
+  const handlePlatformChange = (platform) => {
+    const updatedShow = showProgress
+    updatedShow.platform = platform.value
+    setShowProgress(updatedShow)
+  }
+
   return (
     <>
       <Header />
@@ -185,7 +201,12 @@ const IndividualShow = ({ id }) => {
                     updateProgress={updateProgress}
                   />
                 )}
-                <Select className="platform-select" options={platforms} />
+                <Select
+                  className="platform-select"
+                  defaultValue={platformToValue(showProgress.platform)}
+                  options={platforms}
+                  onChange={handlePlatformChange}
+                />
                 <div className="show-content">
                   <Description
                     genres={show.genres}
