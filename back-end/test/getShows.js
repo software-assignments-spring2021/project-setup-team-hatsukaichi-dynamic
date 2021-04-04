@@ -7,16 +7,16 @@ const server = require('../app.js')
 chai.use(chaiHttp)
 
 describe('GET /shows', () => {
-  let stub;
-  before(() => {
-    stub = sinon.stub(axios, 'get').resolves({data: ['show one', 'show two']})
-  })
-  after(() => {
+  it('should return 200 OK', async () => {
+    const stub = sinon.stub(axios, 'get').resolves(true)
+    const res = await chai.request(server).get('/shows')
+    expect(res.status).to.equal(200)
     stub.restore()
   })
-  it('should return 200 OK', async () => {
-    chai.request(server).get('/shows').then( res => {
-      expect(res.status).to.equal(200)
-    })
+  it('should return 500 error', async () => {
+    const stub = sinon.stub(axios, 'get').rejects(true)
+    const res = await chai.request(server).get('/shows')
+    expect(res.status).to.equal(500)
+    stub.restore()
   })
 })
