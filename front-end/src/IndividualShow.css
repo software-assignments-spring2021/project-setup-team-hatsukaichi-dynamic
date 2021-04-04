@@ -9,10 +9,6 @@
   color: #d1cdc7;
 }
 
-.description input {
-  width: 50%;
-}
-
 .main {
   width: 90%;
   background-color: #2d2d2d;
@@ -39,15 +35,16 @@
   padding: 0.5em;
 }
 
-#clear {
-  clear: both;
-}
-
-#btn-progress {
-  margin-top: 3%;
-}
-
 .label-custom {
+  margin: 1em;
+  font-size: 16px;
+  background-color: #666666;
+  color: #d1cdc7;
+  padding: 1em 1em 1em 1em;
+}
+
+.platform {
+  margin: 0.75em;
   font-size: 16px;
   background-color: #666666;
   color: #d1cdc7;
@@ -110,7 +107,9 @@ span {
   #season,
   #episode,
   .label-platform,
-  .descript {
+  .descript,
+  .platform-select,
+  .status-select {
     font-size: 16px;
   }
 
@@ -148,7 +147,9 @@ span {
   #season,
   #episode,
   .label-platform,
-  .descript {
+  .descript,
+  .platform-select,
+  .status-select {
     font-size: 14px;
   }
 
@@ -186,7 +187,9 @@ span {
   #season,
   #episode,
   .label-platform,
-  .descript {
+  .descript,
+  .platform-select,
+  .status-select {
     font-size: 12px;
   }
 
@@ -212,4 +215,25 @@ span {
     margin-top: 6%;
     margin-bottom: 6%;
   }
+  #episode:hover,
+  #season:hover,
+  #description:hover {
+    border: 2px solid #d1dcd7;
+    background-color: #2d2d2d;
+    color: #d1dcd7;
+  }
+
+  .platform-select,
+  .status-select {
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+  }
+}
+
+.css-2b097c-container {
+  color: black;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
