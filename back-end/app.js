@@ -189,30 +189,32 @@ app.get('/shows-trakt/:id', (req, res, next) => {
       .then(responseA => {
         //add response from Trakt API to final response object
         response_final=responseA.data; 
-        //return imdb_id value which is used for retrieving poster url 
-        //by making a get request to Fanart API
+        //return imdb_id value which is used for retrieving poster url in get request to Fanart API
         return responseA.data.ids.imdb; 
       })
       .then(responseB => {
-        axios
-          .get(
+        return axios
+          .get( 
             `https://webservice.fanart.tv/v3/movies/${responseB}?api_key=c5c5284883d4cc5e0999afc1a5a2c96d`
-          )//if the movie is not found in Fanart database
-          if (responseB.data==null) {
-            //send available movie info without poster
-            res.json(response_final); 
-            //throw error to break the chain (catch doesn't break)
-            throw new Error("404 Not Found in Fanart database! ")
-          }//if the movie is found in Fanart database
-          else //return the data
-            return responseB.data; 
+          )
       })
+      //catch error if the movie is not found in Fanart database
+      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+        if (err.response.status != 200 && err.response.status != 304) {
+          res.json(response_final); //send available show info and throw an error
+          throw err;
+        }
+      }) 
       .then(responseC => {
+        console.log(responseC.data);
+        if (responseC.data!=null){
+          console.log("responseC.data not null");
         //if posters are available, append their urls to the info object
-        if (responseC.movieposter!=null){
-          for(let i=0;i<responseC.movieposter.length; i++)
-            response_final['poster-url-'+String(i)]=responseC.movieposter[i].url;
-        }//send movie info and, if available, poster info
+          if (responseC.data.movieposter!=null){
+            for(let i=0;i<responseC.data.movieposter.length; i++)
+              response_final['poster-url-'+String(i)]=responseC.data.movieposter[i].url;
+          }
+        } //send movie info and, if available, poster info
         res.json(response_final);
       })
       .catch((err) => {
