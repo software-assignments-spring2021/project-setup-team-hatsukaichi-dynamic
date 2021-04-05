@@ -2,6 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const app = express()
 const morgan = require("morgan") // middleware for logging of incoming HTTP requests
+const { mockAllShows } = require('./MockData')
 require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -71,7 +72,12 @@ app.get('/shows', (req, res, next) => {
       res.json(response.data)
     })
     .catch((err) => {
-      next(err)
+      if (err.response.status === 500) {
+        res.status(200).json(mockAllShows)
+      }
+      else {
+        next(err)
+      }
     })
 })
 

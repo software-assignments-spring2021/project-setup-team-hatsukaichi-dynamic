@@ -16,10 +16,4 @@ describe('GET /shows', () => {
     expect(res.body).to.deep.equal({id: 1, name: 'sample show'})
     stub.restore()
   })
-  it('should return 500 error', async () => {
-    const stub = sinon.stub(axios, 'get').rejects(true)
-    const res = await chai.request(server).get('/shows')
-    expect(res.status).to.equal(500)
-    stub.restore()
-  })
 })
