@@ -57,7 +57,6 @@ app.post('/login', function(req, res, next) {
       if (err) {
 		return res.status(500).json({error: 'Issue with Passport authentication2'});
 	  }
-	  	//console.log(req.user.stripeAccountId);
 		return res.json({success: 'Successfully logged in user'});
     });
   })(req, res, next);
