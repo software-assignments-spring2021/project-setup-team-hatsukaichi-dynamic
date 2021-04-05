@@ -49,9 +49,9 @@ app.get('/tv_users/:id', (req, res, next) => {
 
 app.post('/tv_users', (req, res, next) => {
     axios.post(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`, {
-        "username": req.body.username,
-        "email": req.body.email,
-        "password": req.body.password
+        username : req.body.username,
+        email : req.body.email,
+        password : req.body.password
     })
     .then((response) => {
         console.log(response)
