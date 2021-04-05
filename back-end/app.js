@@ -2,7 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const app = express()
 const morgan = require("morgan") // middleware for logging of incoming HTTP requests
-const { mockAllShows } = require('./MockData')
+const { mockAllShows, mockShowAPI } = require('./MockData')
 require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -27,7 +27,17 @@ app.get('/shows/:id', (req, res, next) => {
       res.json(response.data)
     })
     .catch((err) => {
-      next(err)
+      if (err.response.status === 500) {
+        if (req.params.id in mockShowAPI) {
+          res.status(200).json(mockShowAPI[req.params.id])
+        }
+        else {
+          res.status(404).json('show with requested id not found')
+        }
+      }
+      else {
+        next(err)
+      }
     })
 })
 
