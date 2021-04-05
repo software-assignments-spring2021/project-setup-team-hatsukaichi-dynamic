@@ -41,16 +41,16 @@ const mockShows = JSON.parse(`[{
   "episodes": 22
 }]`)
 
-const createMockUser = (id) => {
+const createMockUser = (id, username, password, email) => {
   return {
     id: id,
-    username: 'mlaffan0',
-    password: 'njb9oAB',
-    email: 'jparkin0@utexas.edu',
+    username: username || 'mlaffan0',
+    password: password || 'njb9oAB',
+    email: email || 'jparkin0@utexas.edu',
     bio:
-      'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.',
-    img: 'http://dummyimage.com/182x112.jpg/dddddd/000000',
-    shows: mockShows
+      '',
+    img: '',
+    shows: []
   }
 }
 
