@@ -137,7 +137,7 @@ app.get('/shows-trakt', (req, res, next) => {
 })
 
 app.get('/shows-trakt/:id', (req, res, next) => {
-  //return Bad Request error if type is not given
+  //return Bad Request error if content type is not given
   if (Object.keys(req.query).length === 0){
     const errorMessage = {
     status: 400,
@@ -197,27 +197,24 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         axios
           .get(
             `https://webservice.fanart.tv/v3/movies/${responseB}?api_key=c5c5284883d4cc5e0999afc1a5a2c96d`
-          )
-          return responseB.data; 
+          )//if the movie is not found in Fanart database
+          if (responseB.data==null) {
+            //send available movie info without poster
+            res.json(response_final); 
+            //throw error to break the chain (catch doesn't break)
+            throw new Error("404 Not Found in Fanart database! ")
+          }//if the movie is found in Fanart database
+          else //return the data
+            return responseB.data; 
       })
-      //catch error if the movie is not found in Fanart database
-      .catch(err => { //status 200 is success and status 304 is retrieval from cache
-        if (err.response.status != 200 && err.response.status != 304) 
-          throw err;
-      }) 
       .then(responseC => {
-       if (responseC!=null){
         //if posters are available, append their urls to the info object
         if (responseC.movieposter!=null){
           for(let i=0;i<responseC.movieposter.length; i++)
             response_final['poster-url-'+String(i)]=responseC.movieposter[i].url;
-        }
-        //send the final json object that includes movie info and, if available, poster info
-       }
-       res.json(response_final);
-       
+        }//send movie info and, if available, poster info
+        res.json(response_final);
       })
-        //res.json(response.data)
       .catch((err) => {
         next(err)
       })
