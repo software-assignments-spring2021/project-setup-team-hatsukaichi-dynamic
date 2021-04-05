@@ -148,9 +148,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
     message: "Content with the indicated Trakt id is not found",
     path: "/shows-trakt/:id"
   }
-  let traktURL; 
-  let tmdbURL;
-  let tmdbType; 
+  let traktURL, tmdbType; 
   //Bad Request error if content type is not given
   if (Object.keys(req.query).length === 0){
     res.json(badRequestError);
