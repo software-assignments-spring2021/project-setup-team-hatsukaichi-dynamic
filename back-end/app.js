@@ -167,12 +167,12 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         //add response from Trakt API to final response object
         response_final=responseA.data; 
         //return imdb_id value which is used for retrieving poster url in get request to Fanart API
-        return responseA.data.ids.imdb; 
+        return responseA.data.ids.tmdb; 
       })
       .then(responseB => {
         return axios
           .get( 
-          `https://api.themoviedb.org/3/tv/${responseB}/images?api_key=6703037a7cd8cf8df3b8be0e98746c66`
+          `https://api.themoviedb.org/3/tv/${responseB}/images?api_key=${API_KEY_TMDB}`
           )
       })
       //catch error if the movie is not found in Fanart database
@@ -188,8 +188,10 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           console.log("responseC.data not null");
           //if posters are available, append their urls to the info object
           if (responseC.data.posters!=null){
+            console.log("responseC.data.posters not null");
             for(let i=0;i<responseC.data.posters.length; i++)
-              response_final['poster-url-'+String(i)]=responseC.data.posters[i].file_path;
+              //construct image path based on tmdb documentation
+              response_final['poster-url-'+String(i)]='https://image.tmdb.org/t/p/w500'+str(responseC.data.posters[i].file_path);
           }
         } //send movie info and, if available, poster info
         res.json(response_final);
@@ -218,12 +220,12 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         //add response from Trakt API to final response object
         response_final=responseA.data; 
         //return imdb_id value which is used for retrieving poster url in get request to Fanart API
-        return responseA.data.ids.imdb; 
+        return responseA.data.ids.tmdb; 
       })
       .then(responseB => {
         return axios
           .get( 
-            `https://webservice.fanart.tv/v3/movies/${responseB}?api_key=c5c5284883d4cc5e0999afc1a5a2c96d`
+            `https://api.themoviedb.org/3/movie/${responseB}/images?api_key=${API_KEY_TMDB}`
           )
       })
       //catch error if the movie is not found in Fanart database
@@ -238,9 +240,10 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         if (responseC.data!=null){
           console.log("responseC.data not null");
         //if posters are available, append their urls to the info object
-          if (responseC.data.movieposter!=null){
-            for(let i=0;i<responseC.data.movieposter.length; i++)
-              response_final['poster-url-'+String(i)]=responseC.data.movieposter[i].url;
+          if (responseC.data.posters!=null){
+            for(let i=0;i<responseC.data.posters.length; i++)
+              //construct image path based on tmdb documentation
+              response_final['poster-url-'+String(i)]='https://image.tmdb.org/t/p/w500'+responseC.data.posters[i].file_path;
           }
         } //send movie info and, if available, poster info
         res.json(response_final);
