@@ -186,9 +186,38 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         }
       )
-      .then((response) => {
-        res.json(response.data)
+      .then(responseA => {
+        //add response from Trakt API to final response object
+        response_final=responseA.data; 
+        //return imdb_id value which is used for retrieving poster url 
+        //by making a get request to Fanart API
+        return responseA.data.ids.imdb; 
       })
+      .then(responseB => {
+        axios
+          .get(
+            `https://webservice.fanart.tv/v3/movies/${responseB}?api_key=c5c5284883d4cc5e0999afc1a5a2c96d`
+          )
+          return responseB.data; 
+      })
+      //catch error if the movie is not found in Fanart database
+      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+        if (err.response.status != 200 && err.response.status != 304) 
+          throw err;
+      }) 
+      .then(responseC => {
+       if (responseC!=null){
+        //if posters are available, append their urls to the info object
+        if (responseC.movieposter!=null){
+          for(let i=0;i<responseC.movieposter.length; i++)
+            response_final['poster-url-'+String(i)]=responseC.movieposter[i].url;
+        }
+        //send the final json object that includes movie info and, if available, poster info
+       }
+       res.json(response_final);
+       
+      })
+        //res.json(response.data)
       .catch((err) => {
         next(err)
       })
