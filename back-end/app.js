@@ -124,4 +124,9 @@ app.get('/shows-trakt', (req, res, next) => {
   }
 })
 
+app.get('/logout', (req, res, next) => {
+	req.logOut();
+	res.json({success: "Successfully logged out"});
+})
+
 module.exports = app
