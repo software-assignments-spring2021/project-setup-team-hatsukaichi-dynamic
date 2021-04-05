@@ -54,7 +54,6 @@ app.post('/tv_users', (req, res, next) => {
       password: req.body.password
     })
     .then((response) => {
-        console.log(response)
         res.json(response.data)
     })
     .catch((err) => {
@@ -138,17 +137,23 @@ app.get('/shows-trakt', (req, res, next) => {
 
 app.get('/shows-trakt/:id', (req, res, next) => {
   //return Bad Request error if content type is not given
-  if (Object.keys(req.query).length === 0){
-    const errorMessage = {
-    status: 400,
-    error:"Bad Request - request couldn't be parsed",
-    message: "Content type (show or movie) is not indicated e.g. /shows-trakt/1390/?type=movie",
-    path: "/shows-trakt/:id",
+  const badRequestError = {
+   status: 400,
+   error:"Bad Request - request couldn't be parsed",
+   message: "Content type (show or movie) is not indicated e.g. /shows-trakt/1390/?type=movie",
+   path: "/shows-trakt/:id",
   }
-  res.json(errorMessage);
+  const notFoundError = {
+    status: 404,
+    error:"Not Found - method exists, but no record found",
+    message: "Content with the indicated Trakt id is not found",
+    path: "/shows-trakt/:id"
+  }
+  if (Object.keys(req.query).length === 0){
+  res.json(badRequestError);
   //return extended show information 
   }else if (req.query.type=='show'){
-    axios
+    return axios
       .get(
         `https://api.trakt.tv/shows/${req.params.id}`,{
           params: {
@@ -163,35 +168,49 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         }
       )
+      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+        if (err.status != 200 && err.status != 304) {
+          //otherwise return Not Found error message
+          res.json(notFoundError); 
+          throw err; //throw an error since poster is not found
+        }
+      }) 
       .then(responseA => {
         //add response from Trakt API to final response object
         response_final=responseA.data; 
-        //return imdb_id value which is used for retrieving poster url in get request to Fanart API
-        return responseA.data.ids.tmdb; 
+        if (response_final==null){
+          res.json(notFoundError);
+          throw new Error("Error");
+        } else{
+          //return imdb_id value which is used for retrieving poster url in get request to Fanart API
+          return responseA.data.ids.tmdb; 
+        }
       })
       .then(responseB => {
         return axios
           .get( 
-          `https://api.themoviedb.org/3/tv/${responseB}/images?api_key=${API_KEY_TMDB}`
+          `https://api.themoviedb.org/3/tv/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
           )
       })
       //catch error if the movie is not found in Fanart database
       .catch(err => { //status 200 is success and status 304 is retrieval from cache
-        if (err.response.status != 200 && err.response.status != 304) {
-          res.json(response_final); //send available show info and throw an error
-          throw err;
+        if (err.status != 200 && err.status != 304) {
+          //if show is in Trakt database, return data
+          if (response_final!=null){
+            res.json(response_final); 
+          }else{ //otherwise return Not Found error message
+            res.json(notFoundError); 
         }
+        throw err; //throw an error since poster is not found
+      }
       }) 
       .then(responseC => {
-        console.log(responseC.data);
         if (responseC.data!=null){
-          console.log("responseC.data not null");
           //if posters are available, append their urls to the info object
           if (responseC.data.posters!=null){
-            console.log("responseC.data.posters not null");
             for(let i=0;i<responseC.data.posters.length; i++)
               //construct image path based on tmdb documentation
-              response_final['poster-url-'+String(i)]='https://image.tmdb.org/t/p/w500'+str(responseC.data.posters[i].file_path);
+              response_final['poster-url-'+String(i)]='https://image.tmdb.org/t/p/w500'+responseC.data.posters[i].file_path;
           }
         } //send movie info and, if available, poster info
         res.json(response_final);
@@ -201,7 +220,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
       })
   //return extended movie information     
   }else if (req.query.type=='movie'){
-    axios
+    return axios
       .get(
         `https://api.trakt.tv/movies/${req.params.id}`,{
           params: {
@@ -216,29 +235,44 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         }
       )
+      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+        if (err.status != 200 && err.status != 304) {
+          //otherwise return Not Found error message
+          res.json(notFoundError); 
+          throw err; //throw an error since poster is not found
+        }
+      }) 
       .then(responseA => {
         //add response from Trakt API to final response object
         response_final=responseA.data; 
-        //return imdb_id value which is used for retrieving poster url in get request to Fanart API
-        return responseA.data.ids.tmdb; 
+        if (response_final==null){
+          res.json(notFoundError);
+          throw new Error("Error");
+        }else{
+          //return imdb_id value which is used for retrieving poster url in get request to Fanart API
+          return responseA.data.ids.tmdb;
+        }
       })
       .then(responseB => {
         return axios
           .get( 
-            `https://api.themoviedb.org/3/movie/${responseB}/images?api_key=${API_KEY_TMDB}`
+            `https://api.themoviedb.org/3/movie/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
           )
       })
       //catch error if the movie is not found in Fanart database
       .catch(err => { //status 200 is success and status 304 is retrieval from cache
-        if (err.response.status != 200 && err.response.status != 304) {
-          res.json(response_final); //send available show info and throw an error
+        if (err.status != 200 && err.status != 304) {
+           //if movie is in Trakt database, return data
+          if (response_final!=null){
+            res.json(response_final);
+          } else{ //otherwise return Not Found error message
+            res.json(notFoundError);
+          } //throw an error since poster is not found
           throw err;
         }
       }) 
       .then(responseC => {
-        console.log(responseC.data);
         if (responseC.data!=null){
-          console.log("responseC.data not null");
         //if posters are available, append their urls to the info object
           if (responseC.data.posters!=null){
             for(let i=0;i<responseC.data.posters.length; i++)
@@ -253,13 +287,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
       })
   //return Not Found error if content is not found 
   }else{
-      const errorMessage = {
-      status: 404,
-      error:"Not Found - method exists, but no record found",
-      message: "Content with the indicated Trakt id is not found",
-      path: "/shows-trakt/:id"
-      }
-    res.json(errorMessage);
+    res.json(notFoundError);
   }
 })
 
