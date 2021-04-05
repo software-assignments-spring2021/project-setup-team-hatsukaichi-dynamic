@@ -136,7 +136,6 @@ app.get('/shows-trakt', (req, res, next) => {
 })
 
 app.get('/shows-trakt/:id', (req, res, next) => {
-  //return Bad Request error if content type is not given
   const badRequestError = {
    status: 400,
    error:"Bad Request - request couldn't be parsed",
@@ -149,9 +148,10 @@ app.get('/shows-trakt/:id', (req, res, next) => {
     message: "Content with the indicated Trakt id is not found",
     path: "/shows-trakt/:id"
   }
+  //Bad Request error if content type is not given
   if (Object.keys(req.query).length === 0){
   res.json(badRequestError);
-  //return extended show information 
+  //Otherwise return extended show information 
   }else if (req.query.type=='show'){
     return axios
       .get(
@@ -168,23 +168,18 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         }
       )
-      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+      //If data is not found in Trakt database return Not Found error
+      .catch(err => { 
         if (err.status != 200 && err.status != 304) {
-          //otherwise return Not Found error message
           res.json(notFoundError); 
-          throw err; //throw an error since poster is not found
+          throw err; 
         }
       }) 
       .then(responseA => {
         //add response from Trakt API to final response object
         response_final=responseA.data; 
-        if (response_final==null){
-          res.json(notFoundError);
-          throw new Error("Error");
-        } else{
-          //return imdb_id value which is used for retrieving poster url in get request to Fanart API
-          return responseA.data.ids.tmdb; 
-        }
+        //return tmdb_id value which is used for retrieving poster url in get request to Tmdb API
+        return responseA.data.ids.tmdb; 
       })
       .then(responseB => {
         return axios
@@ -192,10 +187,10 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           `https://api.themoviedb.org/3/tv/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
           )
       })
-      //catch error if the movie is not found in Fanart database
-      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+      //catch error if the movie is not found in Tmdb database
+      .catch(err => { 
         if (err.status != 200 && err.status != 304) {
-          //if show is in Trakt database, return data
+          //if show is in Trakt database, return available data
           if (response_final!=null){
             res.json(response_final); 
           }else{ //otherwise return Not Found error message
@@ -207,11 +202,9 @@ app.get('/shows-trakt/:id', (req, res, next) => {
       .then(responseC => {
         if (responseC.data!=null){
           //if posters are available, append their urls to the info object
-          if (responseC.data.posters!=null){
-            for(let i=0;i<responseC.data.posters.length; i++)
+          if (responseC.data.posters!=null)
               //construct image path based on tmdb documentation
-              response_final['poster-url-'+String(i)]='https://image.tmdb.org/t/p/w500'+responseC.data.posters[i].file_path;
-          }
+              response_final['poster-url']='https://image.tmdb.org/t/p/w500'+responseC.data.posters[0].file_path;
         } //send movie info and, if available, poster info
         res.json(response_final);
       })
@@ -235,23 +228,18 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         }
       )
-      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+      //If data is not found in Trakt database return Not Found error
+      .catch(err => { 
         if (err.status != 200 && err.status != 304) {
-          //otherwise return Not Found error message
           res.json(notFoundError); 
-          throw err; //throw an error since poster is not found
+          throw err; 
         }
       }) 
       .then(responseA => {
         //add response from Trakt API to final response object
         response_final=responseA.data; 
-        if (response_final==null){
-          res.json(notFoundError);
-          throw new Error("Error");
-        }else{
-          //return imdb_id value which is used for retrieving poster url in get request to Fanart API
-          return responseA.data.ids.tmdb;
-        }
+        //return tmdb_id value which is used for retrieving poster url in get request to Tmdb API
+        return responseA.data.ids.tmdb;
       })
       .then(responseB => {
         return axios
@@ -259,8 +247,8 @@ app.get('/shows-trakt/:id', (req, res, next) => {
             `https://api.themoviedb.org/3/movie/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
           )
       })
-      //catch error if the movie is not found in Fanart database
-      .catch(err => { //status 200 is success and status 304 is retrieval from cache
+      //catch error if the movie is not found in Tmdb database
+      .catch(err => { 
         if (err.status != 200 && err.status != 304) {
            //if movie is in Trakt database, return data
           if (response_final!=null){
@@ -273,21 +261,18 @@ app.get('/shows-trakt/:id', (req, res, next) => {
       }) 
       .then(responseC => {
         if (responseC.data!=null){
-        //if posters are available, append their urls to the info object
-          if (responseC.data.posters!=null){
-            for(let i=0;i<responseC.data.posters.length; i++)
-              //construct image path based on tmdb documentation
-              response_final['poster-url-'+String(i)]='https://image.tmdb.org/t/p/w500'+responseC.data.posters[i].file_path;
-          }
+          //if posters are available, append their urls to the info object
+          if (responseC.data.posters!=null)
+            //construct image path based on tmdb documentation
+            response_final['poster-url']='https://image.tmdb.org/t/p/w500'+responseC.data.posters[0].file_path;
         } //send movie info and, if available, poster info
         res.json(response_final);
       })
       .catch((err) => {
         next(err)
       })
-  //return Not Found error if content is not found 
-  }else{
-    res.json(notFoundError);
+  }else{ //return Bad Request error for other errors
+    res.json(badRequestError);
   }
 })
 
