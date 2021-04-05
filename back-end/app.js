@@ -125,7 +125,7 @@ app.get('/shows-trakt', (req, res, next) => {
 })
 
 app.get('/logout', (req, res, next) => {
-	req.logOut();
+	//req.logOut(); add later when database is setup
 	res.json({success: "Successfully logged out"});
 })
 
