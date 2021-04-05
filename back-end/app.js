@@ -2,7 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const app = express()
 const morgan = require("morgan") // middleware for logging of incoming HTTP requests
-const { mockAllShows, mockShowAPI, createMockUser } = require('./MockData')
+const { mockAllShows, mockShowAPI, createMockUser, mockUserAPI } = require('./MockData')
 require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -62,7 +62,17 @@ app.get('/tv_users/:id', (req, res, next) => {
       res.json(response.data)
     })
     .catch((err) => {
-      next(err)
+      if (err.response.status === 500) {
+        if (req.params.id in mockUserAPI) {
+          res.status(200).json(mockUserAPI[req.params.id])
+        }
+        else {
+          res.status(400).json('user with requested id not found')
+        }
+      }
+      else {
+        next(err)
+      }
     })
 })
 
