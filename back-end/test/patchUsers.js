@@ -3,6 +3,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const axios = require('axios')
 const sinon = require('sinon')
+const { mockUserUpdate } = require('../MockData.js')
 var expect = chai.expect
 chai.use(chaiHttp)
 
@@ -71,5 +72,21 @@ describe('PATCH /tv_users/1', () => {
     })
     sinon.assert.calledOnce(stub)
     sinon.assert.calledWith(stub, patchURL, { password: 'newPassword' })
+  })
+  it('should return mocked data when stubbed Mockaroo call results in 500 error', async () => {
+    stub = sinon.stub(axios, 'patch').rejects({
+      response: {
+        status: 500,
+        message: 'mockaroo api limit exceeded (probably)'
+      }
+    })
+    const res = await chai
+      .request(server)
+      .patch('/tv_users/1')
+      .send({ username: 'test user' })
+    expect(res.status).to.equal(200)
+    expect(res.body).to.deep.equal(mockUserUpdate(1, { username: 'test user' }))
+    sinon.assert.calledOnce(stub)
+    sinon.assert.calledWith(stub, patchURL, { username: 'test user' })
   })
 })
