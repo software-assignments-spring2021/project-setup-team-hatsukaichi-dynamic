@@ -172,14 +172,6 @@ const mockShowAPI = {
   }
 }
 
-const mockUserImage = (id) => {
-  return `https://picsum.photos/seed/${id}/200`
-}
-
-const mockShowImage = (id) => {
-  return `https://picsum.photos/seed/m${id}/200/300`
-}
-
 const mockAllShows = JSON.parse(`[{
   "id": 36,
   "name": "Man in the Saddle",
@@ -251,12 +243,18 @@ const mockAllShows = JSON.parse(`[{
   "coverPhoto": "http://dummyimage.com/175x231.png/dddddd/000000"
 }]`)
 
+const mockErrorMessage = {
+  response: {
+    status: 500,
+    message: 'mockaroo api limit exceeded (probably)'
+  }
+}
+
 module.exports = {
   createMockUser: createMockUser,
   mockShowAPI: mockShowAPI,
   mockAllShows: mockAllShows,
-  mockUserImage: mockUserImage,
-  mockShowImage: mockShowImage,
   mockUserAPI: mockUserAPI,
-  mockUserUpdate: mockUserUpdate
+  mockUserUpdate: mockUserUpdate,
+  mockErrorMessage: mockErrorMessage
 }
