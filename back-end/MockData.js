@@ -47,8 +47,7 @@ const createMockUser = (id, username, password, email) => {
     username: username || 'mlaffan0',
     password: password || 'njb9oAB',
     email: email || 'jparkin0@utexas.edu',
-    bio:
-      '',
+    bio: '',
     img: '',
     shows: []
   }
@@ -96,12 +95,10 @@ const mockUserAPI = {
 }
 
 const mockUserUpdate = (id, newUser) => {
-  const thirdUser = {
-    ...mockUserAPI[id],
-    bio: newUser.bio,
-    img: newUser.img,
-    email: newUser.email
-  }
+  const thirdUser = mockUserAPI[id]
+  Object.keys(newUser).map((key) => {
+    thirdUser[key] = newUser[key]
+  })
   mockUserAPI[id] = thirdUser
   return thirdUser
 }
