@@ -33,7 +33,7 @@ const ShowGrid = (props) => {
         promises.push(
           axios
             .get(
-              `http://localhost:3000/shows/${show.id}`
+              `http://localhost:4000/shows/${show.id}`
             )
             .then((response) => {
               showInfo.push(response.data)
@@ -126,7 +126,7 @@ const MyShows = (props) => {
 
   useEffect(() => {
     axios(
-      `http://localhost:3000/tv_users/${props.id}`
+      `http://localhost:4000/tv_users/${props.id}`
     )
       .then((response) => {
         setUserData(response.data)
@@ -178,7 +178,7 @@ const MyShows = (props) => {
   const loadOptions = (input) => {
     return axios
       .get(
-        `http://localhost:3000/shows`
+        `http://localhost:4000/shows`
       )
       .then((response) => {
         return searchShows(input, response.data)

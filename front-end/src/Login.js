@@ -19,7 +19,7 @@ function Login() {
     // Actual login handling will go here; for now, we'll simply get a user
     // from our Mockaroo API. User id is hardcoded for now.
     axios(
-      `http://localhost:3000/tv_users/1`
+      `http://localhost:4000/tv_users/1`
     )
       .then((response) => {
         setLoggedInUser(response.data)

@@ -109,7 +109,7 @@ const IndividualShow = ({ id }) => {
     // Fetch show meta-information from the API
     axios
       .get(
-        `http://localhost:3000/shows/${id}`
+        `http://localhost:4000/shows/${id}`
       )
       .then((response) => {
         setShow(response.data)
@@ -160,7 +160,7 @@ const IndividualShow = ({ id }) => {
       }
       axios
         .patch(
-          `http://localhost:3000/tv_users/${loggedInUser.id}`,
+          `http://localhost:4000/tv_users/${loggedInUser.id}`,
           patchUser
         )
         .then((response) => {
