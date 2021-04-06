@@ -2,6 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
+require('dotenv').config({ silent: true })
 const {
   mockAllShows,
   mockShowAPI,
@@ -9,7 +10,6 @@ const {
   mockUserAPI,
   mockUserUpdate
 } = require('./MockData')
-require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev')) // dev is a concise color-coded default style for morgan
@@ -155,8 +155,14 @@ app.get('/shows-trakt', (req, res, next) => {
   if (Object.keys(req.query).length === 0) {
     axios
       .get(
-        `https://api.trakt.tv/shows/popular?Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
-      )
+        `https://api.trakt.tv/shows/popular`,{
+          headers: {
+            'trakt-api-version': 2, 
+            'trakt-api-key':`${process.env.API_KEY_TRAKT}`,
+            'Accept': '*/*'
+          }
+        }
+      )  
       .then((response) => {
         res.json(response.data)
       })
@@ -167,7 +173,13 @@ app.get('/shows-trakt', (req, res, next) => {
   } else {
     axios
       .get(
-        `https://api.trakt.tv/search/show,movie?query=${req.query.query}&Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`
+        `https://api.trakt.tv/search/show,movie?query=${req.query.query}&Content-Type=application/json&trakt-api-version=2&trakt-api-key=${process.env.API_KEY_TRAKT}`,{
+          headers: {
+            'trakt-api-version': 2, 
+            'trakt-api-key':`${process.env.API_KEY_TRAKT}`,
+            'Accept': '*/*'
+          }
+        }
       )
       .then((response) => {
         res.json(response.data)
@@ -178,9 +190,97 @@ app.get('/shows-trakt', (req, res, next) => {
   }
 })
 
+app.get('/shows-trakt/:id', (req, res, next) => {
+  const badRequestError = {
+   status: 400,
+   error:"Bad Request - request couldn't be parsed",
+   message: "Content type (show or movie) is not indicated e.g. /shows-trakt/1390/?type=movie",
+   path: "/shows-trakt/:id",
+  }
+  const notFoundError = {
+    status: 404,
+    error:"Not Found - method exists, but no record found",
+    message: "Content with the indicated Trakt id is not found",
+    path: "/shows-trakt/:id"
+  }
+  let traktURL, tmdbType; 
+  //Bad Request error if content type is not given
+  if (Object.keys(req.query).length === 0){
+    res.json(badRequestError);
+  //Otherwise return extended show information 
+  }else if (req.query.type=='show'){
+    traktURL=`https://api.trakt.tv/shows/${req.params.id}`;
+    tmdbType='tv';
+  }else if (req.query.type=='movie'){
+    traktURL=`https://api.trakt.tv/movies/${req.params.id}`;
+    tmdbType='movie';
+  }else //return Bad Request error for other errors
+    res.json(badRequestError);
+  if (tmdbType !== undefined) {
+    return axios
+      .get(
+        traktURL,{
+          params: {
+            'extended':'full',
+          },
+          headers: {
+            'trakt-api-version':'2', 
+            'trakt-api-key':`${process.env.API_KEY_TRAKT}`,
+            'extended':'full',
+            'Accept':'*/*', //necessary since requests have multiple content-types
+            'User-Agent':'request'
+          }
+        }
+      )
+      //if data is not found in Trakt database return Not Found error
+      .catch(err => { 
+        if (err.status != 200 && err.status != 304) {
+          res.json(notFoundError); 
+          throw err; 
+        }
+      }) 
+      .then(responseA => {
+        //add response from Trakt API to final response object
+        response_final=responseA.data; 
+        //return tmdb_id value which is used for retrieving poster url in get request to Tmdb API
+        return responseA.data.ids.tmdb; 
+      })
+      .then(responseB => {
+        return axios
+          .get( 
+            `https://api.themoviedb.org/3/${tmdbType}/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
+          )
+      })
+      //catch error if the movie is not found in Tmdb database
+      .catch(err => { 
+        if (err.status != 200 && err.status != 304) {
+          //if show is in Trakt database, return available data
+          if (response_final!=null){
+            res.json(response_final); 
+          }else{ //otherwise return Not Found error message
+            res.json(notFoundError); 
+        }
+        throw err; //poster not found error
+      }
+      }) 
+      .then(responseC => {
+        if (responseC.data!=null){
+          //if posters are available, append their urls to the info object
+          if (responseC.data.posters!=null)
+            //construct image path based on tmdb documentation
+            response_final['poster-url']='https://image.tmdb.org/t/p/w500'+responseC.data.posters[0].file_path;
+        } //send movie info and, if available, poster info
+        res.json(response_final);
+      })
+      .catch((err) => {
+        next(err)
+      })
+  }
+  
 app.get('/logout', (req, res, next) => {
   //req.logOut(); add later when database is setup
   res.json({ success: 'Successfully logged out' })
+
 })
 
 module.exports = app
