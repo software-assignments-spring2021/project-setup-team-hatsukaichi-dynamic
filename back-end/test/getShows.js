@@ -23,11 +23,13 @@ describe('GET /shows', () => {
     const res = await chai.request(server).get('/shows')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({ id: 1, name: 'sample show' })
+    sinon.assert.calledOnce(stub)
   })
   it('should return mocked data when stubbed Mockaroo call results in 500 error', async () => {
     stub = sinon.stub(axios, 'get').rejects(mockErrorMessage)
     const res = await chai.request(server).get('/shows')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal(mockAllShows)
+    sinon.assert.calledOnce(stub)
   })
 })
