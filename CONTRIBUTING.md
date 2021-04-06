@@ -76,9 +76,9 @@ For example, if your client id is 123456, the file would read:
 
 > API_KEY_TRAKT=123456
 
-### Tmdb API Setup
+### TMDb API Setup
 
-To use Tmdb API to retrieve poster information for movies and shows, you need to register for an account. 
+To use TMDb API to retrieve poster information for movies and shows, you need to register for an account. 
 1. Register for an account [here](https://www.themoviedb.org/signup).
 2. Go to 'Profile and Settings tab' and navigate to the API tab [here](https://www.themoviedb.org/settings/api).
 3. Click 'Request an API key' and accept the terms. 
