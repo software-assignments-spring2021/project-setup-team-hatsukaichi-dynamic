@@ -75,3 +75,20 @@ You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. 
 For example, if your client id is 123456, the file would read:
 
 > API_KEY_TRAKT=123456
+
+### TMDb API Setup
+
+To use TMDb API to retrieve poster information for movies and shows, you need to register for an account. 
+1. Register for an account [here](https://www.themoviedb.org/signup).
+2. Go to 'Profile and Settings tab' and navigate to the API tab [here](https://www.themoviedb.org/settings/api).
+3. Click 'Request an API key' and accept the terms. 
+4. Create an application by filling out the details of your app. <br>
+For ``Application URL``, if URL is not yet available, type `not yet available`.
+You can now use your API Key (v3 auth).
+5. In your .env file, add the following line: 
+
+> API_KEY_TMDB=your_api_key(v3 auth)
+
+For example, if your api key is 123456, the file would read:
+
+> API_KEY_TMDB=123456
