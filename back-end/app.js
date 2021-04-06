@@ -6,7 +6,8 @@ const {
   mockAllShows,
   mockShowAPI,
   createMockUser,
-  mockUserAPI
+  mockUserAPI,
+  mockUserUpdate
 } = require('./MockData')
 require('dotenv').config()
 app.use(express.json())
@@ -15,11 +16,14 @@ app.use(morgan('dev')) // dev is a concise color-coded default style for morgan
 
 app.get('/tv_users', (req, res, next) => {
   axios
-    .get(`https://my.api.mockaroo.com/tv_users.json?key=`)
+    .get(
+      `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}`
+    )
     .then((response) => {
       res.json(response.data)
     })
     .catch((err) => {
+      // This specifically is for Mockaroo errors
       if (err.response.status === 500) {
         res
           .status(200)
@@ -135,7 +139,11 @@ app.patch('/tv_users/:id', (req, res, next) => {
       res.json(response.data)
     })
     .catch((err) => {
-      next(err)
+      if (err.response.status == 500) {
+        res.status(200).json(mockUserUpdate(req.params.id, patchUser))
+      } else {
+        next(err)
+      }
     })
 })
 
