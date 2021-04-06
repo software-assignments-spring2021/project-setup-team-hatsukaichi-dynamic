@@ -33,14 +33,14 @@ const ShowGrid = (props) => {
         promises.push(
           axios
             .get(
-              `https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+              `http://localhost:3000/shows/${show.id}`
             )
             .then((response) => {
               showInfo.push(response.data)
             })
             .catch((err) => {
               console.log(
-                "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+                "Error: could not make the request."
               )
               console.log(err)
               showInfo.push(mockShowAPI[show.id])
@@ -126,7 +126,7 @@ const MyShows = (props) => {
 
   useEffect(() => {
     axios(
-      `https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+      `http://localhost:3000/tv_users/${props.id}`
     )
       .then((response) => {
         setUserData(response.data)
@@ -136,7 +136,7 @@ const MyShows = (props) => {
         // It'd be good to add some error handling here later, if someone tries to
         // access a non-existent user
         console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+          "Error: could not make the request."
         )
         console.log(err)
         const mockUser = createMockUser(props.id)
@@ -178,14 +178,14 @@ const MyShows = (props) => {
   const loadOptions = (input) => {
     return axios
       .get(
-        `https://my.api.mockaroo.com/shows.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+        `http://localhost:3000/shows`
       )
       .then((response) => {
         return searchShows(input, response.data)
       })
       .catch((err) => {
         console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+          "Error: could not make the request."
         )
         console.log(err)
         return searchShows(input, mockAllShows)

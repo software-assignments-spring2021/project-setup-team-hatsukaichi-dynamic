@@ -109,14 +109,14 @@ const IndividualShow = ({ id }) => {
     // Fetch show meta-information from the API
     axios
       .get(
-        `https://my.api.mockaroo.com/shows/${id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+        `http://localhost:3000/shows/${id}`
       )
       .then((response) => {
         setShow(response.data)
       })
       .catch((err) => {
         console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+          "Error: could not make the request."
         )
         console.log(err)
         setShow(mockShowAPI[id])
@@ -160,7 +160,7 @@ const IndividualShow = ({ id }) => {
       }
       axios
         .patch(
-          `https://my.api.mockaroo.com/tv_users/${loggedInUser.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`,
+          `http://localhost:3000/tv_users/${loggedInUser.id}`,
           patchUser
         )
         .then((response) => {
@@ -168,7 +168,7 @@ const IndividualShow = ({ id }) => {
         })
         .catch((err) => {
           console.log(
-            "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+            "Error: could not make the request."
           )
           console.log(err)
           setLoggedInUser(patchUser)

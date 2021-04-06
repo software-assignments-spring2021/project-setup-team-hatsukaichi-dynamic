@@ -19,7 +19,7 @@ function Login() {
     // Actual login handling will go here; for now, we'll simply get a user
     // from our Mockaroo API. User id is hardcoded for now.
     axios(
-      `https://my.api.mockaroo.com/tv_users/1.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+      `http://localhost:3000/tv_users/1`
     )
       .then((response) => {
         setLoggedInUser(response.data)
@@ -30,7 +30,7 @@ function Login() {
         // It'd be good to add some error handling here later, if someone tries to
         // access a non-existent user
         console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+          "Error: could not make the request."
         )
         console.log(err)
         const mockUser = createMockUser(1)
