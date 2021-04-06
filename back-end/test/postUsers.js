@@ -52,7 +52,7 @@ describe('POST /tv_users', () => {
       email: 'newemail@gmail.com',
     })
   })
-  it('should return mocked data when stubbed Mockaroo call results in 500 error', async () => {
+  it('should return new data when stubbed Mockaroo call results in 500 error', async () => {
     stub = sinon.stub(axios, 'post').rejects({
       response: {
         status: 500,
