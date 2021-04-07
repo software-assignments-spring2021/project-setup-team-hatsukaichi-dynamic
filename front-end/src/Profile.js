@@ -74,8 +74,7 @@ const SettingsForm = (props) => {
     }
     axios
       .patch(
-        `https://my.api.mockaroo.com/tv_users/${props.data.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`,
-        newData
+        `http://localhost:4000/tv_users/${props.data.id}`, newData
       )
       .then((response) => {
         console.log(response)
@@ -84,7 +83,7 @@ const SettingsForm = (props) => {
       })
       .catch((err) => {
         console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+          "Error: could not make the request."
         )
         console.log(err)
         props.updateUserData(mockUserUpdate(props.data.id, newData))
@@ -194,14 +193,14 @@ const ProfileContents = ({ data, updateUserData }) => {
         promises.push(
           axios
             .get(
-              `https://my.api.mockaroo.com/shows/${show.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+              `http://localhost:4000/shows/${show.id}`
             )
             .then((response) => {
               showInfo.push(response.data)
             })
             .catch((err) => {
               console.log(
-                "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+                "Error: could not make the request."
               )
               console.log(err)
               showInfo.push(mockShowAPI[show.id])
@@ -281,7 +280,7 @@ const Profile = (props) => {
 
   useEffect(() => {
     axios(
-      `https://my.api.mockaroo.com/tv_users/${props.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
+      `http://localhost:4000/tv_users/${props.id}`
     )
       .then((response) => {
         setUserData(response.data)
@@ -291,7 +290,7 @@ const Profile = (props) => {
         // It'd be good to add some error handling here later, if someone tries to
         // access a non-existent user
         console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
+          "Error: could not make the request."
         )
         console.log(err)
         const mockUser = createMockUser(props.id)

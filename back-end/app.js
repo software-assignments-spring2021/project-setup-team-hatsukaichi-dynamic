@@ -13,6 +13,16 @@ const {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev')) // dev is a concise color-coded default style for morgan
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH')
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept'
+	)
+	next()
+})
+
 
 app.get('/tv_users', (req, res, next) => {
   axios
