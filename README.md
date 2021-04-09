@@ -92,7 +92,7 @@ To use Trakt API, you need to register for an account and create a Trakt App.
 2. Create a new Trakt API app [here](https://trakt.tv/oauth/applications/new) to have 
 your own ``client_id`` and ``client_secret``. <br>
 For ``Name``, enter your project name (e.g. *TV Tracker*). <br>
-For ``Description`` enter description for the project (e.g. *App allows to retrieve information about trending shows and store it*). <br>
+For ``Description`` enter description for the project (e.g. *A handy tool for tracking your shows across platforms.*). <br>
 For ``Redirect uri``, enter `urn:ietf:wg:oauth:2.0:oob`. <br>
 Leave the rest empty and click on ``SAVE APP``. <br>
 You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. More 
