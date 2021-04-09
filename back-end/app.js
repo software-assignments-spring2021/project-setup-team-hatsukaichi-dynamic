@@ -14,15 +14,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev')) // dev is a concise color-coded default style for morgan
 app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH')
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept'
-	)
-	next()
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  next()
 })
-
 
 app.get('/tv_users', (req, res, next) => {
   axios
@@ -82,7 +81,7 @@ app.get('/tv_users/:id', (req, res, next) => {
         if (req.params.id in mockUserAPI) {
           res.status(200).json(mockUserAPI[req.params.id])
         } else {
-          res.status(400).json('user with requested id not found')
+          res.status(404).json('user with requested id not found')
         }
       } else {
         next(err)
