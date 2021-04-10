@@ -64,7 +64,7 @@ app.get('/shows/:id', (req, res, next) => {
     })
 })
 
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
   res.send('TV Tracker App Home page!')
 })
 
