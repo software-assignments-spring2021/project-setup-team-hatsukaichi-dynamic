@@ -67,5 +67,12 @@ describe('GET /shows-trakt', () => {
       ])
       sinon.assert.calledOnce(stub)
     })
+    it('should return mocked data when stubbed call results in 500 error', async () => {
+      stub = sinon.stub(axios, 'get').rejects(mockErrorMessage)
+      const res = await chai.request(server).get('/shows-trakt')
+      expect(res.status).to.equal(200)
+      expect(res.body).to.deep.equal(mockPopularShows)
+      sinon.assert.calledOnce(stub)
+    })
   })
 })

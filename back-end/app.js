@@ -8,7 +8,8 @@ const {
   mockShowAPI,
   createMockUser,
   mockUserAPI,
-  mockUserUpdate
+  mockUserUpdate,
+  mockPopularShows
 } = require('./MockData')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -174,7 +175,11 @@ app.get('/shows-trakt', (req, res, next) => {
         res.json(response.data)
       })
       .catch((err) => {
-        next(err)
+        if (err.response.status === 500) {
+          res.status(200).json(mockPopularShows)
+        } else {
+          next(err)
+        }
       })
     //otherwise return requested show information
   } else {
