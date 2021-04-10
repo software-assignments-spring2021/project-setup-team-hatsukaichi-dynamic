@@ -4,6 +4,7 @@ const axios = require('axios')
 const sinon = require('sinon')
 const expect = chai.expect
 const server = require('../app.js')
+const { mockErrorMessage, mockPopularShows } = require('../MockData.js')
 chai.use(chaiHttp)
 
 describe('GET /shows-trakt', () => {
