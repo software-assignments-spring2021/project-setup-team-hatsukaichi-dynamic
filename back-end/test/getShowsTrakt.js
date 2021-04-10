@@ -15,13 +15,11 @@ describe('GET /shows-trakt', () => {
   })
 
   it('should return 200 OK and data', async () => {
-    stub = sinon
-      .stub(axios, 'get')
-      .resolves({ data: { title: 'sample title' } })
+    stub = sinon.stub(axios, 'get').resolves({ data: { mockPopularShows } })
     const res = await chai.request(server).get('/shows-trakt')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({
-      title: 'sample title'
+      mockPopularShows
     })
     sinon.assert.calledOnce(stub)
   })
