@@ -226,7 +226,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                   <button className="prof-button">My Shows</button>
                 </Link>
               </div>
-              {loggedInUser && loggedInUser.id === data.id ? (
+              {loggedInUser && loggedInUser.id === parseInt(data.id) ? (
                 <div id="buttons">
                   <button className="prof-button" onClick={toggleModal}>
                     Settings
