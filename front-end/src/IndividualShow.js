@@ -108,16 +108,12 @@ const IndividualShow = ({ id }) => {
     }
     // Fetch show meta-information from the API
     axios
-      .get(
-        `http://localhost:4000/shows/${id}`
-      )
+      .get(`http://localhost:4000/shows/${id}`)
       .then((response) => {
         setShow(response.data)
       })
       .catch((err) => {
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
         setShow(mockShowAPI[id])
       })
@@ -159,17 +155,12 @@ const IndividualShow = ({ id }) => {
         patchUser.shows.push(showProgress)
       }
       axios
-        .patch(
-          `http://localhost:4000/tv_users/${loggedInUser.id}`,
-          patchUser
-        )
+        .patch(`http://localhost:4000/tv_users/${loggedInUser.id}`, patchUser)
         .then((response) => {
           setLoggedInUser(response.data)
         })
         .catch((err) => {
-          console.log(
-            "Error: could not make the request."
-          )
+          console.log('Error: could not make the request.')
           console.log(err)
           setLoggedInUser(patchUser)
         })
