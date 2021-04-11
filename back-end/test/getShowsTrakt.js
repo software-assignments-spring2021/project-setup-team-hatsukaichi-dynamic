@@ -14,7 +14,7 @@ describe('GET /shows-trakt', () => {
     stub.restore()
   })
 
-  it('should return 200 OK and data', async () => {
+  it('should return 200 OK and data when there is no query', async () => {
     stub = sinon.stub(axios, 'get').resolves({ data: { mockPopularShows } })
     const res = await chai.request(server).get('/shows-trakt')
     expect(res.status).to.equal(200)
@@ -66,11 +66,13 @@ describe('GET /shows-trakt', () => {
       sinon.assert.calledOnce(stub)
     })
     describe('when stubbed call returns with 500 error', () => {
-      it('should return mocked data', async () => {
+      it('should report an error', async () => {
         stub = sinon.stub(axios, 'get').rejects(mockErrorMessage)
         const res = await chai.request(server).get('/shows-trakt')
-        expect(res.status).to.equal(200)
-        expect(res.body).to.deep.equal(mockPopularShows)
+        expect(res.status).to.equal(500)
+        expect(res.body).to.deep.equal(
+          'An error occurred loading shows from Trakt!'
+        )
         sinon.assert.calledOnce(stub)
       })
     })

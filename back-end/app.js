@@ -176,7 +176,9 @@ app.get('/shows-trakt', (req, res, next) => {
       })
       .catch((err) => {
         if (err.response.status === 500) {
-          res.status(200).json(mockPopularShows)
+          res
+            .status(err.response.status)
+            .json('An error occurred loading shows from Trakt!')
         } else {
           next(err)
         }
