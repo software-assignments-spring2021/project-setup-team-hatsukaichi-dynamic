@@ -6,10 +6,6 @@
   margin-top: 10%;
 }
 
-#search-bar {
-  color: black;
-}
-
 div.css-yk16xz-control {
   margin-left: 5%;
   margin-right: 10%;
@@ -45,10 +41,22 @@ div.css-yk16xz-control {
   justify-content: center;
 }
 
-#search-bar {
-  width: 20rem;
-  padding: 0.5rem;
-  display: block;
+.modal-open {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.search-bar {
+  color: black;
+  position: absolute;
+  top: 15%;
+  bottom: 5%;
+  left: 30%;
+  right: 30%;
 }
 
 #filter-container {
@@ -120,8 +128,9 @@ h3 {
   .my-shows-button,
   .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows, 
-  .selected, 
+  #no-shows,
+  .search-bar,
+  .selected,
   .selected:hover {
     font-size: 16px;
   }
@@ -140,9 +149,10 @@ h3 {
   .my-shows-button,
   .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows, 
-  .selected, 
-  .selected:hover { 
+  #no-shows,
+  .search-bar,
+  .selected,
+  .selected:hover {
     font-size: 14px;
   }
   #profile-title,
@@ -160,8 +170,9 @@ h3 {
   .my-shows-button,
   .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows, 
-  .selected, 
+  #no-shows,
+  .search-bar,
+  .selected,
   .selected:hover {
     font-size: 12px;
   }
@@ -179,8 +190,10 @@ h3 {
   .filter-button,
   .my-shows-button,
   .filter-button:hover,
-  .my-shows-button:hover, 
-  .selected, 
+  .my-shows-button:hover,
+  #no-shows,
+  .search-bar,
+  .selected,
   .selected:hover {
     font-size: 10.5px;
   }

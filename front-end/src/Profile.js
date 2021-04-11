@@ -73,18 +73,14 @@ const SettingsForm = (props) => {
       email: email
     }
     axios
-      .patch(
-        `http://localhost:4000/tv_users/${props.data.id}`, newData
-      )
+      .patch(`http://localhost:4000/tv_users/${props.data.id}`, newData)
       .then((response) => {
         console.log(response)
         props.updateUserData(response.data)
         props.toggleModal()
       })
       .catch((err) => {
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
         props.updateUserData(mockUserUpdate(props.data.id, newData))
         props.toggleModal()
@@ -192,16 +188,12 @@ const ProfileContents = ({ data, updateUserData }) => {
       showIds.map((show) => {
         promises.push(
           axios
-            .get(
-              `http://localhost:4000/shows/${show.id}`
-            )
+            .get(`http://localhost:4000/shows/${show.id}`)
             .then((response) => {
               showInfo.push(response.data)
             })
             .catch((err) => {
-              console.log(
-                "Error: could not make the request."
-              )
+              console.log('Error: could not make the request.')
               console.log(err)
               showInfo.push(mockShowAPI[show.id])
             })
@@ -244,8 +236,7 @@ const ProfileContents = ({ data, updateUserData }) => {
                     onRequestClose={toggleModal}
                     contentLabel="Settings"
                     className="settings-modal"
-                    overlayClassName="modal-open"
-                  >
+                    overlayClassName="modal-open">
                     <SettingsForm
                       data={data}
                       updateUserData={updateUserData}
@@ -279,9 +270,7 @@ const Profile = (props) => {
   }
 
   useEffect(() => {
-    axios(
-      `http://localhost:4000/tv_users/${props.id}`
-    )
+    axios(`http://localhost:4000/tv_users/${props.id}`)
       .then((response) => {
         setUserData(response.data)
       })
@@ -289,9 +278,7 @@ const Profile = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to
         // access a non-existent user
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
         const mockUser = createMockUser(props.id)
         setUserData(mockUser)

@@ -32,16 +32,12 @@ const ShowGrid = (props) => {
       props.shows.map((show) => {
         promises.push(
           axios
-            .get(
-              `http://localhost:4000/shows/${show.id}`
-            )
+            .get(`http://localhost:4000/shows/${show.id}`)
             .then((response) => {
               showInfo.push(response.data)
             })
             .catch((err) => {
-              console.log(
-                "Error: could not make the request."
-              )
+              console.log('Error: could not make the request.')
               console.log(err)
               showInfo.push(mockShowAPI[show.id])
             })
@@ -125,9 +121,7 @@ const MyShows = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    axios(
-      `http://localhost:4000/tv_users/${props.id}`
-    )
+    axios(`http://localhost:4000/tv_users/${props.id}`)
       .then((response) => {
         setUserData(response.data)
       })
@@ -135,9 +129,7 @@ const MyShows = (props) => {
         // This case is likely to be due to Mockaroo rate limiting!
         // It'd be good to add some error handling here later, if someone tries to
         // access a non-existent user
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
         const mockUser = createMockUser(props.id)
         setUserData(mockUser)
@@ -177,16 +169,12 @@ const MyShows = (props) => {
 
   const loadOptions = (input) => {
     return axios
-      .get(
-        `http://localhost:4000/shows`
-      )
+      .get(`http://localhost:4000/shows`)
       .then((response) => {
         return searchShows(input, response.data)
       })
       .catch((err) => {
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
         return searchShows(input, mockAllShows)
       })
@@ -210,7 +198,7 @@ const MyShows = (props) => {
         {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}
         <div id="search-container">
           <AsyncSelect
-            id="search-bar"
+            className="search-bar"
             cacheOptions
             defaultOptions
             loadOptions={loadOptions}
@@ -229,9 +217,11 @@ const MyShows = (props) => {
             Filter Shows
           </button>
           <Modal
+            className="search-bar"
             isOpen={open}
             onRequestClose={toggleModal}
-            contentLabel="Filter Shows">
+            contentLabel="Filter Shows"
+            overlayClassName="modal-open">
             <div className="modal-contents">
               <h3 id="filter-title">Filter by Platform</h3>
               <br />
