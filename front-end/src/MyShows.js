@@ -217,7 +217,7 @@ const MyShows = (props) => {
             Filter Shows
           </button>
           <Modal
-            className="search-bar"
+            className="filter-modal"
             isOpen={open}
             onRequestClose={toggleModal}
             contentLabel="Filter Shows"

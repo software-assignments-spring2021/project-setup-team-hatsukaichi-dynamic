@@ -51,6 +51,12 @@ div.css-yk16xz-control {
 }
 
 .search-bar {
+  width: 20rem;
+  padding: 0.5rem;
+  display: block;
+}
+
+.filter-modal {
   color: black;
   position: absolute;
   top: 15%;
@@ -129,7 +135,7 @@ h3 {
   .filter-button:hover,
   .my-shows-button:hover,
   #no-shows,
-  .search-bar,
+  .filter-modal,
   .selected,
   .selected:hover {
     font-size: 16px;
@@ -150,7 +156,7 @@ h3 {
   .filter-button:hover,
   .my-shows-button:hover,
   #no-shows,
-  .search-bar,
+  .filter-modal,
   .selected,
   .selected:hover {
     font-size: 14px;
@@ -171,7 +177,7 @@ h3 {
   .filter-button:hover,
   .my-shows-button:hover,
   #no-shows,
-  .search-bar,
+  .filter-modal,
   .selected,
   .selected:hover {
     font-size: 12px;
@@ -192,7 +198,7 @@ h3 {
   .filter-button:hover,
   .my-shows-button:hover,
   #no-shows,
-  .search-bar,
+  .filter-modal,
   .selected,
   .selected:hover {
     font-size: 10.5px;
