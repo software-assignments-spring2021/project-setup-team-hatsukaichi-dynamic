@@ -175,13 +175,10 @@ app.get('/shows-trakt', (req, res, next) => {
         res.json(response.data)
       })
       .catch((err) => {
-        if (err.response.status === 500) {
-          res
-            .status(err.response.status)
-            .json('An error occurred loading shows from Trakt!')
-        } else {
-          next(err)
-        }
+        res
+          .status(err.response.status)
+          .json('An error occurred loading shows from Trakt!')
+        next(err)
       })
     //otherwise return requested show information
   } else {
@@ -200,6 +197,9 @@ app.get('/shows-trakt', (req, res, next) => {
         res.json(response.data)
       })
       .catch((err) => {
+        res
+          .status(err.response.status)
+          .json('An error occurred loading shows from Trakt!')
         next(err)
       })
   }
