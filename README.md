@@ -110,10 +110,10 @@ For example, if your client id is 123456, the file would read:
 
 To use TMDb API to retrieve poster information for movies and shows, you need to register for an account. 
 1. Register for an account [here](https://www.themoviedb.org/signup).
-2. Go to 'Profile and Settings tab' and navigate to the API tab [here](https://www.themoviedb.org/settings/api).
-3. Click 'Request an API key' and accept the terms. 
+2. Click on your profile picture and press the 'Settings' button. Navigate to the API tab [here](https://www.themoviedb.org/settings/api).
+3. Under the 'Request an API key' heading, press [click here](https://www.themoviedb.org/settings/api/request) and accept the terms. 
 4. Create an application by filling out the details of your app. <br>
-For ``Application URL``, if URL is not yet available, type `not yet available`.
+For ``Application URL``, if you do not yet have a URL, enter `not yet available`.
 You can now use your API Key (v3 auth).
 5. In your .env file, add the following line: 
 

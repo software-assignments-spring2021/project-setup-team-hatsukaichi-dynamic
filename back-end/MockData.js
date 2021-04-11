@@ -243,6 +243,120 @@ const mockAllShows = JSON.parse(`[{
   "coverPhoto": "http://dummyimage.com/175x231.png/dddddd/000000"
 }]`)
 
+const mockPopularShows = JSON.parse(
+  `[
+    {
+      "title":"Game of Thrones",
+      "year":2011,
+      "ids":{
+        "trakt":1390,
+        "slug":"game-of-thrones",
+        "tvdb":121361,
+        "imdb":"tt0944947",
+        "tmdb":1399,
+        "tvrage":24493
+      }
+    }, {
+      "title":"Breaking Bad",
+      "year":2008,
+      "ids":{
+        "trakt":1388,
+        "slug":"breaking-bad",
+        "tvdb":81189,
+        "imdb":"tt0903747",
+        "tmdb":1396,
+        "tvrage":18164
+      }
+    }, {
+      "title":"The Walking Dead",
+      "year":2010,
+      "ids":{
+        "trakt":1393,
+        "slug":"the-walking-dead",
+        "tvdb":153021,
+        "imdb":"tt1520211",
+        "tmdb":1402,"tvrage":25056
+      }
+    }, {
+      "title":"The Big Bang Theory",
+      "year":2007,
+      "ids":{
+        "trakt":1409,
+        "slug":"the-big-bang-theory",
+        "tvdb":80379,
+        "imdb":"tt0898266",
+        "tmdb":1418,
+        "tvrage":8511
+      }
+    }, {
+      "title":"Sherlock",
+      "year":2010,
+      "ids":{
+        "trakt":19792,
+        "slug":"sherlock",
+        "tvdb":176941,
+        "imdb":"tt1475582",
+        "tmdb":19885,
+        "tvrage":23433
+      }
+    }, {
+      "title":"How I Met Your Mother",
+      "year":2005,
+      "ids":{
+        "trakt":1095,
+        "slug":"how-i-met-your-mother",
+        "tvdb":75760,
+        "imdb":"tt0460649",
+        "tmdb":1100,
+        "tvrage":3918
+      }
+    }, {
+      "title":"Dexter",
+      "year":2006,
+      "ids":{
+        "trakt":1396,
+        "slug":"dexter",
+        "tvdb":79349,
+        "imdb":"tt0773262",
+        "tmdb":1405,
+        "tvrage":null
+      }
+    }, {
+      "title":"Friends",
+      "year":1994,
+      "ids":{
+        "trakt":1657,
+        "slug":"friends",
+        "tvdb":79168,
+        "imdb":"tt0108778",
+        "tmdb":1668,
+        "tvrage":3616
+      }
+    }, {
+      "title":"Stranger Things",
+      "year":2016,
+      "ids":{
+        "trakt":104439,
+        "slug":"stranger-things",
+        "tvdb":305288,
+        "imdb":"tt4574334",
+        "tmdb":66732,
+        "tvrage":48493
+      }
+    }, {
+      "title":"Arrow",
+      "year":2012,
+      "ids":{
+        "trakt":1403,
+        "slug":"arrow",
+        "tvdb":257655,
+        "imdb":"tt2193021",
+        "tmdb":1412,"tvrage":30715
+      }
+    }
+  ]`
+)
+
 const mockErrorMessage = {
   response: {
     status: 500,
@@ -256,5 +370,6 @@ module.exports = {
   mockAllShows: mockAllShows,
   mockUserAPI: mockUserAPI,
   mockUserUpdate: mockUserUpdate,
+  mockPopularShows: mockPopularShows,
   mockErrorMessage: mockErrorMessage
 }
