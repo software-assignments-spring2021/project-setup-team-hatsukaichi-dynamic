@@ -80,7 +80,7 @@ const Description = ({ genres, description, totalEpisodes, isMovie }) => {
           <p className="descript">{totalEpisodes}</p>
         </>
       ) : (
-        <p className="descript">This entry is a movie</p>
+        <br />
       )}
     </div>
   )
