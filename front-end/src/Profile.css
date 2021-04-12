@@ -168,7 +168,6 @@
   .prof-button,
   .filter-button:hover,
   .prof-button:hover,
-  
   #no-shows,
   #copied {
     font-size: 16px;
@@ -179,16 +178,16 @@
   #settings-title {
     font-size: 22px;
   }
-  
+
   .show-image {
     width: 75%;
     padding: 0.1em;
   }
-  
+
   #profile-picture {
     max-width: 155px;
   }
-  
+
   #bio {
     font-size: 18px;
   }
@@ -203,31 +202,30 @@
   .prof-button,
   .filter-button:hover,
   .prof-button:hover,
-  
   #no-shows,
   #copied {
     font-size: 14px;
   }
-  
+
   #profile-title,
   #title-rec-shows,
   #settings-title {
     font-size: 20px;
   }
-  
+
   .show-image {
     width: 66%;
     padding: 0.2em;
   }
-  
+
   #profile-picture {
     max-width: 140px;
   }
-  
+
   #bio {
     font-size: 16px;
   }
-  
+
   #settings-title {
     margin-bottom: 5%;
   }
@@ -240,7 +238,6 @@
   .prof-button:hover,
   .label-profile,
   .inputs,
-  
   #no-shows,
   #copied {
     font-size: 12px;
@@ -251,20 +248,20 @@
   #settings-title {
     font-size: 15px;
   }
-  
+
   .show-image {
     width: 55%;
     padding: 0.1em;
   }
-  
+
   #profile-picture {
     width: 28%;
   }
-  
+
   #bio {
     font-size: 12px;
   }
-  
+
   #settings-title {
     margin-bottom: 3%;
   }

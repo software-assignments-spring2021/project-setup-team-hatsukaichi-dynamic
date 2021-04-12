@@ -29,17 +29,12 @@ function Signup() {
     }
 
     axios
-      .post(
-        `http://localhost:4000/tv_users/`,
-        newUser
-      )
+      .post(`http://localhost:4000/tv_users/`, newUser)
       .then((response) => {
         history.push(`/profile/${response.data.id}`)
       })
       .catch((err) => {
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         history.push('/profile/1')
       })
   }
