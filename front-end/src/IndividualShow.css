@@ -81,16 +81,17 @@
   margin: 5%;
   font-size: 16px;
   background-color: whitesmoke;
-  color: #2d2d2d;
+  background-color: #000000;
+  color: #666666;
   padding: 1em 1em 1em 1em;
 }
 
 #episode:hover,
 #season:hover,
 #description:hover {
-  border: 2px solid #d1dcd7;
+  border: 2px solid #d1cdc7;
   background-color: #2d2d2d;
-  color: #d1dcd7;
+  color: #d1cdc7;
 }
 
 .descript,

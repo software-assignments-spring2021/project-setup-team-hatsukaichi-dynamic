@@ -27,14 +27,11 @@ describe('POST /tv_users', () => {
         shows: []
       }
     })
-    const res = await chai
-      .request(server)
-      .post('/tv_users')
-      .send({
-        username: 'newUsername',
-        password: 'newPassword',
-        email: 'newemail@gmail.com',
-      })
+    const res = await chai.request(server).post('/tv_users').send({
+      username: 'newUsername',
+      password: 'newPassword',
+      email: 'newemail@gmail.com'
+    })
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({
       id: 'sampleID',
@@ -49,7 +46,7 @@ describe('POST /tv_users', () => {
     sinon.assert.calledWith(stub, postURL, {
       username: 'newUsername',
       password: 'newPassword',
-      email: 'newemail@gmail.com',
+      email: 'newemail@gmail.com'
     })
   })
   it('should return new data when stubbed Mockaroo call results in 500 error', async () => {
@@ -62,10 +59,20 @@ describe('POST /tv_users', () => {
     const res = await chai
       .request(server)
       .post('/tv_users')
-      .send({ username: 'test user', password: 'test password', email: 'testEmail@gmail.com'})
+      .send({
+        username: 'test user',
+        password: 'test password',
+        email: 'testEmail@gmail.com'
+      })
     expect(res.status).to.equal(200)
-    expect(res.body).to.deep.equal(createMockUser(1, 'test user', 'test password', 'testEmail@gmail.com'))
+    expect(res.body).to.deep.equal(
+      createMockUser(1, 'test user', 'test password', 'testEmail@gmail.com')
+    )
     sinon.assert.calledOnce(stub)
-    sinon.assert.calledWith(stub, postURL, { username: 'test user', password: 'test password', email: 'testEmail@gmail.com'})
+    sinon.assert.calledWith(stub, postURL, {
+      username: 'test user',
+      password: 'test password',
+      email: 'testEmail@gmail.com'
+    })
   })
 })
