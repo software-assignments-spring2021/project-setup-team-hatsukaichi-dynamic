@@ -27,8 +27,7 @@ app.use((req, res, next) => {
 })
 
 //mongo setup
-
-const mongo_uri = process.env.CONNECTION_STRING_MONGODB;
+const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`;
 
 
 mongoose.connect(mongo_uri, {useUnifiedTopology:true, useNewUrlParser:true})
