@@ -1,5 +1,7 @@
 # TV Tracker
 
+[![Build Status](https://travis-ci.com/agile-dev-assignments/project-setup-team-hatsukaichi-dynamic.svg?branch=master)](https://travis-ci.com/agile-dev-assignments/project-setup-team-hatsukaichi-dynamic)
+
 ## Project Description
 
 TV Tracker is an easy, intuitive way to keep track of the shows and movies you're watching across platforms. Given that some shows are only available on specific platforms, it can be hard to figure out where you're watching your content.
