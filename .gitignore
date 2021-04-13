@@ -129,3 +129,5 @@ typings/
 .vscode
 .vscode/*
 !.vscode/settings.json
+
+testResults.md
