@@ -27,16 +27,19 @@ app.use((req, res, next) => {
 })
 
 //mongo setup
-const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`;
+const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
 
-
-mongoose.connect(mongo_uri, {useUnifiedTopology:true, useNewUrlParser:true})
-	.then((resolved) => console.log('The database has been successfully connected'))
-	.catch((err) => console.log(err))
-
-mongoose.set('useNewUrlParser', true)
-mongoose.set('useFindAndModify', false)
-mongoose.set('useCreateIndex', true)
+mongoose
+  .connect(mongo_uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  .then((resolved) =>
+    console.log('The database has been successfully connected.')
+  )
+  .catch((err) => console.log(err))
 
 app.get('/tv_users', (req, res, next) => {
   axios

@@ -61,11 +61,11 @@ To start the front end of the project, navigate to the front-end folder and run 
 
 In front-end, create a file named '.env' with the following contents:
 
-> REACT_APP_MOCKAROO_KEY=[your API key]
+> REACT_APP_MOCKAROO_KEY=your_API_key
 
-Replace [your API key] with your actual API key. Save the file and close it.
+Replace ``your_API_key`` with your Mockaroo API key. Save the file and close it.
 
-For example, if your API key is 123456, the file would read:
+For example, if your API key is 123456, the line would read:
 
 > REACT_APP_MOCKAROO_KEY=123456
 
@@ -79,36 +79,36 @@ To start the back end of the project, navigate to the back-end folder and run th
 
 In back-end, create a file named '.env' with the following contents:
 
-> API_KEY_MOCKAROO=[your API key]
+> API_KEY_MOCKAROO=your_API_key
 
-Replace [your API key] with your actual API key. Save the file and close it.
+Replace ``your_API_key`` with your Mockaroo API key. Save the file and close it.
 
 Then, in back-end, run:
 
-> npx nodemon
+> bash backEnd.sh
 
-### Trakt API Setup
+#### Trakt API Setup
 
 To use Trakt API, you need to register for an account and create a Trakt App. 
 1. Register for an account [here](https://login.apiary.io/register).
 2. Create a new Trakt API app [here](https://trakt.tv/oauth/applications/new) to have 
 your own ``client_id`` and ``client_secret``. <br>
 For ``Name``, enter your project name (e.g. *TV Tracker*). <br>
-For ``Description`` enter description for the project (e.g. *A handy tool for tracking your shows across platforms.*). <br>
+For ``Description`` write a short description of the project (e.g. *A handy tool for tracking your shows across platforms.*). <br>
 For ``Redirect uri``, enter `urn:ietf:wg:oauth:2.0:oob`. <br>
 Leave the rest empty and click on ``SAVE APP``. <br>
 You can now use ``client_id`` and ``client_secret`` for making Trakt API calls. More 
-information about Trakt API required headers is available [here](https://trakt.docs.apiary.io/#introduction/required-headers). 
-3. To create Oauth, please follow these instructions [here](https://github.com/xbgmsharp/trakt#usage). Note: for Sprint 2, Oauth will not be needed. 
+information about the Trakt API required headers is available [here](https://trakt.docs.apiary.io/#introduction/required-headers). 
+3. To create an oauth token, follow [these instructions](https://github.com/xbgmsharp/trakt#usage). For Sprint 2, Oauth will not be needed. 
 4. In your .env file, add the following line: 
 
 > API_KEY_TRAKT=your_client_id
 
-For example, if your client id is 123456, the file would read:
+Replace ``your_client_id`` with your Trakt client ID. For example, if your client ID is 123456, the line would read:
 
 > API_KEY_TRAKT=123456
 
-### TMDb API Setup
+#### TMDb API Setup
 
 To use TMDb API to retrieve poster information for movies and shows, you need to register for an account. 
 1. Register for an account [here](https://www.themoviedb.org/signup).
@@ -121,7 +121,22 @@ You can now use your API Key (v3 auth).
 
 > API_KEY_TMDB=your_api_key(v3 auth)
 
-For example, if your api key is 123456, the file would read:
+Replace ``your_api_key(v3 auth)`` with your TMDb API key. For example, if your API key is 123456, the line would read:
 
 > API_KEY_TMDB=123456
 
+#### MongoDB Setup
+
+To use the TVTracker MongoDB database, you must follow these steps.
+1. In the Org, navigate to ``Database Access`` under the ``Security`` tab.
+2. Click ``ADD NEW DATABASE USER`` on the right of the screen and choose a username and password. Under Database User Privileges, select ``Atlas admin.`` Then, click ``Add User`` at the bottom.
+3. Navigate to back-end. In your .env file, add the following lines:
+> MONGODB_USERNAME=username
+
+> MONGODB_PASSWORD=password
+
+Replace ``username`` and ``password`` with the username and password you chose in step 2. For example, if your username is testUser and your password is testPass, the lines would read:
+
+> MONGODB_USERNAME=testUser
+
+> MONGODB_PASSWORD=testPass
