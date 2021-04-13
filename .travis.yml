@@ -3,6 +3,9 @@ node_js:
   - "node"
   - "12"
 
+install:
+  - npm install
+
 script:
   - cd back-end/
   - npm test
