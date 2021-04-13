@@ -65,7 +65,7 @@ In front-end, create a file named '.env' with the following contents:
 
 Replace [your API key] with your actual API key. Save the file and close it.
 
-For example, if your API key is 123456, the file would read:
+For example, if your API key is 123456, the line would read:
 
 > REACT_APP_MOCKAROO_KEY=123456
 
@@ -85,7 +85,7 @@ Replace [your API key] with your actual API key. Save the file and close it.
 
 Then, in back-end, run:
 
-> npx nodemon
+> bash backEnd.sh
 
 ### Trakt API Setup
 
@@ -104,7 +104,7 @@ information about Trakt API required headers is available [here](https://trakt.d
 
 > API_KEY_TRAKT=your_client_id
 
-For example, if your client id is 123456, the file would read:
+For example, if your client id is 123456, the line would read:
 
 > API_KEY_TRAKT=123456
 
@@ -121,7 +121,22 @@ You can now use your API Key (v3 auth).
 
 > API_KEY_TMDB=your_api_key(v3 auth)
 
-For example, if your api key is 123456, the file would read:
+For example, if your api key is 123456, the line would read:
 
 > API_KEY_TMDB=123456
 
+### MongoDB Setup
+
+To use the TVTracker MongoDB database, you must follow these steps.
+1. In the Org, navigate to ``Database Access`` under the ``Security`` tab.
+2. Click ``ADD NEW DATABASE USER`` on the right of the screen and choose a username and password. Under Database User Privileges, select ``Atlas admin.`` Then, click ``Add User`` at the bottom.
+3. Navigate to back-end. In your .env file, add the follwing line:
+
+> CONNECTION_STRING_MONGODB=mongodb://[username]:[password]@cluster0-shard-00-02.a1meh.mongodb.net:27017,cluster0-shard-00-01.a1meh.mongodb.net:27017,cluster0-shard-00-00.a1meh.mongodb.net:27017/?authSource=admin
+
+Replace [username] and [password] with the username and password you chose in step 2. For example, if your username is ``testUser`` and your password is ``testPass``, the line would read:
+
+> CONNECTION_STRING_MONGODB=mongodb://testUser:testPass@cluster0-shard-00-02.a1meh.mongodb.net:27017,cluster0-shard-00-01.a1meh.mongodb.net:27017,cluster0-shard-00-00.a1meh.mongodb.net:27017/?authSource=admin
+
+4. Navigate to ``Network Access`` under the ``Security`` tab.
+5. Click ``ADD IP ADDRESS`` on the right of the screen. Click ``ADD CURRENT IP ADDRESS`` and enter ``[your name]'s IP`` in the comment section.
