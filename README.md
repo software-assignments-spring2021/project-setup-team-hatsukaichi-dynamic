@@ -131,11 +131,11 @@ To use the TVTracker MongoDB database, you must follow these steps.
 1. In the Org, navigate to ``Database Access`` under the ``Security`` tab.
 2. Click ``ADD NEW DATABASE USER`` on the right of the screen and choose a username and password. Under Database User Privileges, select ``Atlas admin.`` Then, click ``Add User`` at the bottom.
 3. Navigate to back-end. In your .env file, add the following lines:
-> MONGODB_USERNAME=[username]
+> MONGODB_USERNAME=username
 
-> MONGODB_PASSWORD=[password]
+> MONGODB_PASSWORD=password
 
-Replace ``[username]`` and ``[password]`` with the username and password you chose in step 2. For example, if your username is testUser and your password is testPass, the lines would read:
+Replace ``username`` and ``password`` with the username and password you chose in step 2. For example, if your username is testUser and your password is testPass, the lines would read:
 
 > MONGODB_USERNAME=testUser
 
