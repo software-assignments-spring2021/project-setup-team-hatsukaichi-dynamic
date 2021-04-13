@@ -87,7 +87,7 @@ Then, in back-end, run:
 
 > bash backEnd.sh
 
-### Trakt API Setup
+#### Trakt API Setup
 
 To use Trakt API, you need to register for an account and create a Trakt App. 
 1. Register for an account [here](https://login.apiary.io/register).
@@ -108,7 +108,7 @@ For example, if your client id is 123456, the line would read:
 
 > API_KEY_TRAKT=123456
 
-### TMDb API Setup
+#### TMDb API Setup
 
 To use TMDb API to retrieve poster information for movies and shows, you need to register for an account. 
 1. Register for an account [here](https://www.themoviedb.org/signup).
@@ -125,16 +125,16 @@ For example, if your api key is 123456, the line would read:
 
 > API_KEY_TMDB=123456
 
-### MongoDB Setup
+#### MongoDB Setup
 
 To use the TVTracker MongoDB database, you must follow these steps.
 1. In the Org, navigate to ``Database Access`` under the ``Security`` tab.
 2. Click ``ADD NEW DATABASE USER`` on the right of the screen and choose a username and password. Under Database User Privileges, select ``Atlas admin.`` Then, click ``Add User`` at the bottom.
-3. Navigate to back-end. In your .env file, add the follwing lines:
-MONGODB_USERNAME=[username]
-MONGODB_PASSWORD=[password]
+3. Navigate to back-end. In your .env file, add the following lines:
+> MONGODB_USERNAME=[username]
+> MONGODB_PASSWORD=[password]
 
 Replace [username] and [password] with the username and password you chose in step 2. For example, if your username is ``testUser`` and your password is ``testPass``, the lines would read:
 
-MONGODB_USERNAME=``testUser``
-MONGODB_PASSWORD=``testPass``
+> MONGODB_USERNAME=``testUser``
+> MONGODB_PASSWORD=``testPass``
