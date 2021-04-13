@@ -130,13 +130,11 @@ For example, if your api key is 123456, the line would read:
 To use the TVTracker MongoDB database, you must follow these steps.
 1. In the Org, navigate to ``Database Access`` under the ``Security`` tab.
 2. Click ``ADD NEW DATABASE USER`` on the right of the screen and choose a username and password. Under Database User Privileges, select ``Atlas admin.`` Then, click ``Add User`` at the bottom.
-3. Navigate to back-end. In your .env file, add the follwing line:
+3. Navigate to back-end. In your .env file, add the follwing lines:
+MONGODB_USERNAME=[username]
+MONGODB_PASSWORD=[password]
 
-> CONNECTION_STRING_MONGODB=mongodb://[username]:[password]@cluster0-shard-00-02.a1meh.mongodb.net:27017,cluster0-shard-00-01.a1meh.mongodb.net:27017,cluster0-shard-00-00.a1meh.mongodb.net:27017/?authSource=admin
+Replace [username] and [password] with the username and password you chose in step 2. For example, if your username is ``testUser`` and your password is ``testPass``, the lines would read:
 
-Replace [username] and [password] with the username and password you chose in step 2. For example, if your username is ``testUser`` and your password is ``testPass``, the line would read:
-
-> CONNECTION_STRING_MONGODB=mongodb://testUser:testPass@cluster0-shard-00-02.a1meh.mongodb.net:27017,cluster0-shard-00-01.a1meh.mongodb.net:27017,cluster0-shard-00-00.a1meh.mongodb.net:27017/?authSource=admin
-
-4. Navigate to ``Network Access`` under the ``Security`` tab.
-5. Click ``ADD IP ADDRESS`` on the right of the screen. Click ``ADD CURRENT IP ADDRESS`` and enter ``[your name]'s IP`` in the comment section.
+MONGODB_USERNAME=``testUser``
+MONGODB_PASSWORD=``testPass``
