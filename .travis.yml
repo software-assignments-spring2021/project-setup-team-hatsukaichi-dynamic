@@ -4,8 +4,8 @@ node_js:
   - "12"
 
 install:
+  - cd back-end/
   - npm install
 
 script:
-  - cd back-end/
   - npm test
