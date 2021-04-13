@@ -27,7 +27,9 @@ app.use((req, res, next) => {
 })
 
 //mongo setup
-const mongo_uri = process.env.MONGODB_KEY;
+
+const mongo_uri = process.env.CONNECTION_STRING_MONGODB;
+
 
 mongoose.connect(mongo_uri, {useUnifiedTopology:true, useNewUrlParser:true})
 	.then((resolved) => console.log('The database has been successfully connected'))
