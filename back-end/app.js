@@ -233,7 +233,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
   const notFoundError = {
     status: 404,
     error: 'Not Found - method exists, but no record found',
-    message: 'Content with the indicated Trakt id is not found',
+    message: 'Content with the indicated Trakt ID could not be found',
     path: '/shows-trakt/:id'
   }
   let traktURL, tmdbType

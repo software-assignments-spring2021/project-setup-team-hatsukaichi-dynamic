@@ -3,6 +3,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const axios = require('axios')
 const sinon = require('sinon')
+const mongoose = require('mongoose')
 const { createMockUser } = require('../MockData.js')
 var expect = chai.expect
 chai.use(chaiHttp)
@@ -13,6 +14,16 @@ describe('POST /tv_users', () => {
 
   afterEach(() => {
     stub.restore()
+  })
+
+  after(() => {
+    //do this in whatever the last test is alphabetically
+    mongoose.connection
+      .close()
+      .then((resolved) =>
+        console.log('The connection to the database has been closed.')
+      )
+      .catch((err) => console.log(err))
   })
 
   it('should create all user info fields', async () => {
@@ -56,14 +67,11 @@ describe('POST /tv_users', () => {
         message: 'mockaroo api limit exceeded (probably)'
       }
     })
-    const res = await chai
-      .request(server)
-      .post('/tv_users')
-      .send({
-        username: 'test user',
-        password: 'test password',
-        email: 'testEmail@gmail.com'
-      })
+    const res = await chai.request(server).post('/tv_users').send({
+      username: 'test user',
+      password: 'test password',
+      email: 'testEmail@gmail.com'
+    })
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal(
       createMockUser(1, 'test user', 'test password', 'testEmail@gmail.com')
