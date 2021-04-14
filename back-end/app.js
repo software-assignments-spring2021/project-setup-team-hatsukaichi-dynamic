@@ -364,6 +364,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         .then((responseA) => {
           //add response from Trakt API to final response object
           response_final = responseA.data
+          response_final['type'] = req.query.type
           //return tmdb_id value which is used for retrieving poster url in get request to Tmdb API
           return responseA.data
         })
