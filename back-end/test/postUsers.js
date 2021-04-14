@@ -96,5 +96,19 @@ describe('POST /tv_users', () => {
       email: 'notanemail'
     })
     expect(res.status).to.equal(400)
+    expect(res.body.errors).to.deep.equal([
+      {
+        value: 'notanemail',
+        msg: 'Invalid value',
+        param: 'email',
+        location: 'body'
+      },
+      {
+        value: 'invalidpassword',
+        msg: 'Invalid value',
+        param: 'password',
+        location: 'body'
+      }
+    ])
   })
 })
