@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
+const validator = require('validator')
+const { body, validationResult } = require('express-validator')
 require('dotenv').config({ silent: true })
 const {
   mockAllShows,
@@ -41,6 +43,9 @@ mongoose
   )
   .catch((err) => console.log(err))
 
+const db = mongoose.connection
+
+//routes
 app.get('/tv_users', (req, res, next) => {
   axios
     .get(
@@ -107,36 +112,59 @@ app.get('/tv_users/:id', (req, res, next) => {
     })
 })
 
-app.post('/tv_users', (req, res, next) => {
-  axios
-    .post(
-      `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`,
-      {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-      }
-    )
-    .then((response) => {
-      res.json(response.data)
+app.post(
+  '/tv_users',
+  body('email').isEmail().normalizeEmail(),
+  body('username').isAlphanumeric().not().isEmpty().trim().escape(),
+  body('password')
+    .isStrongPassword({
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 0,
+      returnScore: false
     })
-    .catch((err) => {
-      if (err.response.status === 500) {
-        res
-          .status(200)
-          .json(
-            createMockUser(
-              1,
-              req.body.username,
-              req.body.password,
-              req.body.email
+    .isAlphanumeric()
+    .not()
+    .isEmpty()
+    .trim()
+    .escape(),
+  (req, res, next) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
+    axios
+      .post(
+        `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`,
+        {
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password
+        }
+      )
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          res
+            .status(200)
+            .json(
+              createMockUser(
+                1,
+                req.body.username,
+                req.body.password,
+                req.body.email
+              )
             )
-          )
-      } else {
-        next(err)
-      }
-    })
-})
+        } else {
+          next(err)
+        }
+      })
+  }
+)
 
 app.get('/shows', (req, res, next) => {
   axios
