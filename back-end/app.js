@@ -1,4 +1,6 @@
 const express = require('express')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
@@ -23,6 +25,21 @@ app.use((req, res, next) => {
   )
   next()
 })
+
+//mongo setup
+const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
+
+mongoose
+  .connect(mongo_uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  .then((resolved) =>
+    console.log('The database has been successfully connected.')
+  )
+  .catch((err) => console.log(err))
 
 app.get('/tv_users', (req, res, next) => {
   axios

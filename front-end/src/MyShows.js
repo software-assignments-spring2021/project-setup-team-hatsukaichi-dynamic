@@ -189,7 +189,7 @@ const MyShows = (props) => {
         <h3 id="profile-title">{userData.username}'s Shows</h3>
         <div id="search-container">
           <AsyncSelect
-            id="search-bar"
+            className="search-bar"
             cacheOptions
             defaultOptions
             loadOptions={loadOptions}
@@ -209,9 +209,11 @@ const MyShows = (props) => {
             Filter Shows
           </button>
           <Modal
+            className="filter-modal"
             isOpen={open}
             onRequestClose={toggleModal}
-            contentLabel="Filter Shows">
+            contentLabel="Filter Shows"
+            overlayClassName="modal-open">
             <div className="modal-contents">
               <h3 id="filter-title">Filter by Platform</h3>
               <br />
