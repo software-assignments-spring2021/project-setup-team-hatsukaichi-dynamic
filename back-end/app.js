@@ -159,6 +159,7 @@ app.post(
                 req.body.email
               )
             )
+        } else if (err.response.status === 400) {
         } else {
           next(err)
         }

@@ -86,8 +86,15 @@ describe('POST /tv_users', () => {
   it('should return a 400 error if invalid form answers are provided', async () => {
     stub = sinon.stub(axios, 'post').rejects({
       response: {
-        status: 400
+        status: 400,
+        errors: []
       }
     })
+    const res = await chai.request(server).post('/tv_users').send({
+      username: 'testUser',
+      password: 'invalidpassword',
+      email: 'notanemail'
+    })
+    expect(res.status).to.equal(400)
   })
 })
