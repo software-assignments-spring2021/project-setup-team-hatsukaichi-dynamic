@@ -56,14 +56,11 @@ describe('POST /tv_users', () => {
         message: 'mockaroo api limit exceeded (probably)'
       }
     })
-    const res = await chai
-      .request(server)
-      .post('/tv_users')
-      .send({
-        username: 'test user',
-        password: 'test password',
-        email: 'testEmail@gmail.com'
-      })
+    const res = await chai.request(server).post('/tv_users').send({
+      username: 'test user',
+      password: 'test password',
+      email: 'testEmail@gmail.com'
+    })
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal(
       createMockUser(1, 'test user', 'test password', 'testEmail@gmail.com')
