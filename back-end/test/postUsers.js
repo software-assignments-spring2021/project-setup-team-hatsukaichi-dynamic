@@ -92,7 +92,7 @@ describe('POST /tv_users', () => {
     })
     const res = await chai.request(server).post('/tv_users').send({
       username: 'testUser',
-      password: 'invalidpassword',
+      password: 'invalid Password1',
       email: 'notanemail'
     })
     expect(res.status).to.equal(400)
@@ -104,7 +104,7 @@ describe('POST /tv_users', () => {
         location: 'body'
       },
       {
-        value: 'invalidpassword',
+        value: 'invalid Password1',
         msg: 'Invalid value',
         param: 'password',
         location: 'body'

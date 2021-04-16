@@ -125,7 +125,8 @@ app.post(
       minSymbols: 0,
       returnScore: false
     })
-    .isAlphanumeric()
+    .not()
+    .contains(' ')
     .not()
     .isEmpty()
     .trim()
