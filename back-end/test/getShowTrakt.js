@@ -4,7 +4,7 @@ const axios = require('axios')
 const sinon = require('sinon')
 const expect = chai.expect
 const server = require('../app.js')
-const { mockErrorMessage, mockShowAPI } = require('../MockData.js')
+const { mockErrorMessage, mockGOT, mockShowAPI } = require('../MockData.js')
 chai.use(chaiHttp)
 
 describe('GET /shows/1', () => {
@@ -23,10 +23,15 @@ describe('GET /shows/1', () => {
             mockGOT
           }
       })
-      .onSecondCall().resolves(2)
+      .onSecondCall().resolves({
+        data:
+        {
+
+        }
+      })
     const res = await chai.request(server).get('/shows/1')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({ id: 1, name: 'sample show' })
-    sinon.assert.calledOnce(stub)
+    sinon.assert.calledTwice(stub)
   })
 })

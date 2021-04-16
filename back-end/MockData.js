@@ -358,7 +358,7 @@ const mockPopularShows = JSON.parse(
 )
 
 const mockGOT = JSON.parse(
-  {
+  `{
     "title": "Game of Thrones",
       "year": 2011,
       "ids": {
@@ -412,7 +412,7 @@ const mockGOT = JSON.parse(
         "fantasy"
       ],
       "aired_episodes": 50
-  }
+  }`
 )
 
 const mockErrorMessage = {
@@ -427,6 +427,7 @@ module.exports = {
   mockShowAPI: mockShowAPI,
   mockAllShows: mockAllShows,
   mockUserAPI: mockUserAPI,
+  mockGOT: mockGOT,
   mockUserUpdate: mockUserUpdate,
   mockPopularShows: mockPopularShows,
   mockErrorMessage: mockErrorMessage
