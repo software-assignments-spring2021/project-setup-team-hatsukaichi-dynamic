@@ -41,11 +41,19 @@ const mockShows = JSON.parse(`[{
   "episodes": 22
 }]`)
 
+const mockSingleShow = JSON.parse(`{
+  "id": 36,
+  "platform": "Netflix",
+  "completed": false,
+  "seasons": 2,
+  "episodes": 30
+}`)
+
 const createMockUser = (id, username, password, email) => {
   return {
     id: id,
     username: username || 'mlaffan0',
-    password: password || 'njb9oAB',
+    password: password || 'njb9oAB111',
     email: email || 'jparkin0@utexas.edu',
     bio: '',
     img: '',
@@ -57,7 +65,7 @@ const mockUserAPI = {
   1: {
     id: 1,
     username: 'mlaffan0',
-    password: 'njb9oAB',
+    password: 'njb9oAB111',
     email: 'jparkin0@utexas.edu',
     bio:
       'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.',
@@ -67,7 +75,7 @@ const mockUserAPI = {
   2: {
     id: 2,
     username: 'fgoodlett1',
-    password: 'Y3DJKGN2',
+    password: 'Y3DJKGN2111',
     email: 'rgrolmann1@cloudflare.com',
     bio: 'Mauris sit amet cursus integer. Ut tellus.',
     img: 'https://dummyimage.com/194x133.png/ffffff/000000',
@@ -76,8 +84,8 @@ const mockUserAPI = {
   3: {
     id: 3,
     username: 'msuff2',
-    password: 'hrqkb4',
-    email: 'msuff2',
+    password: 'hrqkB4111',
+    email: 'msuff2@gmail.com',
     bio:
       'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.',
     img: 'https://dummyimage.com/194x133.png/dddddd/000000',
@@ -86,7 +94,7 @@ const mockUserAPI = {
   4: {
     id: 4,
     username: 'dstuckford3',
-    password: 'ykBWYvO',
+    password: 'ykBWYvO111',
     email: 'mjosilevich3@apple.com',
     bio: 'Etiam faucibus cursus urna. Ut tellus.',
     img: 'https://dummyimage.com/194x133.png/ffffff/000000',
@@ -371,5 +379,6 @@ module.exports = {
   mockUserAPI: mockUserAPI,
   mockUserUpdate: mockUserUpdate,
   mockPopularShows: mockPopularShows,
+  mockSingleShow: mockSingleShow,
   mockErrorMessage: mockErrorMessage
 }
