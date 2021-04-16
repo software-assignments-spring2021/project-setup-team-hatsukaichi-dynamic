@@ -114,7 +114,7 @@ const Description = ({
 const IndividualShow = ({ id, type }) => {
   const [show, setShow] = useState({})
   const notLoggedShow = {
-    mediaType: type,
+    isMovie: type === 'movie',
     traktId: id,
     season: 0,
     episodes: 0
@@ -202,7 +202,7 @@ const IndividualShow = ({ id, type }) => {
     if (type === 'platform') {
       updatedShow.platform = newValue.value
     } else if (type === 'status') {
-      updatedShow.list = newValue.value === 'Watched'
+      updatedShow.list = newValue.value
     }
     setShowProgress(updatedShow)
   }
