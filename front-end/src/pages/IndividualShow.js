@@ -111,11 +111,12 @@ const Description = ({
   )
 }
 
-const IndividualShow = ({ id }) => {
+const IndividualShow = ({ id, type }) => {
   const [show, setShow] = useState({})
   const notLoggedShow = {
-    id: id,
-    seasons: 0,
+    mediaType: type,
+    traktId: id,
+    season: 0,
     episodes: 0
   }
   const [showProgress, setShowProgress] = useState(notLoggedShow)
@@ -201,7 +202,7 @@ const IndividualShow = ({ id }) => {
     if (type === 'platform') {
       updatedShow.platform = newValue.value
     } else if (type === 'status') {
-      updatedShow.completed = newValue.value === 'Watched'
+      updatedShow.list = newValue.value === 'Watched'
     }
     setShowProgress(updatedShow)
   }
@@ -220,7 +221,7 @@ const IndividualShow = ({ id }) => {
                 </Link>
                 <Select
                   className="status-select"
-                  defaultValue={textToValue(showProgress.completed, 'status')}
+                  defaultValue={textToValue(showProgress.list, 'status')}
                   options={statuses}
                   onChange={(value) => handleDropdownChange(value, 'status')}
                 />
