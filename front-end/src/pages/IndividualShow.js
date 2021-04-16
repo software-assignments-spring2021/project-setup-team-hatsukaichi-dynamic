@@ -115,9 +115,9 @@ const IndividualShow = ({ id, type }) => {
   const [show, setShow] = useState({})
   const notLoggedShow = {
     isMovie: type === 'movie',
-    traktId: id,
+    traktId: parseInt(id),
     season: 0,
-    episodes: 0
+    episode: 0
   }
   const [showProgress, setShowProgress] = useState(notLoggedShow)
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
@@ -126,8 +126,9 @@ const IndividualShow = ({ id, type }) => {
     // Fetch user-related show information for the logged in user
     if (loggedInUser) {
       const userShowInfo = loggedInUser.shows.filter((show) => {
-        // TODO: Change to account for type and id
-        return show.id === parseInt(id)
+        return (
+          show.traktId === parseInt(id) && show.isMovie === (type === 'movie')
+        )
       })
       if (userShowInfo.length !== 0) {
         setShowProgress(userShowInfo[0])
@@ -143,18 +144,18 @@ const IndividualShow = ({ id, type }) => {
         console.log('Error: could not make the request.')
         console.log(err)
       })
-  }, [id, loggedInUser])
+  }, [id, type, loggedInUser])
 
   // TODO: do a check for NaN here
   const updateSeasons = (seasons) => {
     const updatedShow = showProgress
-    updatedShow.seasons = seasons
+    updatedShow.season = seasons
     setShowProgress(updatedShow)
   }
 
   const updateEpisodes = (episodes) => {
     const updatedShow = showProgress
-    updatedShow.episodes = episodes
+    updatedShow.episode = episodes
     setShowProgress(updatedShow)
   }
 
@@ -166,8 +167,10 @@ const IndividualShow = ({ id, type }) => {
       let updated = false
       const updatedShows = loggedInUser.shows.map((show) => {
         // parseInt is needed because id is stored as a String while show.id is a Number
-        // TODO: change to account for show type and id
-        if (show.id === parseInt(id)) {
+        if (
+          show.traktId === parseInt(id) &&
+          show.isMovie === (type === 'movie')
+        ) {
           updated = true
           return showProgress
         }
@@ -227,8 +230,8 @@ const IndividualShow = ({ id, type }) => {
                 />
                 {show.type === 'movie' ? null : (
                   <ProgressData
-                    initialSeason={showProgress.seasons}
-                    initialEpisode={showProgress.episodes}
+                    initialSeason={showProgress.season}
+                    initialEpisode={showProgress.episode}
                     updateSeasons={updateSeasons}
                     updateEpisodes={updateEpisodes}
                   />
