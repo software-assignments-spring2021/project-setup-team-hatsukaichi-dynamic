@@ -94,6 +94,10 @@ function Signup() {
                 Could not create account--passwords did not match.
               </p>
             ) : null}
+            <p>
+              Passwords have a minimum length 8 and must contain <br />
+              at least one uppercase and one lowercase letter.
+            </p>
           </div>
           <button id="signup-button" type="submit">
             Sign Up
