@@ -185,27 +185,55 @@ app.get('/shows', (req, res, next) => {
     })
 })
 
-app.patch('/tv_users/:id', (req, res, next) => {
-  const patchUser = {}
-  Object.keys(req.body).map((key) => {
-    patchUser[key] = req.body[key]
-  })
-  axios
-    .patch(
-      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}&__method=PATCH`,
-      patchUser
-    )
-    .then((response) => {
-      res.json(response.data)
+app.patch(
+  '/tv_users/:id',
+  body('email').optional().isEmail().normalizeEmail(),
+  body('username').optional().isAlphanumeric().not().isEmpty().trim().escape(),
+  body('password')
+    .optional()
+    .isStrongPassword({
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 0,
+      returnScore: false
     })
-    .catch((err) => {
-      if (err.response.status == 500) {
-        res.status(200).json(mockUserUpdate(req.params.id, patchUser))
-      } else {
-        next(err)
-      }
+    .not()
+    .contains(' ')
+    .not()
+    .isEmpty()
+    .trim()
+    .escape(),
+  body('shows.*.episode').optional().isInt(),
+  body('shows.*.season').optional().isInt(),
+  (req, res, next) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      console.log(errors)
+      return res.status(400).json({ errors: errors.array() })
+    }
+    const patchUser = {}
+    Object.keys(req.body).map((key) => {
+      patchUser[key] = req.body[key]
     })
-})
+    axios
+      .patch(
+        `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}&__method=PATCH`,
+        patchUser
+      )
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((err) => {
+        if (err.response.status == 500) {
+          res.status(200).json(mockUserUpdate(req.params.id, patchUser))
+        } else {
+          next(err)
+        }
+      })
+  }
+)
 
 app.get('/shows-trakt', (req, res, next) => {
   //Return a list of popular shows if search query is not given
