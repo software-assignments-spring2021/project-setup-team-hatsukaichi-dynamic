@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
+const validator = require('validator')
+const { body, validationResult } = require('express-validator')
 require('dotenv').config({ silent: true })
 const {
   mockAllShows,
@@ -27,16 +29,23 @@ app.use((req, res, next) => {
 })
 
 //mongo setup
-const mongo_uri = process.env.MONGODB_KEY;
+const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
 
-mongoose.connect(mongo_uri, {useUnifiedTopology:true, useNewUrlParser:true})
-	.then((resolved) => console.log('The database has been successfully connected'))
-	.catch((err) => console.log(err))
+mongoose
+  .connect(mongo_uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  .then((resolved) =>
+    console.log('The database has been successfully connected.')
+  )
+  .catch((err) => console.log(err))
 
-mongoose.set('useNewUrlParser', true)
-mongoose.set('useFindAndModify', false)
-mongoose.set('useCreateIndex', true)
+const db = mongoose.connection
 
+//routes
 app.get('/tv_users', (req, res, next) => {
   axios
     .get(
@@ -103,36 +112,61 @@ app.get('/tv_users/:id', (req, res, next) => {
     })
 })
 
-app.post('/tv_users', (req, res, next) => {
-  axios
-    .post(
-      `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`,
-      {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-      }
-    )
-    .then((response) => {
-      res.json(response.data)
+app.post(
+  '/tv_users',
+  body('email').isEmail().normalizeEmail(),
+  body('username').isAlphanumeric().not().isEmpty().trim().escape(),
+  body('password')
+    .isStrongPassword({
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 0,
+      returnScore: false
     })
-    .catch((err) => {
-      if (err.response.status === 500) {
-        res
-          .status(200)
-          .json(
-            createMockUser(
-              1,
-              req.body.username,
-              req.body.password,
-              req.body.email
+    .not()
+    .contains(' ')
+    .not()
+    .isEmpty()
+    .trim()
+    .escape(),
+  (req, res, next) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
+    axios
+      .post(
+        `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`,
+        {
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password
+        }
+      )
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          res
+            .status(200)
+            .json(
+              createMockUser(
+                1,
+                req.body.username,
+                req.body.password,
+                req.body.email
+              )
             )
-          )
-      } else {
-        next(err)
-      }
-    })
-})
+        } else if (err.response.status === 400) {
+        } else {
+          next(err)
+        }
+      })
+  }
+)
 
 app.get('/shows', (req, res, next) => {
   axios
@@ -229,7 +263,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
   const notFoundError = {
     status: 404,
     error: 'Not Found - method exists, but no record found',
-    message: 'Content with the indicated Trakt id is not found',
+    message: 'Content with the indicated Trakt ID could not be found',
     path: '/shows-trakt/:id'
   }
   let traktURL, tmdbType

@@ -32,8 +32,7 @@ const Header = () => {
             )}
           </div>
         </div>
-      }
-    ></StickyHeader>
+      }></StickyHeader>
   )
 }
 

@@ -8,14 +8,14 @@ const port = 4000
 
 //call to start listening
 const listener = server.listen(port, function () {
-	console.log(`Server running on port: ${port}`)
+  console.log(`Server running on port: ${port}`)
 })
 
 //funciton to close listener
 const close = () => {
-	listener.close()
+  listener.close()
 }
 
 module.exports = {
-	close: close
+  close: close
 }

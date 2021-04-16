@@ -3,17 +3,12 @@ import AsyncSelect from 'react-select/async'
 import Header from './Header'
 import Footer from './Footer'
 import axios from 'axios'
-import {
-  createMockUser,
-  mockAllShows,
-  mockShowAPI,
-  mockShowImage
-} from './MockData'
+import { mockShowAPI, mockShowImage } from './MockData'
 import './MyShows.css'
 import Modal from 'react-modal'
 import Select from 'react-select'
 import { Link, useHistory } from 'react-router-dom'
-import { platforms } from './DropdownOptions'
+import { platforms, textToValue } from './DropdownOptions'
 require('dotenv').config()
 
 const ShowGrid = (props) => {
@@ -32,16 +27,12 @@ const ShowGrid = (props) => {
       props.shows.map((show) => {
         promises.push(
           axios
-            .get(
-              `http://localhost:4000/shows/${show.id}`
-            )
+            .get(`http://localhost:4000/shows/${show.id}`)
             .then((response) => {
               showInfo.push(response.data)
             })
             .catch((err) => {
-              console.log(
-                "Error: could not make the request."
-              )
+              console.log('Error: could not make the request.')
               console.log(err)
               showInfo.push(mockShowAPI[show.id])
             })
@@ -71,7 +62,9 @@ const ShowGrid = (props) => {
 
   return (
     <>
-      <h3 id="title">My Shows</h3>
+      <h3 id="title">
+        My Shows {props.platform ? `- ${props.platform} Shows` : null}
+      </h3>
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0 ? (
           filteredShows.map((show) => {
@@ -125,22 +118,13 @@ const MyShows = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    axios(
-      `http://localhost:4000/tv_users/${props.id}`
-    )
+    axios(`http://localhost:4000/tv_users/${props.id}`)
       .then((response) => {
         setUserData(response.data)
       })
       .catch((err) => {
-        // This case is likely to be due to Mockaroo rate limiting!
-        // It'd be good to add some error handling here later, if someone tries to
-        // access a non-existent user
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
-        const mockUser = createMockUser(props.id)
-        setUserData(mockUser)
       })
   }, [props.id])
 
@@ -177,18 +161,14 @@ const MyShows = (props) => {
 
   const loadOptions = (input) => {
     return axios
-      .get(
-        `http://localhost:4000/shows`
-      )
+      .get(`http://localhost:4000/shows`)
       .then((response) => {
         return searchShows(input, response.data)
       })
       .catch((err) => {
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
-        return searchShows(input, mockAllShows)
+        return []
       })
   }
 
@@ -207,14 +187,14 @@ const MyShows = (props) => {
       <Header />
       <div id="container">
         <h3 id="profile-title">{userData.username}'s Shows</h3>
-        {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}
         <div id="search-container">
           <AsyncSelect
-            id="search-bar"
+            className="search-bar"
             cacheOptions
             defaultOptions
             loadOptions={loadOptions}
             onChange={linkToShow}
+            placeholder="Search Shows..."
           />
         </div>
         <div id="filter-container">
@@ -229,16 +209,18 @@ const MyShows = (props) => {
             Filter Shows
           </button>
           <Modal
+            className="filter-modal"
             isOpen={open}
             onRequestClose={toggleModal}
-            contentLabel="Filter Shows">
+            contentLabel="Filter Shows"
+            overlayClassName="modal-open">
             <div className="modal-contents">
               <h3 id="filter-title">Filter by Platform</h3>
               <br />
               <Select
                 options={platforms}
                 onChange={onChange}
-                value={selectedPlatform}
+                value={textToValue(selectedPlatform, 'platform')}
               />
               <button
                 className="my-shows-button"

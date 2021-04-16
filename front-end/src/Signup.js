@@ -29,17 +29,12 @@ function Signup() {
     }
 
     axios
-      .post(
-        `http://localhost:4000/tv_users/`,
-        newUser
-      )
+      .post(`http://localhost:4000/tv_users/`, newUser)
       .then((response) => {
         history.push(`/profile/${response.data.id}`)
       })
       .catch((err) => {
-        console.log(
-          "Error: could not make the request."
-        )
+        console.log('Error: could not make the request.')
         history.push('/profile/1')
       })
   }
@@ -99,6 +94,10 @@ function Signup() {
                 Could not create account--passwords did not match.
               </p>
             ) : null}
+            <p>
+              Passwords have a minimum length 8 and must contain <br />
+              at least one uppercase and one lowercase letter.
+            </p>
           </div>
           <button id="signup-button" type="submit">
             Sign Up
