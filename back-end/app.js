@@ -294,7 +294,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
     path: '/shows-trakt/:id'
   }
   let traktURL, tmdbType
-  seasonURL=`https://api.trakt.tv/shows/${req.params.id}/seasons`
+  let seasonURL=`https://api.trakt.tv/shows/${req.params.id}/seasons`
   //Bad Request error if content type is not given
   if (Object.keys(req.query).length === 0) {
     res.json(badRequestError)
@@ -302,7 +302,6 @@ app.get('/shows-trakt/:id', (req, res, next) => {
   } else if (req.query.type == 'show') {
     traktURL = `https://api.trakt.tv/shows/${req.params.id}`
     tmdbType = 'tv'
-    //seasonURL=`https://api.trakt.tv/shows/${req.params.id}/seasons`
   } else if (req.query.type == 'movie') {
     traktURL = `https://api.trakt.tv/movies/${req.params.id}`
     tmdbType = 'movie'
@@ -337,6 +336,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           return responseA.data
         })
         .then((responseX) => {
+          //retrieve season info for a show from Seasons Trakt API
           if (tmdbType=='tv'){
             return axios.get(seasonURL, {
               headers: {
@@ -350,13 +350,13 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         .then((responseB) => {
           let count=0;
+          //show seasons only for shows
           if (tmdbType=='tv'){
+            //count season objects
             for (let i=0; i<responseB.data.length; i++)
               count+=1
-            console.log(responseB.data)
-            console.log(count)
-            response_final['seasons']=count
-          }
+            response_final['seasons']=count //set number of seasons
+          } //return tmdb images object for both shows and movies
           return axios.get(
             `https://api.themoviedb.org/3/${tmdbType}/${response_final.ids.tmdb}/images?api_key=${process.env.API_KEY_TMDB}`
           )
