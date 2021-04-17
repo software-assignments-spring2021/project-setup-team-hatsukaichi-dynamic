@@ -349,7 +349,6 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         })
         .then((responseB) => {
-          let count=0;
           //show seasons only for shows
           if (tmdbType=='tv'){
             response_final['seasons']=responseB.data.length //set number of seasons
