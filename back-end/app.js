@@ -294,6 +294,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
     path: '/shows-trakt/:id'
   }
   let traktURL, tmdbType
+  seasonURL=`https://api.trakt.tv/shows/${req.params.id}/seasons`
   //Bad Request error if content type is not given
   if (Object.keys(req.query).length === 0) {
     res.json(badRequestError)
@@ -301,6 +302,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
   } else if (req.query.type == 'show') {
     traktURL = `https://api.trakt.tv/shows/${req.params.id}`
     tmdbType = 'tv'
+    //seasonURL=`https://api.trakt.tv/shows/${req.params.id}/seasons`
   } else if (req.query.type == 'movie') {
     traktURL = `https://api.trakt.tv/movies/${req.params.id}`
     tmdbType = 'movie'
@@ -332,11 +334,31 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           //add response from Trakt API to final response object
           response_final = responseA.data
           //return tmdb_id value which is used for retrieving poster url in get request to Tmdb API
-          return responseA.data.ids.tmdb
+          return responseA.data
+        })
+        .then((responseX) => {
+          if (tmdbType=='tv'){
+            return axios.get(seasonURL, {
+              headers: {
+                'trakt-api-version': '2',
+                'trakt-api-key': `${process.env.API_KEY_TRAKT}`,
+                Accept: '*/*', //necessary since requests have multiple content-types
+                'User-Agent': 'request'
+              }
+            })
+          }
         })
         .then((responseB) => {
+          let count=0;
+          if (tmdbType=='tv'){
+            for (let i=0; i<responseB.data.length; i++)
+              count+=1
+            console.log(responseB.data)
+            console.log(count)
+            response_final['seasons']=count
+          }
           return axios.get(
-            `https://api.themoviedb.org/3/${tmdbType}/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
+            `https://api.themoviedb.org/3/${tmdbType}/${response_final.ids.tmdb}/images?api_key=${process.env.API_KEY_TMDB}`
           )
         })
         //catch error if the movie is not found in Tmdb database
@@ -363,8 +385,17 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           } //send movie info and, if available, poster info
           res.json(response_final)
         })
-        .catch((err) => {
-          next(err)
+         .catch((err) => {
+          if (err.status != 200 && err.status != 304) {
+          //if show is in Trakt database, return available data
+            if (response_final != null) {
+              res.json(response_final)
+            } else {
+              //otherwise return Not Found error message
+              res.json(notFoundError)
+            }
+            throw err //poster not found error
+          }
         })
     )
   }
