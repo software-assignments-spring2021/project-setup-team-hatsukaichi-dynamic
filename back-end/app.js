@@ -324,7 +324,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         //if data is not found in Trakt database return Not Found error
         .catch((err) => {
-          if (err.status != 200 && err.status != 304) {
+          if (err.response.status != 200 && err.response.status != 304) {
             res.json(notFoundError)
             throw err
           }
@@ -352,10 +352,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           let count=0;
           //show seasons only for shows
           if (tmdbType=='tv'){
-            //count season objects
-            for (let i=0; i<responseB.data.length; i++)
-              count+=1
-            response_final['seasons']=count //set number of seasons
+            response_final['seasons']=responseB.data.length //set number of seasons
           } //return tmdb images object for both shows and movies
           return axios.get(
             `https://api.themoviedb.org/3/${tmdbType}/${response_final.ids.tmdb}/images?api_key=${process.env.API_KEY_TMDB}`
@@ -363,7 +360,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         //catch error if the movie is not found in Tmdb database
         .catch((err) => {
-          if (err.status != 200 && err.status != 304) {
+          if (err.response.status != 200 && err.response.status != 304) {
             //if show is in Trakt database, return available data
             if (response_final != null) {
               res.json(response_final)
@@ -386,7 +383,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           res.json(response_final)
         })
          .catch((err) => {
-          if (err.status != 200 && err.status != 304) {
+          if (err.response.status != 200 && err.response.status != 304) {
           //if show is in Trakt database, return available data
             if (response_final != null) {
               res.json(response_final)
