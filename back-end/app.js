@@ -30,7 +30,7 @@ app.use((req, res, next) => {
   next()
 })
 
-//mongo setup
+//MongoDB setup
 const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
 
 mongoose
@@ -46,7 +46,7 @@ mongoose
   .catch((err) => console.log(err))
 
 const db = mongoose.connection
-db.on('error', console.error.bind(console, 'MongoDB error: '))
+db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
 //routes
 app.get('/tv_users', (req, res, next) => {
@@ -94,7 +94,22 @@ app.get('/', (req, res) => {
   res.send('TV Tracker App Home page!')
 })
 
-app.get('/tv_users/:id', (req, res, next) => {
+app.get('/tv_users/:id', async (req, res, next) => {
+  /*
+  UserModel.findOne({ id: req.params.id }, async function (err, foundUser) {
+    if (err) {
+      console.log('MongoDB Error: ' + err)
+    } else if (foundUser) {
+      await foundUser.save()
+    }
+  })*/
+  try {
+    const foundUser = await UserModel.findOne({ id: req.params.id })
+    res.json(foundUser)
+  } catch {
+    res.status(404).json('Error! Invalid user ID!')
+  }
+  /*
   axios
     .get(
       `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}`
@@ -112,7 +127,7 @@ app.get('/tv_users/:id', (req, res, next) => {
       } else {
         next(err)
       }
-    })
+    })*/
 })
 
 app.post(
