@@ -4,7 +4,7 @@
 const server = require('./app')
 
 //the port to listen to for incoming requests
-const port = 3000
+const port = 4000
 
 //call to start listening
 const listener = server.listen(port, function () {

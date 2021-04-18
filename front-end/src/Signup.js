@@ -29,17 +29,12 @@ function Signup() {
     }
 
     axios
-      .post(
-        `https://my.api.mockaroo.com/tv_users.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=POST`,
-        newUser
-      )
+      .post(`http://localhost:4000/tv_users/`, newUser)
       .then((response) => {
         history.push(`/profile/${response.data.id}`)
       })
       .catch((err) => {
-        console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
-        )
+        console.log('Error: could not make the request.')
         history.push('/profile/1')
       })
   }
@@ -99,6 +94,10 @@ function Signup() {
                 Could not create account--passwords did not match.
               </p>
             ) : null}
+            <p>
+              Passwords have a minimum length 8 and must contain <br />
+              at least one uppercase and one lowercase letter.
+            </p>
           </div>
           <button id="signup-button" type="submit">
             Sign Up

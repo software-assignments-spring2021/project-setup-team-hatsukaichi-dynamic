@@ -3,9 +3,9 @@ import Header from './Header'
 import Footer from './Footer'
 import './IndividualShow.css'
 import axios from 'axios'
-import { mockShowAPI, mockShowImage } from './MockData'
+import { mockShowImage } from './MockData'
 import { Link } from 'react-router-dom'
-import { platforms, statuses } from './DropdownOptions'
+import { platforms, statuses, textToValue } from './DropdownOptions'
 import Select from 'react-select'
 import { AuthContext } from './App'
 require('dotenv').config()
@@ -80,7 +80,7 @@ const Description = ({ genres, description, totalEpisodes, isMovie }) => {
           <p className="descript">{totalEpisodes}</p>
         </>
       ) : (
-        <p className="descript">This entry is a movie</p>
+        <br />
       )}
     </div>
   )
@@ -108,18 +108,13 @@ const IndividualShow = ({ id }) => {
     }
     // Fetch show meta-information from the API
     axios
-      .get(
-        `https://my.api.mockaroo.com/shows/${id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}`
-      )
+      .get(`http://localhost:4000/shows/${id}`)
       .then((response) => {
         setShow(response.data)
       })
       .catch((err) => {
-        console.log(
-          "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
-        )
+        console.log('Error: could not make the request.')
         console.log(err)
-        setShow(mockShowAPI[id])
       })
   }, [id, loggedInUser])
 
@@ -159,17 +154,12 @@ const IndividualShow = ({ id }) => {
         patchUser.shows.push(showProgress)
       }
       axios
-        .patch(
-          `https://my.api.mockaroo.com/tv_users/${loggedInUser.id}.json?key=${process.env.REACT_APP_MOCKAROO_KEY}&__method=PATCH`,
-          patchUser
-        )
+        .patch(`http://localhost:4000/tv_users/${loggedInUser.id}`, patchUser)
         .then((response) => {
           setLoggedInUser(response.data)
         })
         .catch((err) => {
-          console.log(
-            "We likely reached Mockaroo's request limit, or you did not insert your API key in .env."
-          )
+          console.log('Error: could not make the request.')
           console.log(err)
           setLoggedInUser(patchUser)
         })
@@ -177,32 +167,6 @@ const IndividualShow = ({ id }) => {
       console.log(
         'Oh no! There is no logged in user. Add some sort of notification here.'
       )
-    }
-  }
-
-  // textToValue transforms a text value to a value/label format to pre-populate
-  // the Select component that calls the function. It currently supports both
-  // platform dropdowns and status dropdowns
-  const textToValue = (text, type) => {
-    let array = []
-    switch (type) {
-      case 'platform':
-        array = platforms
-        break
-      case 'status':
-        array = statuses
-        break
-      default:
-        break
-    }
-    const match = array.filter((p) => p.value === text)
-    if (match.length === 0) {
-      return {
-        value: '',
-        label: `Select a ${type.charAt(0).toUpperCase() + type.slice(1)}`
-      }
-    } else {
-      return match[0]
     }
   }
 

@@ -126,5 +126,8 @@ typings/
 **/_site/
 
 ##vscode
+.vscode
 .vscode/*
 !.vscode/settings.json
+
+testResults.md
