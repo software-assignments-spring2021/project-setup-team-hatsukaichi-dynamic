@@ -5,8 +5,10 @@ const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
 const validator = require('validator')
-const { body, validationResult } = require('express-validator')
 require('dotenv').config({ silent: true })
+const { body, validationResult } = require('express-validator')
+const { userModel } = require('./models/User')
+const { showModel } = require('./models/Show')
 const {
   mockAllShows,
   mockShowAPI,

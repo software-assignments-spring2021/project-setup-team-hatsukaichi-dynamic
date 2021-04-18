@@ -9,4 +9,4 @@ const ShowSchema = new mongoose.Schema({
   platform: { type: String, required: true } //netflix, prime, etc
 })
 
-module.exports = mongoose.model('Show', ShowSchema)
+module.exports = { showModel: mongoose.model('Show', ShowSchema) }
