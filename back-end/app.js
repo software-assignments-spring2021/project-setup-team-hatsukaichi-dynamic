@@ -95,14 +95,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/tv_users/:id', async (req, res, next) => {
-  /*
-  UserModel.findOne({ id: req.params.id }, async function (err, foundUser) {
-    if (err) {
-      console.log('MongoDB Error: ' + err)
-    } else if (foundUser) {
-      await foundUser.save()
-    }
-  })*/
   try {
     const foundUser = await UserModel.findOne({ id: req.params.id })
     res.json(foundUser)
