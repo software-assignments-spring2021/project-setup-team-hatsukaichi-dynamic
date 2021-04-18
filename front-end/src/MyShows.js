@@ -14,6 +14,13 @@ import Modal from 'react-modal'
 import Select from 'react-select'
 import { Link, useHistory } from 'react-router-dom'
 import { platforms } from './DropdownOptions'
+import amazon from './Images/amazon.jpg'
+import crunchyroll from './Images/crunchyroll.png'
+import disney from './Images/disney.jpg'
+import hbo from './Images/hbo.jpg'
+import hulu from './Images/hulu.png'
+import netflix from './Images/netflix.png'
+import other from './Images/other.png'
 require('dotenv').config()
 
 const ShowGrid = (props) => {
@@ -65,8 +72,28 @@ const ShowGrid = (props) => {
     }
   }, [props.shows, props.status, props.platform, shows])
 
+  const setPlatformLogo = (platform) => {
+    let platformLogo
+    if (platform === 'Amazon Prime') {
+      platformLogo = amazon
+    } else if (platform === 'Crunchyroll') {
+      platformLogo = crunchyroll
+    } else if (platform === 'Disney Plus') {
+      platformLogo = disney
+    } else if (platform === 'HBO') {
+      platformLogo = hbo
+    } else if (platform === 'Hulu') {
+      platformLogo = hulu
+    } else if (platform === 'Netflix') {
+      platformLogo = netflix
+    } else { //platform is 'other' or hasn't been set
+      platformLogo = other
+    }
+    return platformLogo
+  }
+
   return (
-    <>
+    <> 
       <h3 id="title">My Shows</h3>
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0 ? (
@@ -79,7 +106,12 @@ const ShowGrid = (props) => {
                   src={mockShowImage(show.id)}
                   alt={`cover-${show.id}`}
                 />
-              </Link>
+                  <img
+                  className="platform-image"
+                  src={setPlatformLogo(props.platform)}
+                  alt={`${props.platform} logo`}
+                />
+               </Link>
             )
           })
         ) : (
@@ -181,11 +213,11 @@ const MyShows = (props) => {
   }
 
   const [selectedPlatform, setSelectedPlatform] = useState('')
-
+  
   const onChange = (platform) => {
     setSelectedPlatform(platform.value)
   }
-
+    
   const linkToShow = (e) => {
     history.push(`/show/${e.value}`)
   }
@@ -256,5 +288,4 @@ const MyShows = (props) => {
     </>
   )
 }
-
-export default MyShows
+export default MyShows 
