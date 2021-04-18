@@ -7,8 +7,8 @@ const morgan = require('morgan') // middleware for logging of incoming HTTP requ
 const validator = require('validator')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
-const { userModel } = require('./models/User')
-const { showModel } = require('./models/Show')
+const { UserModel } = require('./models/User')
+const { ShowModel } = require('./models/Show')
 const {
   mockAllShows,
   mockShowAPI,
@@ -46,6 +46,7 @@ mongoose
   .catch((err) => console.log(err))
 
 const db = mongoose.connection
+db.on('error', console.error.bind(console, 'MongoDB error: '))
 
 //routes
 app.get('/tv_users', (req, res, next) => {
