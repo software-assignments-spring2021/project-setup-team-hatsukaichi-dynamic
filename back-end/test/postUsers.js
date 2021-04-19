@@ -15,6 +15,16 @@ describe('POST /tv_users', () => {
     stub.restore()
   })
 
+  after(() => {
+    //do this in whatever the last test is alphabetically
+    mongoose.connection
+      .close()
+      .then((resolved) =>
+        console.log('The connection to the database has been closed.')
+      )
+      .catch((err) => console.log(err))
+  })
+
   it('should create all user info fields', async () => {
     stub = sinon.stub(axios, 'post').resolves({
       data: {
