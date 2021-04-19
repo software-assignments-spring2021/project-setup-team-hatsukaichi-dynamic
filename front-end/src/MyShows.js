@@ -3,17 +3,11 @@ import AsyncSelect from 'react-select/async'
 import Header from './Header'
 import Footer from './Footer'
 import axios from 'axios'
-import {
-  createMockUser,
-  mockAllShows,
-  mockShowAPI,
-  mockShowImage
-} from './MockData'
+import { mockShowAPI, mockShowImage } from './MockData'
 import './MyShows.css'
 import Modal from 'react-modal'
 import Select from 'react-select'
 import { Link, useHistory } from 'react-router-dom'
-import { platforms } from './DropdownOptions'
 import amazon from './Images/amazon.jpg'
 import crunchyroll from './Images/crunchyroll.png'
 import disney from './Images/disney.jpg'
@@ -21,6 +15,7 @@ import hbo from './Images/hbo.jpg'
 import hulu from './Images/hulu.png'
 import netflix from './Images/netflix.png'
 import other from './Images/other.png'
+import { platforms, textToValue } from './DropdownOptions'
 require('dotenv').config()
 
 const ShowGrid = (props) => {
@@ -95,6 +90,10 @@ const ShowGrid = (props) => {
   return (
     <> 
       <h3 id="title">My Shows</h3>
+    <>
+      <h3 id="title">
+        My Shows {props.platform ? `- ${props.platform} Shows` : null}
+      </h3>
       <div id="show-container">
         {filteredShows !== undefined && filteredShows.length !== 0 ? (
           filteredShows.map((show) => {
@@ -158,13 +157,8 @@ const MyShows = (props) => {
         setUserData(response.data)
       })
       .catch((err) => {
-        // This case is likely to be due to Mockaroo rate limiting!
-        // It'd be good to add some error handling here later, if someone tries to
-        // access a non-existent user
         console.log('Error: could not make the request.')
         console.log(err)
-        const mockUser = createMockUser(props.id)
-        setUserData(mockUser)
       })
   }, [props.id])
 
@@ -208,7 +202,7 @@ const MyShows = (props) => {
       .catch((err) => {
         console.log('Error: could not make the request.')
         console.log(err)
-        return searchShows(input, mockAllShows)
+        return []
       })
   }
 
@@ -227,7 +221,6 @@ const MyShows = (props) => {
       <Header />
       <div id="container">
         <h3 id="profile-title">{userData.username}'s Shows</h3>
-        {/* TODO: Use onChange props for AsyncSelect to trigger Individual Show modal */}
         <div id="search-container">
           <AsyncSelect
             className="search-bar"
@@ -235,6 +228,7 @@ const MyShows = (props) => {
             defaultOptions
             loadOptions={loadOptions}
             onChange={linkToShow}
+            placeholder="Search Shows..."
           />
         </div>
         <div id="filter-container">
@@ -260,7 +254,7 @@ const MyShows = (props) => {
               <Select
                 options={platforms}
                 onChange={onChange}
-                value={selectedPlatform}
+                value={textToValue(selectedPlatform, 'platform')}
               />
               <button
                 className="my-shows-button"

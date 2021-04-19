@@ -3,9 +3,9 @@ import Header from './Header'
 import Footer from './Footer'
 import './IndividualShow.css'
 import axios from 'axios'
-import { mockShowAPI, mockShowImage } from './MockData'
+import { mockShowImage } from './MockData'
 import { Link } from 'react-router-dom'
-import { platforms, statuses } from './DropdownOptions'
+import { platforms, statuses, textToValue } from './DropdownOptions'
 import Select from 'react-select'
 import { AuthContext } from './App'
 require('dotenv').config()
@@ -115,7 +115,6 @@ const IndividualShow = ({ id }) => {
       .catch((err) => {
         console.log('Error: could not make the request.')
         console.log(err)
-        setShow(mockShowAPI[id])
       })
   }, [id, loggedInUser])
 
@@ -168,32 +167,6 @@ const IndividualShow = ({ id }) => {
       console.log(
         'Oh no! There is no logged in user. Add some sort of notification here.'
       )
-    }
-  }
-
-  // textToValue transforms a text value to a value/label format to pre-populate
-  // the Select component that calls the function. It currently supports both
-  // platform dropdowns and status dropdowns
-  const textToValue = (text, type) => {
-    let array = []
-    switch (type) {
-      case 'platform':
-        array = platforms
-        break
-      case 'status':
-        array = statuses
-        break
-      default:
-        break
-    }
-    const match = array.filter((p) => p.value === text)
-    if (match.length === 0) {
-      return {
-        value: '',
-        label: `Select a ${type.charAt(0).toUpperCase() + type.slice(1)}`
-      }
-    } else {
-      return match[0]
     }
   }
 
