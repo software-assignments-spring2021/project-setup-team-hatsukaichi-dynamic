@@ -5,10 +5,12 @@ const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
 const validator = require('validator')
-const passport = require('passport'); //authentication middleware
-const { body, validationResult } = require('express-validator')
-const LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport') //authentication middleware
+const LocalStrategy = require('passport-local').Strategy
 require('dotenv').config({ silent: true })
+const { body, validationResult } = require('express-validator')
+const { UserModel } = require('./models/User')
+const { ShowModel } = require('./models/Show')
 const {
   mockAllShows,
   mockShowAPI,
@@ -17,7 +19,6 @@ const {
   mockUserUpdate,
   mockPopularShows
 } = require('./MockData')
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev')) // dev is a concise color-coded default style for morgan
@@ -31,7 +32,7 @@ app.use((req, res, next) => {
   next()
 })
 
-//mongo setup
+//MongoDB setup
 const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
 
 mongoose
@@ -46,7 +47,7 @@ mongoose
   )
   .catch((err) => console.log(err))
 
-// //=========set up passport auth============================
+//=========set up passport auth============================
 // saving for later
 // app.use(passport.initialize());
 // app.use(passport.session());
@@ -74,6 +75,7 @@ mongoose
 // passport.use('local', local);
 
 const db = mongoose.connection
+db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
 //routes
 app.get('/tv_users', (req, res, next) => {
@@ -96,38 +98,41 @@ app.get('/tv_users', (req, res, next) => {
     })
 })
 
-app.post('/login', function(req, res, next) {
- //  passport.authenticate('local', function(err, user, info) {
- //    if (err) {
-	// 	return res.status(500).json({error: 'Issue with Passport authentication1'});
-	// }
- //    if (!user) {
-	// 	return res.status(403).json({error: 'The login information entered is not correct. Please try again'});
-	// }
- //    req.logIn(user, function(err) {
- //      if (err) {
-	// 	return res.status(500).json({error: 'Issue with Passport authentication2'});
-	//   }
-	// 	return res.json({success: 'Successfully logged in user'});
- //    });
- //  })(req, res, next);
- //saving for later
-   axios.post(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`, {
-        "username": req.body.username,
-        "email": req.body.email,
-        "password": req.body.password
-    })
+app.post('/login', function (req, res, next) {
+  //  passport.authenticate('local', function(err, user, info) {
+  //    if (err) {
+  // 	return res.status(500).json({error: 'Issue with Passport authentication1'});
+  // }
+  //    if (!user) {
+  // 	return res.status(403).json({error: 'The login information entered is not correct. Please try again'});
+  // }
+  //    req.logIn(user, function(err) {
+  //      if (err) {
+  // 	return res.status(500).json({error: 'Issue with Passport authentication2'});
+  //   }
+  // 	return res.json({success: 'Successfully logged in user'});
+  //    });
+  //  })(req, res, next);
+  //saving for later
+  axios
+    .post(
+      `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`,
+      {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+      }
+    )
     .then((response) => {
-        console.log(response)
-        res.json(response.data)
+      console.log(response)
+      res.json(response.data)
     })
     .catch((err) => {
-        next(err)
+      next(err)
     })
 
-    return req.body.username
-
-});
+  return req.body.username
+})
 
 app.get('/shows/:id', (req, res, next) => {
   axios
@@ -154,7 +159,18 @@ app.get('/', (req, res) => {
   res.send('TV Tracker App Home page!')
 })
 
-app.get('/tv_users/:id', (req, res, next) => {
+app.get('/tv_users/:id', async (req, res, next) => {
+  try {
+    const foundUser = await UserModel.findOne({ id: req.params.id })
+    if (foundUser === null) {
+      throw 404
+    } else {
+      res.json(foundUser)
+    }
+  } catch {
+    res.status(404).json('Error! User with requested ID not found.')
+  }
+  /*
   axios
     .get(
       `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}`
@@ -172,7 +188,7 @@ app.get('/tv_users/:id', (req, res, next) => {
       } else {
         next(err)
       }
-    })
+    })*/
 })
 
 app.post(
@@ -357,7 +373,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
     path: '/shows-trakt/:id'
   }
   let traktURL, tmdbType
-  let seasonURL=`https://api.trakt.tv/shows/${req.params.id}/seasons`
+  let seasonURL = `https://api.trakt.tv/shows/${req.params.id}/seasons`
   //Bad Request error if content type is not given
   if (Object.keys(req.query).length === 0) {
     res.json(badRequestError)
@@ -400,7 +416,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         .then((responseX) => {
           //retrieve season info for a show from Seasons Trakt API
-          if (tmdbType=='tv'){
+          if (tmdbType == 'tv') {
             return axios.get(seasonURL, {
               headers: {
                 'trakt-api-version': '2',
@@ -413,8 +429,8 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         .then((responseB) => {
           //show seasons only for shows
-          if (tmdbType=='tv'){
-            response_final['seasons']=responseB.data.length //set number of seasons
+          if (tmdbType == 'tv') {
+            response_final['seasons'] = responseB.data.length //set number of seasons
           } //return tmdb images object for both shows and movies
           return axios.get(
             `https://api.themoviedb.org/3/${tmdbType}/${response_final.ids.tmdb}/images?api_key=${process.env.API_KEY_TMDB}`
@@ -444,9 +460,9 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           } //send movie info and, if available, poster info
           res.json(response_final)
         })
-         .catch((err) => {
+        .catch((err) => {
           if (err.response.status != 200 && err.response.status != 304) {
-          //if show is in Trakt database, return available data
+            //if show is in Trakt database, return available data
             if (response_final != null) {
               res.json(response_final)
             } else {

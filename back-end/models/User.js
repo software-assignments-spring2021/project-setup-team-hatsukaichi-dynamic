@@ -23,4 +23,4 @@ UserSchema.virtual('password').set(function (value) {
   this.passwordHash = bcrypt.hashSync(value, saltRounds)
 })
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = { UserModel: mongoose.model('User', UserSchema) }

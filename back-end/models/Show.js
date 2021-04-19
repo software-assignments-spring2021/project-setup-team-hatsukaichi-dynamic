@@ -6,7 +6,20 @@ const ShowSchema = new mongoose.Schema({
   list: { type: String, required: true }, //in progress or watched list
   season: { type: Number, required: false }, //shows have season and episode progress, movies do not, so this is not required
   episode: { type: Number, required: false },
-  platform: { type: String, required: true } //netflix, prime, etc
+  platform: {
+    type: String,
+    required: true,
+    enum: [
+      'Amazon',
+      'Crunchyroll',
+      'Disney',
+      'HBO',
+      'Hulu',
+      'Netflix',
+      'Other',
+      'None'
+    ]
+  }
 })
 
-module.exports = mongoose.model('Show', ShowSchema)
+module.exports = { ShowModel: mongoose.model('Show', ShowSchema) }
