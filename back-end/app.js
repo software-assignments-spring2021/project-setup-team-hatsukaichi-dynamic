@@ -103,7 +103,7 @@ app.get('/tv_users/:id', async (req, res, next) => {
       res.json(foundUser)
     }
   } catch {
-    res.status(404).json('Error! user with requested id not found.')
+    res.status(404).json('Error! User with requested ID not found.')
   }
   /*
   axios

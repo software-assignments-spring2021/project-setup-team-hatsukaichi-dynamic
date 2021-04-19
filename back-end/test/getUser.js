@@ -59,6 +59,6 @@ describe('GET /tv_users/1', () => {
     stub = sinon.stub(axios, 'get').rejects(mockErrorMessage)
     const res = await chai.request(server).get('/tv_users/5')
     expect(res.status).to.equal(404)
-    expect(res.body).to.deep.equal('Error! user with requested id not found.')
+    expect(res.body).to.deep.equal('Error! User with requested ID not found.')
   })
 })
