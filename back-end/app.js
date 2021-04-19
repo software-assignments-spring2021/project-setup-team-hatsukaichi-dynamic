@@ -5,9 +5,6 @@ const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
 const validator = require('validator')
-const passport = require('passport'); //authentication middleware
-const { body, validationResult } = require('express-validator')
-const LocalStrategy = require('passport-local').Strategy;
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
 const { UserModel } = require('./models/User')
@@ -20,7 +17,6 @@ const {
   mockUserUpdate,
   mockPopularShows
 } = require('./MockData')
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev')) // dev is a concise color-coded default style for morgan
@@ -49,33 +45,6 @@ mongoose
   )
   .catch((err) => console.log(err))
 
-// //=========set up passport auth============================
-// saving for later
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.serializeUser(function(user, done) { //store user id in passport
-// 	done(null, user._id);
-// });
-// passport.deserializeUser(function(userId, done) { //fetch user from database using id
-// 	User.findById(userId, (err, user) => done(err, user));
-// });
-// //local authentication strategy:
-// //		* check if user is in database
-// //		* check if hash of submitted password matches stored hash
-// //		* call done or false
-// const local = new LocalStrategy((username, password, done) => {
-// 	User.findOne( {username} )
-// 		.then(user => {
-// 			if (!user || !user.validPassword(password)) {
-// 				done(null, false);
-// 			} else {
-// 				done(null, user);
-// 			}
-// 		})
-// 		.catch(e => done(e));
-// });
-// passport.use('local', local);
-
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
@@ -99,39 +68,6 @@ app.get('/tv_users', (req, res, next) => {
       }
     })
 })
-
-app.post('/login', function(req, res, next) {
- //  passport.authenticate('local', function(err, user, info) {
- //    if (err) {
-	// 	return res.status(500).json({error: 'Issue with Passport authentication1'});
-	// }
- //    if (!user) {
-	// 	return res.status(403).json({error: 'The login information entered is not correct. Please try again'});
-	// }
- //    req.logIn(user, function(err) {
- //      if (err) {
-	// 	return res.status(500).json({error: 'Issue with Passport authentication2'});
-	//   }
-	// 	return res.json({success: 'Successfully logged in user'});
- //    });
- //  })(req, res, next);
- //saving for later
-   axios.post(`https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`, {
-        "username": req.body.username,
-        "email": req.body.email,
-        "password": req.body.password
-    })
-    .then((response) => {
-        console.log(response)
-        res.json(response.data)
-    })
-    .catch((err) => {
-        next(err)
-    })
-
-    return req.body.username
-
-});
 
 app.get('/shows/:id', (req, res, next) => {
   axios
@@ -372,7 +308,6 @@ app.get('/shows-trakt/:id', (req, res, next) => {
     path: '/shows-trakt/:id'
   }
   let traktURL, tmdbType
-  let seasonURL=`https://api.trakt.tv/shows/${req.params.id}/seasons`
   //Bad Request error if content type is not given
   if (Object.keys(req.query).length === 0) {
     res.json(badRequestError)
@@ -402,7 +337,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         //if data is not found in Trakt database return Not Found error
         .catch((err) => {
-          if (err.response.status != 200 && err.response.status != 304) {
+          if (err.status != 200 && err.status != 304) {
             res.json(notFoundError)
             throw err
           }
@@ -411,33 +346,16 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           //add response from Trakt API to final response object
           response_final = responseA.data
           //return tmdb_id value which is used for retrieving poster url in get request to Tmdb API
-          return responseA.data
-        })
-        .then((responseX) => {
-          //retrieve season info for a show from Seasons Trakt API
-          if (tmdbType=='tv'){
-            return axios.get(seasonURL, {
-              headers: {
-                'trakt-api-version': '2',
-                'trakt-api-key': `${process.env.API_KEY_TRAKT}`,
-                Accept: '*/*', //necessary since requests have multiple content-types
-                'User-Agent': 'request'
-              }
-            })
-          }
+          return responseA.data.ids.tmdb
         })
         .then((responseB) => {
-          //show seasons only for shows
-          if (tmdbType=='tv'){
-            response_final['seasons']=responseB.data.length //set number of seasons
-          } //return tmdb images object for both shows and movies
           return axios.get(
-            `https://api.themoviedb.org/3/${tmdbType}/${response_final.ids.tmdb}/images?api_key=${process.env.API_KEY_TMDB}`
+            `https://api.themoviedb.org/3/${tmdbType}/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
           )
         })
         //catch error if the movie is not found in Tmdb database
         .catch((err) => {
-          if (err.response.status != 200 && err.response.status != 304) {
+          if (err.status != 200 && err.status != 304) {
             //if show is in Trakt database, return available data
             if (response_final != null) {
               res.json(response_final)
@@ -459,17 +377,8 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           } //send movie info and, if available, poster info
           res.json(response_final)
         })
-         .catch((err) => {
-          if (err.response.status != 200 && err.response.status != 304) {
-          //if show is in Trakt database, return available data
-            if (response_final != null) {
-              res.json(response_final)
-            } else {
-              //otherwise return Not Found error message
-              res.json(notFoundError)
-            }
-            throw err //poster not found error
-          }
+        .catch((err) => {
+          next(err)
         })
     )
   }
