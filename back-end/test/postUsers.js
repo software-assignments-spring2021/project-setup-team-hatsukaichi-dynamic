@@ -3,6 +3,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const axios = require('axios')
 const sinon = require('sinon')
+const mongoose = require('mongoose')
 const { createMockUser } = require('../MockData.js')
 var expect = chai.expect
 chai.use(chaiHttp)
