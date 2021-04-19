@@ -7,7 +7,7 @@ const server = require('../app.js')
 const { mockErrorMessage, mockGOT, mockScnd, mockShowAPI } = require('../MockData.js')
 chai.use(chaiHttp)
 
-describe('GET /shows/1', () => {
+describe('GET /shows-trakt/353', () => {
   let stub
 
   afterEach(() => {
@@ -31,7 +31,7 @@ describe('GET /shows/1', () => {
       })
     const res = await chai.request(server).get('/shows/1')
     expect(res.status).to.equal(200)
-    expect(res.body).to.deep.equal({ id: 1, name: 'sample show' })
+    expect(res.body).to.deep.equal({ mockGOT })
     sinon.assert.calledTwice(stub)
   })
 })
