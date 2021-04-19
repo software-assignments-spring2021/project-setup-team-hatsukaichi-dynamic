@@ -98,8 +98,11 @@ app.get('/tv_users/:id', async (req, res, next) => {
   try {
     const foundUser = await UserModel.findOne({ id: req.params.id })
     res.json(foundUser)
+    if (foundUser === null) {
+      return res.status(404)
+    }
   } catch {
-    res.status(404).json('Error! Invalid user ID!')
+    console.log('Error! ')
   }
   /*
   axios
