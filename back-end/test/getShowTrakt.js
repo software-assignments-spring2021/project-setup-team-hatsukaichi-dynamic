@@ -29,7 +29,7 @@ describe('GET /shows-trakt/353', () => {
           mockScnd
         }
       })
-    const res = await chai.request(server).get('/shows/1')
+    const res = await chai.request(server).get('/shows-trakt/353')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({ mockGOT })
     sinon.assert.calledTwice(stub)
