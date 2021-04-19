@@ -26,7 +26,7 @@ describe('GET /shows/1', () => {
       .onSecondCall().resolves({
         data:
         {
-
+          
         }
       })
     const res = await chai.request(server).get('/shows/1')
