@@ -47,6 +47,33 @@ mongoose
   )
   .catch((err) => console.log(err))
 
+//=========set up passport auth============================
+// saving for later
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.serializeUser(function(user, done) { //store user id in passport
+// 	done(null, user._id);
+// });
+// passport.deserializeUser(function(userId, done) { //fetch user from database using id
+// 	User.findById(userId, (err, user) => done(err, user));
+// });
+// //local authentication strategy:
+// //		* check if user is in database
+// //		* check if hash of submitted password matches stored hash
+// //		* call done or false
+// const local = new LocalStrategy((username, password, done) => {
+// 	User.findOne( {username} )
+// 		.then(user => {
+// 			if (!user || !user.validPassword(password)) {
+// 				done(null, false);
+// 			} else {
+// 				done(null, user);
+// 			}
+// 		})
+// 		.catch(e => done(e));
+// });
+// passport.use('local', local);
+
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
@@ -376,7 +403,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         //if data is not found in Trakt database return Not Found error
         .catch((err) => {
-          if (err.status != 200 && err.status != 304) {
+          if (err.response.status != 200 && err.response.status != 304) {
             res.json(notFoundError)
             throw err
           }
@@ -406,12 +433,12 @@ app.get('/shows-trakt/:id', (req, res, next) => {
             response_final['seasons'] = responseB.data.length //set number of seasons
           } //return tmdb images object for both shows and movies
           return axios.get(
-            `https://api.themoviedb.org/3/${tmdbType}/${responseB}/images?api_key=${process.env.API_KEY_TMDB}`
+            `https://api.themoviedb.org/3/${tmdbType}/${response_final.ids.tmdb}/images?api_key=${process.env.API_KEY_TMDB}`
           )
         })
         //catch error if the movie is not found in Tmdb database
         .catch((err) => {
-          if (err.status != 200 && err.status != 304) {
+          if (err.response.status != 200 && err.response.status != 304) {
             //if show is in Trakt database, return available data
             if (response_final != null) {
               res.json(response_final)
