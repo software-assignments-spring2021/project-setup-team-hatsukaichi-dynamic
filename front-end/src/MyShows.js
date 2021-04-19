@@ -8,6 +8,13 @@ import './MyShows.css'
 import Modal from 'react-modal'
 import Select from 'react-select'
 import { Link, useHistory } from 'react-router-dom'
+import amazon from './Images/amazon.jpg'
+import crunchyroll from './Images/crunchyroll.png'
+import disney from './Images/disney.jpg'
+import hbo from './Images/hbo.jpg'
+import hulu from './Images/hulu.png'
+import netflix from './Images/netflix.png'
+import other from './Images/other.png'
 import { platforms, textToValue } from './DropdownOptions'
 require('dotenv').config()
 
@@ -60,6 +67,27 @@ const ShowGrid = (props) => {
     }
   }, [props.shows, props.status, props.platform, shows])
 
+  const setPlatformLogo = (platform) => {
+    let platformLogo
+    if (platform === 'Amazon Prime') {
+      platformLogo = amazon
+    } else if (platform === 'Crunchyroll') {
+      platformLogo = crunchyroll
+    } else if (platform === 'Disney Plus') {
+      platformLogo = disney
+    } else if (platform === 'HBO') {
+      platformLogo = hbo
+    } else if (platform === 'Hulu') {
+      platformLogo = hulu
+    } else if (platform === 'Netflix') {
+      platformLogo = netflix
+    } else {
+      //platform is 'other' or hasn't been set
+      platformLogo = other
+    }
+    return platformLogo
+  }
+
   return (
     <>
       <h3 id="title">
@@ -75,6 +103,11 @@ const ShowGrid = (props) => {
                   className="show-images"
                   src={mockShowImage(show.id)}
                   alt={`cover-${show.id}`}
+                />
+                <img
+                  className="platform-image"
+                  src={setPlatformLogo(props.platform)}
+                  alt={`${props.platform} logo`}
                 />
               </Link>
             )
@@ -248,5 +281,4 @@ const MyShows = (props) => {
     </>
   )
 }
-
 export default MyShows
