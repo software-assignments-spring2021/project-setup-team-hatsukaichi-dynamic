@@ -97,12 +97,13 @@ app.get('/', (req, res) => {
 app.get('/tv_users/:id', async (req, res, next) => {
   try {
     const foundUser = await UserModel.findOne({ id: req.params.id })
-    res.json(foundUser)
     if (foundUser === null) {
-      return res.status(404)
+      throw 404
+    } else {
+      res.json(foundUser)
     }
   } catch {
-    console.log('Error! ')
+    res.status(404).json('Error! user with requested id not found.')
   }
   /*
   axios
