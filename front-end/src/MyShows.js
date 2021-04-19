@@ -81,15 +81,14 @@ const ShowGrid = (props) => {
       platformLogo = hulu
     } else if (platform === 'Netflix') {
       platformLogo = netflix
-    } else { //platform is 'other' or hasn't been set
+    } else {
+      //platform is 'other' or hasn't been set
       platformLogo = other
     }
     return platformLogo
   }
 
   return (
-    <> 
-      <h3 id="title">My Shows</h3>
     <>
       <h3 id="title">
         My Shows {props.platform ? `- ${props.platform} Shows` : null}
@@ -105,12 +104,12 @@ const ShowGrid = (props) => {
                   src={mockShowImage(show.id)}
                   alt={`cover-${show.id}`}
                 />
-                  <img
+                <img
                   className="platform-image"
                   src={setPlatformLogo(props.platform)}
                   alt={`${props.platform} logo`}
                 />
-               </Link>
+              </Link>
             )
           })
         ) : (
@@ -207,11 +206,11 @@ const MyShows = (props) => {
   }
 
   const [selectedPlatform, setSelectedPlatform] = useState('')
-  
+
   const onChange = (platform) => {
     setSelectedPlatform(platform.value)
   }
-    
+
   const linkToShow = (e) => {
     history.push(`/show/${e.value}`)
   }
@@ -282,4 +281,4 @@ const MyShows = (props) => {
     </>
   )
 }
-export default MyShows 
+export default MyShows
