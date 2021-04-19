@@ -414,6 +414,33 @@ const mockGOT = JSON.parse(
   }`
 )
 
+const mockScnd = JSON.parse(
+  `{
+    "backdrops": [
+        {
+            "aspect_ratio": 1.777777777777778,
+            "file_path": "/suopoADq0k8YZr4dQXcU6pToj6s.jpg",
+            "height": 1080,
+            "iso_639_1": null,
+            "vote_average": 5.518,
+            "vote_count": 10,
+            "width": 1920
+        }
+    ], 
+"id": 1399,
+    "posters": [
+        {
+            "aspect_ratio": 0.6666666666666666,
+            "file_path": "/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+            "height": 3000,
+            "iso_639_1": "en",
+            "vote_average": 6.33,
+            "vote_count": 36,
+            "width": 2000
+        }
+    ]
+}`
+)
 const mockErrorMessage = {
   response: {
     status: 500,
@@ -427,6 +454,7 @@ module.exports = {
   mockAllShows: mockAllShows,
   mockUserAPI: mockUserAPI,
   mockGOT: mockGOT,
+  mockScnd: mockScnd,
   mockUserUpdate: mockUserUpdate,
   mockPopularShows: mockPopularShows,
   mockErrorMessage: mockErrorMessage

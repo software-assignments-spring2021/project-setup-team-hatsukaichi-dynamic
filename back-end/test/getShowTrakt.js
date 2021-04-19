@@ -4,7 +4,7 @@ const axios = require('axios')
 const sinon = require('sinon')
 const expect = chai.expect
 const server = require('../app.js')
-const { mockErrorMessage, mockGOT, mockShowAPI } = require('../MockData.js')
+const { mockErrorMessage, mockGOT, mockScnd, mockShowAPI } = require('../MockData.js')
 chai.use(chaiHttp)
 
 describe('GET /shows/1', () => {
@@ -26,7 +26,7 @@ describe('GET /shows/1', () => {
       .onSecondCall().resolves({
         data:
         {
-          
+          mockScnd
         }
       })
     const res = await chai.request(server).get('/shows/1')
