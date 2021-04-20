@@ -2,25 +2,43 @@ const app = require('express').Router()
 const User=require('../models/User')
 const bcrypt = require('bcrypt') //encrypt password
 const Joi = require('@hapi/joi') //joi validates user input
+const { body, validationResult } = require('express-validator')
+const expressSession = require('express-session') 
 
-//validate user signup submission
-const registerValidation = (data) => {
-  const schema =
-    Joi.object({
-      id: Joi.string().min(1).required(), 
-      username: Joi.string().min(2).required(), 
-      email: Joi.string().min(2).required(),
-      passwordHash: Joi.string().min(6).required()
-  })
-  return schema.validate(data)
-}
+app.use(expressSession({'secret':'any','saveUninitialized':false, 'resave':false}))
 
-app.post('/register', async (req, res) => {
-  //validate data
-  const {error} =registerValidation(req.body)
+app.get('/', function(req, res, next) {
+  res.render('index', {title: 'Input Validation', success: false, errors: req.session.errors})
+  req.session.errors=null
+})
 
-  //send validation error
-  if (error) return res.status(400).send(error.details[0].message)
+  app.post('/register',
+    body('email').isEmail().normalizeEmail().withMessage('invalid email'),
+    body('username').isAlphanumeric().not().isEmpty().trim().escape().isLength({ min: 2 }).withMessage('invalid username'),
+    body('passwordHash')
+    .isStrongPassword({
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 0,
+      returnScore: false
+    })
+    .withMessage(
+      'Password must have at least 8 characters - at least 1 lowercase, 1 uppercase, 1 numeric and no symbol characters'
+      )
+    .not()
+    .contains(' ')
+    .not()
+    .isEmpty()
+    .trim()
+    .escape(),
+
+  async(req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
 
   //check if email exists
   const emailExist = await User.findOne({email: req.body.email})
