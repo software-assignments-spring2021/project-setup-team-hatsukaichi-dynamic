@@ -7,9 +7,10 @@ const expressSession = require('express-session')
 
 app.use(expressSession({'secret':'any','saveUninitialized':false, 'resave':false}))
 
+
 app.get('/', function(req, res, next) {
-  res.render('index', {title: 'Input Validation', success: false, errors: req.session.errors})
-  req.session.errors=null
+  if (req.session.errors != null)
+  res.json(req.session.errors)
 })
 
   app.post('/register',
@@ -37,6 +38,7 @@ app.get('/', function(req, res, next) {
   async(req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
+      req.session.errors=errors
       return res.status(400).json({ errors: errors.array() })
     }
 
@@ -73,3 +75,12 @@ app.post('/login1', (req, res) => {
 })
 
 module.exports=app 
+
+
+
+
+
+
+
+
+

@@ -99,6 +99,9 @@ app.get('/tv_users', (req, res, next) => {
     })
 })
 
+app.get('/', function(req, res, next) {
+  res.send('TV Tracker App Home page!')
+})
 
 
 app.use('/tv_users/:id',authRoute);
@@ -161,9 +164,6 @@ app.get('/shows/:id', (req, res, next) => {
     })
 })
 
-app.get('/', function(req, res, next) {
-  res.send('TV Tracker App Home page!')
-})
 
 app.get('/tv_users/:id', async (req, res, next) => {
   try {
