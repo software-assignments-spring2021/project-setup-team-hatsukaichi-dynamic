@@ -7,6 +7,7 @@ const morgan = require('morgan') // middleware for logging of incoming HTTP requ
 const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
+const authRoute=require('./routes/auth')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
 const { UserModel } = require('./models/User')
@@ -33,14 +34,17 @@ app.use((req, res, next) => {
 })
 
 //MongoDB setup
-const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
+//const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
+
+const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority`
+
 
 mongoose
   .connect(mongo_uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
+    useNewUrlParser: true
+    //useUnifiedTopology: true,
+   // useCreateIndex: true,
+   // useFindAndModify: false
   })
   .then((resolved) =>
     console.log('The database has been successfully connected.')
@@ -97,6 +101,11 @@ app.get('/tv_users', (req, res, next) => {
       }
     })
 })
+
+
+
+app.use('/tv_users/:id',authRoute);
+
 
 app.post('/login', function (req, res, next) {
   //  passport.authenticate('local', function(err, user, info) {
