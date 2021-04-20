@@ -8,8 +8,8 @@ const expressSession = require('express-session')
 app.use(expressSession({'secret':'any','saveUninitialized':false, 'resave':false}))
 
 app.get('/', function(req, res, next) {
-  res.render('index', {title: 'Input Validation', success: false, errors: req.session.errors})
-  req.session.errors=null
+  if (req.session.errors != null)
+  res.json(req.session.errors)
 })
 
   app.post('/register',
