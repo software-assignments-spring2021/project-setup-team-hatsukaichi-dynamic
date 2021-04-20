@@ -4,10 +4,10 @@ const uniqueValidator = require('mongoose-unique-validator')
 const saltRounds = 10
 
 const UserSchema = new mongoose.Schema({
-  id: { type: Number, required: true, unique: true },
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  passwordHash: { type: String, required: true },
+  id: { type: Number, required: true, unique: true, min: 1, max: 255  },
+  username: { type: String, required: true, unique: true, min: 2, max: 255 },
+  email: { type: String, required: true, unique: true, min: 2,  max: 255 },
+  passwordHash: { type: String, required: true, min: 6, max: 1024 },
   bio: { type: String, required: false },
   img: { type: String, required: false },
   shows: { type: Array, default: [] }
