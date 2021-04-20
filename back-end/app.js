@@ -99,10 +99,7 @@ app.get('/tv_users', (req, res, next) => {
     })
 })
 
-
-
 app.use('/tv_users/:id',authRoute);
-
 
 app.post('/login', function (req, res, next) {
   //  passport.authenticate('local', function(err, user, info) {
