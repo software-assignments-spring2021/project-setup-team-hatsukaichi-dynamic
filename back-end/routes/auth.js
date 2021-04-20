@@ -1,16 +1,17 @@
 const app = require('express').Router()
 const User=require('../models/User')
 const bcrypt = require('bcrypt') //encrypt password
-const Joi = require('@hapi/joi') //joi validates user input
 const { body, validationResult } = require('express-validator')
 const expressSession = require('express-session') 
 
 app.use(expressSession({'secret':'any','saveUninitialized':false, 'resave':false}))
 
+/*
 app.get('/', function(req, res, next) {
   if (req.session.errors != null)
   res.json(req.session.errors)
 })
+*/
 
   app.post('/register',
     body('email').isEmail().normalizeEmail().withMessage('invalid email'),
