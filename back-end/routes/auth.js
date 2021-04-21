@@ -6,9 +6,7 @@ const localStrategy = require('passport-local').Strategy;
 
 const bcrypt = require('bcrypt') //encrypt password
 const { body, validationResult } = require('express-validator')
-const expressSession = require('express-session') 
 app.use(express.urlencoded({ extended: true }))
-app.use(expressSession({'secret':'any','saveUninitialized':false, 'resave':false}))
 app.use(passport.initialize());
 app.use(passport.session());
 
