@@ -51,7 +51,6 @@ passport.use('register', new localStrategy({
       }); 
     //Save user object to the database
     await user.save();
-
     //Send the user information to the next middleware
     return done(null, user, { message: 'Successful sign up'})
   //Return error message
@@ -75,7 +74,7 @@ app.post(
       returnScore: false
     })
     .withMessage(
-      'Password must have at least 8 characters - at least 1 lowercase, 1 uppercase, 1 numeric and no symbol characters'
+      'Password can contain only letters and digits. It must contain at least 1 lowercase, 1 uppercase and 1 numeric character. Length should be at least 8 characters.'
       )
     .not()
     .contains(' ')
