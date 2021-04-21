@@ -15,14 +15,10 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(uniqueValidator)
 
-UserSchema.methods.validPassword = function (password) {
+UserSchema.methods.validPassword = async function (password) {
   const compare = await bcrypt.compare(password, this.password)
   return compare
 }
-
-UserSchema.virtual('password').set(function (value) {
-  this.passwordHash = bcrypt.hashSync(value, saltRounds)
-})
 
 //Pre-hook before the user info is saved in database: hash password and store it
 UserSchema.pre('save', async function(next){
