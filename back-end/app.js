@@ -19,7 +19,6 @@ const {
   mockUserUpdate,
   mockPopularShows
 } = require('./MockData')
-const User = require('./models/User')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev')) // dev is a concise color-coded default style for morgan
