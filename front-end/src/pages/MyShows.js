@@ -98,7 +98,6 @@ const ShowGrid = (props) => {
           filteredShows.map((show) => {
             return (
               <Link to={`/show/${show.id}`} key={show.id}>
-                {' '}
                 <img
                   className="show-images"
                   src={mockShowImage(show.id)}
