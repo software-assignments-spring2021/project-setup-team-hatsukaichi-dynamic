@@ -422,7 +422,97 @@ const mockGOT = JSON.parse(
   }`
 )
 
-const mockScnd = JSON.parse(
+const mockSeasons = JSON.parse(
+  `[
+    {
+      "number": 0,
+      "ids": {
+        "trakt": 1,
+        "tvdb": 137481,
+        "tmdb": 3627
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Specials",
+      "overview": null,
+      "first_aired": "2010-12-06T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 1,
+      "ids": {
+        "trakt": 2,
+        "tvdb": 364731,
+        "tmdb": 3624
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 1",
+      "overview": "Season 1 overview.",
+      "first_aired": "2011-04-09T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 2,
+      "ids": {
+        "trakt": 3,
+        "tvdb": 473271,
+        "tmdb": 3625
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 2",
+      "overview": "Season 2 overview.",
+      "first_aired": "2012-04-02T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 3,
+      "ids": {
+        "trakt": 4,
+        "tvdb": 488434,
+        "tmdb": 3626
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 3",
+      "overview": "Season 3 overview.",
+      "first_aired": "2013-04-01T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 4,
+      "ids": {
+        "trakt": 5,
+        "tvdb": 522882,
+        "tmdb": 3628
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 4",
+      "overview": "Season 4 overview",
+      "first_aired": "2014-04-07T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    }
+  ]`
+)
+
+const mockFileInfo = JSON.parse(
   `{
     "backdrops": [
         {
@@ -435,19 +525,19 @@ const mockScnd = JSON.parse(
             "width": 1920
         }
     ], 
-"id": 1399,
-    "posters": [
-        {
-            "aspect_ratio": 0.6666666666666666,
-            "file_path": "/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
-            "height": 3000,
-            "iso_639_1": "en",
-            "vote_average": 6.33,
-            "vote_count": 36,
-            "width": 2000
-        }
-    ]
-}`
+    "id": 1399,
+        "posters": [
+            {
+                "aspect_ratio": 0.6666666666666666,
+                "file_path": "/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+                "height": 3000,
+                "iso_639_1": "en",
+                "vote_average": 6.33,
+                "vote_count": 36,
+                "width": 2000
+            }
+        ]
+    }`
 )
 const mockErrorMessage = {
   response: {
@@ -462,7 +552,8 @@ module.exports = {
   mockAllShows: mockAllShows,
   mockUserAPI: mockUserAPI,
   mockGOT: mockGOT,
-  mockScnd: mockScnd,
+  mockSeasons: mockSeasons,
+  mockFileInfo: mockFileInfo,
   mockUserUpdate: mockUserUpdate,
   mockPopularShows: mockPopularShows,
   mockSingleShow: mockSingleShow,
