@@ -7,6 +7,7 @@ const morgan = require('morgan') // middleware for logging of incoming HTTP requ
 const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
+const authRoute=require('./routes/auth')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
 const { UserModel } = require('./models/User')
@@ -37,7 +38,7 @@ const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.M
 
 mongoose
   .connect(mongo_uri, {
-    useNewUrlParser: true,
+    useNewUrlParser: true, 
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false
@@ -98,6 +99,8 @@ app.get('/tv_users', (req, res, next) => {
     })
 })
 
+app.use('/tv_users/:id',authRoute);
+
 app.post('/login', function (req, res, next) {
   //  passport.authenticate('local', function(err, user, info) {
   //    if (err) {
@@ -155,7 +158,7 @@ app.get('/shows/:id', (req, res, next) => {
     })
 })
 
-app.get('/', (req, res) => {
+app.get('/', function(req, res, next) {
   res.send('TV Tracker App Home page!')
 })
 
