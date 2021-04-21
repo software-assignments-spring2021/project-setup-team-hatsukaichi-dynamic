@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
   id: { type: Number, required: true, unique: true },
   username: { type: String, required: true, unique: true, min: 2 },
   email: { type: String, required: true, unique: true },
-  passwordHash: { type: String, required: true, min: 8, max: 1024 },
+  password: { type: String, required: true, min: 8, max: 1024 },
   bio: { type: String, required: false },
   img: { type: String, required: false },
   shows: { type: Array, default: [] }
@@ -16,12 +16,24 @@ const UserSchema = new mongoose.Schema({
 UserSchema.plugin(uniqueValidator)
 
 UserSchema.methods.validPassword = function (password) {
-  return bcrypt.compareSync(password, this.passwordHash)
+  const compare = await bcrypt.compare(password, this.password)
+  return compare
 }
 
 UserSchema.virtual('password').set(function (value) {
   this.passwordHash = bcrypt.hashSync(value, saltRounds)
 })
 
-//module.exports = { UserModel: mongoose.model('User', UserSchema) }
-module.exports =  mongoose.model('User', UserSchema)
+//Pre-hook before the user info is saved in database: hash password and store it
+UserSchema.pre('save', async function(next){
+  const user = this;
+  const hash = await bcrypt.hash(this.password, saltRounds);
+  this.password = hash;
+  next()
+})
+
+const User = mongoose.model('user',UserSchema)
+
+module.exports = User
+
+
