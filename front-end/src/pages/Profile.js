@@ -33,7 +33,7 @@ const RecentShows = ({ shows }) => {
           {shows.map((show) => {
             return (
               <Link
-                to={`/${show.type}/${show.ids.trakt}`}
+                to={`/${show.type}s/${show.ids.trakt}`}
                 key={show.ids.trakt + '-' + show.type}>
                 <img
                   className="show-image"
@@ -163,6 +163,7 @@ const ProfileContents = ({ data, updateUserData }) => {
   }
 
   // This helper function is necessary to get the Promise.all in useEffect to work
+  // When moving this to Helpers it resulted in errors I couldn't fix...
   const makeAxiosCalls = (urls) => {
     return urls.map((url) => {
       return axios.get(url)
@@ -188,14 +189,15 @@ const ProfileContents = ({ data, updateUserData }) => {
       // Note: At the moment, we don't need any of the mocked data since we only really need the image here
       // but it's being mocked with picsum for now.
       showIds.map((show) => {
-        urls.push(
-          `http://localhost:4000/shows-trakt/${show.traktId}?type=${
-            show.isMovie ? 'movie' : 'show'
-          }`
-        )
+        if (show.isMovie) {
+          urls.push(`http://localhost:4000/movies/${show.traktId}`)
+        } else {
+          urls.push(`http://localhost:4000/shows/${show.traktId}`)
+        }
         return show.id
       })
-      Promise.all(makeAxiosCalls(urls))
+      axios
+        .all(makeAxiosCalls(urls))
         .then((showInfo) => {
           setUserShows(showInfo.map((info) => info.data))
         })
