@@ -83,7 +83,7 @@ app.get('/tv_users', async (req, res) => {
     const users = await UserModel.find()
     res.json(users)
   } catch (err) {
-    res.status(500).json('Error: could not find users.')
+    res.status(404).json('Error: could not find users.')
   }
 })
 
