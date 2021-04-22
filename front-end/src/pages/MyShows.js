@@ -3,7 +3,7 @@ import AsyncSelect from 'react-select/async'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import axios from 'axios'
-import { mockShowAPI, mockShowImage } from '../utils/MockData'
+import { mockShowImage } from '../utils/MockData'
 import './MyShows.css'
 import Modal from 'react-modal'
 import Select from 'react-select'
@@ -22,9 +22,14 @@ const ShowGrid = (props) => {
   const [shows, setShows] = useState([])
   const [filteredShows, setFilteredShows] = useState([])
 
+  const makeAxiosCalls = (urls) => {
+    return urls.map((url) => {
+      return axios.get(url)
+    })
+  }
+
   useEffect(() => {
-    let promises = []
-    let showInfo = []
+    const urls = []
 
     // This check is crucial--it sees whether userData (the props) has been loaded yet or not
     if (!props.shows) {
@@ -32,24 +37,19 @@ const ShowGrid = (props) => {
       setFilteredShows([])
     } else {
       props.shows.map((show) => {
-        promises.push(
-          axios
-            .get(`http://localhost:4000/shows/${show.id}`)
-            .then((response) => {
-              showInfo.push(response.data)
-            })
-            .catch((err) => {
-              console.log('Error: could not make the request.')
-              console.log(err)
-              showInfo.push(mockShowAPI[show.id])
-            })
+        console.log(show)
+        urls.push(
+          `http://localhost:4000/shows-trakt/${show.traktId}?type=${
+            show.isMovie ? 'movie' : 'show'
+          }`
         )
         return show.id
       })
 
-      Promise.all(promises).then(() => {
-        setShows(showInfo)
-        setFilteredShows(showInfo)
+      Promise.all(makeAxiosCalls(urls)).then((showInfo) => {
+        console.log(showInfo)
+        setShows(showInfo.map((info) => info.data))
+        setFilteredShows(showInfo.map((info) => info.data))
       })
     }
   }, [props.shows])
@@ -60,7 +60,7 @@ const ShowGrid = (props) => {
     } else {
       const res = filterShows(props.shows, props.status, props.platform).map(
         (showUserInfo) => {
-          return shows.find((show) => show.id === showUserInfo.id)
+          return shows.find((show) => show.ids.trakt === showUserInfo.traktId)
         }
       )
       setFilteredShows(res)
