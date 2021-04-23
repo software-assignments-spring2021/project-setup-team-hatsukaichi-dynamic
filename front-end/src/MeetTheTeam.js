@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from './Footer'
 import Header from './Header'
-import './MeetTheTeam.css'
+import './css/MeetTheTeam.css'
 import image from './Images/stock-user-white.png'
 
 function MeetTheTeam() {

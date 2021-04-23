@@ -1,7 +1,7 @@
 import React from 'react'
 import 'react-sticky-header/styles.css'
 import StickyHeader from 'react-sticky-header'
-import './Header.css'
+import './css/Header.css'
 import Hamburger from './Hamburger'
 import logo from './Images/logo.png'
 import HeaderLogo from './HeaderLogo'

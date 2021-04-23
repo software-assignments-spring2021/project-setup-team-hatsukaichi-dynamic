@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import './IndividualShow.css'
+import './css/IndividualShow.css'
 import axios from 'axios'
 import { mockShowImage } from './MockData'
 import { Link } from 'react-router-dom'

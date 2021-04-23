@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import axios from 'axios'
-import './Profile.css'
+import './css/Profile.css'
 import Header from './Header'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {

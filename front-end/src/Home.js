@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import './Home.css'
+import './css/Home.css'
 
 function Home() {
   return (

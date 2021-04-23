@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { AuthContext } from './App.js'
-import './LogoutButton.css'
+import './css/LogoutButton.css'
 
 function LogoutButton() {
   const { setLoggedInUser } = React.useContext(AuthContext)
