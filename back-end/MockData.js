@@ -365,6 +365,180 @@ const mockPopularShows = JSON.parse(
   ]`
 )
 
+const mockGOT = JSON.parse(
+  `{
+    "title": "Game of Thrones",
+      "year": 2011,
+      "ids": {
+        "trakt": 353,
+        "slug": "game-of-thrones",
+        "tvdb": 121361,
+        "imdb": "tt0944947",
+        "tmdb": 1399
+      },
+      "first_aired": "2011-04-18T01:00:00.000Z",
+      "airs": {
+        "day": "Sunday",
+        "time": "21:00",
+        "timezone": "America/New_York"
+      },
+      "runtime": 60,
+      "certification": "TV-MA",
+      "network": "HBO",
+      "country": "us",
+      "updated_at": "2014-08-22T08:32:06.000Z",
+      "trailer": null,
+      "homepage": "http://www.hbo.com/game-of-thrones/index.html",
+      "status": "returning series",
+      "rating": 9,
+      "votes": 111,
+      "comment_count": 92,
+      "language": "en",
+      "available_translations": [
+        "en",
+        "tr",
+        "sk",
+        "de",
+        "ru",
+        "fr",
+        "hu",
+        "zh",
+        "el",
+        "pt",
+        "es",
+        "bg",
+        "ro",
+        "it",
+        "ko",
+        "he",
+        "nl",
+        "pl"
+      ],
+      "genres": [
+        "drama",
+        "fantasy"
+      ],
+      "aired_episodes": 50
+  }`
+)
+
+const mockSeasons = JSON.parse(
+  `[
+    {
+      "number": 0,
+      "ids": {
+        "trakt": 1,
+        "tvdb": 137481,
+        "tmdb": 3627
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Specials",
+      "overview": null,
+      "first_aired": "2010-12-06T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 1,
+      "ids": {
+        "trakt": 2,
+        "tvdb": 364731,
+        "tmdb": 3624
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 1",
+      "overview": "Season 1 overview.",
+      "first_aired": "2011-04-09T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 2,
+      "ids": {
+        "trakt": 3,
+        "tvdb": 473271,
+        "tmdb": 3625
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 2",
+      "overview": "Season 2 overview.",
+      "first_aired": "2012-04-02T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 3,
+      "ids": {
+        "trakt": 4,
+        "tvdb": 488434,
+        "tmdb": 3626
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 3",
+      "overview": "Season 3 overview.",
+      "first_aired": "2013-04-01T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    },
+    {
+      "number": 4,
+      "ids": {
+        "trakt": 5,
+        "tvdb": 522882,
+        "tmdb": 3628
+      },
+      "rating": 9,
+      "votes": 111,
+      "episode_count": 10,
+      "aired_episodes": 10,
+      "title": "Season 4",
+      "overview": "Season 4 overview",
+      "first_aired": "2014-04-07T02:00:00.000Z",
+      "udpated_at": "2010-12-07T01:023:00.000Z",
+      "network": "HBO"
+    }
+  ]`
+)
+
+const mockFileInfo = JSON.parse(
+  `{
+    "backdrops": [
+        {
+            "aspect_ratio": 1.777777777777778,
+            "file_path": "/suopoADq0k8YZr4dQXcU6pToj6s.jpg",
+            "height": 1080,
+            "iso_639_1": null,
+            "vote_average": 5.518,
+            "vote_count": 10,
+            "width": 1920
+        }
+    ], 
+    "id": 1399,
+        "posters": [
+            {
+                "aspect_ratio": 0.6666666666666666,
+                "file_path": "/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+                "height": 3000,
+                "iso_639_1": "en",
+                "vote_average": 6.33,
+                "vote_count": 36,
+                "width": 2000
+            }
+        ]
+    }`
+)
 const mockErrorMessage = {
   response: {
     status: 500,
@@ -377,6 +551,9 @@ module.exports = {
   mockShowAPI: mockShowAPI,
   mockAllShows: mockAllShows,
   mockUserAPI: mockUserAPI,
+  mockGOT: mockGOT,
+  mockSeasons: mockSeasons,
+  mockFileInfo: mockFileInfo,
   mockUserUpdate: mockUserUpdate,
   mockPopularShows: mockPopularShows,
   mockSingleShow: mockSingleShow,

@@ -49,24 +49,13 @@ const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
 //routes
-app.get('/tv_users', (req, res, next) => {
-  axios
-    .get(
-      `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}`
-    )
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      // This specifically is for Mockaroo errors
-      if (err.response.status === 500) {
-        res
-          .status(200)
-          .json([createMockUser(1), createMockUser(2), createMockUser(3)])
-      } else {
-        next(err)
-      }
-    })
+app.get('/tv_users', async (req, res) => {
+  try {
+    const users = await UserModel.find()
+    res.json(users)
+  } catch (err) {
+    res.status(404).json('Error: could not find users.')
+  }
 })
 
 app.use('/tv_users/:id/',authRoute);
@@ -376,6 +365,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         //catch error if the movie is not found in Tmdb database
         .catch((err) => {
+          console.log(err)
           if (err.response.status != 200 && err.response.status != 304) {
             //if show is in Trakt database, return available data
             if (response_final != null) {
@@ -388,6 +378,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         })
         .then((responseC) => {
+          //console.log(err)
           if (responseC.data != null) {
             //if posters are available, append their urls to the info object
             if (responseC.data.posters != null)
