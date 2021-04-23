@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../css/SignupButton.css'
+import './SignupButton.css'
 
 function SignupButton() {
   return (

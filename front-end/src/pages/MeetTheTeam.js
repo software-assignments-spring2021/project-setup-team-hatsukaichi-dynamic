@@ -1,8 +1,8 @@
 import React from 'react'
-import Footer from '../shared/Footer'
-import Header from '../shared/Header'
-import '../css/MeetTheTeam.css'
-import image from '../Images/stock-user-white.png'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import './MeetTheTeam.css'
+import image from '../images/stock-user-white.png'
 
 function MeetTheTeam() {
   return (
