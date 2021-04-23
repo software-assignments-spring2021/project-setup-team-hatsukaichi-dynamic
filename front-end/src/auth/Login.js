@@ -1,11 +1,11 @@
-import './css/Login.css'
+import '../css/Login.css'
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
-import Header from './Header'
-import Footer from './Footer'
-import { AuthContext } from './App'
-import { createMockUser } from './MockData.js'
+import Header from '../shared/Header'
+import Footer from '../shared/Footer'
+import { AuthContext } from '../App'
+import { createMockUser } from '../shared/MockData.js'
 
 function Login() {
   const [username, setUsername] = useState('')

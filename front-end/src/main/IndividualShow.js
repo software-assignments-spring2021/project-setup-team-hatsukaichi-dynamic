@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Header from './Header'
-import Footer from './Footer'
-import './css/IndividualShow.css'
+import Header from '../shared/Header'
+import Footer from '../shared/Footer'
+import '../css/IndividualShow.css'
 import axios from 'axios'
-import { mockShowImage } from './MockData'
+import { mockShowImage } from '../shared/MockData'
 import { Link } from 'react-router-dom'
-import { platforms, statuses, textToValue } from './DropdownOptions'
+import { platforms, statuses, textToValue } from '../shared/DropdownOptions'
 import Select from 'react-select'
-import { AuthContext } from './App'
+import { AuthContext } from '../App'
 require('dotenv').config()
 
 const ProgressData = ({

@@ -11,6 +11,12 @@ const Hamburger = (props) => {
       <Link to="/my-shows/1" id="My Shows" className="menu-item">
         My Shows
       </Link>
+      <Link to="/meet-the-team/1" id="Meet-the-team" className="menu-item">
+      Meet the Team
+      </Link>
+      <Link to="/terms-of-service/1" className="menu-item">
+        Terms of Service
+      </Link>
     </Menu>
   )
 }

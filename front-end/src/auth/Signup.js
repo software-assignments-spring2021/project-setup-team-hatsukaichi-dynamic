@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import Header from './Header'
-import Footer from './Footer'
-import './css/Signup.css'
+import Header from '../shared/Header'
+import Footer from '../shared/Footer'
+import '../css/Signup.css'
 import axios from 'axios'
 require('dotenv').config()
 

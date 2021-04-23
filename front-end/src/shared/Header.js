@@ -1,14 +1,14 @@
 import React from 'react'
 import 'react-sticky-header/styles.css'
 import StickyHeader from 'react-sticky-header'
-import './css/Header.css'
+import '../css/Header.css'
 import Hamburger from './Hamburger'
-import logo from './Images/logo.png'
+import logo from '../Images/logo.png'
 import HeaderLogo from './HeaderLogo'
-import SignupButton from './SignupButton'
-import LoginButton from './LoginButton'
-import { AuthContext } from './App'
-import LogoutButton from './LogoutButton'
+import SignupButton from '../auth/SignupButton'
+import LoginButton from '../auth/LoginButton'
+import { AuthContext } from '../App'
+import LogoutButton from '../auth/LogoutButton'
 
 const Header = () => {
   const { loggedInUser } = React.useContext(AuthContext)
