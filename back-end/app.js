@@ -75,30 +75,13 @@ const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
 //routes
-app.get('/tv_users', (req, res, next) => {
-  axios
-    .get(
-      `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}`
-    )
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      // This specifically is for Mockaroo errors
-      if (err.response.status === 500) {
-        res
-          .status(200)
-          .json([createMockUser(1), createMockUser(2), createMockUser(3)])
-      } else {
-        res.status(401)
-        .json({
-          status: "error",
-          error: {
-            message: "Mockaroo Error: Mock User(s) cannot be retrieved"
-          }
-        })
-      }
-    })
+app.get('/tv_users', async (req, res) => {
+  try {
+    const users = await UserModel.find()
+    res.json(users)
+  } catch (err) {
+    res.status(404).json('Error: could not find users.')
+  }
 })
 
 // Handles login/registering
