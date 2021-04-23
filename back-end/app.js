@@ -8,6 +8,7 @@ const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
 const authRoute=require('./routes/auth')
+const secureRoute=require('./routes/secure-route')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
 const { UserModel } = require('./models/User')
@@ -48,33 +49,6 @@ mongoose
   )
   .catch((err) => console.log(err))
 
-//=========set up passport auth============================
-// saving for later
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.serializeUser(function(user, done) { //store user id in passport
-// 	done(null, user._id);
-// });
-// passport.deserializeUser(function(userId, done) { //fetch user from database using id
-// 	User.findById(userId, (err, user) => done(err, user));
-// });
-// //local authentication strategy:
-// //		* check if user is in database
-// //		* check if hash of submitted password matches stored hash
-// //		* call done or false
-// const local = new LocalStrategy((username, password, done) => {
-// 	User.findOne( {username} )
-// 		.then(user => {
-// 			if (!user || !user.validPassword(password)) {
-// 				done(null, false);
-// 			} else {
-// 				done(null, user);
-// 			}
-// 		})
-// 		.catch(e => done(e));
-// });
-// passport.use('local', local);
-
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
@@ -99,7 +73,8 @@ app.get('/tv_users', (req, res, next) => {
     })
 })
 
-app.use('/tv_users/:id',authRoute);
+app.use('/',authRoute);
+app.use('/tv_users/:id/', passport.authenticate('jwt', { session: false }), secureRoute);
 
 app.get('/shows/:id', (req, res, next) => {
   axios
