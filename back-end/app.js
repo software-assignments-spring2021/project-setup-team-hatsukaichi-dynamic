@@ -7,18 +7,16 @@ const morgan = require('morgan') // middleware for logging of incoming HTTP requ
 const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
-const authRoute=require('./routes/auth')
+const authRoute = require('./routes/auth')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
-const { UserModel } = require('./models/User')
+const User = require('./models/User')
 const { ShowModel } = require('./models/Show')
 const {
   mockAllShows,
   mockShowAPI,
   createMockUser,
-  mockUserAPI,
-  mockUserUpdate,
-  mockPopularShows
+  mockUserUpdate
 } = require('./MockData')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -38,14 +36,12 @@ const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.M
 
 mongoose
   .connect(mongo_uri, {
-    useNewUrlParser: true, 
+    useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false
   })
-  .then((resolved) =>
-    console.log('The database has been successfully connected.')
-  )
+  .then(() => console.log('The database has been successfully connected.'))
   .catch((err) => console.log(err))
 
 //=========set up passport auth============================
@@ -105,7 +101,8 @@ app.get('/tv_users', (req, res, next) => {
     })
 })
 
-app.use('/tv_users/:id',authRoute);
+// Handles login/registering
+app.use('/tv_users/:id', authRoute)
 
 app.post('/login', function (req, res, next) {
   //  passport.authenticate('local', function(err, user, info) {
@@ -176,13 +173,13 @@ app.get('/shows/:id', (req, res, next) => {
     })
 })
 
-app.get('/', function(req, res, next) {
+app.get('/', function (req, res, next) {
   res.send('TV Tracker App Home page!')
 })
 
 app.get('/tv_users/:id', async (req, res, next) => {
   try {
-    const foundUser = await UserModel.findOne({ id: req.params.id })
+    const foundUser = await User.findOne({ id: req.params.id })
     if (foundUser === null) {
       throw 404
     } else {
