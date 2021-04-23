@@ -58,8 +58,8 @@ app.get('/tv_users', async (req, res) => {
   }
 })
 
-app.use('/tv_users/:id/',authRoute);
-app.use('/tv_users/:id/', passport.authenticate('jwt', { session: false }), secureRoute);
+app.use('/',authRoute);
+app.use('/profile', passport.authenticate('jwt', { session: false }), secureRoute);
 
 app.get('/shows/:id', (req, res, next) => {
   axios
@@ -97,25 +97,6 @@ app.get('/tv_users/:id', async (req, res, next) => {
   } catch {
     res.status(404).json('Error! User with requested ID not found.')
   }
-  /*
-  axios
-    .get(
-      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}`
-    )
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      if (err.response.status === 500) {
-        if (req.params.id in mockUserAPI) {
-          res.status(200).json(mockUserAPI[req.params.id])
-        } else {
-          res.status(404).json('user with requested id not found')
-        }
-      } else {
-        next(err)
-      }
-    })*/
 })
 
 app.post(

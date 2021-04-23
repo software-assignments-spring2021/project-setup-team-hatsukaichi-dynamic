@@ -6,7 +6,7 @@ const expect = chai.expect
 const server = require('../app.js')
 chai.use(chaiHttp)
 
-describe('GET /tv_users/1/logout', () => {
+describe('GET /logout', () => {
   let stub
 
   afterEach(() => {
@@ -17,7 +17,7 @@ describe('GET /tv_users/1/logout', () => {
     stub = sinon.stub(axios, 'get').resolves({
       data: { status: "logout",message:"Successful logout"}
     })
-    const res = await chai.request(server).get('/tv_users/1/logout')
+    const res = await chai.request(server).get('/logout')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({
       status: "logout",message:"Successful logout"

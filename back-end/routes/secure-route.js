@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express.Router();
 //to access the secure route, a query with a secret_token needs to be provided
-//for example: http://localhost:4000/tv_users/124/profile?secret_token=XXXXX where XXXXX 
+//for example: http://localhost:4000/profile?secret_token=XXXXX where XXXXX 
 app.get(
   '/profile',
   (req, res, next) => {
