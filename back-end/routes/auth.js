@@ -206,7 +206,7 @@ app.get("/logout", (req, res) => {
   req.logout();
   res.json({ 
     status: "logout",
-    msg:"Successful logout"
+    message:"Successful logout"
   });
 });
 

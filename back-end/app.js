@@ -73,7 +73,7 @@ app.get('/tv_users', (req, res, next) => {
     })
 })
 
-app.use('/',authRoute);
+app.use('/tv_users/:id/',authRoute);
 app.use('/tv_users/:id/', passport.authenticate('jwt', { session: false }), secureRoute);
 
 app.get('/shows/:id', (req, res, next) => {
