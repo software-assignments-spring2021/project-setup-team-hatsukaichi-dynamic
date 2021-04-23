@@ -137,7 +137,13 @@ app.post('/login', function (req, res, next) {
       res.json(response.data)
     })
     .catch((err) => {
-      next(err)
+      res.status(401)
+      .json({
+        status: "error",
+        error: {
+          message: "Mockaroo Error: Mock User(s) cannot be created"
+        }
+      })
     })
 
   return req.body.username
@@ -185,25 +191,6 @@ app.get('/tv_users/:id', async (req, res, next) => {
   } catch {
     res.status(404).json('Error! User with requested ID not found.')
   }
-  /*
-  axios
-    .get(
-      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}`
-    )
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      if (err.response.status === 500) {
-        if (req.params.id in mockUserAPI) {
-          res.status(200).json(mockUserAPI[req.params.id])
-        } else {
-          res.status(404).json('user with requested id not found')
-        }
-      } else {
-        next(err)
-      }
-    })*/
 })
 
 app.post(
@@ -363,8 +350,12 @@ app.get('/shows-trakt', (req, res, next) => {
       .catch((err) => {
         res
           .status(err.response.status)
-          .json('An error occurred loading shows from Trakt!')
-        next(err)
+          .json({
+            status: "error",
+            error: {
+            message: "An error occurred loading shows from Trakt!"
+            }
+          })
       })
     //otherwise return requested show information
   } else {
@@ -385,8 +376,12 @@ app.get('/shows-trakt', (req, res, next) => {
       .catch((err) => {
         res
           .status(err.response.status)
-          .json('An error occurred loading shows from Trakt!')
-        next(err)
+          .json({
+            status: "error",
+            error: {
+              message: "An error occurred loading shows from Trakt!"
+            }
+          })
       })
   }
 })
