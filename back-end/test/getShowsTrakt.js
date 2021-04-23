@@ -71,7 +71,12 @@ describe('GET /shows-trakt', () => {
         const res = await chai.request(server).get('/shows-trakt')
         expect(res.status).to.equal(500)
         expect(res.body).to.deep.equal(
-          'An error occurred loading shows from Trakt!'
+        {
+          status: "error",
+            error: {
+              message: "An error occurred loading shows from Trakt!"
+            }
+          }
         )
         sinon.assert.calledOnce(stub)
       })
