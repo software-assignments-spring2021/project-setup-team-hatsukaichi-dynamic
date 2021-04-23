@@ -6,8 +6,10 @@ const server = require('../app.js')
 const User = require('../models/User')
 chai.use(chaiHttp)
 
-describe('GET /tv_users/:id', () => {
+describe('GET /tv_users/:id', function () {
   before(async () => {
+    // Make sure database is empty first:
+    await User.deleteMany({})
     // Save a user manually to the database:
     const user = new User({
       id: 1,
@@ -37,7 +39,7 @@ describe('GET /tv_users/:id', () => {
     expect(res.body).to.have.property('img', 'https://i.imgur.com/IHOjDbq.jpg')
     expect(res.body).to.have.property('shows')
     expect(res.body.shows).to.be.an('array').that.is.empty
-  }).timeout(3000)
+  })
   it('should return 404 and an error for a invalid user id', async () => {
     const res = await chai.request(server).get('/tv_users/badid')
     expect(res.status).to.equal(404)
@@ -48,4 +50,4 @@ describe('GET /tv_users/:id', () => {
     expect(res.status).to.equal(404)
     expect(res.body).to.deep.equal('Error! User with requested ID not found.')
   })
-})
+}).timeout(3000)

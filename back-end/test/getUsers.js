@@ -5,9 +5,11 @@ const server = require('../app.js')
 const User = require('../models/User.js')
 chai.use(chaiHttp)
 
-describe('GET /tv_users', () => {
+describe('GET /tv_users', function () {
   before(async () => {
-    // Populate the test database with some users before the first test]
+    // Make sure the database is empty first
+    await User.deleteMany({})
+    // Populate the test database with some users before the first test
     const users = [
       {
         id: 1,
@@ -59,4 +61,4 @@ describe('GET /tv_users', () => {
     expect(res.body).to.be.an('array')
     expect(res.body.length).to.equal(0)
   })
-})
+}).timeout(3000)
