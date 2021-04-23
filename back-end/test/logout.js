@@ -15,12 +15,12 @@ describe('GET /logout', () => {
 
   it('should return 200 OK', async () => {
     stub = sinon.stub(axios, 'get').resolves({
-      data: { success: 'Successfully logged out' }
+      data: { status: "logout",message:"Successful logout"}
     })
     const res = await chai.request(server).get('/logout')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({
-      success: 'Successfully logged out'
+      status: "logout",message:"Successful logout"
     })
   })
 })

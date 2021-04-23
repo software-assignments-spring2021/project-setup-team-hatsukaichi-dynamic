@@ -7,7 +7,8 @@ const morgan = require('morgan') // middleware for logging of incoming HTTP requ
 const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
-const authRoute = require('./routes/auth')
+const authRoute=require('./routes/auth')
+const secureRoute=require('./routes/secure-route')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
 const User = require('./models/User')
@@ -44,33 +45,6 @@ mongoose
   .then(() => console.log('The database has been successfully connected.'))
   .catch((err) => console.log(err))
 
-//=========set up passport auth============================
-// saving for later
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.serializeUser(function(user, done) { //store user id in passport
-// 	done(null, user._id);
-// });
-// passport.deserializeUser(function(userId, done) { //fetch user from database using id
-// 	User.findById(userId, (err, user) => done(err, user));
-// });
-// //local authentication strategy:
-// //		* check if user is in database
-// //		* check if hash of submitted password matches stored hash
-// //		* call done or false
-// const local = new LocalStrategy((username, password, done) => {
-// 	User.findOne( {username} )
-// 		.then(user => {
-// 			if (!user || !user.validPassword(password)) {
-// 				done(null, false);
-// 			} else {
-// 				done(null, user);
-// 			}
-// 		})
-// 		.catch(e => done(e));
-// });
-// passport.use('local', local);
-
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB Error: '))
 
@@ -84,44 +58,8 @@ app.get('/tv_users', async (req, res) => {
   }
 })
 
-// Handles login/registering
-app.use('/tv_users/:id', authRoute)
-
-app.post('/login', function (req, res, next) {
-  //  passport.authenticate('local', function(err, user, info) {
-  //    if (err) {
-  // 	return res.status(500).json({error: 'Issue with Passport authentication1'});
-  // }
-  //    if (!user) {
-  // 	return res.status(403).json({error: 'The login information entered is not correct. Please try again'});
-  // }
-  //    req.logIn(user, function(err) {
-  //      if (err) {
-  // 	return res.status(500).json({error: 'Issue with Passport authentication2'});
-  //   }
-  // 	return res.json({success: 'Successfully logged in user'});
-  //    });
-  //  })(req, res, next);
-  //saving for later
-  axios
-    .post(
-      `https://my.api.mockaroo.com/tv_users.json?key=${process.env.API_KEY_MOCKAROO}&__method=POST`,
-      {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-      }
-    )
-    .then((response) => {
-      console.log(response)
-      res.json(response.data)
-    })
-    .catch((err) => {
-      next(err)
-    })
-
-  return req.body.username
-})
+app.use('/',authRoute);
+app.use('/profile', passport.authenticate('jwt', { session: false }), secureRoute);
 
 app.get('/shows/:id', (req, res, next) => {
   axios
@@ -159,25 +97,6 @@ app.get('/tv_users/:id', async (req, res, next) => {
   } catch {
     res.status(404).json('Error! User with requested ID not found.')
   }
-  /*
-  axios
-    .get(
-      `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}`
-    )
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      if (err.response.status === 500) {
-        if (req.params.id in mockUserAPI) {
-          res.status(200).json(mockUserAPI[req.params.id])
-        } else {
-          res.status(404).json('user with requested id not found')
-        }
-      } else {
-        next(err)
-      }
-    })*/
 })
 
 app.post(
@@ -465,11 +384,6 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
     )
   }
-})
-
-app.get('/logout', (req, res) => {
-  //req.logOut(); add later when database is setup
-  res.json({ success: 'Successfully logged out' })
 })
 
 module.exports = app
