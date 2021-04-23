@@ -94,7 +94,8 @@ const ExtractJWT = require('passport-jwt').ExtractJwt;
 passport.use(
   new JWTstrategy(
     {
-      secretOrKey: process.env.TOKEN_SECRET,
+      //secretOrKey: process.env.TOKEN_SECRET,
+      secretOrKey: 'TOKEN_SECRET',
       jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
     },
     async (token, done) => {
@@ -188,7 +189,8 @@ app.post(
                   message: error.message
                 });
               const body = { _id: user._id, email: user.email };
-              const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET);
+              //const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET);
+              const token = jwt.sign({ user: body }, 'TOKEN_SECRET');
               return res.json({ user, token });
             }
           );
