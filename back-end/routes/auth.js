@@ -4,7 +4,7 @@ const User=require('../models/User')
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const localStrategy = require('passport-local').Strategy;
-require('dotenv').config({ silent: true })
+//require('dotenv').config({ silent: true })
 
 const bcrypt = require('bcrypt') //encrypt password
 const { body, validationResult } = require('express-validator')
