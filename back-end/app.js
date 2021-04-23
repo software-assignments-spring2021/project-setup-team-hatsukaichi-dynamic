@@ -94,7 +94,13 @@ app.get('/tv_users', (req, res, next) => {
           .status(200)
           .json([createMockUser(1), createMockUser(2), createMockUser(3)])
       } else {
-        next(err)
+        res.status(401)
+        .json({
+          status: "error",
+          error: {
+            message: "Mockaroo Error: Mock User(s) cannot be retrieved"
+          }
+        })
       }
     })
 })
@@ -153,7 +159,13 @@ app.get('/shows/:id', (req, res, next) => {
           res.status(404).json('show with requested id not found')
         }
       } else {
-        next(err)
+        res.status(401)
+          .json({
+            status: "error",
+            error: {
+            message: "Mockaroo GET show error"
+            }
+          })
       }
     })
 })
@@ -242,9 +254,15 @@ app.post(
                 req.body.email
               )
             )
-        } else if (err.response.status === 400) {
-        } else {
-          next(err)
+        }else if (err.response.status === 400) {
+        }else {
+          res.status(401)
+            .json({
+              status: "error",
+              error: {
+              message: "Mockaroo Error: Mock User(s) cannot be created"
+              }
+            })
         }
       })
   }
@@ -262,7 +280,13 @@ app.get('/shows', (req, res, next) => {
       if (err.response.status === 500) {
         res.status(200).json(mockAllShows)
       } else {
-        next(err)
+        res.status(401)
+          .json({
+            status: "error",
+            error: {
+            message: "Mockaroo Error: Mock Shows cannot be retrieved"
+            }
+          })
       }
     })
 })
@@ -310,7 +334,13 @@ app.patch(
         if (err.response.status == 500) {
           res.status(200).json(mockUserUpdate(req.params.id, patchUser))
         } else {
-          next(err)
+          res.status(401)
+            .json({
+              status: "error",
+              error: {
+              message: "Mockaroo Error: Mock User cannot be updated"
+              }
+            })
         }
       })
   }
