@@ -169,7 +169,7 @@ app.get('/shows/:id', (req, res, next) => {
           .json({
             status: "error",
             error: {
-            message: "Mockaroo GET show error"
+            message: "Mockaroo Error: Mock Show cannot be retrieved"
             }
           })
       }
