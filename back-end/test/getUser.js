@@ -1,44 +1,33 @@
-/*
 const chai = require('chai')
 const chaiHttp = require('chai-http')
-const axios = require('axios')
-const sinon = require('sinon')
 const expect = chai.expect
 const server = require('../app.js')
-const { mockErrorMessage, mockShowAPI } = require('../MockData.js')
 chai.use(chaiHttp)
 
-describe('GET /shows/1', () => {
-  let stub
-
-  afterEach(() => {
-    stub.restore()
-  })
-
-  it('should return 200 OK and data', async () => {
-    stub = sinon
-      .stub(axios, 'get')
-      .resolves({ data: { id: 1, name: 'sample show' } })
-    const res = await chai.request(server).get('/shows/1')
+describe('GET /tv_users/1', () => {
+  it('should return 200 OK and data for a valid id', async () => {
+    const res = await chai.request(server).get('/tv_users/1')
     expect(res.status).to.equal(200)
-    expect(res.body).to.deep.equal({ id: 1, name: 'sample show' })
-    sinon.assert.calledOnce(stub)
+    expect(res.body).to.deep.equal({
+      __v: 0,
+      _id: '6082b46b25895861f652e1df',
+      id: 1,
+      username: 'testUsername',
+      email: 'testEmail@gmail.com',
+      password: '$2b$10$kTrfm/ETBk9G1jzWStD6zebSODZSBTXcbg0d5TYMLYDM7MwY8QqE6',
+      bio: 'This is my bio.',
+      img: 'An image.',
+      shows: []
+    })
+  }).timeout(3000)
+  it('should return 404 and an error for a invalid user id', async () => {
+    const res = await chai.request(server).get('/tv_users/badid')
+    expect(res.status).to.equal(404)
+    expect(res.body).to.deep.equal('Error! User with requested ID not found.')
   })
-  describe('when Mockaroo returns with 500 error', () => {
-    it('should return 200 with mock data if show exists', async () => {
-      stub = sinon.stub(axios, 'get').rejects(mockErrorMessage)
-      const res = await chai.request(server).get('/shows/3')
-      expect(res.status).to.equal(200)
-      expect(res.body).to.deep.equal(mockShowAPI[3])
-      sinon.assert.calledOnce(stub)
-    })
-    it('should return 404 with error message if show does not exist', async () => {
-      stub = sinon.stub(axios, 'get').rejects(mockErrorMessage)
-      const res = await chai.request(server).get('/shows/2')
-      expect(res.status).to.equal(404)
-      expect(res.body).to.deep.equal('show with requested id not found')
-      sinon.assert.calledOnce(stub)
-    })
+  it('should return 404 and an error for an id with no user', async () => {
+    const res = await chai.request(server).get('/tv_users/100000')
+    expect(res.status).to.equal(404)
+    expect(res.body).to.deep.equal('Error! User with requested ID not found.')
   })
 })
-*/
