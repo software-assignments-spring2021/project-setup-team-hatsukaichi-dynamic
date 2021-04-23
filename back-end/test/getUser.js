@@ -9,17 +9,17 @@ describe('GET /tv_users/1', () => {
     const res = await chai.request(server).get('/tv_users/1')
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({
-      shows: [],
-      _id: '607cc452d1d1cdaaf48de324',
+      __v: 0,
+      _id: '6082b46b25895861f652e1df',
       id: 1,
       username: 'testUsername',
       email: 'testEmail@gmail.com',
-      passwordHash: 'aaa',
+      password: '$2b$10$kTrfm/ETBk9G1jzWStD6zebSODZSBTXcbg0d5TYMLYDM7MwY8QqE6',
       bio: 'This is my bio.',
       img: 'An image.',
       shows: []
     })
-  })
+  }).timeout(3000)
   it('should return 404 and an error for a invalid user id', async () => {
     const res = await chai.request(server).get('/tv_users/badid')
     expect(res.status).to.equal(404)
