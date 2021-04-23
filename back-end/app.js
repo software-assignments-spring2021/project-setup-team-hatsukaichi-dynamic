@@ -463,6 +463,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
         })
         //catch error if the movie is not found in Tmdb database
         .catch((err) => {
+          console.log(err)
           if (err.response.status != 200 && err.response.status != 304) {
             //if show is in Trakt database, return available data
             if (response_final != null) {
@@ -475,6 +476,7 @@ app.get('/shows-trakt/:id', (req, res, next) => {
           }
         })
         .then((responseC) => {
+          //console.log(err)
           if (responseC.data != null) {
             //if posters are available, append their urls to the info object
             if (responseC.data.posters != null)
