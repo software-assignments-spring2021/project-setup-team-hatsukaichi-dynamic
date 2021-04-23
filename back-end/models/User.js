@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 const uniqueValidator = require('mongoose-unique-validator')
 const saltRounds = 10
 const autoIncrement = require('mongoose-sequence')(mongoose);
@@ -24,15 +24,13 @@ UserSchema.methods.validPassword = async function (password) {
 }
 
 //Pre-hook before the user info is saved in database: hash password and store it
-UserSchema.pre('save', async function(next){
-  const user = this;
-  const hash = await bcrypt.hash(this.password, saltRounds);
-  this.password = hash;
+UserSchema.pre('save', async function (next) {
+  const user = this
+  const hash = await bcryptjs.hash(this.password, saltRounds)
+  this.password = hash
   next()
 })
 
-const User = mongoose.model('user',UserSchema)
+const User = mongoose.model('user', UserSchema)
 
 module.exports = User
-
-
