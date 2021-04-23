@@ -3,6 +3,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const axios = require('axios')
 const sinon = require('sinon')
+const mongoose = require('mongoose')
 const { mockUserUpdate, mockSingleShow } = require('../MockData.js')
 var expect = chai.expect
 chai.use(chaiHttp)
@@ -15,14 +16,26 @@ describe('PATCH /tv_users/1', () => {
     stub.restore()
   })
 
+  after(() => {
+  //do this in whatever the last test is alphabetically
+  mongoose.connection
+    .close()
+    .then((resolved) =>
+      console.log('The connection to the database has been closed.')
+    )
+    .catch((err) => console.log(err))
+  })
+
   it('should update all user info fields', async () => {
     stub = sinon.stub(axios, 'patch').resolves({
       data: {
+        id: 'sampleID',
         username: 'newUsername',
         password: 'newPassword1',
         email: 'newemail@gmail.com',
-        bio: 'old bio',
-        shows: [mockSingleShow]
+        bio: '',
+        img: '',
+        shows: []
       }
     })
     const res = await chai
@@ -31,23 +44,23 @@ describe('PATCH /tv_users/1', () => {
       .send({
         username: 'newUsername',
         password: 'newPassword1',
-        email: 'newemail@gmail.com',
-        shows: [mockSingleShow]
+        email: 'newemail@gmail.com'
       })
     expect(res.status).to.equal(200)
     expect(res.body).to.deep.equal({
+      id: 'sampleID',
       username: 'newUsername',
       password: 'newPassword1',
       email: 'newemail@gmail.com',
-      bio: 'old bio',
-      shows: [mockSingleShow]
-    })
+      bio: '',
+      img: '',
+      shows: []
+   })
     sinon.assert.calledOnce(stub)
     sinon.assert.calledWith(stub, patchURL, {
       username: 'newUsername',
       password: 'newPassword1',
-      email: 'newemail@gmail.com',
-      shows: [mockSingleShow]
+      email: 'newemail@gmail.com'
     })
   })
   it('should update only the password', async () => {
