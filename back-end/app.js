@@ -73,32 +73,6 @@ app.use(
   secureRoute
 )
 
-app.get('/shows/:id', (req, res, next) => {
-  axios
-    .get(
-      `https://my.api.mockaroo.com/shows/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}`
-    )
-    .then((response) => {
-      res.json(response.data)
-    })
-    .catch((err) => {
-      if (err.response.status === 500) {
-        if (req.params.id in mockShowAPI) {
-          res.status(200).json(mockShowAPI[req.params.id])
-        } else {
-          res.status(404).json('show with requested id not found')
-        }
-      } else {
-        res.status(401).json({
-          status: 'error',
-          error: {
-            message: 'Mockaroo Error: Mock Show cannot be retrieved'
-          }
-        })
-      }
-    })
-})
-
 app.get('/', function (req, res, next) {
   res.send('TV Tracker App Home page!')
 })

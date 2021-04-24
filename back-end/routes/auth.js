@@ -4,7 +4,13 @@ const User = require('../models/User')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const localStrategy = require('passport-local').Strategy
+<<<<<<< HEAD
 
+=======
+//require('dotenv').config({ silent: true })
+
+const bcryptjs = require('bcryptjs') //encrypt password
+>>>>>>> fix rebase conflicts and bcrypt stuff
 const { body, validationResult } = require('express-validator')
 app.use(express.urlencoded({ extended: true }))
 app.use(passport.initialize())
