@@ -192,21 +192,40 @@ const MyShows = (props) => {
     }
   }
 
-  const searchShows = (input, shows) => {
-    return shows
-      .filter((show) => {
-        return show.name.toLowerCase().includes(input.toLowerCase())
-      })
-      .map((show) => {
-        return { value: show.id, label: show.name }
-      })
+  const popularShows = (shows) => {
+    return shows.map((show) => {
+      // Can hardcode the type since this case only gets TV Shows
+      return { value: show.ids.trakt, label: show.title, type: 'shows' }
+    })
+  }
+
+  const searchShows = (data) => {
+    console.log(data)
+    return data.map((item) => {
+      return {
+        value: item[item.type]['ids']['trakt'],
+        label: `${item[item.type]['title']} (${item[item.type]['year']})`,
+        type: `${item.type}s`
+      }
+    })
   }
 
   const loadOptions = (input) => {
+    let url
+    if (input) {
+      url = `http://localhost:4000/shows-trakt?query=${input}`
+    } else {
+      url = `http://localhost:4000/shows-trakt`
+    }
     return axios
-      .get(`http://localhost:4000/shows`)
+      .get(url)
       .then((response) => {
-        return searchShows(input, response.data)
+        // split into cases for popular shows or not
+        if (input) {
+          return searchShows(response.data)
+        } else {
+          return popularShows(response.data)
+        }
       })
       .catch((err) => {
         console.log('Error: could not make the request.')
@@ -222,7 +241,7 @@ const MyShows = (props) => {
   }
 
   const linkToShow = (e) => {
-    history.push(`/show/${e.value}`)
+    history.push(`/${e.type}/${e.value}`)
   }
 
   return (
