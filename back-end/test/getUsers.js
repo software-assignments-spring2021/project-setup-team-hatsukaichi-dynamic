@@ -6,8 +6,8 @@ const expect = chai.expect
 const server = require('../app.js')
 const { createMockUser } = require('../MockData.js')
 chai.use(chaiHttp)
-
-{/*describe('GET /tv_users', () => {
+/*
+describe('GET /tv_users', () => {
   let stub
 
   afterEach(() => {
@@ -39,4 +39,5 @@ chai.use(chaiHttp)
     ])
     sinon.assert.calledOnce(stub)
   })
-})*/}
+})
+*/

@@ -77,7 +77,13 @@ app.get('/shows/:id', (req, res, next) => {
           res.status(404).json('show with requested id not found')
         }
       } else {
-        next(err)
+        res.status(401)
+          .json({
+            status: "error",
+            error: {
+            message: "Mockaroo Error: Mock Show cannot be retrieved"
+            }
+          })
       }
     })
 })
@@ -147,9 +153,15 @@ app.post(
                 req.body.email
               )
             )
-        } else if (err.response.status === 400) {
-        } else {
-          next(err)
+        }else if (err.response.status === 400) {
+        }else {
+          res.status(401)
+            .json({
+              status: "error",
+              error: {
+              message: "Mockaroo Error: Mock User(s) cannot be created"
+              }
+            })
         }
       })
   }
@@ -167,7 +179,13 @@ app.get('/shows', (req, res, next) => {
       if (err.response.status === 500) {
         res.status(200).json(mockAllShows)
       } else {
-        next(err)
+        res.status(401)
+          .json({
+            status: "error",
+            error: {
+            message: "Mockaroo Error: Mock Shows cannot be retrieved"
+            }
+          })
       }
     })
 })
@@ -215,7 +233,13 @@ app.patch(
         if (err.response.status == 500) {
           res.status(200).json(mockUserUpdate(req.params.id, patchUser))
         } else {
-          next(err)
+          res.status(401)
+            .json({
+              status: "error",
+              error: {
+              message: "Mockaroo Error: Mock User cannot be updated"
+              }
+            })
         }
       })
   }
@@ -238,8 +262,12 @@ app.get('/shows-trakt', (req, res, next) => {
       .catch((err) => {
         res
           .status(err.response.status)
-          .json('An error occurred loading shows from Trakt!')
-        next(err)
+          .json({
+            status: "error",
+            error: {
+            message: "An error occurred loading shows from Trakt!"
+            }
+          })
       })
     //otherwise return requested show information
   } else {
@@ -260,8 +288,12 @@ app.get('/shows-trakt', (req, res, next) => {
       .catch((err) => {
         res
           .status(err.response.status)
-          .json('An error occurred loading shows from Trakt!')
-        next(err)
+          .json({
+            status: "error",
+            error: {
+              message: "An error occurred loading shows from Trakt!"
+            }
+          })
       })
   }
 })
