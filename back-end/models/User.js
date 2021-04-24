@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const bcryptjs = require('bcryptjs')
 const uniqueValidator = require('mongoose-unique-validator')
 const saltRounds = 10
-const autoIncrement = require('mongoose-sequence')(mongoose);
+const autoIncrement = require('mongoose-sequence')(mongoose)
 
 const UserSchema = new mongoose.Schema({
   id: { type: Number },
@@ -14,12 +14,12 @@ const UserSchema = new mongoose.Schema({
   shows: { type: Array, default: [] }
 })
 
-UserSchema.plugin(autoIncrement, {inc_field: 'id'});
+UserSchema.plugin(autoIncrement, { inc_field: 'id' })
 
 UserSchema.plugin(uniqueValidator)
 
 UserSchema.methods.validPassword = async function (password) {
-  const compare = await bcrypt.compare(password, this.password)
+  const compare = await bcryptjs.compare(password, this.password)
   return compare
 }
 

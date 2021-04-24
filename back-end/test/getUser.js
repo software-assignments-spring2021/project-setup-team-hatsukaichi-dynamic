@@ -1,9 +1,11 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http')
-const { useFakeServer } = require('sinon')
 const expect = chai.expect
 const server = require('../app.js')
 const User = require('../models/User')
+const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-sequence')(mongoose)
+
 chai.use(chaiHttp)
 
 describe('GET /tv_users/:id', function () {
@@ -12,7 +14,6 @@ describe('GET /tv_users/:id', function () {
     await User.deleteMany({})
     // Save a user manually to the database:
     const user = new User({
-      id: 1,
       username: 'testUser',
       password: 'unhashedPwd1',
       email: 'testEmail@gmail.com',
@@ -25,6 +26,8 @@ describe('GET /tv_users/:id', function () {
   after(async () => {
     // Remove users from the database
     await User.deleteMany({})
+    // Reset the id counter for this
+    await User.counterReset('id', (err) => {})
   })
   it('should return 200 OK and data for a valid id', async () => {
     const res = await chai.request(server).get('/tv_users/1')

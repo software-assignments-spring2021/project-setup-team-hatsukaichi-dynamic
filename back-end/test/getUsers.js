@@ -12,7 +12,6 @@ describe('GET /tv_users', function () {
     // Populate the test database with some users before the first test
     const users = [
       {
-        id: 1,
         username: 'user1',
         password: 'validPwd1',
         email: 'email1@gmail.com',
@@ -21,7 +20,6 @@ describe('GET /tv_users', function () {
         shows: []
       },
       {
-        id: 2,
         username: 'user2',
         password: 'validPwd2',
         email: 'email2@gmail.com',

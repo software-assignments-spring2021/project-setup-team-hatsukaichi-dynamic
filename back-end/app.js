@@ -7,8 +7,8 @@ const morgan = require('morgan') // middleware for logging of incoming HTTP requ
 const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
-const authRoute=require('./routes/auth')
-const secureRoute=require('./routes/secure-route')
+const authRoute = require('./routes/auth')
+const secureRoute = require('./routes/secure-route')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
 const User = require('./models/User')
@@ -66,8 +66,12 @@ app.get('/tv_users', async (req, res) => {
   }
 })
 
-app.use('/',authRoute);
-app.use('/profile', passport.authenticate('jwt', { session: false }), secureRoute);
+app.use('/', authRoute)
+app.use(
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
+  secureRoute
+)
 
 app.get('/shows/:id', (req, res, next) => {
   axios
@@ -108,7 +112,8 @@ app.get('/tv_users/:id', async (req, res, next) => {
     } else {
       res.json(foundUser)
     }
-  } catch {
+  } catch (err) {
+    //console.log(err)
     res.status(404).json('Error! User with requested ID not found.')
   }
 })
