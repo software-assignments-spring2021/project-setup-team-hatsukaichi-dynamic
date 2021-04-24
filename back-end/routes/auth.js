@@ -2,7 +2,9 @@ const express = require('express')
 const app = require('express').Router()
 const User=require('../models/User')
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const localStrategy = require('passport-local').Strategy;
+//require('dotenv').config({ silent: true })
 
 const bcrypt = require('bcrypt') //encrypt password
 const { body, validationResult } = require('express-validator')
@@ -56,6 +58,55 @@ passport.use('register', new localStrategy({
     return done(null, false, { message: error.message});
   }
 }))
+
+passport.use(
+  'login',
+  new localStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    async (email, password, done) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          return done(null, false, { message: 'User not found' });
+        }
+
+        const validate = await user.validPassword(password);
+
+        if (!validate) {
+          return done(null, false, { message: 'Wrong Password' });
+        }
+
+        return done(null, user, { message: 'Logged in Successfully' });
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
+
+passport.use(
+  new JWTstrategy(
+    {
+      //secretOrKey: process.env.TOKEN_SECRET,
+      secretOrKey: 'TOKEN_SECRET',
+      jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+    },
+    async (token, done) => {
+      try {
+        return done(null, token.user);
+      } catch (error) {
+        done(error);
+      }
+    }
+  )
+);
 
 app.post(
   '/register',
@@ -114,8 +165,49 @@ app.post(
   }
 );
 
-app.post('/login1', (req, res) => {
-  res.send('Login')
-})
+app.post(
+  '/login',
+  async (req, res, next) => {
+    passport.authenticate(
+      'login',
+      async (err, user, info) => {
+        try {
+          if (err || !user) {
+            const { statusCode = 400, message } = info;
+            return res.status(statusCode).json({
+              status: "error",
+              error: {
+              message,
+              },
+            });
+          }
+          req.login( user, { session: false },
+            async (error) => {
+              if (error)
+                return res.status(400).json({
+                  status: "error",
+                  message: error.message
+                });
+              const body = { _id: user._id, email: user.email };
+              //const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET);
+              const token = jwt.sign({ user: body }, 'TOKEN_SECRET');
+              return res.json({ user, token });
+            }
+          );
+        }catch (error) {
+          throw new Error({message: error.message});
+        }
+      }
+    )(req, res, next);
+  }
+);
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.json({ 
+    status: "logout",
+    message:"Successful logout"
+  });
+});
 
 module.exports=app 
