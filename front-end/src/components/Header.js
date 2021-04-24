@@ -3,11 +3,11 @@ import 'react-sticky-header/styles.css'
 import StickyHeader from 'react-sticky-header'
 import './Header.css'
 import Hamburger from './Hamburger'
-import logo from './Images/logo.png'
+import logo from '../images/logo.png'
 import HeaderLogo from './HeaderLogo'
 import SignupButton from './SignupButton'
 import LoginButton from './LoginButton'
-import { AuthContext } from './App'
+import { AuthContext } from '../App'
 import LogoutButton from './LogoutButton'
 
 const Header = () => {

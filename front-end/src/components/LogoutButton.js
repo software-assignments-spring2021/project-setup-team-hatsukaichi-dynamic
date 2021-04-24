@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { AuthContext } from './App.js'
+import { AuthContext } from '../App.js'
 import './LogoutButton.css'
 
 function LogoutButton() {

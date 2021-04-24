@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Footer from './Footer'
+import Footer from '../components/Footer'
 import axios from 'axios'
 import './Profile.css'
-import Header from './Header'
+import Header from '../components/Header'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {
   createMockUser,
@@ -10,10 +10,10 @@ import {
   mockUserImage,
   mockShowImage,
   mockUserUpdate
-} from './MockData'
+} from '../utils/MockData'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
-import { AuthContext } from './App'
+import { AuthContext } from '../App'
 require('dotenv').config()
 
 /* UserInfo displays username, user bio, and user profile picture */

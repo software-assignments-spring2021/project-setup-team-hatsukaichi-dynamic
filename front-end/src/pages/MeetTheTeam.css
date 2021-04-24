@@ -70,11 +70,11 @@ body {
   }
   .content p,
   .content a {
-    font-size: 22px;
+    font-size: 20px;
   }
   .content img {
-    width: 130px;
-    height: 130px;
+    width: 140px;
+    height: 140px;
   }
 }
 
@@ -93,7 +93,7 @@ body {
 
   .content p,
   .content a {
-    font-size: 20px;
+    font-size: 19px;
   }
   .content img {
     width: 110px;

@@ -1,8 +1,8 @@
 import React from 'react'
-import Footer from './Footer'
-import Header from './Header'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 import './MeetTheTeam.css'
-import image from './Images/stock-user-white.png'
+import image from '../images/stock-user-white.png'
 
 function MeetTheTeam() {
   return (
@@ -13,7 +13,7 @@ function MeetTheTeam() {
           <h1>Meet the Team</h1>
         </div>
         <div className="content">
-          <img src={image} alt=""></img>
+          <img className="github-img" src={image} alt=""></img>
           <h4>Sam Eng</h4>
           <p>Student at New York University</p>
           <a href="https://github.com/sam-eng">GitHub</a>
@@ -21,7 +21,7 @@ function MeetTheTeam() {
           <p>Favorite Movie: Titanic</p>
         </div>
         <div className="content">
-          <img src={image} alt=""></img>
+          <img className="github-img" src={image} alt=""></img>
           <h4>Lev Bernstein</h4>
           <p>Student at New York University</p>
           <a href="https://github.com/LevBernstein">GitHub</a>
@@ -29,7 +29,7 @@ function MeetTheTeam() {
           <p>Favorite Movie: Transformers</p>
         </div>
         <div className="content">
-          <img src={image} alt=""></img>
+          <img className="github-img" src={image} alt=""></img>
           <h4>Mason Kalaty</h4>
           <p>Student at New York University</p>
           <a href="https://github.com/Gkal2000">GitHub</a>
@@ -37,17 +37,17 @@ function MeetTheTeam() {
           <p>Favorite Movie: Great Gatsby</p>
         </div>
         <div className="content">
-          <img src={image} alt=""></img>
+          <img className="github-img" src={image} alt=""></img>
           <h4>Ben Kaplan</h4>
           <p>Student at New York University</p>
           <a href="https://github.com/benrkaplan">GitHub</a>
           <p>
-            Favorite color: Grey. Interests: Travel, Computer games, Reading.{' '}
+            Favorite color: Grey. Interests: Travel, Computer games, Reading.
           </p>
           <p>Favorite Movie: Formula 1</p>
         </div>
         <div className="content">
-          <img src={image} alt=""></img>
+          <img className="github-img" src={image} alt=""></img>
           <h4>Nicole Stovall</h4>
           <p>Student at New York University</p>
           <a href="https://github.com/stovalln21">GitHub</a>
@@ -55,7 +55,7 @@ function MeetTheTeam() {
           <p>Favorite Movie: Supernatural</p>
         </div>
         <div className="content">
-          <img src={image} alt=""></img>
+          <img className="github-img" src={image} alt=""></img>
           <h4>Almazhan Kapan</h4>
           <p>Student at New York University</p>
           <a href="https://github.com/almazhankapan">GitHub</a>

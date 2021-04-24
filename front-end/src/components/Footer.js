@@ -1,7 +1,7 @@
 import React from 'react'
 import './Footer.css'
 import { Link } from 'react-router-dom'
-import trakt from './Images/trakt.png'
+import trakt from '../images/trakt.png'
 
 function Footer() {
   return (
