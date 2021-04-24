@@ -136,7 +136,7 @@ const IndividualShow = ({ id, type }) => {
     }
     // Fetch show meta-information from the API
     axios
-      .get(`http://localhost:4000/shows-trakt/${id}?type=show`)
+      .get(`http://localhost:4000/${type}s/${id}`)
       .then((response) => {
         setShow(response.data)
       })
@@ -220,6 +220,7 @@ const IndividualShow = ({ id, type }) => {
               <form id="show-form" onSubmit={handleSubmit}>
                 <h3 id="title">{show.title}</h3>
                 <Link to="/my-shows/1">
+                  {/*TODO: Change this to link to logged in user's my-shows*/}
                   <button className="btn-progress">Return to My Shows</button>
                 </Link>
                 <Select
