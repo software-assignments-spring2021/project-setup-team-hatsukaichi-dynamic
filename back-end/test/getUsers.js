@@ -13,8 +13,6 @@ describe('GET /tv_users', function () {
     // Make sure the database is empty first
     await User.deleteMany({})
     // Populate the test database with some users before the first test
-    // insertMany will not trigger automatic incrementation of the id field, so it is being set manually
-    // see here:
     const users = [
       {
         username: 'user1',
