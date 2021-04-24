@@ -7,8 +7,8 @@ const morgan = require('morgan') // middleware for logging of incoming HTTP requ
 const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
-const authRoute=require('./routes/auth')
-const secureRoute=require('./routes/secure-route')
+const authRoute = require('./routes/auth')
+const secureRoute = require('./routes/secure-route')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
 const User = require('./models/User')
@@ -33,7 +33,13 @@ app.use((req, res, next) => {
 })
 
 //MongoDB setup
-const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
+let dbName
+if (process.env.NODE_ENV === 'test') {
+  dbName = 'unit_tests'
+} else {
+  dbName = 'test' // Perhaps change this later, but this is the database we're using for development purposes
+}
+const mongo_uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.a1meh.mongodb.net/${dbName}?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`
 
 mongoose
   .connect(mongo_uri, {
@@ -42,7 +48,9 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false
   })
-  .then(() => console.log('The database has been successfully connected.'))
+  .then(() => {
+    console.log(`Connected successfully to the ${dbName} database`)
+  })
   .catch((err) => console.log(err))
 
 const db = mongoose.connection
@@ -51,15 +59,19 @@ db.on('error', console.error.bind(console, 'MongoDB Error: '))
 //routes
 app.get('/tv_users', async (req, res) => {
   try {
-    const users = await UserModel.find()
+    const users = await User.find()
     res.json(users)
   } catch (err) {
     res.status(404).json('Error: could not find users.')
   }
 })
 
-app.use('/',authRoute);
-app.use('/profile', passport.authenticate('jwt', { session: false }), secureRoute);
+app.use('/', authRoute)
+app.use(
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
+  secureRoute
+)
 
 app.get('/shows/:id', (req, res, next) => {
   axios
@@ -100,7 +112,8 @@ app.get('/tv_users/:id', async (req, res, next) => {
     } else {
       res.json(foundUser)
     }
-  } catch {
+  } catch (err) {
+    //console.log(err)
     res.status(404).json('Error! User with requested ID not found.')
   }
 })
