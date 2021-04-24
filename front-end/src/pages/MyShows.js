@@ -3,7 +3,6 @@ import AsyncSelect from 'react-select/async'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import axios from 'axios'
-import { mockShowImage } from '../utils/MockData'
 import './MyShows.css'
 import Modal from 'react-modal'
 import Select from 'react-select'
@@ -37,17 +36,15 @@ const ShowGrid = (props) => {
       setFilteredShows([])
     } else {
       props.shows.map((show) => {
-        console.log(show)
-        urls.push(
-          `http://localhost:4000/shows-trakt/${show.traktId}?type=${
-            show.isMovie ? 'movie' : 'show'
-          }`
-        )
-        return show.id
+        if (show.isMovie) {
+          urls.push(`http://localhost:4000/movies/${show.traktId}`)
+        } else {
+          urls.push(`http://localhost:4000/shows/${show.traktId}`)
+        }
+        return show // to satisfy warning about map expecting a return value
       })
 
       Promise.all(makeAxiosCalls(urls)).then((showInfo) => {
-        console.log(showInfo)
         setShows(showInfo.map((info) => info.data))
         setFilteredShows(showInfo.map((info) => info.data))
       })
@@ -58,14 +55,26 @@ const ShowGrid = (props) => {
     if (props.shows === undefined || shows.length === 0) {
       setFilteredShows([])
     } else {
-      const res = filterShows(props.shows, props.status, props.platform).map(
+      const res = filterShows(props.shows, props.list, props.platform).map(
         (showUserInfo) => {
-          return shows.find((show) => show.ids.trakt === showUserInfo.traktId)
+          return shows.find((show) => {
+            if (show.ids.trakt === showUserInfo.traktId) {
+              // Match in type too
+              if (show.type === 'movie' && showUserInfo.isMovie) {
+                return true
+              } else if (show.type === 'show' && !showUserInfo.isMovie) {
+                return true
+              } else {
+                return false
+              }
+            }
+            return false
+          })
         }
       )
       setFilteredShows(res)
     }
-  }, [props.shows, props.status, props.platform, shows])
+  }, [props.shows, props.list, props.platform, shows])
 
   const setPlatformLogo = (platform) => {
     let platformLogo
@@ -97,17 +106,21 @@ const ShowGrid = (props) => {
         {filteredShows !== undefined && filteredShows.length !== 0 ? (
           filteredShows.map((show) => {
             return (
-              <Link to={`/show/${show.id}`} key={show.id}>
+              <Link
+                to={`/${show.type}s/${show.ids.trakt}`}
+                key={show.ids.trakt + '-' + show.type}>
                 <img
                   className="show-images"
-                  src={mockShowImage(show.id)}
-                  alt={`cover-${show.id}`}
+                  src={show['poster-url']}
+                  alt={`cover-${show.ids.trakt}-${show.type}`}
                 />
-                <img
-                  className="platform-image"
-                  src={setPlatformLogo(props.platform)}
-                  alt={`${props.platform} logo`}
-                />
+                {props.platform ? (
+                  <img
+                    className="platform-image"
+                    src={setPlatformLogo(props.platform)}
+                    alt={`${props.platform} logo`}
+                  />
+                ) : null}
               </Link>
             )
           })
@@ -119,21 +132,19 @@ const ShowGrid = (props) => {
   )
 }
 
-// filterShows filters a list of shows with user information by their status (indicated by a boolean)
-// the status variable being passed into this function, however, is a string as to account for
-// the case where no show status filtering is being done
-const filterShows = (shows, status, platform) => {
-  const isCompleted = status === 'Completed'
+// filterShows filters a list of shows with user information by their list (indicated by a string)
+// the list variable being passed into this function, however, is a string as to account for
+// the case where no show list filtering is being done
+const filterShows = (shows, list, platform) => {
   if (!shows) {
     return []
   } else {
     const filtered = shows.filter((show) => {
       if (platform === '' || show.platform === platform) {
-        console.log(show)
-        if (status === '') {
+        if (list === '') {
           return show
         }
-        return show.completed === isCompleted
+        return show.list === list
       }
       return false
     })
@@ -143,7 +154,7 @@ const filterShows = (shows, status, platform) => {
 
 const MyShows = (props) => {
   const [userData, setUserData] = useState([])
-  const [status, setStatus] = useState('')
+  const [list, setList] = useState('')
   const [inProgressSelected, setInProgressSelected] = useState(false)
   const [completedSelected, setCompletedSelected] = useState(false)
   const [open, setOpen] = useState(false)
@@ -164,17 +175,17 @@ const MyShows = (props) => {
     setOpen(!open)
   }
 
-  const onStatusChange = (buttonType) => {
+  const onListChange = (buttonType) => {
     if (buttonType === 'in progress') {
-      inProgressSelected ? setStatus('') : setStatus('In Progress')
-      // This if statement logic ensures that the two status buttons are never on at the same time
-      if (status !== '') {
+      inProgressSelected ? setList('') : setList('In Progress')
+      // This if statement logic ensures that the two list buttons are never on at the same time
+      if (list !== '') {
         setCompletedSelected(false)
       }
       setInProgressSelected(!inProgressSelected)
     } else {
-      completedSelected ? setStatus('') : setStatus('Completed')
-      if (status !== '') {
+      completedSelected ? setList('') : setList('Completed')
+      if (list !== '') {
         setInProgressSelected(false)
       }
       setCompletedSelected(!completedSelected)
@@ -225,7 +236,7 @@ const MyShows = (props) => {
             cacheOptions
             defaultOptions
             loadOptions={loadOptions}
-            onChange={linkToShow}
+            onChange={linkToShow} // Change this to account for type
             placeholder="Search Shows..."
           />
         </div>
@@ -234,7 +245,7 @@ const MyShows = (props) => {
             className={
               inProgressSelected ? 'selected filter-button' : 'filter-button'
             }
-            onClick={(e) => onStatusChange('in progress')}>
+            onClick={(e) => onListChange('in progress')}>
             In Progress
           </button>
           <button className="my-shows-button" onClick={toggleModal}>
@@ -266,13 +277,13 @@ const MyShows = (props) => {
             className={
               completedSelected ? 'selected filter-button' : 'filter-button'
             }
-            onClick={(e) => onStatusChange('completed')}>
+            onClick={(e) => onListChange('completed')}>
             Completed
           </button>
         </div>
         <ShowGrid
           shows={userData.shows}
-          status={status}
+          list={list}
           platform={selectedPlatform}
         />
       </div>
