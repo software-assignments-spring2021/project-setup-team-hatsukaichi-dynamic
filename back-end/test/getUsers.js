@@ -3,6 +3,9 @@ const chaiHttp = require('chai-http')
 const expect = chai.expect
 const server = require('../app.js')
 const User = require('../models/User.js')
+const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-sequence')(mongoose)
+
 chai.use(chaiHttp)
 
 describe('GET /tv_users', function () {
@@ -10,6 +13,8 @@ describe('GET /tv_users', function () {
     // Make sure the database is empty first
     await User.deleteMany({})
     // Populate the test database with some users before the first test
+    // insertMany will not trigger automatic incrementation of the id field, so it is being set manually
+    // see here:
     const users = [
       {
         username: 'user1',
@@ -28,12 +33,14 @@ describe('GET /tv_users', function () {
         shows: []
       }
     ]
-    await User.insertMany(users)
+    await User.create(users)
   })
 
   afterEach(async () => {
     // Clear the database of any users after each test (so the second test has no users for it)
     await User.deleteMany({})
+    // Clean up counter incrementation for id field
+    await User.counterReset('id', (err) => {})
   })
 
   it('should return 200 OK', async () => {
