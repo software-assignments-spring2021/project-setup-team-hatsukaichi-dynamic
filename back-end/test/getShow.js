@@ -29,4 +29,5 @@ describe('GET /shows/1', () => {
     expect(res.body).to.deep.equal(mockExpectedShow)
     sinon.assert.calledThrice(stub)
   })
+  //TODO: Add error handling test
 })
