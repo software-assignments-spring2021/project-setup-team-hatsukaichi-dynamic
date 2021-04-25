@@ -5,7 +5,6 @@ const sinon = require('sinon')
 const expect = chai.expect
 const server = require('../app.js')
 const {
-  mockErrorMessage,
   mockTraktShow,
   mockPosterCall,
   mockSeasonsCall,
