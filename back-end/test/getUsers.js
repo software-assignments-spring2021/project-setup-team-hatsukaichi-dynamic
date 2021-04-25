@@ -12,7 +12,7 @@ describe('GET /tv_users', function () {
   before(async () => {
     // Make sure the database is empty first
     await User.deleteMany({})
-    // Populate the test database with some users before the first test
+    // Populate the test database with two users before the first test
     const users = [
       {
         username: 'user1',
