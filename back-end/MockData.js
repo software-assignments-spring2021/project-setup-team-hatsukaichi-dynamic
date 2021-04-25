@@ -647,6 +647,102 @@ const mockExpectedShow = {
   type: 'show'
 }
 
+const mockTraktMovie = {
+  title: 'Confessions of Felix Krull',
+  year: 1957,
+  ids: {
+    trakt: 1390,
+    slug: 'confessions-of-felix-krull-1957',
+    imdb: 'tt0050179',
+    tmdb: 2030
+  },
+  tagline: '',
+  overview:
+    "Thomas Mann's witty and intimate story of a irresistible scoundrel.",
+  released: '1958-03-04',
+  runtime: 108,
+  country: 'de',
+  trailer: null,
+  homepage: null,
+  status: 'released',
+  rating: 7.83715,
+  votes: 393,
+  comment_count: 0,
+  updated_at: '2020-10-02T08:09:41.000Z',
+  language: 'de',
+  available_translations: ['de', 'en', 'hu'],
+  genres: ['comedy', 'drama'],
+  certification: null
+}
+
+const mockPosterCallMovie = {
+  id: 2030,
+  backdrops: [],
+  posters: [
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/zWE40Yuu3IhTLF8dtKl5yhXSPNP.jpg',
+      height: 1500,
+      iso_639_1: 'it',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 1000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/woWQpgWNIqKEUUpTLR1RV6teQNl.jpg',
+      height: 750,
+      iso_639_1: 'de',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 500
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/x0eLXhJquBJntzVZzSDN8AkgzS2.jpg',
+      height: 900,
+      iso_639_1: 'fr',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 600
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/1GbqecYArhnKMKeQU9ioI3NFIym.jpg',
+      height: 900,
+      iso_639_1: 'it',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 600
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/cqCDFLMuPPgdtcm3YAPxfxajkBM.jpg',
+      height: 900,
+      iso_639_1: 'de',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 600
+    },
+    {
+      aspect_ratio: 0.7060702875399361,
+      file_path: '/x35vXEx58CRFhoJ5ggCwd7XLBL1.jpg',
+      height: 2191,
+      iso_639_1: 'hu',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 1547
+    }
+  ]
+}
+
+const mockExpectedMovie = {
+  ...mockTraktMovie,
+  type: 'movie',
+  'poster-url':
+    'https://image.tmdb.org/t/p/w500/zWE40Yuu3IhTLF8dtKl5yhXSPNP.jpg'
+}
+
 module.exports = {
   createMockUser: createMockUser,
   mockShowAPI: mockShowAPI,
@@ -659,5 +755,8 @@ module.exports = {
   mockTraktShow: mockTraktShow,
   mockPosterCall: mockPosterCall,
   mockSeasonsCall: mockSeasonsCall,
-  mockExpectedShow: mockExpectedShow
+  mockExpectedShow: mockExpectedShow,
+  mockTraktMovie: mockTraktMovie,
+  mockPosterCallMovie: mockPosterCallMovie,
+  mockExpectedMovie: mockExpectedMovie
 }
