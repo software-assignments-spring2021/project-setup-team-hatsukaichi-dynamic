@@ -234,27 +234,16 @@ app.patch(
     Object.keys(req.body).map((key) => {
       patchUser[key] = req.body[key]
     })
-    axios
-      .patch(
-        `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}&__method=PATCH`,
-        patchUser
-      )
-      .then((response) => {
-        res.json(response.data)
-      })
-      .catch((err) => {
-        if (err.response.status == 500) {
-          res.status(200).json(mockUserUpdate(req.params.id, patchUser))
-        } else {
-          res.status(401)
-            .json({
-              status: "error",
-              error: {
-              message: "Mockaroo Error: Mock User cannot be updated"
-              }
-            })
-        }
-      })
+  try {
+    const updatedUser = {
+      username : (req.body.username == null ? req.query.username : patchUser.username),
+      password : (req.body.password == null ? req.query.password : patchUser.password),
+      email : (req.body.email == null ? req.query.email : patchUser.email)
+    }
+    res.json(updatedUser)
+  } catch (err) {
+    res.status(404).json('Error: could not update user.')
+  }
   }
 )
 
