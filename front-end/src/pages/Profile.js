@@ -4,13 +4,7 @@ import axios from 'axios'
 import './Profile.css'
 import Header from '../components/Header'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import {
-  createMockUser,
-  mockShowAPI,
-  mockUserImage,
-  mockShowImage,
-  mockUserUpdate
-} from '../utils/MockData'
+import { mockUserUpdate } from '../utils/MockData'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import { AuthContext } from '../App'
@@ -38,13 +32,14 @@ const RecentShows = ({ shows }) => {
         <div id="profile-show-container">
           {shows.map((show) => {
             return (
-              <Link to={`/show/${show.id}`} key={show.id}>
-                {' '}
+              <Link
+                to={`/${show.type}s/${show.ids.trakt}`}
+                key={show.ids.trakt + '-' + show.type}>
                 <img
                   className="show-image"
-                  src={mockShowImage(show.id)}
-                  alt={`cover-${show.id}`}
-                />{' '}
+                  src={show['poster-url']}
+                  alt={`cover-${show.ids.trakt}-${show.type}`}
+                />
               </Link>
             )
           })}
@@ -167,10 +162,17 @@ const ProfileContents = ({ data, updateUserData }) => {
     setCopied(true)
   }
 
+  // This helper function is necessary to get the Promise.all in useEffect to work
+  // When moving this to Helpers it resulted in errors I couldn't fix...
+  const makeAxiosCalls = (urls) => {
+    return urls.map((url) => {
+      return axios.get(url)
+    })
+  }
+
   useEffect(() => {
     let showIds = []
-    let promises = []
-    let showInfo = []
+    const urls = []
 
     // This check is crucial--it sees whether userData (the props) has been loaded yet or not
     if (!data.shows) {
@@ -183,27 +185,26 @@ const ProfileContents = ({ data, updateUserData }) => {
       } else {
         showIds = data.shows
       }
+      console.log(showIds)
       // Note: At the moment, we don't need any of the mocked data since we only really need the image here
       // but it's being mocked with picsum for now.
       showIds.map((show) => {
-        promises.push(
-          axios
-            .get(`http://localhost:4000/shows/${show.id}`)
-            .then((response) => {
-              showInfo.push(response.data)
-            })
-            .catch((err) => {
-              console.log('Error: could not make the request.')
-              console.log(err)
-              showInfo.push(mockShowAPI[show.id])
-            })
-        )
+        if (show.isMovie) {
+          urls.push(`http://localhost:4000/movies/${show.traktId}`)
+        } else {
+          urls.push(`http://localhost:4000/shows/${show.traktId}`)
+        }
         return show.id
       })
-
-      Promise.all(promises).then(() => {
-        setUserShows(showInfo)
-      })
+      axios
+        .all(makeAxiosCalls(urls))
+        .then((showInfo) => {
+          setUserShows(showInfo.map((info) => info.data))
+        })
+        .catch((err) => {
+          console.log('Request could not be made...')
+          console.log(err)
+        })
     }
   }, [data.shows])
 
@@ -215,7 +216,7 @@ const ProfileContents = ({ data, updateUserData }) => {
             <UserInfo
               username={data.username}
               bio={data.bio}
-              image={mockUserImage(data.id)}
+              image={data.img}
             />
             <RecentShows shows={userShows} />
             <br />
@@ -280,8 +281,6 @@ const Profile = (props) => {
         // access a non-existent user
         console.log('Error: could not make the request.')
         console.log(err)
-        const mockUser = createMockUser(props.id)
-        setUserData(mockUser)
       })
   }, [props.id])
 

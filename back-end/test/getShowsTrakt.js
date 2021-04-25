@@ -70,14 +70,12 @@ describe('GET /shows-trakt', () => {
         stub = sinon.stub(axios, 'get').rejects(mockErrorMessage)
         const res = await chai.request(server).get('/shows-trakt')
         expect(res.status).to.equal(500)
-        expect(res.body).to.deep.equal(
-        {
-          status: "error",
-            error: {
-              message: "An error occurred loading shows from Trakt!"
-            }
+        expect(res.body).to.deep.equal({
+          status: 'error',
+          error: {
+            message: 'An error occurred loading shows from Trakt!'
           }
-        )
+        })
         sinon.assert.calledOnce(stub)
       })
     })

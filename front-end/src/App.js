@@ -23,8 +23,9 @@ const MyShowsWrapper = ({ match }) => {
   return <MyShows id={match.params.id} />
 }
 
-const IndividualShowWrapper = ({ match }) => {
-  return <IndividualShow id={match.params.id} />
+const IndividualMediaWrapper = ({ match }) => {
+  const type = match.path.startsWith('/shows') ? 'show' : 'movie'
+  return <IndividualShow id={match.params.id} type={type} />
 }
 
 export const AuthContext = React.createContext()
@@ -55,7 +56,9 @@ const App = () => {
         <Router>
           <ScrollToTop />
           <Switch>
-            <Route path="/show/:id" component={IndividualShowWrapper} />
+            <Route path="/shows/:id" component={IndividualMediaWrapper} />
+            <Route path="/movies/:id" component={IndividualMediaWrapper} />
+            {/* TODO: Add a way to view a list of all shows, much like my-shows but for non logged in users */}
             <Route path="/my-shows/:id" component={MyShowsWrapper} />
             <Route path="/profile/:id" component={ProfileWrapper} />
             <Route path="/terms-of-service">

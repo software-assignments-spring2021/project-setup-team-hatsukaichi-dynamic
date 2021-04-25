@@ -365,180 +365,6 @@ const mockPopularShows = JSON.parse(
   ]`
 )
 
-const mockGOT = JSON.parse(
-  `{
-    "title": "Game of Thrones",
-      "year": 2011,
-      "ids": {
-        "trakt": 353,
-        "slug": "game-of-thrones",
-        "tvdb": 121361,
-        "imdb": "tt0944947",
-        "tmdb": 1399
-      },
-      "first_aired": "2011-04-18T01:00:00.000Z",
-      "airs": {
-        "day": "Sunday",
-        "time": "21:00",
-        "timezone": "America/New_York"
-      },
-      "runtime": 60,
-      "certification": "TV-MA",
-      "network": "HBO",
-      "country": "us",
-      "updated_at": "2014-08-22T08:32:06.000Z",
-      "trailer": null,
-      "homepage": "http://www.hbo.com/game-of-thrones/index.html",
-      "status": "returning series",
-      "rating": 9,
-      "votes": 111,
-      "comment_count": 92,
-      "language": "en",
-      "available_translations": [
-        "en",
-        "tr",
-        "sk",
-        "de",
-        "ru",
-        "fr",
-        "hu",
-        "zh",
-        "el",
-        "pt",
-        "es",
-        "bg",
-        "ro",
-        "it",
-        "ko",
-        "he",
-        "nl",
-        "pl"
-      ],
-      "genres": [
-        "drama",
-        "fantasy"
-      ],
-      "aired_episodes": 50
-  }`
-)
-
-const mockSeasons = JSON.parse(
-  `[
-    {
-      "number": 0,
-      "ids": {
-        "trakt": 1,
-        "tvdb": 137481,
-        "tmdb": 3627
-      },
-      "rating": 9,
-      "votes": 111,
-      "episode_count": 10,
-      "aired_episodes": 10,
-      "title": "Specials",
-      "overview": null,
-      "first_aired": "2010-12-06T02:00:00.000Z",
-      "udpated_at": "2010-12-07T01:023:00.000Z",
-      "network": "HBO"
-    },
-    {
-      "number": 1,
-      "ids": {
-        "trakt": 2,
-        "tvdb": 364731,
-        "tmdb": 3624
-      },
-      "rating": 9,
-      "votes": 111,
-      "episode_count": 10,
-      "aired_episodes": 10,
-      "title": "Season 1",
-      "overview": "Season 1 overview.",
-      "first_aired": "2011-04-09T02:00:00.000Z",
-      "udpated_at": "2010-12-07T01:023:00.000Z",
-      "network": "HBO"
-    },
-    {
-      "number": 2,
-      "ids": {
-        "trakt": 3,
-        "tvdb": 473271,
-        "tmdb": 3625
-      },
-      "rating": 9,
-      "votes": 111,
-      "episode_count": 10,
-      "aired_episodes": 10,
-      "title": "Season 2",
-      "overview": "Season 2 overview.",
-      "first_aired": "2012-04-02T02:00:00.000Z",
-      "udpated_at": "2010-12-07T01:023:00.000Z",
-      "network": "HBO"
-    },
-    {
-      "number": 3,
-      "ids": {
-        "trakt": 4,
-        "tvdb": 488434,
-        "tmdb": 3626
-      },
-      "rating": 9,
-      "votes": 111,
-      "episode_count": 10,
-      "aired_episodes": 10,
-      "title": "Season 3",
-      "overview": "Season 3 overview.",
-      "first_aired": "2013-04-01T02:00:00.000Z",
-      "udpated_at": "2010-12-07T01:023:00.000Z",
-      "network": "HBO"
-    },
-    {
-      "number": 4,
-      "ids": {
-        "trakt": 5,
-        "tvdb": 522882,
-        "tmdb": 3628
-      },
-      "rating": 9,
-      "votes": 111,
-      "episode_count": 10,
-      "aired_episodes": 10,
-      "title": "Season 4",
-      "overview": "Season 4 overview",
-      "first_aired": "2014-04-07T02:00:00.000Z",
-      "udpated_at": "2010-12-07T01:023:00.000Z",
-      "network": "HBO"
-    }
-  ]`
-)
-
-const mockFileInfo = JSON.parse(
-  `{
-    "backdrops": [
-        {
-            "aspect_ratio": 1.777777777777778,
-            "file_path": "/suopoADq0k8YZr4dQXcU6pToj6s.jpg",
-            "height": 1080,
-            "iso_639_1": null,
-            "vote_average": 5.518,
-            "vote_count": 10,
-            "width": 1920
-        }
-    ], 
-    "id": 1399,
-        "posters": [
-            {
-                "aspect_ratio": 0.6666666666666666,
-                "file_path": "/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
-                "height": 3000,
-                "iso_639_1": "en",
-                "vote_average": 6.33,
-                "vote_count": 36,
-                "width": 2000
-            }
-        ]
-    }`
-)
 const mockErrorMessage = {
   response: {
     status: 500,
@@ -546,16 +372,391 @@ const mockErrorMessage = {
   }
 }
 
+const mockTraktShow = {
+  title: 'Game of Thrones',
+  year: 2011,
+  ids: {
+    trakt: 1390,
+    slug: 'game-of-thrones',
+    tvdb: 121361,
+    imdb: 'tt0944947',
+    tmdb: 1399,
+    tvrage: 24493
+  },
+  overview:
+    "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+  first_aired: '2011-04-18T01:00:00.000Z',
+  airs: { day: 'Sunday', time: '21:00', timezone: 'America/New_York' },
+  runtime: 60,
+  certification: 'TV-MA',
+  network: 'HBO',
+  country: 'us',
+  trailer: 'https://youtube.com/watch?v=bjqEWgDVPe0',
+  homepage: 'http://www.hbo.com/game-of-thrones',
+  status: 'ended',
+  rating: 9.0961,
+  votes: 119962,
+  comment_count: 379,
+  updated_at: '2021-04-21T18:29:48.000Z',
+  language: 'en',
+  available_translations: [
+    'ar',
+    'be',
+    'bg',
+    'bs',
+    'cn',
+    'cs',
+    'da',
+    'de',
+    'el',
+    'en',
+    'eo',
+    'es',
+    'et',
+    'fa',
+    'fi',
+    'fr',
+    'he',
+    'hr',
+    'hu',
+    'id',
+    'is',
+    'it',
+    'ja',
+    'ka',
+    'ko',
+    'lb',
+    'lt',
+    'lv',
+    'ml',
+    'nl',
+    'no',
+    'pl',
+    'pt',
+    'ro',
+    'ru',
+    'sk',
+    'sr',
+    'sv',
+    'ta',
+    'th',
+    'tr',
+    'tw',
+    'uk',
+    'uz',
+    'vi',
+    'zh'
+  ],
+  genres: ['drama', 'fantasy', 'science-fiction', 'action', 'adventure'],
+  aired_episodes: 73
+}
+
+const mockPosterCall = {
+  id: 1399,
+  posters: [
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
+      height: 3000,
+      iso_639_1: 'en',
+      vote_average: 6.366,
+      vote_count: 37,
+      width: 2000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/44rw2cOQrgUthZMhp3eibpXVy9p.jpg',
+      height: 1500,
+      iso_639_1: 'en',
+      vote_average: 5.708,
+      vote_count: 9,
+      width: 1000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/gKepMfnseLPwbZ0U9E1LmMW2x4V.jpg',
+      height: 3000,
+      iso_639_1: 'en',
+      vote_average: 5.456,
+      vote_count: 5,
+      width: 2000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/7WUHnWGx5OO145IRxPDUkQSh4C7.jpg',
+      height: 1920,
+      iso_639_1: 'en',
+      vote_average: 5.394,
+      vote_count: 10,
+      width: 1280
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/nC0dXhtcAdcqQ4anJfRz82XLL9l.jpg',
+      height: 2175,
+      iso_639_1: 'es',
+      vote_average: 5.384,
+      vote_count: 2,
+      width: 1450
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/bk7SJsNtVP97faavetnurgXdrOF.jpg',
+      height: 1500,
+      iso_639_1: 'en',
+      vote_average: 5.384,
+      vote_count: 2,
+      width: 1000
+    },
+    {
+      aspect_ratio: 0.7012622720897616,
+      file_path: '/p7DZWrEqTik2LGzMuvoigQGGTW0.jpg',
+      height: 1426,
+      iso_639_1: 'he',
+      vote_average: 5.384,
+      vote_count: 2,
+      width: 1000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg',
+      height: 3000,
+      iso_639_1: 'en',
+      vote_average: 5.374,
+      vote_count: 39,
+      width: 2000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/bw6DlqljVFIinhBA7uDSNha6Lnp.jpg',
+      height: 3000,
+      iso_639_1: 'en',
+      vote_average: 5.322,
+      vote_count: 5,
+      width: 2000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/3hDtRuwTfQQYRst3kjhvp4Cogjw.jpg',
+      height: 2175,
+      iso_639_1: 'es',
+      vote_average: 5.318,
+      vote_count: 3,
+      width: 1450
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/t4IinrhH2BN7clHpEVBbHEjSB7U.jpg',
+      height: 1500,
+      iso_639_1: 'en',
+      vote_average: 5.312,
+      vote_count: 1,
+      width: 1000
+    }
+  ]
+}
+
+const mockSeasonsCall = [
+  {
+    number: 0,
+    ids: {
+      trakt: 3962,
+      tvdb: 137481,
+      tmdb: 3627,
+      tvrage: {}
+    }
+  },
+  {
+    number: 1,
+    ids: {
+      trakt: 3963,
+      tvdb: 364731,
+      tmdb: 3624,
+      tvrage: {}
+    }
+  },
+  {
+    number: 2,
+    ids: {
+      trakt: 3964,
+      tvdb: 473271,
+      tmdb: 3625,
+      tvrage: {}
+    }
+  },
+  {
+    number: 3,
+    ids: {
+      trakt: 3965,
+      tvdb: 488434,
+      tmdb: 3626,
+      tvrage: {}
+    }
+  },
+  {
+    number: 4,
+    ids: {
+      trakt: 3966,
+      tvdb: 568657,
+      tmdb: 3628,
+      tvrage: {}
+    }
+  },
+  {
+    number: 5,
+    ids: {
+      trakt: 3967,
+      tvdb: 607490,
+      tmdb: 62090,
+      tvrage: {}
+    }
+  },
+  {
+    number: 6,
+    ids: {
+      trakt: 114727,
+      tvdb: 651357,
+      tmdb: 71881,
+      tvrage: {}
+    }
+  },
+  {
+    number: 7,
+    ids: {
+      trakt: 140912,
+      tvdb: 703353,
+      tmdb: 81266,
+      tvrage: {}
+    }
+  },
+  {
+    number: 8,
+    ids: {
+      trakt: 184210,
+      tvdb: 793782,
+      tmdb: 107971,
+      tvrage: {}
+    }
+  }
+]
+
+const mockExpectedShow = {
+  ...mockTraktShow,
+  seasons: 8,
+  'poster-url': `https://image.tmdb.org/t/p/w500${mockPosterCall.posters[0].file_path}`,
+  type: 'show'
+}
+
+const mockTraktMovie = {
+  title: 'Confessions of Felix Krull',
+  year: 1957,
+  ids: {
+    trakt: 1390,
+    slug: 'confessions-of-felix-krull-1957',
+    imdb: 'tt0050179',
+    tmdb: 2030
+  },
+  tagline: '',
+  overview:
+    "Thomas Mann's witty and intimate story of a irresistible scoundrel.",
+  released: '1958-03-04',
+  runtime: 108,
+  country: 'de',
+  trailer: null,
+  homepage: null,
+  status: 'released',
+  rating: 7.83715,
+  votes: 393,
+  comment_count: 0,
+  updated_at: '2020-10-02T08:09:41.000Z',
+  language: 'de',
+  available_translations: ['de', 'en', 'hu'],
+  genres: ['comedy', 'drama'],
+  certification: null
+}
+
+const mockPosterCallMovie = {
+  id: 2030,
+  backdrops: [],
+  posters: [
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/zWE40Yuu3IhTLF8dtKl5yhXSPNP.jpg',
+      height: 1500,
+      iso_639_1: 'it',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 1000
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/woWQpgWNIqKEUUpTLR1RV6teQNl.jpg',
+      height: 750,
+      iso_639_1: 'de',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 500
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/x0eLXhJquBJntzVZzSDN8AkgzS2.jpg',
+      height: 900,
+      iso_639_1: 'fr',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 600
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/1GbqecYArhnKMKeQU9ioI3NFIym.jpg',
+      height: 900,
+      iso_639_1: 'it',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 600
+    },
+    {
+      aspect_ratio: 0.6666666666666666,
+      file_path: '/cqCDFLMuPPgdtcm3YAPxfxajkBM.jpg',
+      height: 900,
+      iso_639_1: 'de',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 600
+    },
+    {
+      aspect_ratio: 0.7060702875399361,
+      file_path: '/x35vXEx58CRFhoJ5ggCwd7XLBL1.jpg',
+      height: 2191,
+      iso_639_1: 'hu',
+      vote_average: 0.0,
+      vote_count: 0,
+      width: 1547
+    }
+  ]
+}
+
+const mockExpectedMovie = {
+  ...mockTraktMovie,
+  type: 'movie',
+  'poster-url':
+    'https://image.tmdb.org/t/p/w500/zWE40Yuu3IhTLF8dtKl5yhXSPNP.jpg'
+}
+
 module.exports = {
   createMockUser: createMockUser,
   mockShowAPI: mockShowAPI,
   mockAllShows: mockAllShows,
   mockUserAPI: mockUserAPI,
-  mockGOT: mockGOT,
-  mockSeasons: mockSeasons,
-  mockFileInfo: mockFileInfo,
   mockUserUpdate: mockUserUpdate,
   mockPopularShows: mockPopularShows,
   mockSingleShow: mockSingleShow,
-  mockErrorMessage: mockErrorMessage
+  mockErrorMessage: mockErrorMessage,
+  mockTraktShow: mockTraktShow,
+  mockPosterCall: mockPosterCall,
+  mockSeasonsCall: mockSeasonsCall,
+  mockExpectedShow: mockExpectedShow,
+  mockTraktMovie: mockTraktMovie,
+  mockPosterCallMovie: mockPosterCallMovie,
+  mockExpectedMovie: mockExpectedMovie
 }

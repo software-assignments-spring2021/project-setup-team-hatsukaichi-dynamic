@@ -3,7 +3,6 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import './IndividualShow.css'
 import axios from 'axios'
-import { mockShowImage } from '../utils/MockData'
 import { Link } from 'react-router-dom'
 import { platforms, statuses, textToValue } from '../utils/Helpers'
 import Select from 'react-select'
@@ -67,16 +66,42 @@ const ProgressData = ({
   )
 }
 
-const Description = ({ genres, description, totalEpisodes, isMovie }) => {
+const Description = ({
+  genres,
+  description,
+  totalEpisodes,
+  isAiring,
+  isMovie
+}) => {
+  const cleanGenres = (genres) => {
+    return genres.reduce((prev, curr, idx) => {
+      let cleaned = curr.replaceAll('-', ' ')
+      const words = cleaned.split(' ')
+      // This reduce capitalizes all words in a genre
+      cleaned = words.reduce((prev, curr, idx) => {
+        const capitalized = curr.charAt(0).toUpperCase() + curr.slice(1)
+        if (idx === words.length - 1) {
+          return prev + capitalized
+        } else {
+          return prev + capitalized + ' '
+        }
+      }, '')
+      if (idx === genres.length - 1) {
+        return prev + cleaned
+      } else {
+        return prev + cleaned + ', '
+      }
+    }, '')
+  }
   return (
     <div className="description">
       <span>Genres</span>
-      <p className="descript">{genres ? genres.replaceAll('|', ', ') : null}</p>
+      <p className="descript">{genres ? cleanGenres(genres) : null}</p>
       <span>Description</span>
       <p className="descript">{description}</p>
       {!isMovie ? (
         <>
-          <span>Total Episodes</span>
+          <span>Total Episodes{isAiring ? ' Aired So Far' : null}</span>
           <p className="descript">{totalEpisodes}</p>
         </>
       ) : (
@@ -86,12 +111,13 @@ const Description = ({ genres, description, totalEpisodes, isMovie }) => {
   )
 }
 
-const IndividualShow = ({ id }) => {
+const IndividualShow = ({ id, type }) => {
   const [show, setShow] = useState({})
   const notLoggedShow = {
-    id: id,
-    seasons: 0,
-    episodes: 0
+    isMovie: type === 'movie',
+    traktId: parseInt(id),
+    season: 0,
+    episode: 0
   }
   const [showProgress, setShowProgress] = useState(notLoggedShow)
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
@@ -100,7 +126,9 @@ const IndividualShow = ({ id }) => {
     // Fetch user-related show information for the logged in user
     if (loggedInUser) {
       const userShowInfo = loggedInUser.shows.filter((show) => {
-        return show.id === parseInt(id)
+        return (
+          show.traktId === parseInt(id) && show.isMovie === (type === 'movie')
+        )
       })
       if (userShowInfo.length !== 0) {
         setShowProgress(userShowInfo[0])
@@ -108,7 +136,7 @@ const IndividualShow = ({ id }) => {
     }
     // Fetch show meta-information from the API
     axios
-      .get(`http://localhost:4000/shows/${id}`)
+      .get(`http://localhost:4000/${type}s/${id}`)
       .then((response) => {
         setShow(response.data)
       })
@@ -116,18 +144,18 @@ const IndividualShow = ({ id }) => {
         console.log('Error: could not make the request.')
         console.log(err)
       })
-  }, [id, loggedInUser])
+  }, [id, type, loggedInUser])
 
   // TODO: do a check for NaN here
   const updateSeasons = (seasons) => {
     const updatedShow = showProgress
-    updatedShow.seasons = seasons
+    updatedShow.season = seasons
     setShowProgress(updatedShow)
   }
 
   const updateEpisodes = (episodes) => {
     const updatedShow = showProgress
-    updatedShow.episodes = episodes
+    updatedShow.episode = episodes
     setShowProgress(updatedShow)
   }
 
@@ -135,12 +163,14 @@ const IndividualShow = ({ id }) => {
     e.preventDefault()
     // only go through with the PATCH request if there is a user logged in
     // and if the show is already in their list
-    // TODO: Eventually move this into its own handleSubmit function to be done later
     if (loggedInUser) {
       let updated = false
       const updatedShows = loggedInUser.shows.map((show) => {
         // parseInt is needed because id is stored as a String while show.id is a Number
-        if (show.id === parseInt(id)) {
+        if (
+          show.traktId === parseInt(id) &&
+          show.isMovie === (type === 'movie')
+        ) {
           updated = true
           return showProgress
         }
@@ -175,7 +205,7 @@ const IndividualShow = ({ id }) => {
     if (type === 'platform') {
       updatedShow.platform = newValue.value
     } else if (type === 'status') {
-      updatedShow.completed = newValue.value === 'Watched'
+      updatedShow.list = newValue.value
     }
     setShowProgress(updatedShow)
   }
@@ -188,20 +218,21 @@ const IndividualShow = ({ id }) => {
           <fieldset className="main">
             <div className="show-details">
               <form id="show-form" onSubmit={handleSubmit}>
-                <h3 id="title">{show.name}</h3>
+                <h3 id="title">{show.title}</h3>
                 <Link to="/my-shows/1">
+                  {/*TODO: Change this to link to logged in user's my-shows*/}
                   <button className="btn-progress">Return to My Shows</button>
                 </Link>
                 <Select
                   className="status-select"
-                  defaultValue={textToValue(showProgress.completed, 'status')}
+                  defaultValue={textToValue(showProgress.list, 'status')}
                   options={statuses}
                   onChange={(value) => handleDropdownChange(value, 'status')}
                 />
-                {show.isMovie ? null : (
+                {show.type === 'movie' ? null : (
                   <ProgressData
-                    initialSeason={showProgress.seasons}
-                    initialEpisode={showProgress.episodes}
+                    initialSeason={showProgress.season}
+                    initialEpisode={showProgress.episode}
                     updateSeasons={updateSeasons}
                     updateEpisodes={updateEpisodes}
                   />
@@ -215,9 +246,10 @@ const IndividualShow = ({ id }) => {
                 <div className="show-content">
                   <Description
                     genres={show.genres}
-                    description={show.description}
-                    totalEpisodes={show.episodes}
-                    isMovie={show.isMovie}
+                    description={show.overview}
+                    totalEpisodes={show['aired_episodes']}
+                    isAiring={show.status !== 'ended'}
+                    isMovie={show.type === 'movie'}
                   />
                 </div>
                 <input
@@ -229,9 +261,9 @@ const IndividualShow = ({ id }) => {
               </form>
             </div>
             <div id="cover">
-              <p className="label-custom">{show.name}</p>
+              <p className="label-custom">{show.title}</p>
               <br />
-              <img src={mockShowImage(show.id)} alt={`cover-${show.id}`} />
+              <img src={show['poster-url']} alt={`cover-${show.title}`} />
             </div>
             <div id="clear"></div>
           </fieldset>
