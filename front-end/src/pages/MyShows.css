@@ -117,20 +117,18 @@ div.css-yk16xz-control {
 }
 
 .show-images {
-  width: 30%;
+  width: 13%;
   z-index: 0;
   position: relative;
 }
 .platform-image {
   z-index: 1;
   position: absolute;
-  width: 30px !important; 
-  height: 30px !important; 
+  width: 30px !important;
+  height: 30px !important;
   margin-left: -38px;
   margin-top: 173px;
-  
 }
-
 
 h3 {
   margin-top: 5%;
