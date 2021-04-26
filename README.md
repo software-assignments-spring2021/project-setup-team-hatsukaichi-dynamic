@@ -140,3 +140,13 @@ Replace ``username`` and ``password`` with the username and password you chose i
 > MONGODB_USERNAME=testUser
 
 > MONGODB_PASSWORD=testPass
+
+#### JWT Token Setup
+
+To use Json Web Token to generate unique tokens for secure access, please follow the step below: 
+- Navigate to back-end. In your .env file, add the following line:
+>TOKEN_SECRET=yourSecretCode
+
+Replace ``yourSecretCode`` with the secret code you chose; secret code can be any word (alphanumeric characters). For example, if your secret code is TvTracker, the line would read: 
+
+>TOKEN_SECRET=TvTracker
