@@ -232,7 +232,11 @@ app.patch(
         return res.status(400).json('Error! Username already in use.')
       }
     }
-    const patchUser = {}
+    const patchUserId = req.params.id
+    const patchUser = await User.findOne({ patchUserId })
+    if (!patchUser) {
+      return res.status(400).json('Error! No user with that ID exists.')
+    }
     Object.keys(req.body).map((key) => {
       patchUser[key] = req.body[key]
     })
