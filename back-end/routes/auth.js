@@ -4,7 +4,7 @@ const User = require('../models/User')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const localStrategy = require('passport-local').Strategy
-//require('dotenv').config({ silent: true })
+require('dotenv').config({ silent: true })
 
 const bcryptjs = require('bcryptjs') //encrypt password
 const { body, validationResult } = require('express-validator')
@@ -105,8 +105,7 @@ const ExtractJWT = require('passport-jwt').ExtractJwt
 passport.use(
   new JWTstrategy(
     {
-      //secretOrKey: process.env.TOKEN_SECRET,
-      secretOrKey: 'TOKEN_SECRET',
+      secretOrKey: process.env.TOKEN_SECRET,
       jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
     },
     async (token, done) => {
@@ -209,8 +208,7 @@ app.post('/login', async (req, res, next) => {
             message: error.message
           })
         const body = { _id: user._id, email: user.email }
-        //const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET);
-        const token = jwt.sign({ user: body }, 'TOKEN_SECRET')
+        const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET)
         return res.json({ user, token })
       })
     } catch (error) {
