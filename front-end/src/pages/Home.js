@@ -14,18 +14,14 @@ function Home() {
           className="full-img"
         />
         <p className="full-text">
-          <br></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-          do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque
-          gravida in fermentum et. Amet consectetur adipiscing elit pellentesque
-          habitant. Duis at consectetur lorem donec massa sapien faucibus. Mi
-          tempus imperdiet nulla malesuada pellentesque elit eget gravida.
-          Tincidunt tortor aliquam nulla facilisi. Sed elementum tempus egestas
-          sed sed risus pretium quam. At in tellus integer feugiat scelerisque.
-          Nibh cras pulvinar mattis nunc sed blandit libero volutpat sed.
-          Porttitor rhoncus dolor purus non enim. Aliquet eget sit amet tellus.
-          Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa. Felis
-          eget velit aliquet sagittis id consectetur purus ut. Venenatis tellus
-          in metus vulputate eu.<br></br>
+          <br></br>In today's world, there are more streaming services and 
+          platforms than we can count. Many people bite off more than they 
+          can chew and try to watch multiple shows spread accross multiple 
+          platforms and genres. It can be pretty tricky to keep mental track 
+          of your progress on each show individually, that's where we come in. 
+          TV Tracker is an online hub to keep note of the shows you watch or 
+          have watched, your progress within those shows, the streaming platforms 
+          that carry the shows, and much more.<br></br>
         </p>
         <br />
         <img
