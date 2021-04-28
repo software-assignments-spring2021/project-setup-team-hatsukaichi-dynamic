@@ -83,7 +83,11 @@ const App = () => {
               <ViewUsers />
             </Route>
             <Route path="/">
-              <Home />
+              {loggedInUser !== null ? (
+                <Profile id={loggedInUser.id} />
+              ) : (
+                <Home />
+              )}
             </Route>
           </Switch>
         </Router>
