@@ -176,8 +176,22 @@ app.get('/shows', (req, res, next) => {
 
 app.patch(
   '/tv_users/:id',
-  body('email').optional().isEmail().normalizeEmail(),
-  body('username').optional().isAlphanumeric().not().isEmpty().trim().escape(),
+  body('email')
+    .optional()
+    .isEmail()
+    .normalizeEmail()
+    .withMessage('Please enter valid email.'),
+  body('username')
+    .optional()
+    .isAlphanumeric()
+    .not()
+    .isEmpty()
+    .trim()
+    .escape()
+    .isLength({ min: 2 })
+    .withMessage(
+      'Username can contain only letters and digits. Length should be at least 2 characters.'
+    ),
   body('password')
     .optional()
     .isStrongPassword({
@@ -188,6 +202,9 @@ app.patch(
       minSymbols: 0,
       returnScore: false
     })
+    .withMessage(
+      'Password can contain only letters and digits. It must contain at least 1 lowercase, 1 uppercase and 1 numeric character. Length should be at least 8 characters.'
+    )
     .not()
     .contains(' ')
     .not()
@@ -196,10 +213,24 @@ app.patch(
     .escape(),
   body('shows.*.episode').optional().isInt(),
   body('shows.*.season').optional().isInt(),
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
+    }
+    if (req.body.email) {
+      const tempEmail = req.body.email
+      const emailExist = await User.findOne({ tempEmail })
+      if (emailExist) {
+        return res.status(400).json('Error! Email already in use.')
+      }
+    }
+    if (req.body.username) {
+      const tempUsername = req.body.username
+      const usernameExist = await User.findOne({ tempUsername })
+      if (usernameExist) {
+        return res.status(400).json('Error! Username already in use.')
+      }
     }
     const patchUser = {}
     Object.keys(req.body).map((key) => {

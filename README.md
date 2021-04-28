@@ -83,10 +83,6 @@ In back-end, create a file named '.env' with the following contents:
 
 Replace ``your_API_key`` with your Mockaroo API key. Save the file and close it.
 
-Then, in back-end, run:
-
-> bash backEnd.sh
-
 #### Trakt API Setup
 
 To use Trakt API, you need to register for an account and create a Trakt App. 
@@ -150,3 +146,7 @@ To use Json Web Token to generate unique tokens for secure access, please follow
 Replace ``yourSecretCode`` with the secret code you chose; secret code can be any word (alphanumeric characters). For example, if your secret code is TvTracker, the line would read: 
 
 >TOKEN_SECRET=TvTracker
+
+Then, in back-end, run:
+
+> bash backEnd.sh
