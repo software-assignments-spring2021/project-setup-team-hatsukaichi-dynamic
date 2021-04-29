@@ -34,6 +34,7 @@ div.css-yk16xz-control {
 #show-container img {
   width: 75%;
   padding: 0.5em;
+
 }
 
 #search-container {
@@ -118,16 +119,16 @@ div.css-yk16xz-control {
 
 .show-images {
   width: 13%;
-  z-index: 0;
   position: relative;
+  z-index: 0;
 }
-.platform-image {
+#show-container .platform-image{
   z-index: 1;
-  position: absolute;
+  position: relative;
   width: 30px !important;
   height: 30px !important;
-  margin-left: -38px;
-  margin-top: 173px;
+  object-position: right bottom;
+  right: 6%;
 }
 
 h3 {
@@ -160,6 +161,9 @@ h3 {
     width: 75%;
     padding: 0.1em;
   }
+  #show-container .platform-image {
+    right: 6.2%;
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -180,6 +184,9 @@ h3 {
   #show-container img {
     width: 66%;
     padding: 0.2em;
+  }
+  #show-container .platform-image {
+    right: 6.7%;
   }
 }
 
@@ -202,6 +209,9 @@ h3 {
     width: 55%;
     padding: 0.1em;
   }
+  #show-container .platform-image {
+    right: 6.6%;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -214,5 +224,8 @@ h3 {
   .selected,
   .selected:hover {
     font-size: 10.5px;
+  }
+  #show-container .platform-image {
+    right: 7.6%;
   }
 }
