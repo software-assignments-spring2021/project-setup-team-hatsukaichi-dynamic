@@ -7,6 +7,13 @@
   width: 90%;
 }
 
+.gif-img{
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .header-text{
   font-size: 28px;
   text-align: center;
@@ -19,6 +26,14 @@
 
 .home {
   margin-top: 12em;
+  text-align: center;
+}
+
+.block{
+  border:1px solid black;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (max-width: 2400px) {
