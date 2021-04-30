@@ -62,6 +62,12 @@ function MeetTheTeam() {
           <p>Favorite color: Pink. Interests: Youtube, Piano, Travel. </p>
           <p>Favorite Movie: Butterfly Effect</p>
         </div>
+        <div className="content">
+          <img className="github-img" src={image} alt="TV Tracker Logo"></img>
+          <h4>Special thanks to: </h4>
+          <h4>Sharkie</h4>
+          <p>Friend of the project, maker of the logo</p>
+        </div>
         <Footer />
       </body>
     </>
