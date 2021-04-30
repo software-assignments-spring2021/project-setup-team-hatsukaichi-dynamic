@@ -56,7 +56,7 @@ passport.use(
           password: password,
           bio: '',
           img: '',
-          shows:  []
+          shows: []
         })
         //Save user object to the database
         await user.save()

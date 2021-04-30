@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   bio: { type: String, required: false },
   img: { type: String, required: false },
   shows: { type: Array, default: [] }
-})   
+})
 
 UserSchema.plugin(autoIncrement, { inc_field: 'id' })
 

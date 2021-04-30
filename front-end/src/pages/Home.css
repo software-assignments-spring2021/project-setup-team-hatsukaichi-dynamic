@@ -7,14 +7,14 @@
   width: 90%;
 }
 
-.gif-img{
+.gif-img {
   width: 70%;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.header-text{
+.header-text {
   font-size: 28px;
   text-align: center;
 }
@@ -29,8 +29,8 @@
   text-align: center;
 }
 
-.block{
-  border:1px solid black;
+.block {
+  border: 1px solid black;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -40,7 +40,7 @@
   .full-text {
     font-size: 16px;
   }
-  .header-text{
+  .header-text {
     font-size: 28px;
   }
 }
@@ -49,7 +49,7 @@
   .full-text {
     font-size: 14px;
   }
-  .header-text{
+  .header-text {
     font-size: 24px;
   }
 }
@@ -61,7 +61,7 @@
   .full-img {
     width: 95%;
   }
-  .header-text{
+  .header-text {
     font-size: 20px;
   }
 }
