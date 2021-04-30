@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import video from '../videos/instructions.webm'
 import './Home.css'
 
 function Home() {
@@ -8,11 +9,9 @@ function Home() {
     <>
       <Header />
       <div className="home">
-        <img
-          src="https://picsum.photos/1150/300"
-          alt="Temporary cover from lorem picsum"
-          className="full-img"
-        />
+        <h2 className="header-text">Welcome to TV Tracker app! </h2>
+        <video controls autoplay className="full-img" src={video}>
+        </video>
         <p className="full-text">
           <br></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
           do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque

@@ -7,6 +7,11 @@
   width: 90%;
 }
 
+.header-text{
+  font-size: 28px;
+  text-align: center;
+}
+
 .header {
   margin-top: 2.5em;
   padding: 0;
@@ -20,11 +25,17 @@
   .full-text {
     font-size: 16px;
   }
+  .header-text{
+    font-size: 28px;
+  }
 }
 
 @media screen and (max-width: 992px) {
   .full-text {
     font-size: 14px;
+  }
+  .header-text{
+    font-size: 24px;
   }
 }
 
@@ -34,5 +45,8 @@
   }
   .full-img {
     width: 95%;
+  }
+  .header-text{
+    font-size: 20px;
   }
 }
