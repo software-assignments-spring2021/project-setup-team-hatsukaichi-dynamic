@@ -11,8 +11,8 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true, min: 8, max: 1024 },
   bio: { type: String, required: false },
   img: { type: String, required: false },
-  shows: { type: Array, default: [] }
-})
+  shows: { type: Array }
+})   
 
 UserSchema.plugin(autoIncrement, { inc_field: 'id' })
 

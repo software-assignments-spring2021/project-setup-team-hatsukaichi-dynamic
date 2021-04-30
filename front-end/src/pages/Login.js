@@ -18,7 +18,7 @@ function Login() {
     e.preventDefault()
     // Actual login handling will go here; for now, we'll simply get a user
     // from our Mockaroo API. User id is hardcoded for now.
-    axios(`http://localhost:4000/tv_users/7`)
+    axios(`http://localhost:4000/tv_users/17`)
       .then((response) => {
         setLoggedInUser(response.data)
         setIsLoggedIn(true)

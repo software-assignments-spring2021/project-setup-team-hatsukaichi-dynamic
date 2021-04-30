@@ -180,8 +180,9 @@
   }
 
   .show-image {
-    width: 75%;
+    width: 55%;
     padding: 0.1em;
+    margin-bottom: 2em;
   }
 
   #profile-picture {
@@ -214,8 +215,9 @@
   }
 
   .show-image {
-    width: 66%;
+    width: 46%;
     padding: 0.2em;
+    margin-bottom: 2em;
   }
 
   #profile-picture {
@@ -250,8 +252,9 @@
   }
 
   .show-image {
-    width: 55%;
+    width: 36%;
     padding: 0.1em;
+    margin-bottom: 2em;
   }
 
   #profile-picture {

@@ -35,7 +35,7 @@ function Signup() {
       })
       .catch((err) => {
         console.log('Error: could not make the request.')
-        history.push('/profile/1')
+        history.push('/profile/17')
       })
   }
 

@@ -56,7 +56,54 @@ passport.use(
           password: password,
           bio: '',
           img: '',
-          shows: []
+          shows:  [
+  {
+  isMovie: false,
+  traktId:1390,
+  season:  1,
+  episode: 1,
+  list: "In Progress",
+  platform: "HBO"
+},{
+  isMovie: true,
+traktId:1390,
+season:  0,
+episode: 0,
+list: "Completed",
+platform: "Hulu"
+},
+{
+    isMovie: false,
+traktId:104439,
+season:  3,
+episode: 2,
+list: "In Progress",
+  platform: "Disney Plus",
+},
+{
+      isMovie: false,
+traktId:1095,
+season:  1,
+episode: 3,
+list: "In Progress",
+  platform: "Netlix"
+},
+{
+        isMovie: true,
+traktId:1399,
+season:  0,
+episode: 0,
+list: "Completed",
+  platform: "Crunchyroll"
+},
+{
+          isMovie: true,
+traktId:1388,
+season:  1,
+episode: 2,
+list: "In Progress",
+  platform: "Other"
+}]
         })
         //Save user object to the database
         await user.save()
