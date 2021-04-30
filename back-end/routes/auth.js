@@ -13,11 +13,11 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id)
+  done(null, user)
 })
 
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
+passport.deserializeUser(function (_id, done) {
+  User.findById(_id, function (err, user) {
     done(err, user)
   })
 })
@@ -50,7 +50,7 @@ passport.use(
 
         //Construct a user object
         const user = new User({
-          id: req.body.id,
+          //id: req.body.id,
           username: req.body.username,
           email: email,
           password: password,

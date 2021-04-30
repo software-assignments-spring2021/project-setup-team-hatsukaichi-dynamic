@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 const bcryptjs = require('bcryptjs')
 const uniqueValidator = require('mongoose-unique-validator')
 const saltRounds = 10
-const autoIncrement = require('mongoose-sequence')(mongoose)
+//const autoIncrement = require('mongoose-sequence')(mongoose)
 
 const UserSchema = new mongoose.Schema({
-  id: { type: Number },
+  //id: { type: Number },
   username: { type: String, required: true, unique: true, min: 2 },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, min: 8, max: 1024 },
@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
   shows: { type: Array, default: [] }
 })
 
-UserSchema.plugin(autoIncrement, { inc_field: 'id' })
+//UserSchema.plugin(autoIncrement, { inc_field: 'id' })
 
 UserSchema.plugin(uniqueValidator)
 
