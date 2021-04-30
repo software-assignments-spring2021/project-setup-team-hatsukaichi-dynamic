@@ -161,6 +161,7 @@
 #profile-show-container {
   display: flex;
   flex-wrap: wrap;
+   justify-content: space-around;
 }
 
 @media screen and (max-width: 2400px) {

@@ -25,6 +25,8 @@ div.css-yk16xz-control {
 #my-shows-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+
 }
 
 .modal-contents {
