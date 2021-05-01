@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { platforms, statuses, textToValue } from '../utils/Helpers'
 import Select from 'react-select'
 import { AuthContext } from '../App'
+import { customStyles } from '../utils/DropdownStyles'
 require('dotenv').config()
 
 const ProgressData = ({
@@ -228,6 +229,7 @@ const IndividualShow = ({ id, type }) => {
                   defaultValue={textToValue(showProgress.list, 'status')}
                   options={statuses}
                   onChange={(value) => handleDropdownChange(value, 'status')}
+                  styles={customStyles}
                 />
                 {show.type === 'movie' ? null : (
                   <ProgressData
@@ -242,6 +244,7 @@ const IndividualShow = ({ id, type }) => {
                   defaultValue={textToValue(showProgress.platform, 'platform')}
                   options={platforms}
                   onChange={(value) => handleDropdownChange(value, 'platform')}
+                  styles={customStyles}
                 />
                 <div className="show-content">
                   <Description
