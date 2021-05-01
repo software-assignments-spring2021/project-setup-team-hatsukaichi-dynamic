@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import intro from '../images/intro.gif'
 import profile from '../images/profile.gif'
 import myShows from '../images/shows.gif'
 import searchShows from '../images/shows-search.gif'
@@ -11,7 +12,7 @@ function Home() {
     <>
       <Header />
       <div className="home">
-        <h2 className="header-text">Welcome to the TV Tracker App page! </h2>
+        <h2 className="header-text">Welcome to the TV Tracker page! </h2>
         <div className="block">
           <p className="full-text">
             <br />
@@ -24,20 +25,20 @@ function Home() {
           <p className="full-text">
             {' '}
             With
-            <b> TV Tracker App, </b> you can solve this problem with minimum
-            time and effort spent and get much more!
-            <br /> With our database of shows powered by{' '}
-            <a href="https://trakt.tv/about">Trakt.tv</a>, you can find and
-            update the shows that you are currently watching or have already
-            completed. You can also save and update the streaming platform,
-            season and episode info for each show.
+            <b> TV Tracker, </b> you can solve this problem with minimum time
+            and effort spent and get much more!
+            <br /> You can find and update the shows that you are currently
+            watching or have already completed. You can also save and update the
+            streaming platform, season and episode info for each show.
             <br />
-            <br /> Moreover, you can share your list of shows with friends and
-            also view what shows and movies are on their list.
+            <br /> Moreover, you can share your shows with friends and see what
+            shows and movies they are watching.
             <br />
-            Our App is free to use, so you only need a working email to register
-            :)
+            Our app is and always will be free! You only need an email address
+            to register :)
           </p>
+          <img src={intro} alt="intro gif" className="gif-img" />
+          <br />
         </div>
         <br /> <br />
         <div className="block">
@@ -102,7 +103,6 @@ function Home() {
           <img src={searchShows} alt="search shows gif" className="gif-img" />
           <br />
         </div>
-        
         <br />
       </div>
       <Footer />
