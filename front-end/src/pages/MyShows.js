@@ -114,13 +114,23 @@ const ShowGrid = (props) => {
                   src={show['poster-url']}
                   alt={`cover-${show.ids.trakt}-${show.type}`}
                 />
-                {props.platform ? (
-                  <img
-                    className="platform-image"
-                    src={setPlatformLogo(props.platform)}
-                    alt={`${props.platform} logo`}
-                  />
-                ) : null}
+              </Link>
+            )
+          })
+        ) : (
+          <p id="no-shows">No shows found...</p>
+        )}
+        {filteredShows !== undefined && filteredShows.length !== 0 ? (
+          filteredShows.map((show) => {
+            return (
+              <Link
+                to={`/${show.type}s/${show.ids.trakt}`}
+                key={show.ids.trakt + '-' + show.type}>
+                <img
+                  className="platform-images"
+                  src={setPlatformLogo(props.platform)}
+                  alt={`cover-${show.ids.trakt}-${show.type}`}
+                />
               </Link>
             )
           })

@@ -125,10 +125,9 @@ div.css-yk16xz-control {
 #show-container .platform-image{
   z-index: 1;
   position: relative;
-  width: 30px !important;
-  height: 30px !important;
+  width: 60px !important;
+  height: 60px !important;
   object-position: right bottom;
-  right: 6%;
 }
 
 h3 {
@@ -162,7 +161,9 @@ h3 {
     padding: 0.1em;
   }
   #show-container .platform-image {
-    right: 6.2%;
+    width: 50px !important;
+    height: 50px !important;
+    right: 9.6%;
   }
 }
 
@@ -186,7 +187,9 @@ h3 {
     padding: 0.2em;
   }
   #show-container .platform-image {
-    right: 6.7%;
+    width: 40px;
+    height: 40px;
+    right: 10%;
   }
 }
 
@@ -210,7 +213,9 @@ h3 {
     padding: 0.1em;
   }
   #show-container .platform-image {
-    right: 6.6%;
+    width: 40px !important;
+    height: 40px !important;
+    right: 8%;
   }
 }
 
@@ -226,6 +231,8 @@ h3 {
     font-size: 10.5px;
   }
   #show-container .platform-image {
-    right: 7.6%;
+    width: 40px !important;
+    height: 40px !important;
+    right: 10%;
   }
 }
