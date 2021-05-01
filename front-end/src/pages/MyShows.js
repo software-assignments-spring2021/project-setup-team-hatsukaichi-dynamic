@@ -122,6 +122,7 @@ const ShowGrid = (props) => {
                     alt={`${props.platform} logo`}
                   />
                 ) : null}
+
               </Link>
             )
           })
@@ -285,6 +286,7 @@ const MyShows = (props) => {
                 options={platforms}
                 onChange={onChange}
                 value={textToValue(selectedPlatform, 'platform')}
+                styles={customStyles}
               />
               <button
                 className="my-shows-button"
