@@ -53,7 +53,7 @@ passport.use(
         })
         if (usernameExist)
           return done(null, false, {
-            message: 'Username already registered'
+            message: 'Username is already registered'
           })
 
         //Construct a user object
@@ -153,7 +153,7 @@ app.post(
       returnScore: false
     })
     .withMessage(
-      'Password can contain only letters and digits. It must contain at least 1 lowercase, 1 uppercase and 1 numeric character. Length should be at least 8 characters.'
+      'Password can contain only letters and digits. Password must contain at least 1 lowercase, 1 uppercase and 1 numeric characters and be at least 8 characters in length.'
     )
     .not()
     .contains(' ')

@@ -10,7 +10,6 @@ function Signup() {
   const [usernameReg, setUsername] = useState('')
   const [emailReg, setEmail] = useState('')
   const [passwordReg, setPassword] = useState('')
-  const [hasError, setHasError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [passwordMismatch, setPasswordMismatch] = useState(false)
@@ -22,7 +21,6 @@ function Signup() {
       ? setPasswordMismatch(true)
       : setPasswordMismatch(false)
 
-    // Mockaroo call goes here!
     const newUser = {
       username: usernameReg,
       email: emailReg,
@@ -30,11 +28,7 @@ function Signup() {
     }
 
     axios
-      .post(`http://localhost:4000/register`, {
-        username: usernameReg,
-        email: emailReg,
-        password: passwordReg
-      })
+      .post(`http://localhost:4000/register`, newUser)
       .then((response) => {
         console.log(response)
         history.push(`/profile/${response.data.user.id}`)
@@ -52,7 +46,7 @@ function Signup() {
       <Header />
       <div id="signup-container">
         <form id="signup-form" onSubmit={handleSubmit}>
-          <h2>Sign up for TV Tracker</h2>
+          <h2>Register for TV Tracker</h2>
           <div className="form-fields">
             <label>Username</label>
             <br />
