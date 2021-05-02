@@ -12,7 +12,7 @@ function Home() {
     <>
       <Header />
       <div className="home">
-        <h2 className="header-text">Welcome to the TV Tracker page! </h2>
+        <h2 className="header-text">Welcome to TV Tracker! </h2>
         <div className="block">
           <p className="full-text">
             <br />
