@@ -223,7 +223,7 @@ const ProfileContents = ({ data, updateUserData }) => {
             <br />
             <div className="profile-links">
               <div>
-                <Link to={`/my-shows/${data.user.id}`}>
+                <Link to={`/my-shows/${data.id}`}>
                   <button className="prof-button">My Shows</button>
                 </Link>
               </div>

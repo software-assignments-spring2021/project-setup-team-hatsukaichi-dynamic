@@ -28,15 +28,22 @@ function Signup() {
     }
 
     axios
-      .post(`http://localhost:4000/register`, newUser)
+      .post(`http://localhost:4000/register`, {
+        username: usernameReg,
+        email: emailReg,
+        password: passwordReg
+      })
       .then((response) => {
         console.log(response)
         history.push(`/profile/${response.data.user.id}`)
       })
       .catch((err) => {
-        const errorMessage = err.response.data.errors[0].msg
-        setErrorMessage(errorMessage)
-        console.log(err.response.data.errors[0].msg)
+        console.log(err)
+        if (err.response.data != null) {
+          const errorMessage = err.response.data.errors[0].msg
+          setErrorMessage(errorMessage)
+        }
+        //console.log(err.response.data.errors[0].msg)
         //history.push('/profile/1')
       })
   }
