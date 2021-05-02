@@ -42,7 +42,9 @@ passport.use(
         //Check if email is already registered
         const emailExist = await User.findOne({ email })
         if (emailExist) {
-          return done(null, false, { message: 'Email is already registered' })
+          return done(null, false, {
+            message: 'Email is already registered, log in instead'
+          })
         }
 
         //Check if username is already registered
@@ -51,7 +53,7 @@ passport.use(
         })
         if (usernameExist)
           return done(null, false, {
-            message: 'Username already registered, log in instead'
+            message: 'Username already registered'
           })
 
         //Construct a user object
@@ -163,7 +165,9 @@ app.post(
     //Return any formatting errors
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res
+        .status(400)
+        .json({ type: 'input-error', errors: errors.array() })
     } // Proceed to authentication
     passport.authenticate(
       'register',
@@ -174,10 +178,8 @@ app.post(
           if (err || !user) {
             const { statusCode = 400, message } = info
             return res.status(statusCode).json({
-              status: 'error',
-              error: {
-                message
-              }
+              type: 'db-error',
+              errors: [{ msg: message }]
             })
           } else {
             //Otherwise send success message
@@ -188,7 +190,10 @@ app.post(
           }
         } catch (error) {
           //Handle any other errors
-          throw new Error({ message: error.message })
+          throw new Error({
+            type: 'other',
+            errors: [{ msg: 'Registration error occured' }]
+          })
         }
       }
     )(req, res, next)

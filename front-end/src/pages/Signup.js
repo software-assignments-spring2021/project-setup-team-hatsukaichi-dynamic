@@ -10,10 +10,11 @@ function Signup() {
   const [usernameReg, setUsername] = useState('')
   const [emailReg, setEmail] = useState('')
   const [passwordReg, setPassword] = useState('')
+  const [hasError, setHasError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [passwordMismatch, setPasswordMismatch] = useState(false)
   const history = useHistory()
-
   function handleSubmit(e) {
     e.preventDefault()
 
@@ -39,7 +40,9 @@ function Signup() {
         history.push(`/profile/${response.data.user.id}`)
       })
       .catch((err) => {
-        console.log('Error: could not make the request.')
+        const errorMessage = err.response.data.errors[0].msg
+        setErrorMessage(errorMessage)
+        console.log(err.response.data.errors[0].msg)
         //history.push('/profile/1')
       })
   }
@@ -95,14 +98,11 @@ function Signup() {
               required
             />
             {passwordMismatch ? (
-              <p className="error message">
-                Could not create account--passwords did not match.
+              <p className="error-message">
+                Could not create an account - passwords do not match.
               </p>
             ) : null}
-            <p>
-              Passwords have a minimum length 8 and must contain <br />
-              at least one uppercase and one lowercase letter.
-            </p>
+            <p className="error-msg">{errorMessage}</p>
           </div>
           <button id="signup-button" type="submit">
             Sign Up
