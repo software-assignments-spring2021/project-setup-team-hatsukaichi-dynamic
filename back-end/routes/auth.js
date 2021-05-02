@@ -2,15 +2,21 @@ const express = require('express')
 const app = require('express').Router()
 const User = require('../models/User')
 const passport = require('passport')
+const session = require('express-session')
 const jwt = require('jsonwebtoken')
 const localStrategy = require('passport-local').Strategy
+const cors = require('cors')
+
 require('dotenv').config({ silent: true })
 
 const bcryptjs = require('bcryptjs') //encrypt password
 const { body, validationResult } = require('express-validator')
 app.use(express.urlencoded({ extended: true }))
+app.use(session({ secret: 'anything' }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cors())
+app.options('*', cors())
 
 passport.serializeUser(function (user, done) {
   done(null, user.id)
@@ -177,7 +183,7 @@ app.post(
             //Otherwise send success message
             res.json({
               message: 'Registration successful',
-              user: req.user
+              user: user
             })
           }
         } catch (error) {

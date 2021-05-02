@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 const Hamburger = (props) => {
   return (
     <Menu {...props}>
-      <Link to="/profile/1" id="Profile" className="menu-item">
+      <Link to="/profile/:id" id="Profile" className="menu-item">
         Profile
       </Link>
-      <Link to="/my-shows/1" id="My Shows" className="menu-item">
+      <Link to="/my-shows/:id" id="My Shows" className="menu-item">
         My Shows
       </Link>
       <Link to="/meet-the-team" id="Meet-the-team" className="menu-item">
-      Meet the Team
+        Meet the Team
       </Link>
       <Link to="/terms-of-service" className="menu-item">
         Terms of Service

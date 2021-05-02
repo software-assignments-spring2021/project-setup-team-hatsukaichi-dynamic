@@ -7,9 +7,9 @@ import axios from 'axios'
 require('dotenv').config()
 
 function Signup() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [usernameReg, setUsername] = useState('')
+  const [emailReg, setEmail] = useState('')
+  const [passwordReg, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [passwordMismatch, setPasswordMismatch] = useState(false)
   const history = useHistory()
@@ -17,25 +17,30 @@ function Signup() {
   function handleSubmit(e) {
     e.preventDefault()
 
-    password !== passwordConfirm
+    passwordReg !== passwordConfirm
       ? setPasswordMismatch(true)
       : setPasswordMismatch(false)
 
     // Mockaroo call goes here!
     const newUser = {
-      username: username,
-      email: email,
-      password: password
+      username: usernameReg,
+      email: emailReg,
+      password: passwordReg
     }
 
     axios
-      .post(`http://localhost:4000/tv_users/`, newUser)
+      .post(`http://localhost:4000/register`, {
+        username: usernameReg,
+        email: emailReg,
+        password: passwordReg
+      })
       .then((response) => {
-        history.push(`/profile/${response.data.id}`)
+        console.log(response)
+        history.push(`/profile/${response.data.user.id}`)
       })
       .catch((err) => {
         console.log('Error: could not make the request.')
-        history.push('/profile/1')
+        //history.push('/profile/1')
       })
   }
 
@@ -51,7 +56,7 @@ function Signup() {
             <input
               type="text"
               name="username"
-              value={username}
+              value={usernameReg}
               onChange={(e) => {
                 setUsername(e.target.value)
               }}
@@ -63,7 +68,7 @@ function Signup() {
             <input
               type="text"
               name="email"
-              value={email}
+              value={emailReg}
               onChange={(e) => {
                 setEmail(e.target.value)
               }}
@@ -75,7 +80,7 @@ function Signup() {
             <input
               type="password"
               name="password"
-              value={password}
+              value={passwordReg}
               onChange={(e) => setPassword(e.target.value)}
               required
             />

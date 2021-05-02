@@ -8,9 +8,9 @@ import { AuthContext } from '../App'
 import { createMockUser } from '../utils/MockData.js'
 
 function Login() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  //const [username, setUsername] = useState('')
+  const [emailUser, setEmail] = useState('')
+  const [passwordUser, setPassword] = useState('')
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
@@ -18,8 +18,9 @@ function Login() {
     e.preventDefault()
     // Actual login handling will go here; for now, we'll simply get a user
     // from our Mockaroo API. User id is hardcoded for now.
-    axios(`http://localhost:4000/tv_users/7`)
+    axios.post(`http://localhost:4000/login`,{email: emailUser, password: passwordUser})
       .then((response) => {
+        console.log(response)
         setLoggedInUser(response.data)
         setIsLoggedIn(true)
       })
@@ -46,23 +47,13 @@ function Login() {
         <form id="login-form" onSubmit={handleSubmit}>
           <h2>Log in to TV Tracker</h2>
           <div className="form-fields">
-            <label>Username</label>
-            <br />
-            <input
-              type="text"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <br />
             <label>Email</label>
             <br />
             <input
               autoFocus={true}
               type="email"
               name="email"
-              value={email}
+              value={emailUser}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -72,7 +63,7 @@ function Login() {
             <input
               type="password"
               name="password"
-              value={password}
+              value={passwordUser}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
