@@ -4,6 +4,7 @@
   background-color: #2d2d2d;
   color: #d1cdc7;
   margin-top: 10%;
+  text-align: center;
 }
 
 div.css-yk16xz-control {
@@ -21,19 +22,16 @@ div.css-yk16xz-control {
   color: black;
 }
 
-#show-container {
+#my-shows-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+
 }
 
 .modal-contents {
   background-color: #2d2d2d;
   color: #d1cdc7;
-}
-
-#show-container img {
-  width: 75%;
-  padding: 0.5em;
 }
 
 #search-container {
@@ -117,7 +115,7 @@ div.css-yk16xz-control {
 }
 
 .show-images {
-  width: 13%;
+  width: 55%;
   z-index: 0;
   position: relative;
 }
@@ -156,9 +154,12 @@ h3 {
   #title {
     font-size: 22px;
   }
-  #show-container img {
-    width: 75%;
-    padding: 0.1em;
+
+
+  .show-images {
+  width: 55%;
+  margin-bottom: 2em;
+
   }
 }
 
@@ -177,10 +178,10 @@ h3 {
   #title {
     font-size: 20px;
   }
-  #show-container img {
-    width: 66%;
-    padding: 0.2em;
-  }
+  .show-images {
+width: 46%;
+margin-bottom: 2em;
+}
 }
 
 @media screen and (max-width: 650px) {
@@ -198,10 +199,11 @@ h3 {
   #title {
     font-size: 15px;
   }
-  #show-container img {
-    width: 55%;
-    padding: 0.1em;
-  }
+    .show-images {
+width: 36%;
+margin-bottom: 2em;
+
+}
 }
 
 @media screen and (max-width: 500px) {
