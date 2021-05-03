@@ -9,7 +9,7 @@ export const customStyles = {
             '&:active': {
                 background: '#3cdd1b'
             },
-        color: state.isFocused ? '#f9f9f8' : '#2d2d2d',  
+        color: state.isFocused ? '#666666' : '#2d2d2d',  
         
     }),
     valueContainer: (provided) => ({ 
