@@ -1,14 +1,24 @@
 import React from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../App'
 
 const Hamburger = (props) => {
+  const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
   return (
     <Menu {...props}>
-      <Link to="/profile/:id" id="Profile" className="menu-item">
+      <Link
+        to={loggedInUser == null ? `/login` : `/profile/${loggedInUser.id}`}
+        id="Profile"
+        className="menu-item">
         Profile
       </Link>
-      <Link to="/my-shows/:id" id="My Shows" className="menu-item">
+      <Link
+        to={
+          loggedInUser == null ? `/my-shows/17` : `/my-shows/${loggedInUser.id}`
+        } //path my-shows/17 will be replaced with a new page
+        id="My Shows"
+        className="menu-item">
         My Shows
       </Link>
       <Link to="/meet-the-team" id="Meet-the-team" className="menu-item">
