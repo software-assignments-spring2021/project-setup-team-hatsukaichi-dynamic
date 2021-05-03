@@ -2,6 +2,7 @@ const express = require('express')
 const app = require('express').Router()
 const User = require('../models/User')
 const passport = require('passport')
+const session = require('express-session')
 const jwt = require('jsonwebtoken')
 const localStrategy = require('passport-local').Strategy
 const cors = require('cors') //required for auth troubleshooting
