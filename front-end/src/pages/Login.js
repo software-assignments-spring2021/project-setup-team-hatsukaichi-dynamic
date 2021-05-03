@@ -37,7 +37,8 @@ function Login() {
       })
   }
 
-  const userAuthenticated = () => {
+  //check if user is authorized (jwt is correct)
+  const userAuthorized = () => {
     axios
       .get(`http://localhost:4000/checkAuth`, {
         headers: {
@@ -48,8 +49,8 @@ function Login() {
         console.log(response)
       })
   }
-  //only authenticated users can access the profile page
-  if (isLoggedIn && userAuthenticated) {
+  //only authorized users can access the profile page
+  if (isLoggedIn && userAuthorized) {
     return <Redirect to={`/profile/${loggedInUser.id}`} />
   }
 

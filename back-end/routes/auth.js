@@ -185,7 +185,7 @@ app.post(
       returnScore: false
     })
     .withMessage(
-      'Password can contain only letters and digits. Password must contain at least 1 lowercase, 1 uppercase and 1 numeric characters and be at least 8 characters in length.'
+      'Password can contain only letters and digits. Password must contain at least 1 lowercase, 1 uppercase and 1 numeric character and be at least 8 characters in length.'
     )
     .not()
     .contains(' ')

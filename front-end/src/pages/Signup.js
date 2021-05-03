@@ -30,7 +30,6 @@ function Signup() {
       .then((response) => {
         console.log(response)
         history.push(`/login`)
-        //setErrorMsgSign('Successful Registration, now log in')
       })
       .catch((err) => {
         console.log(err)
