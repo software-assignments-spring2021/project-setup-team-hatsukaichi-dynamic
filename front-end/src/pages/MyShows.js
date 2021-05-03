@@ -102,7 +102,7 @@ const ShowGrid = (props) => {
       <h3 id="title">
         My Shows {props.platform ? `- ${props.platform} Shows` : null}
       </h3>
-      <div id="show-container">
+      <div id="my-shows-container">
         {filteredShows !== undefined && filteredShows.length !== 0 ? (
           filteredShows.map((show) => {
             return (
