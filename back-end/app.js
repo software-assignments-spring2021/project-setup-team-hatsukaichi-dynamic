@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const axios = require('axios')
 const app = express()
+const cors = require('cors')
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
 const validator = require('validator')
 const passport = require('passport') //authentication middleware
@@ -31,6 +32,8 @@ app.use((req, res, next) => {
   )
   next()
 })
+app.use(cors())
+app.options('*', cors())
 
 //MongoDB setup
 let dbName
