@@ -118,7 +118,6 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await User.findOne({ email })
-
         if (!user) {
           return done(null, false, {
             message: 'Email not found'
@@ -232,7 +231,7 @@ app.post(
   }
 )
 
-app.post('/login', async (req, res, next) => {
+app.post('/login', emailToLowerCase, async (req, res, next) => {
   passport.authenticate('login', async (err, user, info) => {
     try {
       if (err || !user) {
@@ -261,6 +260,11 @@ app.post('/login', async (req, res, next) => {
     }
   })(req, res, next)
 })
+
+function emailToLowerCase(req, res, next) {
+  req.body.email = req.body.email.toLowerCase()
+  next()
+}
 
 app.get('/logout', (req, res) => {
   req.logout()
