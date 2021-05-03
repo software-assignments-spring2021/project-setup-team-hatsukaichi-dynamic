@@ -28,11 +28,9 @@ function Signup() {
         password: passwordReg
       })
       .then((response) => {
-        console.log(response)
         history.push(`/login`)
       })
       .catch((err) => {
-        console.log(err)
         if (err.response.data != null) {
           setErrorMsgSign(err.response.data.errors[0].msg)
         }

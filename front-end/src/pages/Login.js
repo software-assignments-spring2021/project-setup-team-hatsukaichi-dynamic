@@ -31,7 +31,6 @@ function Login() {
         }
       })
       .catch((err) => {
-        console.log(err.response.data.error.message)
         setErrorMsgLogin(err.response.data.error.message)
         setIsLoggedIn(false)
       })
