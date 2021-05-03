@@ -31,8 +31,10 @@ function Login() {
         }
       })
       .catch((err) => {
-        setErrorMsgLogin(err.response.data.error.message)
-        setIsLoggedIn(false)
+        if (err.response.data != null) {
+          setErrorMsgLogin(err.response.data.error.message)
+          setIsLoggedIn(false)
+        }
       })
   }
 

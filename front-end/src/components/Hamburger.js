@@ -7,6 +7,9 @@ const Hamburger = (props) => {
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
   return (
     <Menu {...props}>
+      <Link to="/Home" id="home" className="menu-item">
+        Home
+      </Link>
       <Link
         to={loggedInUser == null ? `/login` : `/profile/${loggedInUser.id}`}
         id="Profile"
