@@ -2,17 +2,13 @@ const express = require('express')
 const app = require('express').Router()
 const User = require('../models/User')
 const passport = require('passport')
-const session = require('express-session')
 const jwt = require('jsonwebtoken')
 const localStrategy = require('passport-local').Strategy
-const cors = require('cors')
-
+const cors = require('cors') //required for auth troubleshooting
 require('dotenv').config({ silent: true })
-
 const bcryptjs = require('bcryptjs') //encrypt password
 const { body, validationResult } = require('express-validator')
 app.use(express.urlencoded({ extended: true }))
-app.use(session({ secret: 'anything' }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(cors())
@@ -176,7 +172,7 @@ app.post(
     .escape()
     .isLength({ min: 2 })
     .withMessage(
-      'Username can contain only letters and digits. Length should be at least 2 characters.'
+      'Username can contain only letters and digits and should be at least 2 characters in length.'
     ),
   body('password')
     .isStrongPassword({

@@ -48,7 +48,7 @@ function Login() {
         console.log(response)
       })
   }
-
+  //only authenticated users can access the profile page
   if (isLoggedIn && userAuthenticated) {
     return <Redirect to={`/profile/${loggedInUser.id}`} />
   }
