@@ -220,8 +220,7 @@ const IndividualShow = ({ id, type }) => {
             <div className="show-details">
               <form id="show-form" onSubmit={handleSubmit}>
                 <h3 id="title">{show.title}</h3>
-                <Link to="/my-shows/17">
-                  {/*TODO: Change this to link to logged in user's my-shows*/}
+                <Link to={`/my-shows/${loggedInUser.id}`}>
                   <button className="btn-progress">Return to My Shows</button>
                 </Link>
                 <Select

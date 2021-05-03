@@ -16,6 +16,10 @@
   padding-bottom: 1em;
 }
 
+.error-message-login {
+  color: red;
+}
+
 #login-form input {
   margin-bottom: 1em;
 }
