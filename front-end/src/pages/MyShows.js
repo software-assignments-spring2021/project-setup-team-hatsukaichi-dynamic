@@ -96,7 +96,7 @@ const ShowGrid = (props) => {
       //platform is 'other' or hasn't been set
       platformLogo = other
     }
-    console.log(platformLogo)
+  
     return platformLogo
   }
 
