@@ -10,7 +10,7 @@ function Signup() {
   const [usernameReg, setUsername] = useState('')
   const [emailReg, setEmail] = useState('')
   const [passwordReg, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMsgSign, setErrorMsgSign] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [passwordMismatch, setPasswordMismatch] = useState(false)
   const history = useHistory()
@@ -21,12 +21,6 @@ function Signup() {
       ? setPasswordMismatch(true)
       : setPasswordMismatch(false)
 
-    const newUser = {
-      username: usernameReg,
-      email: emailReg,
-      password: passwordReg
-    }
-
     axios
       .post(`http://localhost:4000/register`, {
         username: usernameReg,
@@ -35,16 +29,14 @@ function Signup() {
       })
       .then((response) => {
         console.log(response)
-        history.push(`/profile/${response.data.user.id}`)
+        history.push(`/login`)
+        //setErrorMsgSign('Successful Registration, now log in')
       })
       .catch((err) => {
         console.log(err)
         if (err.response.data != null) {
-          const errorMessage = err.response.data.errors[0].msg
-          setErrorMessage(errorMessage)
+          setErrorMsgSign(err.response.data.errors[0].msg)
         }
-        //console.log(err.response.data.errors[0].msg)
-        //history.push('/profile/1')
       })
   }
 
@@ -99,11 +91,11 @@ function Signup() {
               required
             />
             {passwordMismatch ? (
-              <p className="error-message">
+              <p className="error-message-sign">
                 Could not create an account - passwords do not match.
               </p>
             ) : null}
-            <p className="error-msg">{errorMessage}</p>
+            <p className="error-message-sign">{errorMsgSign}</p>
           </div>
           <button id="signup-button" type="submit">
             Sign Up

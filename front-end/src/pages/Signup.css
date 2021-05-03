@@ -10,6 +10,9 @@
   padding-bottom: 1em;
 }
 
+.error-message-sign {
+  color: red;
+}
 #signup-form input {
   margin-bottom: 1em;
 }
@@ -45,6 +48,9 @@
   #question {
     font-size: 20px;
   }
+  .error-message p {
+    font-size: 18px;
+  }
 
   #signup-button {
     font-size: 16px;
@@ -61,6 +67,9 @@
   #question {
     font-size: 20px;
   }
+  .error-message p {
+    font-size: 18px;
+  }
 
   #signup-button {
     font-size: 14px;
@@ -75,6 +84,9 @@
   .form-fields label,
   #question {
     font-size: 16px;
+  }
+  .error-message-sign p {
+    font-size: 14px;
   }
   #signup-button {
     font-size: 13px;

@@ -28,6 +28,38 @@ passport.deserializeUser(function (id, done) {
   })
 })
 
+const verifyJWT = (req, res, next) => {
+  const token = req.headers('x-access-token')
+
+  if (!token) {
+    res.send('Token is needed')
+  } else {
+    jwt.verify(
+      token,
+      process.env.TOKEN_SECRET,
+      (err,
+      (decoded) => {
+        if (err) {
+          res.json({
+            status: 'error',
+            auth: false,
+            error: {
+              message
+            }
+          })
+        } else {
+          req.userId = decoded.id
+          next()
+        }
+      })
+    )
+  }
+}
+
+app.get('/checkAuth', verifyJWT, (req, res) => {
+  res.send('User is authorized')
+})
+
 //Passport middleware to handle user registration
 passport.use(
   'register',
@@ -73,7 +105,7 @@ passport.use(
         return done(null, user, { message: 'Successful sign up' })
         //Return error message
       } catch (error) {
-        return done(null, false, { message: error.message })
+        return done(null, false, { message: 'Registration Error' })
       }
     }
   )
@@ -91,16 +123,18 @@ passport.use(
         const user = await User.findOne({ email })
 
         if (!user) {
-          return done(null, false, { message: 'User not found' })
+          return done(null, false, {
+            message: 'Email not found'
+          })
         }
 
         const validate = await user.validPassword(password)
 
         if (!validate) {
-          return done(null, false, { message: 'Wrong Password' })
+          return done(null, false, { message: 'Incorrect Password' })
         }
 
-        return done(null, user, { message: 'Logged in Successfully' })
+        return done(null, user, { message: 'Logged in successfully' })
       } catch (error) {
         return done(error)
       }
@@ -208,6 +242,7 @@ app.post('/login', async (req, res, next) => {
         const { statusCode = 400, message } = info
         return res.status(statusCode).json({
           status: 'error',
+          auth: false,
           error: {
             message
           }
@@ -217,14 +252,15 @@ app.post('/login', async (req, res, next) => {
         if (error)
           return res.status(400).json({
             status: 'error',
+            auth: false,
             message: error.message
           })
         const body = { _id: user._id, email: user.email }
         const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET)
-        return res.json({ user, token })
+        return res.json({ auth: true, user, token })
       })
     } catch (error) {
-      throw new Error({ message: error.message })
+      throw new Error({ auth: false, message: error.message })
     }
   })(req, res, next)
 })

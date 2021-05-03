@@ -5,38 +5,51 @@ import axios from 'axios'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { AuthContext } from '../App'
-import { createMockUser } from '../utils/MockData.js'
 
 function Login() {
-  //const [username, setUsername] = useState('')
   const [emailUser, setEmail] = useState('')
   const [passwordUser, setPassword] = useState('')
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [errorMsgLogin, setErrorMsgLogin] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Actual login handling will go here; for now, we'll simply get a user
-    // from our Mockaroo API. User id is hardcoded for now.
-    axios.post(`http://localhost:4000/login`,{email: emailUser, password: passwordUser})
+    axios
+      .post(`http://localhost:4000/login`, {
+        email: emailUser,
+        password: passwordUser
+      })
       .then((response) => {
-        console.log(response)
-        setLoggedInUser(response.data)
-        setIsLoggedIn(true)
+        //jwt authorization : only the user with valid jwt will access profile
+        if (!response.data.auth) {
+          setIsLoggedIn(false)
+        } else {
+          setLoggedInUser(response.data.user)
+          localStorage.setItem('token', response.data.user)
+          setIsLoggedIn(true)
+        }
       })
       .catch((err) => {
-        // This case is likely to be due to Mockaroo rate limiting!
-        // It'd be good to add some error handling here later, if someone tries to
-        // access a non-existent user
-        console.log('Error: could not make the request.')
-        console.log(err)
-        const mockUser = createMockUser(1)
-        setLoggedInUser(mockUser)
-        setIsLoggedIn(true)
+        console.log(err.response.data.error.message)
+        setErrorMsgLogin(err.response.data.error.message)
+        setIsLoggedIn(false)
       })
   }
 
-  if (isLoggedIn) {
+  const userAuthenticated = () => {
+    axios
+      .get(`http://localhost:4000/checkAuth`, {
+        headers: {
+          'x-access-token': localStorage.getItem('token')
+        }
+      })
+      .then((response) => {
+        console.log(response)
+      })
+  }
+
+  if (isLoggedIn && userAuthenticated) {
     return <Redirect to={`/profile/${loggedInUser.id}`} />
   }
 
@@ -73,6 +86,8 @@ function Login() {
               Login
             </button>
             <br />
+            <br />
+            <p className="error-message-login">{errorMsgLogin}</p>
             <p>
               Not registered?{' '}
               <Link to="/signup/" className="login-links">
