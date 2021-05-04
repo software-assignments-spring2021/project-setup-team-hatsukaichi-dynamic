@@ -60,11 +60,13 @@ const ShowGrid = (props) => {
           return shows.find((show) => {
             if (show.ids.trakt === showUserInfo.traktId) {
               // Match in type too
-              const matchedShow = show
-              matchedShow.platform = showUserInfo.platform
               if (show.type === 'movie' && showUserInfo.isMovie) {
+                const matchedShow = show
+                matchedShow.platform = showUserInfo.platform
                 return matchedShow
               } else if (show.type === 'show' && !showUserInfo.isMovie) {
+                const matchedShow = show
+                matchedShow.platform = showUserInfo.platform
                 return matchedShow
               } else {
                 return false
