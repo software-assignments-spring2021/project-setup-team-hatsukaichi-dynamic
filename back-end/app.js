@@ -214,6 +214,12 @@ app.patch(
     .escape(),
   body('shows.*.episode').optional().isInt(),
   body('shows.*.season').optional().isInt(),
+  body('img')
+    .optional()
+    .isURL()
+    .not()
+    .isEmpty()
+    .withMessage('Profile picture must be a valid URL!'),
   async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -248,7 +254,6 @@ app.patch(
     if (req.body.password) {
       const salt = await bcryptjs.genSalt(10)
       const hash = await bcryptjs.hash(req.body.password, salt)
-      //not sure how to handle password stuff; requires hashing and passport
       patchUser = await User.updateOne(
         { id: req.params.id },
         { password: hash }
@@ -264,6 +269,13 @@ app.patch(
       patchUser = await User.updateOne(
         { id: req.params.id },
         { shows: req.body.shows }
+      )
+    }
+    if (req.body.img) {
+      patchUser = await User.updateOne(
+        //unsure of how to check that the URL links to an image; may require using mimetype
+        { id: req.params.id },
+        { img: req.body.img }
       )
     }
     patchUser = await User.findOne({ id: req.params.id })
