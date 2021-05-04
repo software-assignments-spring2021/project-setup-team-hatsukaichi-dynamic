@@ -223,16 +223,18 @@ app.patch(
   async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
+      console.log(errors)
       return res.status(400).json({ errors: errors.array() })
     }
-    let patchUser = await User.findOne({ id: req.params.id })
+    const finalUser = await User.findOne({ id: req.params.id })
+    let patchUser = finalUser
     if (!patchUser) {
-      return res.status(400).json('Error! No user with that ID exists.')
+      return res.status(401).json('Error! No user with that ID exists.')
     }
     if (req.body.email) {
       const emailExist = await User.findOne({ email: req.body.email })
-      if (emailExist) {
-        return res.status(400).json('Error! Email already in use.')
+      if (emailExist && !(req.body.email === finalUser.email)) {
+        return res.status(402).json('Error! Email already in use.')
       }
       patchUser = await User.updateOne(
         { id: req.params.id },
@@ -243,8 +245,8 @@ app.patch(
       const usernameExist = await User.findOne({
         username: req.body.username
       })
-      if (usernameExist) {
-        return res.status(400).json('Error! Username already in use.')
+      if (usernameExist && !(req.body.username === finalUser.username)) {
+        return res.status(403).json('Error! Username already in use.')
       }
       patchUser = await User.updateOne(
         { id: req.params.id },
