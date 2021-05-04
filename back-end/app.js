@@ -218,28 +218,46 @@ app.patch(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     }
-    if (req.body.email) {
-      const tempEmail = req.body.email
-      const emailExist = await User.findOne({ tempEmail })
-      if (emailExist) {
-        return res.status(400).json('Error! Email already in use.')
-      }
-    }
-    if (req.body.username) {
-      const tempUsername = req.body.username
-      const usernameExist = await User.findOne({ tempUsername })
-      if (usernameExist) {
-        return res.status(400).json('Error! Username already in use.')
-      }
-    }
     const patchUserId = req.params.id
-    const patchUser = await User.findOne({ patchUserId })
+    const patchUser = await User.findOne({ id: patchUserId }).exec()
     if (!patchUser) {
       return res.status(400).json('Error! No user with that ID exists.')
     }
+    if (req.body.email) {
+      const tempEmail = req.body.email
+      const emailExist = await User.findOne({ email: tempEmail }).exec()
+      if (emailExist) {
+        return res.status(400).json('Error! Email already in use.')
+      }
+      patchUser = await User.updateOne(
+        { id: patchUserId },
+        { email: tempEmail }
+      )
+    }
+    if (req.body.username) {
+      const tempUsername = req.body.username
+      const usernameExist = await User.findOne({
+        username: tempUsername
+      }).exec()
+      if (usernameExist) {
+        return res.status(400).json('Error! Username already in use.')
+      }
+      patchUser = await User.updateOne(
+        { id: patchUserId },
+        { username: tempUsername }
+      )
+    }
+    if (req.body.password) {
+      patchUser = await User.updateOne(
+        { id: patchUserId },
+        { password: tempEmail }
+      )
+    }
+
     Object.keys(req.body).map((key) => {
       patchUser[key] = req.body[key]
     })
+    /*
     axios
       .patch(
         `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}&__method=PATCH`,
@@ -260,6 +278,7 @@ app.patch(
           })
         }
       })
+      */
   }
 )
 
