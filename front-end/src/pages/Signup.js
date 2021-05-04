@@ -7,35 +7,33 @@ import axios from 'axios'
 require('dotenv').config()
 
 function Signup() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [usernameReg, setUsername] = useState('')
+  const [emailReg, setEmail] = useState('')
+  const [passwordReg, setPassword] = useState('')
+  const [errorMsgSign, setErrorMsgSign] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [passwordMismatch, setPasswordMismatch] = useState(false)
   const history = useHistory()
-
   function handleSubmit(e) {
     e.preventDefault()
 
-    password !== passwordConfirm
+    passwordReg !== passwordConfirm
       ? setPasswordMismatch(true)
       : setPasswordMismatch(false)
 
-    // Mockaroo call goes here!
-    const newUser = {
-      username: username,
-      email: email,
-      password: password
-    }
-
     axios
-      .post(`http://localhost:4000/tv_users/`, newUser)
+      .post(`http://localhost:4000/register`, {
+        username: usernameReg,
+        email: emailReg,
+        password: passwordReg
+      })
       .then((response) => {
-        history.push(`/profile/${response.data.id}`)
+        history.push(`/login`)
       })
       .catch((err) => {
-        console.log('Error: could not make the request.')
-        history.push('/profile/17')
+        if (err.response.data != null) {
+          setErrorMsgSign(err.response.data.errors[0].msg)
+        }
       })
   }
 
@@ -44,14 +42,14 @@ function Signup() {
       <Header />
       <div id="signup-container">
         <form id="signup-form" onSubmit={handleSubmit}>
-          <h2>Sign up for TV Tracker</h2>
+          <h2>Register for TV Tracker</h2>
           <div className="form-fields">
             <label>Username</label>
             <br />
             <input
               type="text"
               name="username"
-              value={username}
+              value={usernameReg}
               onChange={(e) => {
                 setUsername(e.target.value)
               }}
@@ -63,7 +61,7 @@ function Signup() {
             <input
               type="text"
               name="email"
-              value={email}
+              value={emailReg}
               onChange={(e) => {
                 setEmail(e.target.value)
               }}
@@ -75,7 +73,7 @@ function Signup() {
             <input
               type="password"
               name="password"
-              value={password}
+              value={passwordReg}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -90,14 +88,11 @@ function Signup() {
               required
             />
             {passwordMismatch ? (
-              <p className="error message">
-                Could not create account--passwords did not match.
+              <p className="error-message-sign">
+                Could not create an account - passwords do not match.
               </p>
             ) : null}
-            <p>
-              Passwords have a minimum length 8 and must contain <br />
-              at least one uppercase and one lowercase letter.
-            </p>
+            <p className="error-message-sign">{errorMsgSign}</p>
           </div>
           <button id="signup-button" type="submit">
             Sign Up

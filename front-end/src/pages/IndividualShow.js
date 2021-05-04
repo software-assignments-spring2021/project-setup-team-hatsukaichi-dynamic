@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { platforms, statuses, textToValue } from '../utils/Helpers'
 import Select from 'react-select'
 import { AuthContext } from '../App'
+import { customStyles } from '../utils/DropdownStyles'
 require('dotenv').config()
 
 const ProgressData = ({
@@ -219,8 +220,7 @@ const IndividualShow = ({ id, type }) => {
             <div className="show-details">
               <form id="show-form" onSubmit={handleSubmit}>
                 <h3 id="title">{show.title}</h3>
-                <Link to="/my-shows/17">
-                  {/*TODO: Change this to link to logged in user's my-shows*/}
+                <Link to={`/my-shows/${loggedInUser.id}`}>
                   <button className="btn-progress">Return to My Shows</button>
                 </Link>
                 <Select
@@ -228,6 +228,7 @@ const IndividualShow = ({ id, type }) => {
                   defaultValue={textToValue(showProgress.list, 'status')}
                   options={statuses}
                   onChange={(value) => handleDropdownChange(value, 'status')}
+                  styles={customStyles}
                 />
                 {show.type === 'movie' ? null : (
                   <ProgressData
@@ -242,6 +243,7 @@ const IndividualShow = ({ id, type }) => {
                   defaultValue={textToValue(showProgress.platform, 'platform')}
                   options={platforms}
                   onChange={(value) => handleDropdownChange(value, 'platform')}
+                  styles={customStyles}
                 />
                 <div className="show-content">
                   <Description

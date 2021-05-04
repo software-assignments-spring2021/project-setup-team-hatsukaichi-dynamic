@@ -15,6 +15,7 @@ import hulu from '../images/hulu.png'
 import netflix from '../images/netflix.png'
 import other from '../images/other.png'
 import { platforms, textToValue } from '../utils/Helpers'
+import { customStyles } from '../utils/DropdownStyles'
 require('dotenv').config()
 
 const ShowGrid = (props) => {
@@ -121,6 +122,7 @@ const ShowGrid = (props) => {
                     alt={`${props.platform} logo`}
                   />
                 ) : null}
+
               </Link>
             )
           })
@@ -257,6 +259,7 @@ const MyShows = (props) => {
             loadOptions={loadOptions}
             onChange={linkToShow} // Change this to account for type
             placeholder="Search Shows..."
+            styles={customStyles}
           />
         </div>
         <div id="filter-container">
@@ -283,6 +286,7 @@ const MyShows = (props) => {
                 options={platforms}
                 onChange={onChange}
                 value={textToValue(selectedPlatform, 'platform')}
+                styles={customStyles}
               />
               <button
                 className="my-shows-button"
