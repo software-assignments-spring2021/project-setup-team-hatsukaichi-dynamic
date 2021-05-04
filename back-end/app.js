@@ -8,6 +8,7 @@ const validator = require('validator')
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
 const authRoute = require('./routes/auth')
+const bcryptjs = require('bcryptjs')
 const secureRoute = require('./routes/secure-route')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
@@ -218,7 +219,7 @@ app.patch(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     }
-    const patchUser = await User.findOne({ id: req.params.id })
+    let patchUser = await User.findOne({ id: req.params.id })
     if (!patchUser) {
       return res.status(400).json('Error! No user with that ID exists.')
     }
@@ -245,10 +246,18 @@ app.patch(
       )
     }
     if (req.body.password) {
+      const salt = await bcryptjs.genSalt(10)
+      const hash = await bcryptjs.hash(req.body.password, salt)
       //not sure how to handle password stuff; requires hashing and passport
       patchUser = await User.updateOne(
         { id: req.params.id },
-        { password: req.body.email }
+        { password: hash }
+      )
+    }
+    if (req.body.bio) {
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { bio: req.body.bio }
       )
     }
     if (req.body.shows) {
