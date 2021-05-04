@@ -223,36 +223,42 @@ app.patch(
       return res.status(400).json('Error! No user with that ID exists.')
     }
     if (req.body.email) {
-      const tempEmail = req.body.email
-      const emailExist = await User.findOne({ email: tempEmail })
+      const emailExist = await User.findOne({ email: req.body.email })
       if (emailExist) {
         return res.status(400).json('Error! Email already in use.')
       }
       patchUser = await User.updateOne(
         { id: req.params.id },
-        { email: tempEmail }
+        { email: req.body.email }
       )
     }
     if (req.body.username) {
-      const tempUsername = req.body.username
       const usernameExist = await User.findOne({
-        username: tempUsername
+        username: req.body.username
       })
       if (usernameExist) {
         return res.status(400).json('Error! Username already in use.')
       }
       patchUser = await User.updateOne(
         { id: req.params.id },
-        { username: tempUsername }
+        { username: req.body.username }
       )
     }
     if (req.body.password) {
       //not sure how to handle password stuff; requires hashing and passport
       patchUser = await User.updateOne(
         { id: req.params.id },
-        { password: tempEmail }
+        { password: req.body.email }
       )
     }
+    if (req.body.shows) {
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { shows: req.body.shows }
+      )
+    }
+    patchUser = await User.findOne({ id: req.params.id })
+    res.status(200).json(patchUser)
   }
 )
 
