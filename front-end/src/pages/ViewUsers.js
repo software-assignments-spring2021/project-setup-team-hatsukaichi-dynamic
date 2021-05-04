@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import axios from 'axios'
-import image from '../images/stock-user-white.png'
 import { Link } from 'react-router-dom'
 import './ViewUsers.css'
 
@@ -14,27 +13,29 @@ function ViewUsers(props) {
   const AllUsers = ({ users }) => {
     return (
       <>
-        <h4 id="title-rec-shows">Users</h4>
         {users ? (
           <div id="profile-show-container">
             {users.map((user) => {
               return (
                 <>
-                  <p>{user.email}</p>
-                  <div className="header"></div>
                   <div className="content">
-                    <img className="github-img" src={user.img} alt=""></img>
+                    <img
+                      src={
+                        user.img === ''
+                          ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+                          : user.img
+                      }
+                      alt=""></img>
                     <h4>{user.username}</h4>
-                    <p>{user.bio}</p>
-                    <Link to={`/profile/${user.id}`}>link</Link>
-                    <h4>Shows</h4>
+                    <p>{user.bio === '' ? 'TV Tracker Fan' : user.bio}</p>
+                    <Link to={`/profile/${user.id}`}>View Profile</Link>
                   </div>
                 </>
               )
             })}
           </div>
         ) : (
-          <p id="no-users">No users. Register as a new userq!</p>
+          <p id="no-users">No users. Register as a new user!</p>
         )}
       </>
     )
@@ -57,8 +58,16 @@ function ViewUsers(props) {
     <>
       <body>
         <Header />
-        <h1>All Users</h1>
+        <div className="header">
+          <h2 id="view-header">TV Tracker Users</h2>
+          <br />
+          <p id="view">
+            Feel free to check out profiles of other users in our database and
+            view what shows they are watching :)
+          </p>
+        </div>
         <AllUsers users={users} />
+        {hasError ? <p>{errorMsg}</p> : ''}
         <Footer />
       </body>
     </>
