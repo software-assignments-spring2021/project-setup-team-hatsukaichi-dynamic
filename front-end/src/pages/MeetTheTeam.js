@@ -15,52 +15,63 @@ function MeetTheTeam() {
         <div className="content">
           <img className="github-img" src={image} alt=""></img>
           <h4>Sam Eng</h4>
-          <p>Student at New York University</p>
           <a href="https://github.com/sam-eng">GitHub</a>
-          <p>Favorite color: Red. Interests: Drawing, Skiing, Music. </p>
-          <p>Favorite Movie: Titanic</p>
+          <p>
+            Hi, I'm Sam and I'm a Computer Science and 
+            Linguistics double major at NYU. I graduate in May 2021,
+            and after school, I'll be working as a Software Engineer.
+          </p>
         </div>
         <div className="content">
           <img className="github-img" src={image} alt=""></img>
           <h4>Lev Bernstein</h4>
-          <p>Student at New York University</p>
           <a href="https://github.com/LevBernstein">GitHub</a>
-          <p>Favorite color: Green. Interests: Piano, Travel, Music. </p>
-          <p>Favorite Movie: Transformers</p>
+          <p>
+            I'm Lev Bernstein, a junior at NYU majoring in Computer Science 
+            and minoring in Russian and Classics. I graduate in May 2022, 
+            after which I hope to work in either software engineering or 
+            systems administration.
+          </p>
         </div>
         <div className="content">
           <img className="github-img" src={image} alt=""></img>
           <h4>Mason Kalaty</h4>
-          <p>Student at New York University</p>
           <a href="https://github.com/Gkal2000">GitHub</a>
-          <p>Favorite color: Blue. Interests: Reading, Sightseeing, Guitar. </p>
-          <p>Favorite Movie: Great Gatsby</p>
+          <p>
+            I'm Mason, a Computer Science Major at NYU. I'm going
+            to be graduating in May 2021, and then I'll be working as
+            a Computer Programmer in NYC.
+          </p>
         </div>
         <div className="content">
           <img className="github-img" src={image} alt=""></img>
           <h4>Ben Kaplan</h4>
-          <p>Student at New York University</p>
           <a href="https://github.com/benrkaplan">GitHub</a>
           <p>
-            Favorite color: Grey. Interests: Travel, Computer games, Reading.
+            Hey, I'm Ben and I'm studying Computer Science at NYU.
+            I graduate in May 2021, and hope to continue in the field
+            of software engineering.
           </p>
-          <p>Favorite Movie: Formula 1</p>
         </div>
         <div className="content">
           <img className="github-img" src={image} alt=""></img>
           <h4>Nicole Stovall</h4>
-          <p>Student at New York University</p>
           <a href="https://github.com/stovalln21">GitHub</a>
-          <p>Favorite color: Yellow. Interests: Hiking, Music, Piano. </p>
-          <p>Favorite Movie: Supernatural</p>
+          <p>
+            Hi, I'm Nicole and I'm a Computer Science major and 
+            Anthropology minor at NYU. After my graduation in May 2022, 
+            I hope to work in software engineering.
+          </p>
         </div>
         <div className="content">
           <img className="github-img" src={image} alt=""></img>
           <h4>Almazhan Kapan</h4>
-          <p>Student at New York University</p>
           <a href="https://github.com/almazhankapan">GitHub</a>
-          <p>Favorite color: Pink. Interests: Youtube, Piano, Travel. </p>
-          <p>Favorite Movie: Butterfly Effect</p>
+          <p>
+            Hi, I'm Alma and I'm a Computer Science major and Econ minor 
+            student at NYU. I graduate in December 2021 and hope to work 
+            in software engineering and research after graduation.
+          </p>
         </div>
         <div className="content">
           <img className="github-img" src={image} alt="TV Tracker Logo"></img>
