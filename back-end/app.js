@@ -5,6 +5,8 @@ const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
 const validator = require('validator')
+const bcryptjs = require('bcryptjs')
+const isImageURL = require('image-url-validator').default
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
 const authRoute = require('./routes/auth')
@@ -176,8 +178,22 @@ app.get('/shows', (req, res, next) => {
 
 app.patch(
   '/tv_users/:id',
-  body('email').optional().isEmail().normalizeEmail(),
-  body('username').optional().isAlphanumeric().not().isEmpty().trim().escape(),
+  body('email')
+    .optional()
+    .isEmail()
+    .normalizeEmail()
+    .withMessage('Please enter valid email.'),
+  body('username')
+    .optional()
+    .isAlphanumeric()
+    .not()
+    .isEmpty()
+    .trim()
+    .escape()
+    .isLength({ min: 2 })
+    .withMessage(
+      'Username can contain only letters and digits. Length should be at least 2 characters.'
+    ),
   body('password')
     .optional()
     .isStrongPassword({
@@ -188,6 +204,9 @@ app.patch(
       minSymbols: 0,
       returnScore: false
     })
+    .withMessage(
+      'Password can contain only letters and digits. It must contain at least 1 lowercase, 1 uppercase and 1 numeric character. Length should be at least 8 characters.'
+    )
     .not()
     .contains(' ')
     .not()
@@ -196,35 +215,76 @@ app.patch(
     .escape(),
   body('shows.*.episode').optional().isInt(),
   body('shows.*.season').optional().isInt(),
-  (req, res, next) => {
+  body('img')
+    .optional()
+    .isURL()
+    .not()
+    .isEmpty()
+    .withMessage('Profile picture must be a valid URL!'),
+  async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     }
-    const patchUser = {}
-    Object.keys(req.body).map((key) => {
-      patchUser[key] = req.body[key]
-    })
-    axios
-      .patch(
-        `https://my.api.mockaroo.com/tv_users/${req.params.id}.json?key=${process.env.API_KEY_MOCKAROO}&__method=PATCH`,
-        patchUser
+    const finalUser = await User.findOne({ id: req.params.id })
+    let patchUser = finalUser
+    if (!patchUser) {
+      return res.status(400).json('Error! No user with that ID exists.')
+    }
+    if (req.body.email) {
+      const emailExist = await User.findOne({ email: req.body.email })
+      if (emailExist && !(req.body.email === finalUser.email)) {
+        return res.status(400).json('Error! Email already in use.')
+      }
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { email: req.body.email }
       )
-      .then((response) => {
-        res.json(response.data)
+    }
+    if (req.body.username) {
+      const usernameExist = await User.findOne({
+        username: req.body.username
       })
-      .catch((err) => {
-        if (err.response.status == 500) {
-          res.status(200).json(mockUserUpdate(req.params.id, patchUser))
-        } else {
-          res.status(401).json({
-            status: 'error',
-            error: {
-              message: 'Mockaroo Error: Mock User cannot be updated'
-            }
-          })
-        }
-      })
+      if (usernameExist && !(req.body.username === finalUser.username)) {
+        return res.status(400).json('Error! Username already in use.')
+      }
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { username: req.body.username }
+      )
+    }
+    if (req.body.password) {
+      const salt = await bcryptjs.genSalt(10)
+      const hash = await bcryptjs.hash(req.body.password, salt)
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { password: hash }
+      )
+    }
+    if (req.body.bio) {
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { bio: req.body.bio }
+      )
+    }
+    if (req.body.shows) {
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { shows: req.body.shows }
+      )
+    }
+    if (req.body.img) {
+      const isImage = await isImageURL(req.body.img)
+      if (!isImage) {
+        return res.status(400).json('Error! Must be a valid link to an image.')
+      }
+      patchUser = await User.updateOne(
+        { id: req.params.id },
+        { img: req.body.img }
+      )
+    }
+    patchUser = await User.findOne({ id: req.params.id })
+    res.status(200).json(patchUser)
   }
 )
 
