@@ -11,7 +11,7 @@ const platforms = [
 
 const statuses = [
   { value: '', label: 'Select a Status' },
-  { value: 'Watched', label: 'Watched' },
+  { value: 'Completed', label: 'Completed' },
   { value: 'In Progress', label: 'In Progress' }
 ]
 
