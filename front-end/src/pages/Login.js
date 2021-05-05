@@ -5,37 +5,53 @@ import axios from 'axios'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { AuthContext } from '../App'
-import { createMockUser } from '../utils/MockData.js'
 
 function Login() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [emailUser, setEmail] = useState('')
+  const [passwordUser, setPassword] = useState('')
   const { loggedInUser, setLoggedInUser } = React.useContext(AuthContext)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [errorMsgLogin, setErrorMsgLogin] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Actual login handling will go here; for now, we'll simply get a user
-    // from our Mockaroo API. User id is hardcoded for now.
-    axios(`http://localhost:4000/tv_users/7`)
+    axios
+      .post(`http://localhost:4000/login`, {
+        email: emailUser,
+        password: passwordUser
+      })
       .then((response) => {
-        setLoggedInUser(response.data)
-        setIsLoggedIn(true)
+        //jwt authorization : only the user with valid jwt will access profile
+        if (!response.data.auth) {
+          setIsLoggedIn(false)
+        } else {
+          setLoggedInUser(response.data.user)
+          localStorage.setItem('token', response.data.user)
+          setIsLoggedIn(true)
+        }
       })
       .catch((err) => {
-        // This case is likely to be due to Mockaroo rate limiting!
-        // It'd be good to add some error handling here later, if someone tries to
-        // access a non-existent user
-        console.log('Error: could not make the request.')
-        console.log(err)
-        const mockUser = createMockUser(1)
-        setLoggedInUser(mockUser)
-        setIsLoggedIn(true)
+        if (err.response.data != null) {
+          setErrorMsgLogin(err.response.data.error.message)
+          setIsLoggedIn(false)
+        }
       })
   }
 
-  if (isLoggedIn) {
+  //check if user is authorized (jwt is correct)
+  const userAuthorized = () => {
+    axios
+      .get(`http://localhost:4000/checkAuth`, {
+        headers: {
+          'x-access-token': localStorage.getItem('token')
+        }
+      })
+      .then((response) => {
+        console.log(response)
+      })
+  }
+  //only authorized users can access the profile page
+  if (isLoggedIn && userAuthorized) {
     return <Redirect to={`/profile/${loggedInUser.id}`} />
   }
 
@@ -46,23 +62,13 @@ function Login() {
         <form id="login-form" onSubmit={handleSubmit}>
           <h2>Log in to TV Tracker</h2>
           <div className="form-fields">
-            <label>Username</label>
-            <br />
-            <input
-              type="text"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <br />
             <label>Email</label>
             <br />
             <input
               autoFocus={true}
               type="email"
               name="email"
-              value={email}
+              value={emailUser}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -72,7 +78,7 @@ function Login() {
             <input
               type="password"
               name="password"
-              value={password}
+              value={passwordUser}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -82,6 +88,8 @@ function Login() {
               Login
             </button>
             <br />
+            <br />
+            <p className="error-message-login">{errorMsgLogin}</p>
             <p>
               Not registered?{' '}
               <Link to="/signup/" className="login-links">

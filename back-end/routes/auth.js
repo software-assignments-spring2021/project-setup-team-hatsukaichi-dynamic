@@ -2,15 +2,18 @@ const express = require('express')
 const app = require('express').Router()
 const User = require('../models/User')
 const passport = require('passport')
+const session = require('express-session')
 const jwt = require('jsonwebtoken')
 const localStrategy = require('passport-local').Strategy
+const cors = require('cors') //required for auth troubleshooting
 require('dotenv').config({ silent: true })
-
 const bcryptjs = require('bcryptjs') //encrypt password
 const { body, validationResult } = require('express-validator')
 app.use(express.urlencoded({ extended: true }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cors())
+app.options('*', cors())
 
 passport.serializeUser(function (user, done) {
   done(null, user.id)
@@ -20,6 +23,38 @@ passport.deserializeUser(function (id, done) {
   User.findById(id, function (err, user) {
     done(err, user)
   })
+})
+
+const verifyJWT = (req, res, next) => {
+  const token = req.headers('x-access-token')
+
+  if (!token) {
+    res.send('Token is needed')
+  } else {
+    jwt.verify(
+      token,
+      process.env.TOKEN_SECRET,
+      (err,
+      (decoded) => {
+        if (err) {
+          res.json({
+            status: 'error',
+            auth: false,
+            error: {
+              message
+            }
+          })
+        } else {
+          req.userId = decoded.id
+          next()
+        }
+      })
+    )
+  }
+}
+
+app.get('/checkAuth', verifyJWT, (req, res) => {
+  res.send('User is authorized')
 })
 
 //Passport middleware to handle user registration
@@ -36,7 +71,9 @@ passport.use(
         //Check if email is already registered
         const emailExist = await User.findOne({ email })
         if (emailExist) {
-          return done(null, false, { message: 'Email is already registered' })
+          return done(null, false, {
+            message: 'Email is already registered, log in instead'
+          })
         }
 
         //Check if username is already registered
@@ -45,7 +82,7 @@ passport.use(
         })
         if (usernameExist)
           return done(null, false, {
-            message: 'Username already registered, log in instead'
+            message: 'Username is already registered'
           })
 
         //Construct a user object
@@ -55,7 +92,8 @@ passport.use(
           email: email,
           password: password,
           bio: '',
-          img: '',
+          img:
+            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
           shows: []
         })
         //Save user object to the database
@@ -64,7 +102,7 @@ passport.use(
         return done(null, user, { message: 'Successful sign up' })
         //Return error message
       } catch (error) {
-        return done(null, false, { message: error.message })
+        return done(null, false, { message: 'Registration Error' })
       }
     }
   )
@@ -80,18 +118,19 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await User.findOne({ email })
-
         if (!user) {
-          return done(null, false, { message: 'User not found' })
+          return done(null, false, {
+            message: 'Email not found'
+          })
         }
 
         const validate = await user.validPassword(password)
 
         if (!validate) {
-          return done(null, false, { message: 'Wrong Password' })
+          return done(null, false, { message: 'Incorrect Password' })
         }
 
-        return done(null, user, { message: 'Logged in Successfully' })
+        return done(null, user, { message: 'Logged in successfully' })
       } catch (error) {
         return done(error)
       }
@@ -133,7 +172,7 @@ app.post(
     .escape()
     .isLength({ min: 2 })
     .withMessage(
-      'Username can contain only letters and digits. Length should be at least 2 characters.'
+      'Username can contain only letters and digits and should be at least 2 characters in length.'
     ),
   body('password')
     .isStrongPassword({
@@ -145,7 +184,7 @@ app.post(
       returnScore: false
     })
     .withMessage(
-      'Password can contain only letters and digits. It must contain at least 1 lowercase, 1 uppercase and 1 numeric character. Length should be at least 8 characters.'
+      'Password can contain only letters and digits. Password must contain at least 1 lowercase, 1 uppercase and 1 numeric character and be at least 8 characters in length.'
     )
     .not()
     .contains(' ')
@@ -157,7 +196,9 @@ app.post(
     //Return any formatting errors
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res
+        .status(400)
+        .json({ type: 'input-error', errors: errors.array() })
     } // Proceed to authentication
     passport.authenticate(
       'register',
@@ -168,34 +209,36 @@ app.post(
           if (err || !user) {
             const { statusCode = 400, message } = info
             return res.status(statusCode).json({
-              status: 'error',
-              error: {
-                message
-              }
+              type: 'db-error',
+              errors: [{ msg: message }]
             })
           } else {
             //Otherwise send success message
             res.json({
               message: 'Registration successful',
-              user: req.user
+              user: user
             })
           }
         } catch (error) {
           //Handle any other errors
-          throw new Error({ message: error.message })
+          throw new Error({
+            type: 'other',
+            errors: [{ msg: 'Registration error occured' }]
+          })
         }
       }
     )(req, res, next)
   }
 )
 
-app.post('/login', async (req, res, next) => {
+app.post('/login', emailToLowerCase, async (req, res, next) => {
   passport.authenticate('login', async (err, user, info) => {
     try {
       if (err || !user) {
         const { statusCode = 400, message } = info
         return res.status(statusCode).json({
           status: 'error',
+          auth: false,
           error: {
             message
           }
@@ -205,17 +248,23 @@ app.post('/login', async (req, res, next) => {
         if (error)
           return res.status(400).json({
             status: 'error',
+            auth: false,
             message: error.message
           })
         const body = { _id: user._id, email: user.email }
         const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET)
-        return res.json({ user, token })
+        return res.json({ auth: true, user, token })
       })
     } catch (error) {
-      throw new Error({ message: error.message })
+      throw new Error({ auth: false, message: error.message })
     }
   })(req, res, next)
 })
+
+function emailToLowerCase(req, res, next) {
+  req.body.email = req.body.email.toLowerCase()
+  next()
+}
 
 app.get('/logout', (req, res) => {
   req.logout()
