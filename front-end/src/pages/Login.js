@@ -60,24 +60,25 @@ function Login() {
       <Header />
       <div id="login-container">
         <form id="login-form" onSubmit={handleSubmit}>
-          <h2>Log in to TV Tracker</h2>
+          <h1 id="login-header">Log in to TV Tracker</h1>
           <div className="form-fields">
-            <label>Email</label>
             <br />
             <input
               autoFocus={true}
               type="email"
               name="email"
+              placeholder="Email"
               value={emailUser}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
             <br />
-            <label>Password</label>
+
             <br />
             <input
               type="password"
               name="password"
+              placeholder="Password"
               value={passwordUser}
               onChange={(e) => setPassword(e.target.value)}
               required

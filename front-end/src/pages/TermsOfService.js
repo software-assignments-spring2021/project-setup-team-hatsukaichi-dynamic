@@ -9,11 +9,8 @@ function TermsOfService() {
     <>
       <Header />
       <body>
-        <div className="header">
-          <h1 id="header-title">Terms of Service</h1>
-        </div>
         <div className="text">
-          <h1 id="terms-and-conditions">Terms and Conditions</h1>
+          <h1 className="header-title">Terms and Conditions</h1>
           <p>Last updated: March 10, 2021</p>
           <p>
             Please read these terms and conditions carefully before using Our

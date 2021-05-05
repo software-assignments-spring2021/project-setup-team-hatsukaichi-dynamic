@@ -3,7 +3,7 @@ import AsyncSelect from 'react-select/async'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import axios from 'axios'
-import './MyShows.css' // uses same styling
+import './AllShows.css' // uses same styling
 import { Link, useHistory } from 'react-router-dom'
 require('dotenv').config()
 
@@ -40,8 +40,7 @@ const ShowGrid = (props) => {
 
   return (
     <>
-      <h3 id="title">Popular Shows</h3>
-      <div id="show-container">
+      <div id="all-shows-container">
         {shows !== undefined && shows.length !== 0 ? (
           shows.map((show) => {
             return (
@@ -129,7 +128,8 @@ const AllShows = (props) => {
     <>
       <Header />
       <div id="container">
-        <h3 id="profile-title">Popular Shows</h3>
+        <h1 id="pop-shows-header">Popular Shows</h1>
+        <p id="ad">Explore the most popular shows in our database!</p>
         <div id="search-container">
           <AsyncSelect
             className="search-bar"
