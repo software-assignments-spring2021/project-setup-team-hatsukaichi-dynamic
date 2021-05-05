@@ -265,7 +265,17 @@ const IndividualShow = ({ id, type }) => {
                     value="Save"
                   />
                 ) : (
-                  ''
+                  <p className="descript" id="error-msg">
+                    <br />
+                    <Link to="/login/" className="login-links">
+                      Login
+                    </Link>{' '}
+                    or{' '}
+                    <Link to="/signup/" className="login-links">
+                      Register
+                    </Link>{' '}
+                    to save your watching progress for this show!{' '}
+                  </p>
                 )}
               </form>
             </div>
