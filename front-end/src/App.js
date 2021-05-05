@@ -12,6 +12,8 @@ import Modal from 'react-modal'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AllShows from './pages/AllShows'
+import ViewUsers from './pages/ViewUsers'
+
 require('dotenv').config()
 
 Modal.setAppElement('#root') //Necessary for settings modal
@@ -76,6 +78,9 @@ const App = () => {
             </Route>
             <Route path="/Signup">
               <Signup />
+            </Route>
+            <Route path="/view-users">
+              <ViewUsers />
             </Route>
             <Route path="/">
               <Home />

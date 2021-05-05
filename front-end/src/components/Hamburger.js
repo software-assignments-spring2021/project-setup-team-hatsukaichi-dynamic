@@ -24,6 +24,9 @@ const Hamburger = (props) => {
         className="menu-item">
         My Shows
       </Link>
+      <Link to="/view-users" id="View-users" className="menu-item">
+        View Users
+      </Link>
       <Link to="/meet-the-team" id="Meet-the-team" className="menu-item">
         Meet the Team
       </Link>
