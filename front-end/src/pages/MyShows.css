@@ -26,7 +26,6 @@ div.css-yk16xz-control {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
 }
 
 .modal-contents {
@@ -155,11 +154,9 @@ h3 {
     font-size: 22px;
   }
 
-
   .show-images {
-  width: 55%;
-  margin-bottom: 2em;
-
+    width: 55%;
+    margin-bottom: 2em;
   }
 }
 
@@ -179,9 +176,9 @@ h3 {
     font-size: 20px;
   }
   .show-images {
-width: 46%;
-margin-bottom: 2em;
-}
+    width: 46%;
+    margin-bottom: 2em;
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -199,11 +196,10 @@ margin-bottom: 2em;
   #title {
     font-size: 15px;
   }
-    .show-images {
-width: 36%;
-margin-bottom: 2em;
-
-}
+  .show-images {
+    width: 36%;
+    margin-bottom: 2em;
+  }
 }
 
 @media screen and (max-width: 500px) {

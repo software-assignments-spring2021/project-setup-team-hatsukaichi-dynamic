@@ -8,6 +8,8 @@ const { mockUserUpdate, mockSingleShow } = require('../MockData.js')
 var expect = chai.expect
 chai.use(chaiHttp)
 
+//TODO: update to use db call to unit test db
+
 describe('PATCH /tv_users/1', () => {
   const patchURL = `https://my.api.mockaroo.com/tv_users/1.json?key=${process.env.API_KEY_MOCKAROO}&__method=PATCH`
   let stub
@@ -19,7 +21,7 @@ describe('PATCH /tv_users/1', () => {
   it('should update all user info fields', async () => {
     stub = sinon.stub(axios, 'patch').resolves({
       data: {
-        username: 'newUsername',
+        username: 'newUsername1',
         password: 'newPassword1',
         email: 'newemail@gmail.com',
         bio: 'old bio',

@@ -122,7 +122,6 @@ const ShowGrid = (props) => {
                     alt={`${props.platform} logo`}
                   />
                 ) : null}
-
               </Link>
             )
           })
