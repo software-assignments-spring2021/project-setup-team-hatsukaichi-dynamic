@@ -5,10 +5,11 @@ const axios = require('axios')
 const app = express()
 const morgan = require('morgan') // middleware for logging of incoming HTTP requests
 const validator = require('validator')
+const bcryptjs = require('bcryptjs')
+const isImageURL = require('image-url-validator').default
 const passport = require('passport') //authentication middleware
 const LocalStrategy = require('passport-local').Strategy
 const authRoute = require('./routes/auth')
-const bcryptjs = require('bcryptjs')
 const secureRoute = require('./routes/secure-route')
 require('dotenv').config({ silent: true })
 const { body, validationResult } = require('express-validator')
@@ -223,18 +224,17 @@ app.patch(
   async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      console.log(errors)
       return res.status(400).json({ errors: errors.array() })
     }
     const finalUser = await User.findOne({ id: req.params.id })
     let patchUser = finalUser
     if (!patchUser) {
-      return res.status(401).json('Error! No user with that ID exists.')
+      return res.status(400).json('Error! No user with that ID exists.')
     }
     if (req.body.email) {
       const emailExist = await User.findOne({ email: req.body.email })
       if (emailExist && !(req.body.email === finalUser.email)) {
-        return res.status(402).json('Error! Email already in use.')
+        return res.status(400).json('Error! Email already in use.')
       }
       patchUser = await User.updateOne(
         { id: req.params.id },
@@ -246,7 +246,7 @@ app.patch(
         username: req.body.username
       })
       if (usernameExist && !(req.body.username === finalUser.username)) {
-        return res.status(403).json('Error! Username already in use.')
+        return res.status(400).json('Error! Username already in use.')
       }
       patchUser = await User.updateOne(
         { id: req.params.id },
@@ -274,8 +274,11 @@ app.patch(
       )
     }
     if (req.body.img) {
+      const isImage = await isImageURL(req.body.img)
+      if (!isImage) {
+        return res.status(400).json('Error! Must be a valid link to an image.')
+      }
       patchUser = await User.updateOne(
-        //unsure of how to check that the URL links to an image; may require using mimetype
         { id: req.params.id },
         { img: req.body.img }
       )
