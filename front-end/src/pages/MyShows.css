@@ -31,12 +31,6 @@ div.css-yk16xz-control {
   color: #d1cdc7;
 }
 
-#show-container img {
-  width: 75%;
-  padding: 0.5em;
-
-}
-
 #search-container {
   display: flex;
   justify-content: center;
@@ -118,11 +112,12 @@ div.css-yk16xz-control {
 }
 
 .show-images {
-  width: 13%;
+  width: 55%;
   position: relative;
   z-index: 0;
 }
-#show-container .platform-image{
+
+.platform-image{
   z-index: 1;
   position: relative;
   width: 60px !important;
@@ -160,11 +155,12 @@ h3 {
     width: 75%;
     padding: 0.1em;
   }
-  #show-container .platform-image {
+  .platform-image {
     width: 50px !important;
     height: 50px !important;
     right: 9.6%;
   }
+  
 }
 
 @media screen and (max-width: 992px) {
@@ -186,7 +182,7 @@ h3 {
     width: 66%;
     padding: 0.2em;
   }
-  #show-container .platform-image {
+  .platform-image {
     width: 40px;
     height: 40px;
     right: 10%;
@@ -212,7 +208,7 @@ h3 {
     width: 55%;
     padding: 0.1em;
   }
-  #show-container .platform-image {
+  .platform-image {
     width: 40px !important;
     height: 40px !important;
     right: 8%;
@@ -230,7 +226,7 @@ h3 {
   .selected:hover {
     font-size: 10.5px;
   }
-  #show-container .platform-image {
+  .platform-image {
     width: 40px !important;
     height: 40px !important;
     right: 10%;
