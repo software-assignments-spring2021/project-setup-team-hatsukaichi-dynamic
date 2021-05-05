@@ -220,7 +220,10 @@ const IndividualShow = ({ id, type }) => {
             <div className="show-details">
               <form id="show-form" onSubmit={handleSubmit}>
                 <h3 id="title">{show.title}</h3>
-                <Link to={`/my-shows/${loggedInUser.id}`}>
+                <Link
+                  to={
+                    loggedInUser ? `/my-shows/${loggedInUser.id}` : `/all-shows`
+                  }>
                   <button className="btn-progress">Return to My Shows</button>
                 </Link>
                 <Select
@@ -254,12 +257,26 @@ const IndividualShow = ({ id, type }) => {
                     isMovie={show.type === 'movie'}
                   />
                 </div>
-                <input
-                  className="btn-progress"
-                  id="btn-progress"
-                  type="submit"
-                  value="Save"
-                />
+                {loggedInUser ? (
+                  <input
+                    className="btn-progress"
+                    id="btn-progress"
+                    type="submit"
+                    value="Save"
+                  />
+                ) : (
+                  <p className="descript" id="error-msg">
+                    <br />
+                    <Link to="/login/" className="login-links">
+                      Login
+                    </Link>{' '}
+                    or{' '}
+                    <Link to="/signup/" className="login-links">
+                      Register
+                    </Link>{' '}
+                    to save your watching progress for this show!{' '}
+                  </p>
+                )}
               </form>
             </div>
             <div id="cover">

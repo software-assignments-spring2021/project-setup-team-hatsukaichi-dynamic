@@ -3,10 +3,17 @@ h1 {
   padding: 0;
   color: #d1cdc7;
 }
+h4 {
+  -webkit-text-stroke: 0.5px black;
+}
 
 body {
   color: #d1cdc7;
   background-color: #2d2d2d;
+}
+#team-header {
+  color: green;
+  -webkit-text-stroke: 1px black;
 }
 
 .content {
@@ -28,7 +35,7 @@ body {
   text-align: center;
 }
 .content h4 {
-  font-size: 24px;
+  font-size: 22px;
   margin-left: 20px;
   margin: 2px 0 0 0;
   display: block;

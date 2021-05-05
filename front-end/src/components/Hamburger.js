@@ -18,7 +18,7 @@ const Hamburger = (props) => {
       </Link>
       <Link
         to={
-          loggedInUser == null ? `/my-shows/17` : `/my-shows/${loggedInUser.id}`
+          loggedInUser == null ? `/all-shows` : `/my-shows/${loggedInUser.id}`
         } //path my-shows/17 will be replaced with a new page
         id="My Shows"
         className="menu-item">

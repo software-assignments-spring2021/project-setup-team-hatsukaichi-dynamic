@@ -42,13 +42,13 @@ function Signup() {
       <Header />
       <div id="signup-container">
         <form id="signup-form" onSubmit={handleSubmit}>
-          <h2>Register for TV Tracker</h2>
+          <h1 id="signup-header">Register for TV Tracker</h1>
           <div className="form-fields">
-            <label>Username</label>
             <br />
             <input
               type="text"
               name="username"
+              placeholder="Username"
               value={usernameReg}
               onChange={(e) => {
                 setUsername(e.target.value)
@@ -56,11 +56,12 @@ function Signup() {
               required
             />
             <br />
-            <label>Email</label>
+
             <br />
             <input
               type="text"
               name="email"
+              placeholder="Email"
               value={emailReg}
               onChange={(e) => {
                 setEmail(e.target.value)
@@ -68,21 +69,23 @@ function Signup() {
               required
             />
             <br />
-            <label>Password</label>
+
             <br />
             <input
               type="password"
               name="password"
+              placeholder="Password"
               value={passwordReg}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
             <br />
-            <label>Confirm Password</label>
+
             <br />
             <input
               type="password"
               name="passwordconfirm"
+              placeholder="Confirm Password"
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
               required
