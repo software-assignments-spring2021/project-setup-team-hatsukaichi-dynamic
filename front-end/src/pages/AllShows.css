@@ -28,24 +28,9 @@ div.css-yk16xz-control {
   justify-content: space-around;
 }
 
-.modal-contents {
-  background-color: #2d2d2d;
-  color: #d1cdc7;
-}
-
 #search-container {
   display: flex;
   justify-content: center;
-}
-
-.modal-open {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  z-index: 2;
 }
 
 .search-bar {
@@ -54,81 +39,15 @@ div.css-yk16xz-control {
   display: block;
 }
 
-.filter-modal {
-  color: black;
-  position: absolute;
-  top: 15%;
-  bottom: 5%;
-  left: 30%;
-  right: 30%;
-  z-index: 2;
-}
-
-#filter-container {
-  display: flex;
-  justify-content: space-around;
-}
-
-.filter-button {
-  margin: 2em;
-  font-size: 18px;
-  border: 2px solid #84ed6f;
-  background-color: #666666;
-  color: #84ed6f;
-  padding: 1em 2em 1em 2em;
-  font-size: 1.4vw;
-}
 #pop-shows-header {
   color: green;
   -webkit-text-stroke: 1px black;
-}
-
-.my-shows-button {
-  margin: 2em;
-  font-size: 18px;
-  border: 2px solid #84ed6f;
-  background-color: #666666;
-  color: #84ed6f;
-  padding: 1em 2em 1em 2em;
-  font-size: 1.4vw;
-}
-
-.my-shows-button:hover {
-  border: 1px solid #3cdd1b;
-  background-color: #2d2d2d;
-  color: #3cdd1b;
-  font-size: 1.4vw;
-}
-
-.selected {
-  background-color: #acf39d;
-  margin: 2em;
-  font-size: 18px;
-  border: 2px solid #84ed6f;
-  color: #666666;
-  padding: 1em 2em 1em 2em;
-  font-size: 1.4vw;
-}
-
-.selected:hover {
-  border: 1px solid #4d4d4d;
-  background-color: #84ed6f;
-  color: #4d4d4d;
-  font-size: 1.4vw;
 }
 
 .show-images {
   width: 55%;
   z-index: 0;
   position: relative;
-}
-.platform-image {
-  z-index: 1;
-  position: absolute;
-  width: 30px !important;
-  height: 30px !important;
-  margin-left: -38px;
-  margin-top: 173px;
 }
 
 h3 {
@@ -137,20 +56,10 @@ h3 {
   text-align: center;
 }
 
-#apply {
-  margin-left: 45%;
-  margin-right: 45%;
-}
-
 @media screen and (max-width: 2400px) {
-  .filter-button,
   .my-shows-button,
-  .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows,
-  .filter-modal,
-  .selected,
-  .selected:hover {
+  #no-shows {
     font-size: 16px;
   }
   #ad {
@@ -168,14 +77,9 @@ h3 {
 }
 
 @media screen and (max-width: 992px) {
-  .filter-button,
   .my-shows-button,
-  .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows,
-  .filter-modal,
-  .selected,
-  .selected:hover {
+  #no-shows {
     font-size: 14px;
   }
   #ad {
@@ -192,14 +96,9 @@ h3 {
 }
 
 @media screen and (max-width: 650px) {
-  .filter-button,
   .my-shows-button,
-  .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows,
-  .filter-modal,
-  .selected,
-  .selected:hover {
+  #no-shows {
     font-size: 12px;
   }
 
@@ -217,14 +116,9 @@ h3 {
 }
 
 @media screen and (max-width: 500px) {
-  .filter-button,
   .my-shows-button,
-  .filter-button:hover,
   .my-shows-button:hover,
-  #no-shows,
-  .filter-modal,
-  .selected,
-  .selected:hover {
+  #no-shows {
     font-size: 10.5px;
   }
 }
