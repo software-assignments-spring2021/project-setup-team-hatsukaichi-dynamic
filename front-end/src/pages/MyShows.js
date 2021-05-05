@@ -83,7 +83,7 @@ const ShowGrid = (props) => {
 
   const setPlatformLogo = (platform) => {
     let platformLogo
-    if (platform === 'Amazon') {
+    if (platform === 'Amazon Prime') {
       platformLogo = amazon
     } else if (platform === 'Crunchyroll') {
       platformLogo = crunchyroll
@@ -99,7 +99,7 @@ const ShowGrid = (props) => {
       //platform is 'other' or hasn't been set
       platformLogo = other
     }
-  
+
     return platformLogo
   }
 
@@ -120,14 +120,13 @@ const ShowGrid = (props) => {
                   src={show['poster-url']}
                   alt={`cover-${show.ids.trakt}-${show.type}`}
                 />
-               {show.platform ? (
-                <img
-                  className="platform-image"
-                  src={setPlatformLogo(show.platform)}
-                  alt={`${show.platform} logo`}
-                />
+                {show.platform ? (
+                  <img
+                    className="platform-image"
+                    src={setPlatformLogo(show.platform)}
+                    alt={`${show.platform} logo`}
+                  />
                 ) : null}
-
               </Link>
             )
           })
