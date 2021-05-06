@@ -82,6 +82,9 @@ const App = () => {
             <Route path="/view-users">
               <ViewUsers />
             </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
             <Route path="/">
               {loggedInUser !== null ? (
                 <Profile id={loggedInUser.id} />
