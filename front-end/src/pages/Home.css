@@ -15,8 +15,9 @@
 }
 
 .header-text {
-  font-size: 28px;
   text-align: center;
+  color: green;
+  -webkit-text-stroke: 1px black;
 }
 
 .header {
@@ -41,7 +42,10 @@
     font-size: 16px;
   }
   .header-text {
-    font-size: 28px;
+    font-size: 35.5px;
+  }
+  .gif-text {
+    font-size: 26px;
   }
 }
 
@@ -50,6 +54,9 @@
     font-size: 14px;
   }
   .header-text {
+    font-size: 35px;
+  }
+  .gif-text {
     font-size: 24px;
   }
 }
@@ -62,6 +69,9 @@
     width: 95%;
   }
   .header-text {
+    font-size: 22px;
+  }
+  .gif-text {
     font-size: 20px;
   }
 }

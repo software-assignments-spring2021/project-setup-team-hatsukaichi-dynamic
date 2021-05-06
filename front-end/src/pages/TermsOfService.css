@@ -4,6 +4,20 @@ h1 {
   background-color: #2d2d2d;
 }
 
+h2 {
+  -webkit-text-stroke: 0.5px black;
+}
+
+.header-title {
+  color: green;
+  -webkit-text-stroke: 1px black;
+}
+.text,
+#contents,
+h2,
+h3 {
+  text-align: center;
+}
 body {
   margin-top: 8em;
   color: #d1cdc7;
@@ -66,7 +80,7 @@ body {
 }
 
 @media screen and (max-width: 2400px) {
-  #header-title {
+  .header-title {
     font-size: 35.5px;
   }
 
@@ -90,8 +104,7 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-  #header-title,
-  #terms-and-conditions {
+  .header-title {
     font-size: 35px;
   }
   #contents,
@@ -111,8 +124,7 @@ body {
 }
 
 @media screen and (max-width: 650px) {
-  #header-title,
-  #terms-and-conditions {
+  .header-title {
     font-size: 22px;
   }
   #contents,

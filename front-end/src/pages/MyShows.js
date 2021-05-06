@@ -62,9 +62,13 @@ const ShowGrid = (props) => {
             if (show.ids.trakt === showUserInfo.traktId) {
               // Match in type too
               if (show.type === 'movie' && showUserInfo.isMovie) {
-                return true
+                const matchedShow = show
+                matchedShow.platform = showUserInfo.platform
+                return matchedShow
               } else if (show.type === 'show' && !showUserInfo.isMovie) {
-                return true
+                const matchedShow = show
+                matchedShow.platform = showUserInfo.platform
+                return matchedShow
               } else {
                 return false
               }
@@ -83,7 +87,7 @@ const ShowGrid = (props) => {
       platformLogo = amazon
     } else if (platform === 'Crunchyroll') {
       platformLogo = crunchyroll
-    } else if (platform === 'Disney Plus') {
+    } else if (platform === 'Disney') {
       platformLogo = disney
     } else if (platform === 'HBO') {
       platformLogo = hbo
@@ -91,10 +95,11 @@ const ShowGrid = (props) => {
       platformLogo = hulu
     } else if (platform === 'Netflix') {
       platformLogo = netflix
-    } else {
+    } else if (platform === 'Other') {
       //platform is 'other' or hasn't been set
       platformLogo = other
     }
+
     return platformLogo
   }
 
@@ -115,14 +120,13 @@ const ShowGrid = (props) => {
                   src={show['poster-url']}
                   alt={`cover-${show.ids.trakt}-${show.type}`}
                 />
-                {props.platform ? (
+                {show.platform ? (
                   <img
                     className="platform-image"
-                    src={setPlatformLogo(props.platform)}
-                    alt={`${props.platform} logo`}
+                    src={setPlatformLogo(show.platform)}
+                    alt={`${show.platform} logo`}
                   />
                 ) : null}
-
               </Link>
             )
           })

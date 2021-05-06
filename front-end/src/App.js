@@ -11,6 +11,7 @@ import IndividualShow from './pages/IndividualShow'
 import Modal from 'react-modal'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import AllShows from './pages/AllShows'
 import ViewUsers from './pages/ViewUsers'
 
 require('dotenv').config()
@@ -63,6 +64,9 @@ const App = () => {
             {/* TODO: Add a way to view a list of all shows, much like my-shows but for non logged in users */}
             <Route path="/my-shows/:id" component={MyShowsWrapper} />
             <Route path="/profile/:id" component={ProfileWrapper} />
+            <Route path="/all-shows">
+              <AllShows />
+            </Route>
             <Route path="/terms-of-service">
               <TermsOfService />
             </Route>
