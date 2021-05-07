@@ -2,6 +2,21 @@
   background: #1a1a1a;
 }
 
+.sticky-wrapper {
+  position: relative;
+  margin-top: -90px !important;
+  height: 90px;
+}
+
+.sticky .sticky-inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  margin-top: -90px !important;
+}
+
 .header-title {
   text-align: center;
   color: #d1cdc7;
