@@ -1,9 +1,7 @@
 #container {
-  margin-top: 15em;
   padding-left: 2em;
   background-color: #2d2d2d;
   color: #d1cdc7;
-  margin-top: 10%;
   text-align: center;
 }
 
@@ -26,7 +24,6 @@ div.css-yk16xz-control {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
 }
 
 #show-container img {
@@ -125,7 +122,7 @@ div.css-yk16xz-control {
   z-index: 0;
 }
 
-.platform-image{
+.platform-image {
   z-index: 1;
   position: relative;
   width: 60px !important;
@@ -161,16 +158,14 @@ h3 {
     font-size: 22px;
   }
   .show-images {
-  width: 55%;
-  margin-bottom: 2em;
-
+    width: 55%;
+    margin-bottom: 2em;
   }
   .platform-image {
     width: 50px !important;
     height: 50px !important;
     right: 8.9%;
   }
-  
 }
 
 @media screen and (max-width: 992px) {
@@ -197,9 +192,8 @@ h3 {
     width: 40px;
     height: 40px;
     right: 10%;
-    bottom: 5.3%
+    bottom: 5.3%;
   }
-
 }
 
 @media screen and (max-width: 650px) {
@@ -225,7 +219,7 @@ h3 {
     width: 40px !important;
     height: 40px !important;
     right: 8%;
-    bottom: 6.6%
+    bottom: 6.6%;
   }
 }
 

@@ -4,8 +4,13 @@
 
 .sticky-wrapper {
   position: relative;
-  margin-top: -90px !important;
-  height: 90px;
+  margin-top: -8em !important;
+  height: 8em;
+  background: #1a1a1a;
+}
+
+.sticky-inner {
+  background: #1a1a1a;
 }
 
 .sticky .sticky-inner {
@@ -14,7 +19,8 @@
   left: 0;
   right: 0;
   z-index: 1;
-  margin-top: -90px !important;
+  height: 8em;
+  background: #1a1a1a;
 }
 
 .header-title {
@@ -23,7 +29,7 @@
 }
 
 .login-signup-buttons {
-  position: absolute;
+  position: fixed;
   right: 10px;
   top: 0px;
 }
@@ -31,7 +37,6 @@
 .login-signup-buttons button {
   display: block;
   width: 100%;
-  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 2400px) {
