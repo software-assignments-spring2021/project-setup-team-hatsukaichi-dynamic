@@ -68,7 +68,10 @@ const SettingsForm = (props) => {
       email: email
     }
     axios
-      .patch(`http://localhost:4000/tv_users/${props.data.id}`, newData)
+      .patch(
+        `http://${process.env.REACT_APP_BASE_URL}:4000/tv_users/${props.data.id}`,
+        newData
+      )
       .then((response) => {
         console.log(response)
         props.updateUserData(response.data)
@@ -190,9 +193,13 @@ const ProfileContents = ({ data, updateUserData }) => {
       // but it's being mocked with picsum for now.
       showIds.map((show) => {
         if (show.isMovie) {
-          urls.push(`http://localhost:4000/movies/${show.traktId}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/movies/${show.traktId}`
+          )
         } else {
-          urls.push(`http://localhost:4000/shows/${show.traktId}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/shows/${show.traktId}`
+          )
         }
         return show.id
       })
@@ -271,7 +278,7 @@ const Profile = (props) => {
   }
 
   useEffect(() => {
-    axios(`http://localhost:4000/tv_users/${props.id}`)
+    axios(`http://${process.env.REACT_APP_BASE_URL}:4000/tv_users/${props.id}`)
       .then((response) => {
         setUserData(response.data)
       })

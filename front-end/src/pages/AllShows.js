@@ -25,9 +25,13 @@ const ShowGrid = (props) => {
     } else {
       props.shows.map((show) => {
         if (show.type && show.type === 'movie') {
-          urls.push(`http://localhost:4000/movies/${show.ids.trakt}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/movies/${show.ids.trakt}`
+          )
         } else {
-          urls.push(`http://localhost:4000/shows/${show.ids.trakt}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/shows/${show.ids.trakt}`
+          )
         }
         return show // to satisfy warning about map expecting a return value
       })
