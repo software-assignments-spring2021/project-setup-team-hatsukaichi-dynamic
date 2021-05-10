@@ -38,9 +38,13 @@ const ShowGrid = (props) => {
     } else {
       props.shows.map((show) => {
         if (show.isMovie) {
-          urls.push(`http://localhost:4000/movies/${show.traktId}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/movies/${show.traktId}`
+          )
         } else {
-          urls.push(`http://localhost:4000/shows/${show.traktId}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/shows/${show.traktId}`
+          )
         }
         return show // to satisfy warning about map expecting a return value
       })
@@ -167,7 +171,7 @@ const MyShows = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    axios(`http://localhost:4000/tv_users/${props.id}`)
+    axios(`http://${process.env.REACT_APP_BASE_URL}:4000/tv_users/${props.id}`)
       .then((response) => {
         setUserData(response.data)
       })
@@ -219,9 +223,9 @@ const MyShows = (props) => {
   const loadOptions = (input) => {
     let url
     if (input) {
-      url = `http://localhost:4000/shows-trakt?query=${input}`
+      url = `http://${process.env.REACT_APP_BASE_URL}:4000/shows-trakt?query=${input}`
     } else {
-      url = `http://localhost:4000/shows-trakt`
+      url = `http://${process.env.REACT_APP_BASE_URL}:4000/shows-trakt`
     }
     return axios
       .get(url)
