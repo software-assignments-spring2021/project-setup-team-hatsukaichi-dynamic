@@ -244,6 +244,7 @@ const IndividualShow = ({ id, type }) => {
                 <Select
                   className="platform-select"
                   defaultValue={textToValue(showProgress.platform, 'platform')}
+                  placeholder="Select a platform"
                   options={platforms}
                   onChange={(value) => handleDropdownChange(value, 'platform')}
                   styles={customStyles}
