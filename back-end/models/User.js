@@ -19,14 +19,15 @@ UserSchema.plugin(autoIncrement, { inc_field: 'id' })
 UserSchema.plugin(uniqueValidator)
 
 UserSchema.methods.validPassword = async function (password) {
-  const compare = await bcryptjs.compare(password, this.password)
+  const user = this
+  const compare = await bcryptjs.compareSync(password, this.password)
   return compare
 }
 
 //Pre-hook before the user info is saved in database: hash password and store it
 UserSchema.pre('save', async function (next) {
   const user = this
-  const hash = await bcryptjs.hash(this.password, saltRounds)
+  const hash = await bcryptjs.hashSync(this.password, saltRounds)
   this.password = hash
   next()
 })

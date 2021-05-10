@@ -87,7 +87,7 @@ const ShowGrid = (props) => {
       platformLogo = amazon
     } else if (platform === 'Crunchyroll') {
       platformLogo = crunchyroll
-    } else if (platform === 'Disney') {
+    } else if (platform === 'Disney Plus') {
       platformLogo = disney
     } else if (platform === 'HBO') {
       platformLogo = hbo
@@ -288,6 +288,7 @@ const MyShows = (props) => {
               <br />
               <Select
                 options={platforms}
+                placeholder="Select a platform"
                 onChange={onChange}
                 value={textToValue(selectedPlatform, 'platform')}
                 styles={customStyles}
