@@ -121,6 +121,7 @@ Replace ``your_api_key(v3 auth)`` with your TMDb API key. For example, if your A
 
 > API_KEY_TMDB=123456
 
+
 #### MongoDB Setup
 
 To use the TVTracker MongoDB database, you must follow these steps.
@@ -150,3 +151,12 @@ Replace ``yourSecretCode`` with the secret code you chose; secret code can be an
 Then, in back-end, run:
 
 > bash backEnd.sh
+
+
+#### Deployment Setup
+
+To view our app in deployment, please follow the step below: 
+- Navigate to back-end. In your .env file, add the following line:
+>REACT_APP_BASE_URL = your_IP_address
+
+Replace ``your_IP_address`` with the IP address where the app is deployed
