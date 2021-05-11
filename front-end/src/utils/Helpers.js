@@ -1,5 +1,4 @@
 const platforms = [
-  { value: '', label: 'Select a Platform' },
   { value: 'Netflix', label: 'Netflix' },
   { value: 'Amazon Prime', label: 'Amazon Prime' },
   { value: 'Hulu', label: 'Hulu' },
