@@ -4,7 +4,7 @@ import axios from 'axios'
 import './Profile.css'
 import Header from '../components/Header'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { mockUserUpdate } from '../utils/MockData'
+// import { mockUserUpdate } from '../utils/MockData'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import { AuthContext } from '../App'
@@ -80,7 +80,7 @@ const SettingsForm = (props) => {
       .catch((err) => {
         console.log('Error: could not make the request.')
         console.log(err)
-        props.updateUserData(mockUserUpdate(props.data.id, newData))
+       {/*} props.updateUserData(mockUserUpdate(props.data.id, newData))*/}
         props.toggleModal()
       })
   }
