@@ -1,9 +1,7 @@
 #container {
-  margin-top: 15em;
   padding-left: 2em;
   background-color: #2d2d2d;
   color: #d1cdc7;
-  margin-top: 10%;
   text-align: center;
 }
 
@@ -115,16 +113,17 @@ div.css-yk16xz-control {
 
 .show-images {
   width: 55%;
-  z-index: 0;
   position: relative;
+  z-index: 0;
 }
+
 .platform-image {
   z-index: 1;
-  position: absolute;
-  width: 30px !important;
-  height: 30px !important;
-  margin-left: -38px;
-  margin-top: 173px;
+  position: relative;
+  width: 60px !important;
+  height: 60px !important;
+  object-position: right bottom;
+  bottom: 6.5%;
 }
 
 h3 {
@@ -153,10 +152,16 @@ h3 {
   #title {
     font-size: 22px;
   }
-
+  
   .show-images {
     width: 55%;
     margin-bottom: 2em;
+  }
+  
+  .platform-image {
+    width: 50px !important;
+    height: 50px !important;
+    right: 8.9%;
   }
 }
 
@@ -175,9 +180,17 @@ h3 {
   #title {
     font-size: 20px;
   }
-  .show-images {
-    width: 46%;
-    margin-bottom: 2em;
+
+  #my-shows-container img {
+    width: 66%;
+    padding: 0.2em;
+  }
+  
+  .platform-image {
+    width: 40px;
+    height: 40px;
+    right: 10%;
+    bottom: 5.3%;
   }
 }
 
@@ -196,9 +209,17 @@ h3 {
   #title {
     font-size: 15px;
   }
-  .show-images {
-    width: 36%;
-    margin-bottom: 2em;
+
+  #my-shows-container img {
+    width: 55%;
+    padding: 0.1em;
+  }
+  
+  .platform-image {
+    width: 40px !important;
+    height: 40px !important;
+    right: 8%;
+    bottom: 6.6%;
   }
 }
 
@@ -212,5 +233,11 @@ h3 {
   .selected,
   .selected:hover {
     font-size: 10.5px;
+  }
+  .platform-image {
+    width: 40px !important;
+    height: 40px !important;
+    right: 10%;
+    bottom: 8%;
   }
 }

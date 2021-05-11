@@ -38,9 +38,13 @@ const ShowGrid = (props) => {
     } else {
       props.shows.map((show) => {
         if (show.isMovie) {
-          urls.push(`http://localhost:4000/movies/${show.traktId}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/movies/${show.traktId}`
+          )
         } else {
-          urls.push(`http://localhost:4000/shows/${show.traktId}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/shows/${show.traktId}`
+          )
         }
         return show // to satisfy warning about map expecting a return value
       })
@@ -62,9 +66,13 @@ const ShowGrid = (props) => {
             if (show.ids.trakt === showUserInfo.traktId) {
               // Match in type too
               if (show.type === 'movie' && showUserInfo.isMovie) {
-                return true
+                const matchedShow = show
+                matchedShow.platform = showUserInfo.platform
+                return matchedShow
               } else if (show.type === 'show' && !showUserInfo.isMovie) {
-                return true
+                const matchedShow = show
+                matchedShow.platform = showUserInfo.platform
+                return matchedShow
               } else {
                 return false
               }
@@ -91,10 +99,11 @@ const ShowGrid = (props) => {
       platformLogo = hulu
     } else if (platform === 'Netflix') {
       platformLogo = netflix
-    } else {
+    } else if (platform === 'Other') {
       //platform is 'other' or hasn't been set
       platformLogo = other
     }
+
     return platformLogo
   }
 
@@ -115,11 +124,11 @@ const ShowGrid = (props) => {
                   src={show['poster-url']}
                   alt={`cover-${show.ids.trakt}-${show.type}`}
                 />
-                {props.platform ? (
+                {show.platform ? (
                   <img
                     className="platform-image"
-                    src={setPlatformLogo(props.platform)}
-                    alt={`${props.platform} logo`}
+                    src={setPlatformLogo(show.platform)}
+                    alt={`${show.platform} logo`}
                   />
                 ) : null}
               </Link>
@@ -162,7 +171,7 @@ const MyShows = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    axios(`http://localhost:4000/tv_users/${props.id}`)
+    axios(`http://${process.env.REACT_APP_BASE_URL}:4000/tv_users/${props.id}`)
       .then((response) => {
         setUserData(response.data)
       })
@@ -214,9 +223,9 @@ const MyShows = (props) => {
   const loadOptions = (input) => {
     let url
     if (input) {
-      url = `http://localhost:4000/shows-trakt?query=${input}`
+      url = `http://${process.env.REACT_APP_BASE_URL}:4000/shows-trakt?query=${input}`
     } else {
-      url = `http://localhost:4000/shows-trakt`
+      url = `http://${process.env.REACT_APP_BASE_URL}:4000/shows-trakt`
     }
     return axios
       .get(url)
@@ -283,6 +292,7 @@ const MyShows = (props) => {
               <br />
               <Select
                 options={platforms}
+                placeholder="Select a platform"
                 onChange={onChange}
                 value={textToValue(selectedPlatform, 'platform')}
                 styles={customStyles}

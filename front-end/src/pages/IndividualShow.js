@@ -137,7 +137,7 @@ const IndividualShow = ({ id, type }) => {
     }
     // Fetch show meta-information from the API
     axios
-      .get(`http://localhost:4000/${type}s/${id}`)
+      .get(`http://${process.env.REACT_APP_BASE_URL}:4000/${type}s/${id}`)
       .then((response) => {
         setShow(response.data)
       })
@@ -185,7 +185,10 @@ const IndividualShow = ({ id, type }) => {
         patchUser.shows.push(showProgress)
       }
       axios
-        .patch(`http://localhost:4000/tv_users/${loggedInUser.id}`, patchUser)
+        .patch(
+          `http://${process.env.REACT_APP_BASE_URL}:4000/tv_users/${loggedInUser.id}`,
+          patchUser
+        )
         .then((response) => {
           setLoggedInUser(response.data)
         })
@@ -244,6 +247,7 @@ const IndividualShow = ({ id, type }) => {
                 <Select
                   className="platform-select"
                   defaultValue={textToValue(showProgress.platform, 'platform')}
+                  placeholder="Select a platform"
                   options={platforms}
                   onChange={(value) => handleDropdownChange(value, 'platform')}
                   styles={customStyles}

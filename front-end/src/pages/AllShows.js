@@ -25,9 +25,13 @@ const ShowGrid = (props) => {
     } else {
       props.shows.map((show) => {
         if (show.type && show.type === 'movie') {
-          urls.push(`http://localhost:4000/movies/${show.ids.trakt}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/movies/${show.ids.trakt}`
+          )
         } else {
-          urls.push(`http://localhost:4000/shows/${show.ids.trakt}`)
+          urls.push(
+            `http://${process.env.REACT_APP_BASE_URL}:4000/shows/${show.ids.trakt}`
+          )
         }
         return show // to satisfy warning about map expecting a return value
       })
@@ -68,7 +72,7 @@ const AllShows = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    axios(`http://localhost:4000/shows-trakt`)
+    axios(`http://${process.env.REACT_APP_BASE_URL}:4000/shows-trakt`)
       .then((response) => {
         setShows(response.data)
       })
@@ -99,9 +103,9 @@ const AllShows = (props) => {
   const loadOptions = (input) => {
     let url
     if (input) {
-      url = `http://localhost:4000/shows-trakt?query=${input}`
+      url = `http://${process.env.REACT_APP_BASE_URL}:4000/shows-trakt?query=${input}`
     } else {
-      url = `http://localhost:4000/shows-trakt`
+      url = `http://${process.env.REACT_APP_BASE_URL}:4000/shows-trakt`
     }
     return axios
       .get(url)
