@@ -80,7 +80,6 @@ const SettingsForm = (props) => {
       .catch((err) => {
         console.log('Error: could not make the request.')
         console.log(err)
-       {/*} props.updateUserData(mockUserUpdate(props.data.id, newData))*/}
         props.toggleModal()
       })
   }
