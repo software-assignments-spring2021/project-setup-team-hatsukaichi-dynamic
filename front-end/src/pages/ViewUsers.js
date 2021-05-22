@@ -18,7 +18,7 @@ function ViewUsers(props) {
             {users.map((user) => {
               return (
                 <>
-                  <div className="content" key={user.id}>
+                  <div className="content">
                     <img
                       src={
                         user.img === ''
@@ -42,7 +42,7 @@ function ViewUsers(props) {
   }
   useEffect(() => {
     axios
-      .get(`http://${process.env.REACT_APP_BASE_URL}:4000/tv_users`)
+      .get(`http://localhost:4000/tv_users`)
       .then((response) => {
         console.log(response.data)
         setUsers(response.data)
